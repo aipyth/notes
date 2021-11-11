@@ -1,3 +1,5 @@
 # aipyth Notes
 
-[Complexity Theory Lecture Notes](/math/ComplexityTheory.md)
+- Complexity Theory
+[markdown file](/math/ComplexityTheory.md)
+[pdf file](/math/ComplexityTheory.pdf)
