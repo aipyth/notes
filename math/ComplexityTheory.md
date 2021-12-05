@@ -238,3 +238,70 @@ Numeric set $S \subseteq \mathbb{N}$ is called **invariant**, if representation 
 
 ---
 ---
+
+## Lection *
+
+- Tibour Rado 1962 year
+- TM model: $(1, \{0, 1\}, {1}, 0, Q, q_h, q_0, \sigma)$
+- $\sigma : (Q \backslash \{q_h\}) \times \{0,1\} \rightarrow Q \times \{0,1\} \times \{L, R\}$
+- $\mathcal{K}_{BB}$ -- all turing machines that stop on empty word (Rado class)
+- $\mathcal{K}_{BB}(n)$ -- all TM that stop on empty imput word and have $n$ non-final states
+- $s(M)$ -- number of steps that TM M does with empty input word before it stops
+- $\sigma(M)$ -- number of non-empty left cells on tape after TM M stops with empty input word
+
+#### Definition 
+Rado functions -- $S, \Sigma : \mathbb{N} \rightarrow \mathbb{N} that for arbitrary natural number $n \in \mathbb{N}$ take value $S(n) = \max_{M \in \mathcal{K}_{BB}(n)} s(M)$ and $\Sigma(n) = \max_{M \in \mathcal{K}_{BB}(n)} \sigma(M)$
+
+##### Consequence
+For arbitrary natural number $n \in \mathbb{N}$ the following is true $\Sigma(n) \leq S(n)$.
+
+##### Statement
+For arbitrary natural number $n \in \mathbb{N}$ class Rado $\mathcal{K}_{BB}$ cardinality is limited at top $4^{n + 1}^{2n}$
+
+### Theorem 
+For arbitrary computable function $f : \mathbb{N} \rightarrow \mathbb{N}$ exists sucvh natural number $n_f \in \mathbb{N}$, that $\Sigma(n) > f(n)$ for all natural numbers $n \in \mathbb{N}, n > n_f$.
+
+#### Consequence
+- $\Sigma$ is uncomputable
+- $S$ is uncomputable
+
+- for arbitrary computance and arithmetically right theory exists such natural number $k \in \mathbb{N}$ that for arbitrary number $n \in \mathbb{N}, n \geq k$ no statement like $S(n) = m$, where $m \in \mathbb{N}$ cannot be proved in cases of the theory
+- in cases of the Cermello-fRenkel theory cannot be computed $S(748)$
+- built TM from Rado class $\mathcal{K}_{BB}(1919)$ that stops when CF theory with axiom of choice is contradictional
+- - built TM from Rado class $\mathcal{K}_{BB}(744)$ that stops that Rieman hypothesis is wrong
+
+- small by building TM may generate big computance
+- exists some limit of computable functions, and quite rapid by grows functions are uncomputable
+
+## Lection: Reducibility
+
+#### Definition
+Reducibility is some procedure (or algorithm) of translating one problem to another.
+Problem P1 reduces to problem P2:
+- use available solution of P2
+- prove complexity of solution of problem P1
+
+
+#### Example
+- P1 : $ax^2 + bx + c = 0$
+- P2 : $x^2 + bx + 1 = 0$
+- P3 : $x^2 -2x+1=0$
+- P3 reduces to P2
+- P2 reduces to P1
+
+- PRIME — for given natural number define whether it is prime
+- COMPOSITE — for given natural number define whether it has non-trivial dividers (not 1 and itself)
+- FACTOR — for given natural numbers $m$ and $k$ define whether number $m$ has non-trivial divider that is $\not\geq k$
+- COMPOSITE -> PRIME
+- задача PRIME -> COMPOSITE
+- PRIME & COMPOSITE -> FACTOR
+- FACTOR not -> PRIME | COMPOSITE
+
+#### Definition
+Reduction of languages is arbitrary binary relation on set $\{0,1\}^*$ that is reflexive and transitional. Laguage $L_1 \subseteq \{0,1\}$ reduces to language $L_2 \subseteq \{0,1\}$ if ordered pair $(L_1,L_2)$ belong to the binary relation that defines reduction. For language reduction signing $\leq$ is used with probable use of under- and upper- indexes for clarification of specifical reduction.
+
+##### Consequence
+Computable problem P1 reduces to computable problem P2 if such encoding schemas $e_1, e_2$ of P1 and P2 exists, that language $L[P1, e_1]$ reduces to $L[P2, e_2]$.
+
+##### Remark
+Is applicable for arbitrary sets.

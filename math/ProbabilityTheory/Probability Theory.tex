@@ -1,0 +1,522 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage{fullpage}
+% \usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+% \usepackage{fancy}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{dsfont}
+
+\usepackage{mathtools}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Define Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{light-gray}{gray}{0.85}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pagestyle{headings}
+\pagestyle{fancy}
+\fancyhf{}
+% \usepackage[top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=110pt,showframe]{geometry}
+% \usepackage[top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm, headheight=110pt]{geometry}
+\usepackage[top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+% \usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+% \fancyhead[C]{\rule{.5\textwidth}{4\baselineskip}}% Add something BIG in the header
+% \setlength{\headheight}{52pt}
+% \chead{\rightmark}
+\rfoot{\rightmark}
+\lfoot{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+\title{Probability Theory Notes}
+\author{}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Some declarations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}              % Вимога
+\newtheorem{proposition}[theorem]{Proposition}  % Твердження
+\newtheorem{lemma}[theorem]{Lemma}              % Лема
+\newtheorem{corollary}[theorem]{Corollary}      % Наслідок
+\newtheorem{conjecture}[theorem]{Conjecture}    % Припущення
+\newtheorem*{observation}{Observation}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% \DeclarePairedDelimiter{\set}{\left\{}{\right\}}
+\NewDocumentCommand{\set}{o m}{%
+  % <code>
+  \IfNoValueTF{#1}
+    {\{#2\}}
+    {\{#1 \mid #2\}}%
+  % <code>
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Числові характеристики випадкових величин}
+
+\section{Попередні зауваження}
+
+Розглянемо дискретну випадкову величину $\xi$
+\[
+    \xi(\omega) = \sum_{i=1}^{n} x_i \mathds{1}_{A_i}(\omega)
+\] 
+\[
+    \set{A_1, \dots, A_n} \text{ - повна група подій}
+\] 
+Проведено $n$ незалежних випробувань в кожному з якиx спостерігається 
+\[
+    \xi_n(\omega) = \sum_{i=1}^{m} x_i \cdot \mathds{1}_{A_i}^{n}(\omega)
+\] 
+Розглянемо
+\[
+    \hat{\xi} = \frac{\xi_1 + \dots + \xi_n(\omega)}{n} =
+    \frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{m} x_j \cdot
+    \mathds{1}_{A_j}^{i} (\omega) = 
+\] 
+\[
+    = \sum_{i=1}^{m} x_j \cdot \frac{1}{n} \sum_{i=1}^{n} \mathds{1}_{A_j}^{i} (\omega)
+\] 
+\[
+    \frac{1}{n} \sum_{i=1}^{n} \mathds{1}_{A_j}^{i}(\omega) \text{ - частота появи $A_j$ в $n$ випробуваннях } \rightarrow_{n \rightarrow \infty} P(A_j)
+.\] 
+\[
+    \hat{\xi} = \frac{\xi_1 + \dots + \xi_n}{n} \to_{n\to\infty} \sum_{j=1}^{m} x_j \cdot P(A_j)
+.\] 
+
+Припустимо $\Omega [0,1]; \; \mathcal{F} = \mathcal{B}([0,1])$,
+$P$ міра Лебега, $P((a,b]) = b-a$
+
+для дискретної ймовірності:
+
+\begin{gather*}
+    S_1 = x_1 \cdot P(A_1) = x_1 \cdot |A_1| \\
+    S_2 = x_2 \cdot P(A_2) = x_2 \cdot |A_2| \\
+    S \sim \sum_{j=1}^{m} x_j P(A_j) \text{ - площа }
+\end{gather*}
+
+для неперевного випадку:
+\[
+    \hat{\xi} \sim \int\limits_{\Omega} \xi(\omega)P(d\omega)
+.\] 
+
+\section{Definition and examples of expected value}
+
+Нехай $(\omega, \mathcal{F}, P)$ - ймовірністний простір. $\xi$ - випадкова величина на цьому просторі.
+
+\begin{definition}
+    Математичним сподіванням випадкової величини $\xi$ називається число
+    \[
+        M\xi = \int\limits_{\Omega} \xi(\omega) P(d\omega)
+    .\] 
+    \[
+        \text{(expectation) } \;\; E \xi = \int\limits_{\Omega} \xi(\omega) P(d\omega)
+    .\] 
+\end{definition}
+
+$\xi$ індукує міру $P_{\xi}$ на $\mathbb{R}$:
+\[
+    P_{\xi} ((a,b]) = F_{\xi}(b) - F_{\xi}(a)
+.\] 
+Заміна $\xi(\omega) = x$ приводить до інтеграла Лебега-Стілтьєса:
+
+\[
+    M\xi = \int\limits_{\mathbb{R}}^{} x P_{\xi}(dx)
+.\]
+Звідси маємо інтеграл Стілтьєса: 
+\[
+    M\xi = \int\limits_{\mathbb{R}}^{} x dF_{\xi}(x)
+.\] 
+
+Для дискретної випадкової величини $\xi$:
+\begin{equation} \label{eq:discrete_expectation}
+    E\xi = \sum_{i=1}^{\infty} x_{i} \cdot P(\xi = x_i)
+\end{equation}
+Якщо $\xi$ має щільність $f_{\xi}(x)$:
+\begin{equation} \label{eq:continuous_expectation}
+    E\xi = \int\limits_{\mathbb{R}}^{}x f_{x} (x) dx
+\end{equation}
+
+\begin{remark}
+    It is considered that expectation exists if series \eqref{eq:discrete_expectation} or integral \eqref{eq:continuous_expectation} is absolutely convergent.
+\end{remark}
+
+\begin{example}
+    If $A \in \mathcal{F} $ then $\xi(\omega) = \mathds{1}_{A}(\omega)$
+\[
+    E\xi = 0 \cdot P(\xi=0) + 1 \cdot P(\xi=1) = P(A)
+.\] 
+\end{example}
+\begin{example}
+    \[
+        P(\xi = i) = \frac{1}{i (i+1)}, i=1, 2, \dots
+    .\] 
+    \[
+        \sum_{i=1}^{\infty} i \cdot P(\xi=i) = \sum_{i=1}^{\infty} \frac{1}{i+1} = +\infty \implies
+        E\xi \text{ does not exist}
+    .\] 
+\end{example}
+
+\begin{example}
+   \[
+       \xi \sim U(a, b); \; f_{\xi}(x) = \frac{1}{b-a} \mathds{1}(x\in(a,b])
+   .\] 
+   \[
+       E\xi = \frac{1}{b-a} \int\limits_{a}^{b}x dx = \frac{b^2 - a^2}{2(b-a)} = \frac{a+b}{2}
+   .\] 
+   For uniform distribution the expectation is the middle of the segment.
+\end{example}
+\begin{example}
+    \[
+        \xi \sim C(0,1); \; f_{\xi}(x) = \frac{1}{\pi (a+x^2)}
+    .\] 
+    Whereas $\int\limits_{-\infty}^{\infty}\frac{xdx}{\pi (1+x^2)}$ - divergent then $E\xi$ does not exist.
+\end{example}
+
+
+
+Let $g$ - Borel function. Then $g(\xi)$ - stochastic variable. For $Mg(\xi)$ have:
+\[
+    Eg(\xi) = \int\limits_{\Omega}^{} g(\xi(\omega)) P(d\omega) = \int\limits_{\mathbb{R}}^{} g(x) P_{\xi} (dx) = \int\limits_{\mathbb{R}}^{} g(x) dF_{\xi} (x) 
+.\] 
+For discrete stochastic variable:
+\[
+    Eg(\xi) = \sum_{i=1}^{+\infty} g(x_i) \cdot P(\xi = x_i)
+.\] 
+For absolutely continuous:
+\[
+    Eg(\xi) = \int\limits_{\mathbb{R}}^{} g(x) f_{\xi}(x)dx
+.\] 
+
+If $\xi = (\xi_1, \dots, \xi_n)$ with density $f_{\xi}(x_1, \dots, x_n), \; g : \mathbb{R}^{n} \to \mathbb{R} $ - Borel function.
+\[
+    Eg(\xi_1, \dots, \xi_n) = \int \dots \int\limits_{\mathbb{R}^n} g(x_1, \dots, x_n) f_{\xi}(x_1, \dots, x_n) dx_1 \dots dx_n
+.\] 
+
+\begin{theorem} Properties of expectation \\
+
+    \begin{itemize}
+        \item[1.] $ Ec = c, \; c = const $
+    \item[2.] $ E(a\xi + b) = a \cdot E\xi + b, \; a,b = const $
+    \item[3.] $ E(\xi_1 + \xi_2) = E\xi_1 + E\xi_2 $
+    \item[4.] $ E[\xi_1 \cdot \xi_2] = E\xi_1 \cdot E\xi_2 $ \\
+        $\xi_1, \xi_2$ are independent stochastic variables 
+    \item[5.] $\xi \geq 0 \implies M\xi \geq 0$ \\
+        $ \xi \leq \eta \implies E\xi \leq E\eta $
+    \item [6.] $ |E\xi| \leq E|\xi| $
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item[4.] Let $\xi_1, \xi_2$ - absolutely continuous stochastic variables with densities
+            \[
+                f_{\xi_1}(x), f_{\xi_2}(y)
+            .\] 
+            \begin{align*}
+                E[\xi_1, \xi_2] = \iint\limits_{\mathbb{R}^2} x \cdot y \cdot f_{(\xi_1,\xi_2)}(x,y)dx dy = \\
+                = \iint\limits_{\mathbb{R}^2} x \cdot y \cdot f_{\xi_1}(x) \cdot f_{\xi_2}(y) dx dy = \\
+                = \int\limits_{\mathbb{R}}^{} x f_{\xi_1}(x)dx \int\limits_{\mathbb{R}}^{} y f_{\xi_2}(y) dy = E\xi_1 \cdot E\xi_2
+            .\end{align*}
+    \end{itemize}
+\end{proof}
+\begin{remark}
+    For arbitrary number of stochastic variables:
+    \[
+        E(\xi_1 + \dots + \xi_n) = \sum_{i=1}^{n} E\xi_i
+    .\] 
+    \[
+        E(\xi_1 \cdot \dots \cdot \xi_n) = \prod_{i=1}^{n} E\xi_i 
+    .\] 
+    for $\xi_1, \dots, \xi_n$ that are independent together.
+\end{remark}
+
+\begin{example}
+    let $\xi \sim Bin(n,p); \;\; E\xi - ?$
+    \[
+        P(\xi = k) = C_{n}^{k} p^{k} (1-p)^{n-k} , \; k = \overline{0,n}
+    .\] 
+    \[
+        M\xi = \sum_{k=0}^{n} k \cdot C_n^k p^k (1-p)^{n-k}
+    .\] 
+    Using:
+    \[
+        \xi = \sum_{i=1} ^{n} \xi_i \; \text{ where } \xi_i \sim B(p):
+    .\] 
+    \[
+        P(\xi_i = 1) = p; P(\xi_i = 0) = 1-p
+        M\xi_i = 1 \cdot p + 0 \cdot (1-p) = p
+    .\] 
+    Then:
+    \[
+    M\xi = \sum_{i=1}^{n} M\xi_i = n \cdot p
+    .\] 
+\end{example}
+
+\section{Dispersion}
+\begin{definition}
+    Dispersion of stochastic variable is called a number
+    \[
+        \mathcal{D}\xi = M(\xi - M\xi)^2
+    .\] 
+\end{definition}
+\begin{remark}
+   \[
+       \mathcal{D}\xi = M(\xi^2 - 2M\xi \cdot \xi + (M\xi)^2) = M\xi^2 - 2M\xi \cdot M\xi + (M\xi)^2 = M\xi^2 - (M\xi)^2
+   .\]  
+\end{remark}
+\begin{equation}
+    \mathcal{D}\xi = M\xi^2 - (M\xi)^2
+\end{equation}
+
+\begin{definition}
+    Number $M\xi^2$ is called second momentum os stochastic variable $\xi$.
+\end{definition}
+
+\begin{example}
+    \[
+    .\] 
+    \begin{gather*}
+        \xi \sim B(p); \; M\xi = p; \\
+        M\xi^2 = 1\cdot P(\xi=1) + 0\cdot P(\xi=0) = p
+        \mathcal{D}\xi = p - p^2 = p(1-p)
+    .\end{gather*}
+\end{example}
+\begin{example}
+    \begin{gather*}
+        \xi \sim U(a, b); \; M\xi = \frac{a + b}{2} \\
+        M\xi^2 = \int\limits_{a}^{b}x^2 \frac{1}{b-a} dx = \frac{b^2-a^2}{3(b-a)} = \frac{a^2+ab+b^2}{3} \\
+        \mathcal{D}\xi = \frac{a^2+ab+b^2}{3} - \frac{(a+b)^2}{4} = \frac{4(a^2+ab+b^2) - 3(a+b)^2}{12} = \frac{(b-a)^2}{12}
+    \end{gather*}
+\end{example}
+
+\begin{theorem}[properties of dispersion]
+    \begin{itemize}
+        \item[1.] \[ \mathcal{D}\xi \geq 0 \]
+            \[ \mathcal{D}\xi = 0 \iff \xi = c = const \]
+        \item[2.] \[ \mathcal{D}(a\xi + b) = a^2 \cdot \mathcal{D}\xi \]
+        \item[3.] If $\xi_1$ and $\xi_2$ are independent, then 
+            \[ \mathcal{D}(\xi_1 + \xi_2) = \mathcal{D}\xi_1 + \mathcal{D}\xi_2 \]
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \begin{itemize}
+        \item[1.]
+        \begin{gather*}
+                \mathcal{D}\xi = M(\xi - M\xi)^2 \\
+                (\xi - M\xi)^2 \geq 0 \implies M(\xi -M\xi)^2 \geq 0 \\
+                M(\xi-M\xi)^2 = 0 \iff (\xi-M\xi)^2 = 0 \iff \xi = M\xi = const
+        \end{gather*}
+    \item[2.] 
+        \begin{gather*}
+            \mathcal{D}(a\xi+b) = M((a\xi + b) - m(a\xi+b))^2 = M(a\xi + b - aM\xi -b)^2 = M a^2(\xi-m\xi)^2 = \\
+            = a^2 \cdot M(\xi - M\xi)^2 = a^2 \cdot \mathcal{D}\xi.
+        \end{gather*}
+    \item[3.]
+        Let $\xi_1$ and $\xi_1$ independent.
+        \begin{gather*}
+            \mathcal{D}(\xi_1 + \xi_2) = M(\xi_1 + \xi_2 - M(\xi_1 + \xi_2))^2 = 
+            M((\xi_1 - M\xi_1) + (\xi_2 - M\xi_2))^2 = \\
+            = M((\xi_1 -M\xi_1)^2 + 2(\xi_1-M\xi_1)(\xi_2-M\xi_2) + (\xi_2-M\xi_2)^2) = \\
+            = \mathcal{D}\xi_1 + 2\cdot M[(\xi_1 -M\xi_1)(\xi_2-M\xi_2)] + \mathcal{D}\xi_2. \\
+            \text{$\xi_1, \xi_2$ independent } \implies \mathcal{D}\xi_1 +
+            \mathcal{D}\xi_2 + 2M(\xi_1-M\xi_1) \cdot M(\xi_2 -M\xi_2) = \mathcal{D}\xi_1 + \mathcal{D}\xi_2.
+        \end{gather*}
+    \end{itemize}
+\end{proof}
+
+\begin{example}
+    \begin{gather*}
+        \xi \sim \text{Bin}(n,p); \; M\xi = n\cdot p;  \; \mathcal{D}\xi = ? \\
+        M\xi^2 = \sum_{k=0}^{n} k^2 \cdot C_n^k \cdot p^k \cdot (1-p)^{n-k} \\
+        \xi = \sum_{i=1}^{n}\xi_i, \; \xi_i \sim \text{B}(p), \; \xi_2, \dots, \xi_n \text{ - independent } \\
+        \mathcal{D}\xi = \sum_{i=1}^{n} \mathcal{D}\xi_i = \sum_{i=1}^{n}p\cdot(1-p) = np(1-p).
+    \end{gather*}
+\end{example}
+
+\begin{remark}
+    \[
+        M\xi = \underset{a}{\text{argmin}} M(\xi - a)^2
+    .\] 
+    \begin{gather*}
+        M(\xi - a)^2 = M((\xi - M\xi) + (M\xi - a))^2 = \\
+        M(\xi - M\xi)^2 + 2(M\xi -a)M(\xi-M\xi) + (M\xi-a)^2=\\
+        \mathcal{D}\xi + (M\xi -a)^2 \geq \mathcal{D}\xi \\
+        \text{moreover } M(\xi - a)^2 = \mathcal{D}\xi \iff (M\xi-a)^2 = 0 \\
+        \implies a = M\xi.
+    \end{gather*}
+\end{remark}
+
+\begin{example}
+    Numerical characteristics of the main probability distributions
+    \begin{itemize}
+        \item[1.] $ \xi \sim B(p), M\xi = p, \mathcal{D}\xi = p(1-p) $ 
+        \item[2.] $ \xi \sim \text{Bin}(n,p), M\xi = np, \;\; \mathcal{D}\xi = np(1-p)$
+        \item[3.] $\xi \sim \text{Poiss}(\lambda)$
+            \begin{gather*}
+                M\xi = \sum_{k=0}^{\infty} k\cdot \frac{\lambda^k}{k!} e^{-\lambda} =
+                e^{-\lambda} \cdot \sum_{k=1}^{\infty}\frac{\lambda^k}{(k-1)!} = 
+                \lambda e^{-\lambda} \cdot \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} =
+                \lambda e^{-\lambda} \cdot e^{\lambda} =
+                \lambda \\
+                M\xi^2 = \sum_{k=0}^{\infty} k^2 \cdot \frac{\lambda^k}{k!} e^{-\lambda} =
+                e^{-\lambda} \sum_{k=1}^{\infty}k\frac{\lambda ^{k}}{(k-1)!} = \\
+                e^{-\lambda} \sum_{k=1}^{\infty}((k-1)+1) \cdot \frac{\lambda^k}{(k-1)!} =
+                e^{-\lambda} (\lambda^2 \sum_{k=2}^{\infty}\frac{\lambda^{k-1}}{(k-2)!} +
+                    \lambda \sum_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}) =\\
+                = \lambda^2 e^{-\lambda} e^{\lambda} + \lambda \cdot e^{-\lambda} \cdot e^{\lambda} =
+                \lambda^2 + \lambda \\
+                \mathcal{D}\xi = \lambda^2 + \lambda - \lambda^2 = \lambda
+            \end{gather*}
+        \item[4.] $\xi \sim \text{Geom}(p): p(\xi = k) = (1-p)^{k}, \; k=0,1,\dots$
+            \begin{gather*}
+                M\xi = \sum_{k=0}^{\infty} k\cdot (1-p)^{k} \cdot p \\
+                \sum_{k=0}^{\infty}(1-p)^{k} = \frac{1}{p} \\
+                \sum_{k=0}^{\infty} k (1-p)^{k-1} = \frac{1}{p^2} \;\; \mid p\cdot (1-p) \\
+                \sum_{k=0}^{\infty} k(1-p)^{k}\cdot p = \frac{1-p}{p}\\
+                M\xi^2 = \sum_{k=0}^{\infty} k^2 (1-p)^{k}\cdot p \\
+                \sum_{k=0}^{\infty} k(1-p)^{k} = \frac{1-p}{p^2}=\frac{1}{p^2} - \frac{1}{p} \\
+            \sum_{k=0}^{\infty} k^2 (1-p)^{k-1} = \frac{2}{p^{3}} - \frac{1}{p^2} \;\; \mid (1-p)\cdot p \\
+                \sum_{k=0}^{\infty} k^2(1-p)^{k}\cdot p = \frac{2(1-p)}{p^2} - \frac{1-p}{p} \\
+                \mathcal{D} = \frac{2(1-p)}{p^2} - \frac{1-p}{p} - \left(\frac{1-p}{p}\right)^2 =
+                \frac{2(1-p)}{p^2} - \frac{1-p}{p}\left(1+\frac{1-p}{p}\right) = \\
+                = \frac{2(1-p)}{p^2} - \frac{1-p}{p^2} = \frac{1-p}{p^2}; \\
+                \mathcal{D}\xi = \frac{1-p}{p^2}; \;\; M\xi = \frac{1-p}{p}
+            \end{gather*}
+        \item[5.] $\xi \sim U(a,b); \;\; M\xi = \frac{a+b}{2}; \;\; \mathcal{D}\xi = \frac{(b-a)^2}{12}$
+        \item[6.] $\xi \sim \text{Exp}(\lambda): \; f_{\xi} (x) = \lambda e^{-\lambda x} \cdot \mathds{1}(x\geq 0) $
+            \begin{gather*}
+                M\xi = \int\limits_{0}^{\infty} x \lambda e^{-\lambda x} dx = -\int\limits_{0}^{\infty} x de^{-\lambda x} = -x \cdot e^{-\lambda x} \mid_{0}^{\infty} + \int\limits_{0}^{\infty} e^{-\lambda x} dx = \frac{1}{\lambda}.\\
+                M\xi^2 = \int\limits_{0}^{\infty} x^2 \lambda e^{-\lambda x} dx = \int\limits_{0}^{\infty}x^2 de^{-\lambda x} = \int\limits_{0}^{\infty}2x e^{-\lambda x}dx = \frac{2}{\lambda} \int\limits_{0}^{\infty}x \lambda e^{-\lambda x} dx = \frac{2}{\lambda^2} \\
+                \mathcal{D}\xi = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2} 
+                \;\; M\xi = \frac{1}{\lambda}
+            \end{gather*}
+        \item[7.] $\xi \sim \text{N}(a, \sigma^2); $
+            \[ f_{\xi}(x) = \frac{1}{\sqrt{2\pi \sigma}}e^{-\frac{(x-a)^2}{2\sigma^2}} \]
+            \begin{gather*}
+                M\xi = a; \;\; \mathcal{D}\xi = \sigma^2 \\
+                M\xi = \int\limits_{\mathbb{R}}^{}x \frac{1}{\sqrt{2\pi}\sigma} e^{\frac{(x-a)^2}{2\sigma^2}}dx  = \\
+                \frac{x-a}{\sigma} = z\\
+                dx = \sigma dz \\
+            =  \frac{1}{\sqrt{2\pi}} \int\limits_{\mathbb{R}}^{} (\sigma z + a) e^{-z^2/2} dz =
+            = \frac{\sigma}{\sqrt{2\pi}} \cdot \int\limits_{\mathbb{R}}^{} z e^{-z^2/2} dz + 
+                \frac{a}{\sqrt{2\pi}} \int\limits_{\mathbb{R}}^{} e^{-z^2/2} dz = a
+            \end{gather*}
+            \begin{gather*}
+                \mathcal{D}\xi = M(\xi -M\xi)^2 = M(\xi -a)^2 =
+                \int\limits_{\mathbb{R}}^{} (x-a)^2 \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-a)^2}{2\sigma^2}}dx = \\
+                \frac{x-a}{\sigma} = z \\
+                dx = \sigma dz \\
+                = \frac{1}{\sqrt{2\pi}} \int\limits_{\mathbb{R}}^{} \sigma^2 z^2 \cdot e^{-z^2/2} dz =
+                \frac{2\sigma^2}{\sqrt{2\pi}} \int\limits_{0}^{\infty} z^2 e^{-z^2/2} dz =
+                - \frac{2\sigma^2}{\sqrt{2\pi}} \int\limits_{0}^{\infty} z de^{-z^2/2} = \\
+                = -\frac{2\sigma^2}{\sqrt{2\pi}} z \cdot e^{-z^2/2} \mid_0^{\infty} +
+                    \frac{2\sigma^2}{\sqrt{2\pi}} \int\limits_{0}^{\infty} e^{-z^2/2} dz =
+                \sigma^2\cdot \frac{2}{\sqrt{2\pi}} \int\limits_{0}^{\infty} e^{-z^2/2}dz = \\
+                = \sigma^2 \cdot \frac{1}{\sqrt{2\pi}} \int\limits_{-\infty}^{+\infty} e^{-z^2/2}dz = \sigma^2
+            \end{gather*}
+        \end{itemize}
+\end{example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   Covariance of random variables. Correlation coefficient.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Covariance of random variables. Correlation coefficient.}
+
+Consider $\xi = (\xi_1, \xi_2)$ - random vector.
+
+\begin{definition}
+    Covariation of stochastic variables $\xi_1, \xi_2$ is a number:
+    \begin{equation}
+        \text{cov}(\xi_1, \xi_2) = M[(\xi_1 -M\xi_1) \cdot(\xi_2 - M-\xi_2)]
+    \end{equation}
+    (assuming that $M\xi_i$ exist)
+
+\end{definition}
+
+If $\xi_1, \xi_2$ are discrete random variables, then
+\begin{equation}
+    \text{cov}(\xi_1, \xi_2) = \sum_{i=1}^{\infty}\sum_{j=1}^{\infty} (x_i - M\xi_1) \cdot (y_j - M\xi_2) \cdot P(\xi_1 = x_i, \xi_2 = y_j).
+\end{equation}
+If $\xi_1,\xi_2$ have common distribution density $f_{\xi}(x,y)$, then 
+\begin{equation}
+    \text{cov}(\xi_1,\xi_2) = \underset{\mathbb{R}^2}{\int\int}(x-M\xi_1)(y-M\xi_2) f_{\xi}(x,y)dxdy
+\end{equation}
+From definition implies:
+\begin{gather*}
+    \text{cov}(\xi_1, \xi_2) = M[\xi_1\cdot\xi_2 - \xi_1\cdot M\xi_2 - \xi_2\cdot M\xi_1 + M\xi_1 \cdot M\xi_2] = \\
+    M[\xi_1\cdot\xi_2] - M\xi_2\cdot M\xi_1 - M\xi_1\cdot M\xi_2 + M\xi_1 \cdot M\xi_2 =
+    M[\xi_1 \cdot \xi_2] - M\xi_1 \cdot M\xi_2.
+\end{gather*}
+\begin{equation}
+    \text{cov}(\xi_1,\xi_2) = M[\xi_1\cdot\xi_2] - M\xi_1\cdot M\xi_2
+\end{equation}
+
+\begin{proposition}
+    If $\xi_1, \xi_2$ are independent, then
+    \[
+        \text{cov}(\xi_1, \xi_2) = 0
+    .\] 
+    It is said, that $\xi_1,\xi_2$ are uncorrelated.
+
+    Indeed, if $\xi_1, \xi_2$ are independent, then from the properties of expectation:
+    \[
+        M[\xi_1\cdot\xi_2] = M\xi_1\cdot M\xi_2
+    .\] 
+    then 
+    \[
+        \text{cov}(\xi_1,\xi_2) = M\xi_1\cdot M\xi_2 - M\xi_1\cdot M\xi_2 = 0
+    .\] 
+    Inverse statement is not true: from uncorrelated does not implies independency.
+\end{proposition}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   Inequalities. The law of large numbers in the form of Chebyshev.
+%%%   Borel-Cantelli lemma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Inequalities. The law of large numbers in the form of Chebyshev.
+Borel-Cantelli lemma}
+
+
+\end{document}
+
