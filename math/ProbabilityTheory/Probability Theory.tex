@@ -79,6 +79,7 @@
     {\{#1 \mid #2\}}%
   % <code>
 }
+\DeclareMathOperator{\cov}{cov}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
@@ -186,7 +187,7 @@ $\xi$ індукує міру $P_{\xi}$ на $\mathbb{R}$:
         P(\xi = i) = \frac{1}{i (i+1)}, i=1, 2, \dots
     .\] 
     \[
-        \sum_{i=1}^{\infty} i \cdot P(\xi=i) = \sum_{i=1}^{\infty} \frac{1}{i+1} = +\infty \implies
+        \sum_{i=1}^{\infty} i \cdot P(\xi=i) = \sum_{i=1}^{\infty} \frac{1}{i+1} = +\infty \Rightarrow
         E\xi \text{ does not exist}
     .\] 
 \end{example}
@@ -235,8 +236,8 @@ If $\xi = (\xi_1, \dots, \xi_n)$ with density $f_{\xi}(x_1, \dots, x_n), \; g : 
     \item[3.] $ E(\xi_1 + \xi_2) = E\xi_1 + E\xi_2 $
     \item[4.] $ E[\xi_1 \cdot \xi_2] = E\xi_1 \cdot E\xi_2 $ \\
         $\xi_1, \xi_2$ are independent stochastic variables 
-    \item[5.] $\xi \geq 0 \implies M\xi \geq 0$ \\
-        $ \xi \leq \eta \implies E\xi \leq E\eta $
+    \item[5.] $\xi \geq 0 \Rightarrow M\xi \geq 0$ \\
+        $ \xi \leq \eta \Rightarrow E\xi \leq E\eta $
     \item [6.] $ |E\xi| \leq E|\xi| $
     \end{itemize}
 \end{theorem}
@@ -338,7 +339,7 @@ If $\xi = (\xi_1, \dots, \xi_n)$ with density $f_{\xi}(x_1, \dots, x_n), \; g : 
         \item[1.]
         \begin{gather*}
                 \mathcal{D}\xi = M(\xi - M\xi)^2 \\
-                (\xi - M\xi)^2 \geq 0 \implies M(\xi -M\xi)^2 \geq 0 \\
+                (\xi - M\xi)^2 \geq 0 \Rightarrow M(\xi -M\xi)^2 \geq 0 \\
                 M(\xi-M\xi)^2 = 0 \iff (\xi-M\xi)^2 = 0 \iff \xi = M\xi = const
         \end{gather*}
     \item[2.] 
@@ -353,7 +354,7 @@ If $\xi = (\xi_1, \dots, \xi_n)$ with density $f_{\xi}(x_1, \dots, x_n), \; g : 
             M((\xi_1 - M\xi_1) + (\xi_2 - M\xi_2))^2 = \\
             = M((\xi_1 -M\xi_1)^2 + 2(\xi_1-M\xi_1)(\xi_2-M\xi_2) + (\xi_2-M\xi_2)^2) = \\
             = \mathcal{D}\xi_1 + 2\cdot M[(\xi_1 -M\xi_1)(\xi_2-M\xi_2)] + \mathcal{D}\xi_2. \\
-            \text{$\xi_1, \xi_2$ independent } \implies \mathcal{D}\xi_1 +
+            \text{$\xi_1, \xi_2$ independent } \Rightarrow \mathcal{D}\xi_1 +
             \mathcal{D}\xi_2 + 2M(\xi_1-M\xi_1) \cdot M(\xi_2 -M\xi_2) = \mathcal{D}\xi_1 + \mathcal{D}\xi_2.
         \end{gather*}
     \end{itemize}
@@ -377,7 +378,7 @@ If $\xi = (\xi_1, \dots, \xi_n)$ with density $f_{\xi}(x_1, \dots, x_n), \; g : 
         M(\xi - M\xi)^2 + 2(M\xi -a)M(\xi-M\xi) + (M\xi-a)^2=\\
         \mathcal{D}\xi + (M\xi -a)^2 \geq \mathcal{D}\xi \\
         \text{moreover } M(\xi - a)^2 = \mathcal{D}\xi \iff (M\xi-a)^2 = 0 \\
-        \implies a = M\xi.
+        \Rightarrow a = M\xi.
     \end{gather*}
 \end{remark}
 
@@ -460,6 +461,8 @@ If $\xi = (\xi_1, \dots, \xi_n)$ with density $f_{\xi}(x_1, \dots, x_n), \; g : 
 
 \chapter{Covariance of random variables. Correlation coefficient.}
 
+\section{Covariance of random variables}
+
 Consider $\xi = (\xi_1, \xi_2)$ - random vector.
 
 \begin{definition}
@@ -479,7 +482,7 @@ If $\xi_1,\xi_2$ have common distribution density $f_{\xi}(x,y)$, then
 \begin{equation}
     \text{cov}(\xi_1,\xi_2) = \underset{\mathbb{R}^2}{\int\int}(x-M\xi_1)(y-M\xi_2) f_{\xi}(x,y)dxdy
 \end{equation}
-From definition implies:
+From definition Rightarrow:
 \begin{gather*}
     \text{cov}(\xi_1, \xi_2) = M[\xi_1\cdot\xi_2 - \xi_1\cdot M\xi_2 - \xi_2\cdot M\xi_1 + M\xi_1 \cdot M\xi_2] = \\
     M[\xi_1\cdot\xi_2] - M\xi_2\cdot M\xi_1 - M\xi_1\cdot M\xi_2 + M\xi_1 \cdot M\xi_2 =
@@ -504,10 +507,287 @@ From definition implies:
     \[
         \text{cov}(\xi_1,\xi_2) = M\xi_1\cdot M\xi_2 - M\xi_1\cdot M\xi_2 = 0
     .\] 
-    Inverse statement is not true: from uncorrelated does not implies independency.
+    Inverse statement is not true: from uncorrelated does not Rightarrow independency.
 \end{proposition}
 
+\begin{remark}
+    \[
+        \mathcal{D}(\xi_1 + \xi_2) = \mathcal{D}\xi_1 + \mathcal{D}\xi_2 + 2M(\xi_1 - M\xi_1)(\xi_2 -M\xi_2) = \mathcal{D}\xi_1 + \mathcal{D}\xi_2 + 2\operatorname{cov}(\xi_1, \xi_2)
+    .\] 
+\end{remark}
 
+\begin{theorem}
+    Main properties of variation:
+    \begin{itemize}
+        \item[1.] \[ \cov(\xi, \xi) = \mathcal{D}\xi \]
+        \item[2.] \[ \cov(a_1 \xi_2 + b_1, a_2 \xi_2 + b_2) = a_1 \cdot a_2 \cov(\xi_1, \xi_2) \]
+        \item[3.] \[ |\cov(\xi_1, \xi_2)| \leq \sqrt{\mathcal{D}\xi_1\cdot \mathcal{D}\xi_2} \]
+        \item[4.] Equality $|\cov(\xi_1, \xi_2)| = \sqrt{\mathcal{D}\xi_1 \cdot \mathcal{D}\xi_2}$ is true if and only if $\xi_1$ and $\xi_2$ and linearly dependent.
+            \[
+                \exists a, b = const : \xi_2 = a \xi_2 - b
+            .\] 
+    \end{itemize}
+    \begin{proof}
+        \begin{enumerate}
+            \item
+                \begin{gather*}
+                    \cov(\xi, \xi) = M[\xi \cdot \xi] - M\xi \cdot M\xi = M\xi^2 - (M\xi)^2 = \mathcal{D}\xi
+                \end{gather*}
+            \item
+                \begin{gather*}
+                    \cov(a_1\xi_1 + b_1, a_2\xi_2 + b_2) = M(a_1\xi_2 + b_1 - (a_1 M\xi_1 + b_1)) \cdot (a_2\xi_2+b_2-(a_2M\xi_2+b_2)) = \\
+                    = M(a_1(\xi_1-M\xi_1)\cdot a_2(\xi_2 -M\xi_2)) = 
+                    a_1\cdot a_2 \cdot M((\xi_1 -M\xi_1)(\xi_2 - M\xi_2)) = \\
+                    = a_1 \cdot a_2\cdot \cov(\xi_1, \xi_2)
+                \end{gather*}
+            \item Consider stochastic variable:
+                \[ \eta(x) = x\cdot \xi_1 - \xi_2, \;\; x\in \mathbb{R} \]
+                \[ \mathcal{D}\eta(x) = \mathcal{D}(x\xi_1 - \xi_2) = x^2 \cdot \mathcal{D}\xi_1 + \mathcal{D}\xi_2 - 2x \cdot \cov(\xi_1,  \xi_2) \]
+                As $\mathcal{D}\eta(x) \geq 0 \;\; \forall x \in \mathbb{R}$, so discriminant in the right part is not positive.
+                \[ \mathcal{D} = (2\cov(\xi_1, \xi_2))^2 - 4disp\xi_1\cdot \mathcal{D}\xi_2 \leq 0 \]
+                \[  \Rightarrow |\cov(\xi_1, \xi_2)| \leq \sqrt{\mathcal{D}\xi_1 \cdot \mathcal{D}\xi_2} \]
+            \item 
+                \begin{gather*}
+                    |\cov(\xi_1, \xi_2)| = \sqrt{\mathcal{D}\xi_1\cdot \mathcal{D}\xi_2} \iff \mathcal{D} = 0 \iff \text{ equation $\mathcal{D}\eta(x)=0$ has solution $a$ } \iff \\
+                    \iff \mathcal{D}\eta(a) = 0 \iff \eta(a) = b = const \iff
+                    a\xi_1 - \xi_2 = b \iff \xi_2 = a\xi_1 - b.
+                \end{gather*}
+        \end{enumerate}
+    \end{proof}
+
+    \begin{remark}
+        Covariation of stochastic variables shows how much their dependency is close to linear.
+    \end{remark}
+\end{theorem}
+
+\section{Correlation coefficient}
+
+\begin{definition}
+    Correlation coefficient of random variables $\xi_1, \xi_2$ is a number:
+    \[ \rho(\xi_1, \xi_2) = \frac{\cov(\xi_1, \xi_2)}{\sqrt{\mathcal{D}\xi_1 \cdot \mathcal{D}\xi_2}} \]
+    considering that $\mathcal{D}\xi_i > 0$.
+\end{definition}
+
+\begin{theorem}
+    Properties of covariation coefficient:
+    \begin{enumerate}
+        \item $ \rho(\xi,\xi) = 1 $
+        \item $\xi_1$ and $\xi_2$ are independent and $\mathcal{D}\xi_i > 0 \Rightarrow \rho (\xi_1, \xi_2) = 0$ 
+        \item $ |\rho(\xi_1, \xi_2)| = 1 \Rightarrow \xi_1$ and $\xi_2$ have linear dependency:
+            \[ \xi_2 = a \xi_1 - b \]
+            for any constants $a, b$.
+        \item $\rho (a_1\xi_1 + b_1, a_2\xi_2 + b_2) = \pm \rho(\xi_1, \xi_2) = $
+            \[ = \begin{cases}
+                \rho(\xi_1, \xi_2) & a_1 \cdot a_2 > 0 \\
+                -\rho(\xi_1, \xi_2) & a_1\cdot a_2 < 0
+            \end{cases}\]
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    DO IT YOURSELF
+\end{proof}
+
+\begin{example}
+    Let $\xi_1, \xi_2$ air temperature of some two consistent days of the year. Consider that:
+    \[
+    M\xi_1 = m_1, \; M\xi_2 = m_2 ; \;\;
+    \sigma_1^2 = \mathcal{D}\xi_1, \; \sigma_2^2 = \mathcal{D}\xi_2; \;\;
+    \rho(\xi_1, \xi_2) = \rho.
+    .\] 
+    Consider linear prediction:
+    \[
+        \widetilde{\xi_2} = a\xi_1 + b
+    .\] 
+    where $a, b$ are some constants.
+    Find $a, b$ from the condition of minimization of standard deviation $\widetilde{\xi_2}$ and $\xi_2$, otherwords:
+    \[ M(\widetilde{\xi_2} - \xi_2)^2 \rightarrow min \]
+    Calcualte $M(\widetilde{\xi_2} - \xi_2)^2$:
+            \begin{gather*}
+                M(\widetilde{\xi_2} - \xi_2) = \mathcal{D}(\widetilde{\xi_2} - \xi_2) + (M(\widetilde{\xi_2} - \xi_2))^2 = \mathcal{D}\widetilde{\xi_2} \mathcal{D}\xi_2 - 2\cov(\widetilde{\xi_2}, \xi_2) + (M \widetilde{\xi_2} - M\xi_2)^2 =\\
+                = a^2 \cdot \mathcal{D}\xi_1 + \mathcal{D}\xi_2 - 2a\cdot \cov(\xi_1, \xi_2)
+                    + (aM\xi_1 + b-M\xi_2)^2 = \\
+                ( a^2\cdot \sigma_1^2 + \sigma_2^2 - 2a \rho \sigma_1 \cdot \sigma_2 ) + 
+                    (am_1 + b - m_2) ^2
+            \end{gather*}
+            \[ (am_1 + b -m_2)^2 \geq 0 \]
+            Consider $am_1 + b - m_2 = 0; \;\; b = m_2 - am_1$
+            Minimize first part $a^2\cdot \sigma_1^2 + \sigma_2^2 - 2a \rho \sigma_1 \cdot \sigma_2$:
+            \begin{gather*}
+                2a\cdot \sigma_1^2 - 2\rho\sigma_1\sigma_2 = 0 \\
+                a = \rho \frac{\sigma_2}{\sigma_2} \\
+                2\sigma_1^2 > 0 
+            \end{gather*}
+            So the best predition:
+            \[
+                \widetilde{\xi_2} = \rho \frac{\sigma_2}{\sigma_1}\cdot \xi_1 + (m_2 - \rho\frac{\sigma_2}{\sigma_1} m_1) = \rho\frac{\sigma_2}{\sigma_1}(\xi_1 - m_1) + m_2;
+            .\] 
+            \[
+                M(\widetilde{\xi_2} - \xi_2)^2 = \sigma_2^2(1-\rho^2).
+            .\] 
+            If $|\rho| = 1$ then $M(\widetilde{\xi_2} - \xi_2)^2 = 0 \Rightarrow \text{ min prediction}$
+            \[
+                \widetilde{\xi_2} = \rho\frac{\sigma_2}{\sigma_1} (\xi_1 - m_1) + m_2
+            .\] is precise.
+
+            If $|\rho| = 0 \Rightarrow M(\widetilde{\xi_2} - \xi_2)^2 = \sigma^2$ and $\widetilde{\xi_2} = m_2$ does not depend on $\xi_1$.
+\end{example}
+
+\section{Equation of full probability for expectation}
+
+\begin{example}
+    Firstly, dices are rolled, then a coin is flipped times the points on dice. How to find expectation of tails number?
+
+    Let $\xi$ - number of points of dice rolled.
+
+    $\eta$ - number of tails within $\xi$ flips.
+    \[
+        \eta = \sum_{i=1}^{\xi} \mathds{1}(\text{tail within i-th flip})
+    .\] - number of tails.
+
+    Number of additions is random.
+
+    (will continue soon...)
+\end{example}
+
+\begin{definition}
+    Probability distribution:
+    \[
+        P(\xi = x_i \mid H ), i\geq 1
+    .\] 
+    is conditional distribution of discrete random value $\xi$ within $H$, where $H$ is random event, $P(H) > 0$.
+\end{definition}
+\begin{definition}
+    Conditional expectation of random value $\xi$ within $H$ is
+    \[
+        M(\xi \mid H) = \sum _{i=1}^{\infty} x_i \cdot P(\xi = x_i \mid H)
+    .\]
+\end{definition}
+\begin{theorem}[formula of full probability]
+    Let $\xi$ random value; $\set{H_1, \dots, H_n}$ - full group of events. Then:
+    \[
+        M\xi = \sum_{i=1}^{n} P(H_i) \cdot M(\xi \mid H_i)
+    .\] 
+
+    \begin{proof}
+        \begin{gather*}
+            \sum_{i=1}^{n} P(H_i) \cdot M(\xi \mid H_i) =
+            \sum_{i=1}^{n}P(H_i) \cdot \sum_{j=1}^{m} x_j \cdot P(\xi = x_j \mid H_i) = \\
+            \sum_{i=1}^{n}\sum_{j=1}^{m}x_j \cdot P(H_i) \cdot \frac{P(\xi = x_i, H_i)}{P(H_i)} =
+            \sum_{j=1}^{m}x_j \cdot \sum_{i=1}^{n}P(\xi = x_i, H_i) = \\
+            \sum_{j=1}^{n}x_j \cdot P(\xi = x_j) = M\xi
+        \end{gather*}
+    \end{proof}
+\end{theorem}
+
+\begin{example}[continuation]
+    \begin{gather*}
+        \eta = \sum_{i=1}^{\xi} \mathds{1}(\text{tails in i-th attempt}) \\
+        M\eta = \sum_{k=1}^{6} P(\xi=k) M[\eta \mid \xi = k] =
+        \sum_{k=1}^{6}\frac{1}{6} \cdot M\sum_{i=1}^{k} \mathds{1}(\text{tail on i-th attempt}) = \\
+        = \sum_{k=1}^{6} \frac{1}{6} \cdot \sum_{i=1}^{k}  P(\text{tails on i-th attempt}) = 
+        \frac{1}{6}\sum_{k=1}^{6} k \cdot \frac{1}{2} = \frac{1}{6} \cdot \frac{1}{2} \cdot \frac{1+6}{2} \cdot 6 = \frac{7}{4} = 1.75.
+    \end{gather*}
+\end{example}
+
+\begin{example}
+    Let $\xi \sim \text{Poiss}(\lambda)$; $x_1, x_2, \dots$ - independent equally distributed,
+    $x_i \sim \text{Exp}(\alpha)$.
+    \begin{gather*}
+        \eta = \sum_{i=1}^{\xi} P(\xi=k) \cdot M[\eta \mid \xi = k] =
+        \sum_{k=0}^{\infty} P(\xi=k)\cdot M\sum_{i=1}^{k} x_i =
+        \sum_{k=0}^{\infty} P(\xi=k) \cdot \sum_{i=1}^{k}Mx_i = \\
+        Mx_i = Mx_2 = \dots = Mx_k \\
+        = \sum_{k=0}^{\infty}P(\xi_k) \cdot k \cdot Mx_1 = M\xi \cdot Mx_1
+    \end{gather*}
+    \[
+    M\eta = \frac{\lambda}{\alpha}
+    .\] 
+\end{example}
+
+\section{Inequalities related to moments of random values}
+\subsection{Chebyshev inequality}
+
+Let $\xi$ - integral (невід'ємна) random value. Then:
+\[
+    \forall \varepsilon > 0 : P(\xi \geq \varepsilon) \leq \frac{M\xi}{\varepsilon}
+.\] 
+\begin{proof}
+    \begin{gather*}
+        \xi - \xi \cdot \mathds{1}(\xi \geq \varepsilon) + \xi \cdot \mathds{1}(\xi < \varepsilon) \geq
+        \xi \cdot \mathds{1} (\xi \geq \varepsilon) \geq \varepsilon \cdot \mathds{1}(\xi \geq \varepsilon) \Rightarrow \\
+        \Rightarrow M\xi \geq M(\varepsilon \cdot \mathds{1}(\xi \geq \varepsilon)) =
+        \varepsilon \cdot P(\xi \geq \varepsilon) \Rightarrow \\
+        \Rightarrow P(\xi \geq \varepsilon) \leq \frac{M\xi}{\varepsilon}
+    \end{gather*}
+\end{proof}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item If $\xi$ - arbitrary random value, then 
+            \[
+                P(|\xi| \geq \varepsilon) \leq \frac{M|\xi|}{\varepsilon}
+            .\] 
+        \item $P(|\xi| \geq \varepsilon) = P(|\xi|^k \geq \varepsilon^k) \leq \frac{M|\xi|^k}{\varepsilon^k} $
+        \item $P(|\xi - M\xi| \geq \varepsilon) \leq \frac{\mathcal{D}\xi}{\varepsilon^2}$
+
+            Indeed:
+            \begin{gather*}
+                P(|\xi -M\xi| \geq \varepsilon) = P(|\xi - M\xi|^2 \geq \varepsilon^2) \leq \frac{M(\xi - M\xi)srJ}{\varepsilon^2} = \frac{\mathcal{D}\xi}{\varepsilon^2}
+            \end{gather*}
+    \end{enumerate}
+\end{corollary}
+
+\begin{example}
+    \begin{enumerate}
+        \item Rule of "three sigm"
+
+            Let $\xi$ random value with expectation $M\xi$ and $\mathcal{D}\xi = \sigma^2$;
+
+            $\sigma = \sqrt{\mathcal{D}\xi}$ - standard deviation of random value.
+            \begin{gather*}
+                P(|\xi - M\xi| > 3 \sigma) \leq \frac{\mathcal{D}\xi}{9\sigma^2} = \frac{\sigma^2}{ 0 \sigma^2} = \frac{1}{9} \Rightarrow \\ 
+                P(|\xi - M\xi| < 3\sigma) \geq 1 - \frac{1}{9}.
+            \end{gather*}
+            If $\xi_1, \xi_2 \dots, \xi_N$ independent equally distributed random values, then at least $90\%$ of observations will be in interval:
+            \[
+                (m - 3\sigma, m + 3\sigma)
+            .\] where $m = M\xi_1$.
+
+            $\xi_1, \xi_2, \dots, \xi_N \sim N(0,1)$ independent.
+            Then $\approx 90\%$ will be in interval $(-3, 3)$.
+
+        \item Let $p$ - unknown part of population of a country support some resolution. For definition $p$ is used social poll.
+
+            $n$ persons are polled:
+            \[
+                \sum_{i=1}^{n}\mathds{1}(\text{i-th person support the resolution})
+            .\] 
+            $\frac{S_n}{n}$ - part of those, who support the resolution.
+
+            $\frac{S_n}{n} \approx p$ - within large $n$.
+
+            The question is, how large must be $n$ for the deviation $\frac{S_n}{n}$ to be quite small.
+            For instance:
+            \[
+                P\left( \left| \frac{S_n}{n} - p \right| \geq 0.1 \right) \leq 0.05
+            .\] 
+            Notice that:
+            \[
+                M\left( \frac{S_n}{n} \right) = \frac{1}{n} \cdot MS_n = \frac{1}{n} \cdot np = p.
+            .\] 
+            \[
+                P \left( \left| \frac{S_n}{n} - M \left(\frac{S_n}{n}\right) \right| \leq 0.1 \right) \leq \frac{\mathcal{D} \left(\frac{S_n}{n}\right)}{(0.1)^2} = \frac{\mathcal{D}S_n}{n^2 \cdot (0.1)^2} = \frac{n\cdot p \cdot (1-p)}{n^2 \cdot (0.1)^2} = \frac{p(1-p)}{n(0.1)^2} \leq
+            \] 
+            \[
+                \leq \frac{1}{4n (0.1)^2} \;\; \text{ as }  \;\; 
+                \forall p \in (0,1): p(1-p) \leq \frac{1}{4}
+            .\] 
+            Find $n$ from the condition:
+            \[
+                \frac{1}{4n(0.1)^2} \leq 0.05 \Rightarrow n \geq \frac{1}{4 \cdot 0.05 \cdot (0.1)^2}
+            .\] 
+    \end{enumerate}
+\end{example}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
