@@ -59,7 +59,7 @@
 % - Some declarations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{claim}[theorem]{Claim}              % Вимога
 \newtheorem{proposition}[theorem]{Proposition}  % Твердження
 \newtheorem{lemma}[theorem]{Lemma}              % Лема
@@ -796,6 +796,135 @@ Let $\xi$ - integral (невід'ємна) random value. Then:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Inequalities. The law of large numbers in the form of Chebyshev.
 Borel-Cantelli lemma}
+
+\section{Cauchy-Bunyakovsky inequality}
+
+Let $\xi, \eta$ - stochastic variables such that $M\xi^2 < \infty, M\eta^2 < \infty$. Then $M|\xi \eta | < \infty$ and
+\begin{equation}
+    M|\xi \cdot \eta| \leq \sqrt{M\xi^2} \cdot \sqrt{M\eta^2}
+\end{equation}
+
+\begin{proof}
+    \[
+        \widetilde{\xi} \equiv \frac{\xi}{\sqrt{M\xi^2}}, \; \widetilde{\eta} \equiv \frac{\eta}{\sqrt{M\eta^2}}
+    .\] 
+    Whereas \[ (|\widetilde{\xi}| - |\widetilde{\eta}|)^2 \geq 0 \], then 
+\[ 2 |\widetilde{\xi}| \cdot |\widetilde{\eta}| \leq \widetilde{\xi}^2 + |\widetilde{\eta}|^2 \]
+   Take expectation:
+   \[
+       2 M[|\widetilde{\xi}| \cdot |\widetilde{\eta}| ] \leq M \widetilde{\xi}^2 + M|\widetilde{\eta}|^2 = 2
+   \] 
+   \[ \Rightarrow M[|\widetilde{\xi}|\cdot |\widetilde{\eta}| ] \leq 1 \]
+   \[ \Rightarrow M |\xi| \cdot |\eta| \leq \sqrt{M\xi^2} \cdot \sqrt{M\eta^2} \]
+\end{proof}
+
+\section{Jensen's inequality}
+Let $g(x)$ convex downward Borel function (опукла донизу борелівська функція) and $M|\xi| < \infty$. Then
+\[
+    g(M\xi) \leq Mg(\xi)
+.\] 
+\begin{proof}
+    If $g$ is convex downward, then
+    \[
+        \forall x_0 \in \mathbb{R} \; \exists \lambda = \lambda(x_0) : g(x) \geq g(x_0) + (x - x_0)\cdot \lambda
+    .\] 
+    Consider $x = \xi, x_0 = M\xi$. Got 
+    \[
+        g(\xi) \geq g(M\xi) + (\xi - M\xi)\cdot \lambda
+    .\] 
+    Apply expectation:
+    \[ Mg(\xi) \geq Mg(M\xi) + \lambda \cdot M(\xi - M\xi) \] 
+    \[ Mg(M\xi) = const; \;\; M(\xi - M\xi) = 0\] 
+    \[ \Rightarrow Mg(\xi) \geq g(M(\xi)) \]
+\end{proof}
+
+\section{Lyapunov inequality}
+If $0 < s < t$, then
+\[
+\left( M|\xi|^{s} \right)^{1/s} \leq \left( M|\xi|^{t} \right) ^{1/t}
+.\] 
+\begin{proof}
+    
+\end{proof}
+
+\begin{corollary}
+   \[
+       M|\xi| \leq \left(M|\xi|^2\right)^{1/2} \leq \left(M|\xi|^{3}\right)^{1/3} \leq \dots \leq \left(M|\xi|^{n}\right)^{1/n}
+   .\]  
+\end{corollary}
+
+\section{Helder inequality}
+Let $1 < p < \infty$ and $1 < q < \infty$, $\frac{1}{p} + \frac{1}{q} = 1$.
+
+If $M|\xi|^{p} < \infty$, $M|\eta|^{q} < \infty$, then
+\[
+    M|\xi \eta | < \infty \;\; \text{ and } \;\; M|\xi \cdot \eta | \leq \left( M|\xi|^{p} \right)^{1/p} \cdot \left( M|\eta|^{q} \right)^{1/q}
+.\] 
+(at $p = q = 2$ we obtain Cauchy-Bunyakovsky inequality)
+\begin{proof}
+    Let $\tilde{\xi} = \frac{\xi}{\left(M|\xi|^{p}\right)^{1/p}}$; $\tilde{\eta} = \frac{\eta}{\left(M|\eta|^{q}\right)^{1/q}}$.
+    Function $\ln x$ is convex upward. That's why we have $\forall a, b > 0$ and $a + b = 1$ within $x, y > 0$:
+    \[ \ln(ax + by) \geq a \ln x \cdot b \ln y = \ln x^a y^b \]
+    \[ \Rightarrow ax + by \geq x^a y^b \]
+
+    Let $x = |\tilde{\xi}|^p$, $y = |\tilde{\eta}|^q$, $a = \frac{1}{p}$, $b = \frac{1}{q}$.
+    Then got:
+    $$
+    \begin{array}{l}
+    |\tilde{\xi} \cdot \tilde{\eta}| \leqslant\frac{1}{p}\left|\tilde{\xi}\right|^{p} + \frac{1}{q}\left| \tilde{\eta}\right|^{q} \\
+        M|\tilde{\xi} \cdot \tilde{\eta}| \leqslant \frac{1}{p} \underbrace{M|\tilde{\xi}|^{p}}_{= 1}+\frac{1}{q} \underbrace{M|\tilde{\eta}|^{q}}_{=1} =1 \\
+    M|\xi \cdot \eta| \leqslant\left(M|\xi|^{p}\right)^{1 / p}\left(M|\eta|^{q}\right)^{1 / q}
+    \end{array}
+    $$
+    
+\end{proof}
+
+\section{Minkovkiy inequality}
+
+If $M|\xi|^{p} < \infty$, $M|\eta| ^{p} < \infty$, $1 \leq p < \infty$, then 
+\[
+M|\xi + \eta| ^{p} < \infty
+\] 
+and
+\[
+\left( M|\xi + \eta|^{p} \right)^{1/p} \leq \left( M|\xi|^{p} \right)^{1/p} + \left( M|\eta|^{p} \right)^{1/p}
+.\] 
+\begin{proof}
+    
+\end{proof}
+
+\section{The law of large numbers in the form of Chebyshev}
+
+Let $X_1, X_2, \dots$ - sequence of random values with finite expectation $m_i = MX_i$.
+
+\begin{definition}
+    The sequence $\set{X_n}_{n\geq 1}$ satisfies the law of large numbers, if 
+    \[
+        \forall \varepsilon > 0 : P \left( \left| \frac{1}{n} \sum_{i=1}^{n}X_i - \frac{1}{n}\sum_{i=1}^{n}m_i \right| \geq \varepsilon \right) \underset{n \rightarrow \infty}{\longrightarrow} 0
+    .\] 
+\end{definition}
+
+\begin{theorem}[The Law of large numbers in the form of Chebyshev]
+    Let $\set{x_n}_{n\geq1}$ sequence of independent random values that have finite expectations $Mx_i = m_i$ and $\mathcal{D}x_I = \sigma_i^{2}$, moreover the dispersions are evenly limited:
+    \[
+    \forall i \;\; \sigma_i^2 \leq C < \infty
+    .\] 
+    then $\set{x_n}_{n\geq1}$ satisfies the law of large numbers.
+    
+\end{theorem}
+
+\begin{corollary}
+    For independent evenly distributed random values:
+
+    if $\set{x_n}_{n\geq1}$ sequence with finite $m = Mx_1, \sigma^2 = \mathcal{D}x_1$ then
+    \[
+        \forall \varepsilon > 0 \;\; P \left( \left| \frac{1}{n}\sum_{i=1}^{n} x_i - m \right| \geq \varepsilon \right) \underset{n\to\infty}{\longrightarrow} 0
+    .\] 
+\end{corollary}
+\begin{remark}
+    For use of the law of large numbers the finiteness of expectation is enough (will be proven later).
+\end{remark}
+
 
 
 \end{document}
