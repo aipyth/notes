@@ -1,0 +1,90 @@
+\documentclass{homework}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+
+\title{Probability Theory Homework №3}
+\author{Ivan Zhytkevych}
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[4.20]
+\textit{On a segment \(AB\) of length \textit l point O is chosen by chance. Find the probability that the
+ratio \( \abs{AO}:\abs{AB} \) does not exceed 0.6 }
+
+\textbf{Solution:}
+
+\definecolor{xdxdff}{rgb}{0.49019607843137253,0.49019607843137253,1}
+\definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+    \clip(-10.5, -0.5) rectangle (1,1);
+    \draw [line width=1pt] (-5,0)-- (0,0);
+    \begin{scriptsize}
+        \draw [fill=ududff] (-5,0) circle (2.5pt);
+        \draw[color=ududff] (-5,0.3) node {$A$};
+        \draw [fill=ududff] (0,0) circle (2.5pt);
+        \draw[color=ududff] (0,0.3) node {$B$};
+        \draw [fill=xdxdff] (-3,0) circle (2.5pt);
+        \draw[color=xdxdff] (-3,0.3) node {$O$};
+    \end{scriptsize}
+\end{tikzpicture}
+
+\[ \Omega = \set{ \frac{x}{y} : x = AO, y=AB } \]
+\[ A = \set{ \frac{x}{y} \in \Omega : x = [0, 0.6] } \]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[4.21]
+\textit{On a segment \([-1,2]\) two points A and B are chosen by chance. Fint the probability that
+the distance between them is less then 2 and point A is to the left side of 1. }
+
+\textbf{Solution:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[4.22]
+\textit{Point \( (\zeta, \mu) \) is randomly chosen in a square \( [0, 1]^2 \).
+For a fixed \( z \in (0,1) \) find the probability: }
+
+\begin{enumerate}
+    \item \( P(\zeta + 2 \mu < z) \)
+    \item \( P( max(\zeta, \mu) < z ) \)
+    \item \( P( \zeta * \mu < z ) \)
+\end{enumerate}
+
+\textbf{Solution:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[4.23]
+\textit{}
+
+\textbf{Solution:}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[4.24]
+\textit{}
+
+\textbf{Solution:}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[4.25]
+\textit{}
+
+\textbf{Solution:}
+
+
+
+\end{document}
+

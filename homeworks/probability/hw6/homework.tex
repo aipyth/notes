@@ -1,0 +1,350 @@
+% arara: pdflatex
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\set}{\left\{}{\right\}}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\hwnumber{6}
+\newcommand\student{Ivan Zhytkevych}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\textit{\student}}
+\chead{\textbf{\Large PT Homework \hwnumber}}
+\rhead{\textit{\today}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.14}
+
+\[ A = \{ \text{біла куля виймається з третьої урни} \} \]
+\[ H_1 = \set{ \text{вийнято дві білі кулі}} \]
+\[ H_2 = \set{ \text{вийнято чорна та біла кулі} } \]
+\[ H_3 = \set{ \text{вийнято дві чорні кулі} } \]
+\[ P(H_1) = \frac{1}{10} \cdot \frac{5}{6} = \frac{5}{60} = \frac{1}{12} \]
+\[ P(H_2) = \frac{9}{10} \cdot \frac{5}{6} + \frac{1}{10} \cdot \frac{1}{6}
+= \frac{3}{4} + \frac{1}{60} = \frac{23}{30} \]
+\[ P(H_3) = \frac{9}{10} \cdot \frac{1}{6} = \frac{3}{20} \]
+
+\[ P(A|H_1) = P(\set{ \text{біла куля з 10 чорних та 4 білих} })
+= \frac{4}{14} = \frac{2}{7} \]
+\[ P(A|H_2) = P(\set{ \text{біла куля з 9 чорних та 5 білих} })
+= \frac{5}{14} \]
+\[ P(A|H_3) = P(\set{ \text{біла куля з 8 чорних та 6 білих} })
+= \frac{6}{14} = \frac{3}{7} \]
+
+\begin{gather*}
+    P(A) = P(A|H_1)P(H_1) + P(A|H_2)P(H_2) + P(A|H_3)P(H_3) = \\
+    = \frac{4}{14} \cdot \frac{5}{60} + \frac{5}{14} \cdot \frac{46}{60} +
+    \frac{6}{14} \cdot \frac{9}{60} = \frac{1}{14} \left(
+    4 \cdot \frac{5}{60} + 5 \cdot \frac{46}{60} + 6 \cdot \frac{9}{60} \right) = \\
+    = \frac{1}{14} \left( \frac{20}{60} + \frac{230}{60} + \frac{54}{60} \right)
+    = \frac{1}{14} \cdot \frac{304}{60} = \frac{38}{105} 
+\end{gather*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.15}
+
+% \[ O = \set{ \text{стріляє перший стрілок та він влучив} } \]
+
+% \[ A = \set{ \text{стрілок 1 влучив} } \]
+% \[ B = \set{ \text{стрілок 2 влучив} } \]
+% \[ P(A) = \frac{5}{10} \]
+% \[ P(B) = \frac{8}{10} \]
+
+\[ A = \set{ \text{стрілок влучив} } \]
+
+\[ H_1 = \set{ \text{стріляє перший стрілок} } \]
+\[ H_2 = \set{ \text{стріляє другий стрілок} } \]
+\[ P(H_1) = P(H_2) = \frac{1}{2} \]
+
+\[ P(A|H_1) = \frac{5}{10} \]
+\[ P(A|H_2) = \frac{8}{10} \]
+
+\begin{gather*}
+    P(H_1|A) = \frac{ P(A|H_1)P(H_1) }{ P(H_1)P(A|H_1) + P(H_2)P(A|H_2) } = \\
+    = \frac{P(A|H_1)}{P(A|H_1) + P(A|H_2)} = \frac{1/2}{5/10 + 8/10} = \frac{1/2}{13/10}
+    = \frac{10}{26}
+\end{gather*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.16}
+
+\[ H_1 = \set{ \text{перший студент витягнув щасливий білет} } \]
+\[ H_2 = \set{ \text{перший студент не витягнув щасливий білет} } \]
+\[ P(H_1) = \frac{n}{N}; \; P(H_2) = \frac{N-n}{N} \]
+
+\[ A = \set{ \text{другий студент витягнув щасливий білет} } \]
+\begin{multline} \label{6.16:1}
+    P(A) = P(A|H_1)P(H_1) + P(A|H_2)P(H_2) =
+    \frac{n-1}{N-1} \cdot \frac{n}{N} + \frac{n}{N-1} \cdot \frac{N-n}{N} = \\
+    = \frac{n(n-1+N-n)}{N(N-1)} = \frac{n}{N}
+\end{multline}
+
+\centerline{(\ref{6.16:1}) $ \Rightarrow P(H_1) = P(A) $}
+
+\begin{equation}
+    P(H_1|A) = \frac{ P(A|H_1)P(H_1) }{ P(A) } = \frac{ n(n-1) \cdot N }{ N(N-1) \cdot n }
+    = \frac{n-1}{N-1}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.17}
+
+\[ P(H_1) = P(\set{ \text{сигнал з шумом} }) = 0.4 \]
+\[ P(H_2) = P(\set{ \text{лише шум} }) = 0.6 \]
+
+\[ A = \set{ \text{пристрій реєструє наявність сигналу} } \]
+\[ P(A|H_1) = 0.7; \; P(A|H_2) = 0.5 \]
+
+\[ P(A) = P(A|H_1)P(H_1) + P(A|H_2)P(H_2) = 0.7 \cdot 0.4 + 0.5 \cdot 0.6 = 0.58 \]
+
+\begin{equation}
+    P(H_1|A) = \frac{ P(A|H_1)P(H_1) }{ P(A) } = \frac{ 0.7 \cdot 0.4 }{ 0.58 }
+    = \frac{ 0.28 }{ 0.58 } = \frac{14}{29} \approx 0.48
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.18}
+
+\[ H_1 = \set{ \text{ обрано не фальшиві кубики } } \]
+\[ H_2 = \set{ \text{ із обраних один фальшивий } } \]
+\[ H_3 = \set{ \text{ із обраних два фальшивих } } \]
+\[ P(H_1) = \frac{ C_{4}^{2} }{ C_{7}^{2} } = \frac{2}{7} \]
+\[ P(H_2) = \frac{ C_{3}^{1} \cdot C_{4}^{1} }{ C_{7}^{2} } = \frac{4}{7} \]
+\[ P(H_3) = \frac{ C_{3}^{2} }{ C_{7}^{2} } = \frac{1}{7} \]
+
+\[ A = \set{ \text{ сума очок дорівнює шести } } \]
+\[ P(A|H_1) = \frac{5}{6^2} \]
+\[ P(A|H_2) = \frac{1}{6} \]
+\[ P(A|H_3) = \frac{1}{1} = 1 \]
+\[ P(A) = \frac{5}{6^2} \cdot \frac{2}{7} + \frac{1}{6} \cdot \frac{4}{7}
++ 1 \cdot \frac{1}{7}
+= \frac{1}{7} \left( \frac{10}{6^2} + \frac{4}{6} + 1 \right)
+= \frac{1}{7} \cdot \frac{35}{18} = \frac{5}{18} \]
+
+\begin{equation}
+    P(H_2|A) = \frac{ P(A|H_2) P(H_2) }{ P(A) }
+    = \frac{ \frac{1}{6} \cdot \frac{4}{7} }{ \frac{5}{18} }
+    = \frac{4}{42} \cdot \frac{18}{5}
+    = \frac{3}{7} \cdot \frac{4}{5}
+    = \frac{12}{35}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.19}
+
+75 осіб: 35 чоловіків та 40 жінок.
+
+\[ H_1 = \set{ \text{обрано двох чоловіків} } \]
+\[ H_2 = \set{ \text{обрано чоловіка та жінку} } \]
+\[ H_3 = \set{ \text{обрано двох жінок} } \]
+
+\[ P(H_1) = \frac{ C_{35}^{2} }{ C_{75}^{2} }
+= \frac{ 35! \cdot 2!\cdot 73! }{ 2! \cdot 33! \cdot 75! }
+= \frac{35 \cdot 34}{75 \cdot 74} \]
+
+\[ P(H_2) = \frac{ 35 \cdot 40 }{ C_{75}^{2} }
+= \frac{ 35 \cdot 40 \cdot 2 \cdot 73! }{ 75! }
+= \frac{ 35 \cdot 40 \cdot 2 }{ 75 \cdot 74 }
+\]
+
+\[ P(H_3) = \frac{ C_{40}^{2} }{ C_{75}^{2} }
+= \frac{ 40! \cdot 2! \cdot 73! }{ 2! \cdot 38! \cdot 75! }
+= \frac{ 40 \cdot 39 }{ 75 \cdot 74 } \]
+
+\[ A = \set{ \text{обидві обрані особи шульги} } \]
+\[ P(A|H_1) = \frac{C_{3}^{2}}{C_{35}^{2}}
+= \frac{ 3! \cdot 2! \cdot 33! }{ 2! \cdot 35! }
+= \frac{ 3 \cdot 2 }{ 35 \cdot 34 } \]
+\[ P(A|H_2) = \frac{3 \cdot 2}{35 \cdot 40} \]
+\[ P(A|H_3) = \frac{1}{C_{40}^{2}}
+= \frac{2! \cdot 38!}{40!}
+= \frac{2}{39 \cdot 40} \]
+
+\begin{gather*}
+    P(A) = P(A|H_1)P(H_1) + P(A|H_2)P(H_2) + P(A|H_3)P(H_3) = \\
+    = \frac{ 3 \cdot 2 \cdot 35 \cdot 34 }{ 35 \cdot 34 \cdot 75 \cdot 74 }
+    + \frac{ 3 \cdot 2 \cdot 35 \cdot 40 \cdot 2 }{ 35 \cdot 40 \cdot 75 \cdot 74 }
+    + \frac{ 2 \cdot 39 \cdot 40 \cdot 2 }{39 \cdot 40 \cdot 75 \cdot 74} = \\
+    = \frac{6 + 12 + 4}{75 \cdot 74}
+    = \frac{22}{75 \cdot 74}
+\end{gather*}
+
+\begin{equation}
+    P(H_3|A) = \frac{P(A|H_3)P(H_3)}{P(A)}
+    = \frac{ 4 \cdot 75 \cdot 74 }{ 75 \cdot 74 \cdot 22 }
+    = \frac{4}{22}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.20}
+
+\[ H_i = \set{ \text{випало \textit{i} очок} }; \; i = \overline{1,6} \]
+\[ P(H_i) = \frac{1}{6} \]
+
+\[ A_{>1} = \set{\text{знає відповідь принаймі на одне питання}} \]
+\[ A_{0} = \set{\text{не знає відповідь на жодне з питань}} \]
+\[ P(A_{>1}) = 1 - P(A_0) \]
+
+Використаймо опис всіх можливих випадків питань, якщо задається \textit{i} питань.
+\[ \Omega_q = \set{ (q_1, \dots, q_i) : q_j \text{ - питання} } \]
+\[ |\Omega_q| = C_{30}^{i} \]
+Для випадку, коли студен не знає відповідь на питання, нам потрібні конфігурації,
+де йому задали лише ті питання, відповідь на які він не знає.
+
+Кількість таких питань - $ C_{10}^{i} $.
+
+Кількість заданих питань не перевищує кількість питань, відповідь на які студент не знає.
+Тому нам не потрібно розглядати окремі випадки.
+
+\[ P(A_0|H_i) = \frac{ C_{10}^{i} }{ C_{30}^{i} }
+= \frac{ 10! \cdot i! \cdot (30-i)! }{ i! \cdot (10 - i)! \cdot 30! }
+= \frac{10! \cdot (30-i)!}{30! \cdot (10-i)! } \]
+
+\[ P(A_0) = \sum_{i=1}^{6} P(H_i)P(A_0|H_i) = \frac{1}{6} \sum_{i=1}^{6} P(A_0|H_i) \]
+
+\begin{gather*}
+    \sum_{i=1}^{6} P(A_0|H_i) = \frac{10! \cdot 29!}{30! \cdot 9!}
+    + \frac{10! \cdot 28!}{30! \cdot 8!} + \frac{10! \cdot 27!}{30! \cdot 7!}
+    + \frac{10! \cdot 26!}{30! \cdot 6!} + \frac{10! \cdot 25!}{30! \cdot 5!}
+    + \frac{10! \cdot 24!}{30! \cdot 4!} = \\
+    = \frac{10}{30} + \frac{10 \cdot 9}{30 \cdot 29} +
+    \frac{10 \cdot 9 \cdot 8}{30 \cdot 29 \cdot 28}
+    + \frac{10 \cdot 9 \cdot 8 \cdot 7}{30 \cdot 29 \cdot 28 \cdot 27} + \\
+    + \frac{10 \cdot 9 \cdot 8 \cdot 7 \cdot 6}{30 \cdot 29 \cdot 28 \cdot 27 \cdot 26}
+    + \frac{10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 \cdot 5}{30 \cdot 29 \cdot 28 \cdot 27 \cdot 26 \cdot 25}
+    \approx 0.48
+\end{gather*}
+
+\[ P(A_0) \approx 0.08 \]
+\[ P(A_{>1}) \approx 1 - 0.08 = 0.92 \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.21}
+
+\[ P(\set{\text{йде дощ}}|\set{\text{прогнозували дощ}})
+= P(\set{\text{не йде дощ}}|\set{\text{не прогнозували дощ}}) = \frac{2}{3} \]
+\[ P(\set{\text{буде дощ}}) = \frac{1}{2} \]
+\[ P(\set{\text{Піквік бере парасолю}}|\set{\text{прогнозують дощ}}) = 1 \]
+\[ P(\set{\text{Піквік бере парасолю}}|\set{\text{не прогнозують дощ}}) = \frac{1}{3} \]
+
+\[ A = \set{\text{йде дощ}} \]
+\[ H_1 = \set{\text{прогноз дощу}}; \; H_2 = \set{\text{прогноз, що дощу не буде}} \]
+\[ B = \set{\text{Піквік бере парасолю}} \]
+
+\[ P(A|H_1) = P(\overline A | H_2 ) = \frac{2}{3} \]
+\[ P(A) = \frac{1}{2} \]
+\[ P(B|H_1) = 1 \]
+\[ P(B|H_2) = \frac{1}{3} \]
+
+\begin{enumerate}
+    \item $P(\set{\text{Піквік не має парасолі}}|\set{\text{йде дощ}}) = P(\overline B|A)$
+
+        \[ P(\overline B | A) = \frac{P(\overline B \cap A)}{P(A)}
+        = \frac{P(\overline B \cap A | H_1) P(H_1)
+            + P(\overline B \cap A | H_2) P(H_2)}{P(A)} \]
+
+        % We should know several things: $P(H_1)$ and independence of $B, A$
+
+        \[ P(A) = P(A|H_1)P(H_1) + P(A|H_2)P(H_2)
+        = \frac{2}{3} P(H_1) + \frac{1}{3} (1 - P(H_1)) \]
+        \[ \frac{1}{2} = \frac{1}{3} P(H_1) + \frac{1}{3} \]
+        \[ 3 = 2 P(H_1) + 2 \; \Rightarrow \; P(H_1) = \frac{1}{2} \]
+
+        % Are \textit{B} and \textit{A} independent ?
+ 
+
+        \begin{gather*}
+        P(\overline B | A) = \frac{P(\overline B \cap A | H_1) P(H_1)
+            + P(\overline B \cap A | H_2) P(H_2)}{P(A)} = \\
+            = 2 \cdot \frac{1}{2} \left( 
+                P(\overline B|H_1)P(A|H_1 \overline B)
+                + P(\overline B|H_2)P(A|H_2 \overline B)
+            \right) = \\
+            = P(\overline B|H_2)P(A|H_2 \overline B)
+        \end{gather*}
+
+        \[ P(\overline{B} H_2) = P(\overline{B}|H_2)P(H_2) = \frac{1}{3} \]
+        \[ P(A|H_2 \overline B) = \frac{P(A H_2 \overline B)}{P(H_2 \overline B)} \]
+
+        Щось складно для такої задачі. При умові незалежності подій $B$ та $A$
+        розв'язок повинен знаходитися легко:
+
+        \begin{gather*}
+        P(\overline B | A) = 2 \cdot \frac{1}{2} \left( 
+            P(\overline B|H_1)P(A|H_1) + P(\overline B|H_2)P(A|H_2)
+            \right) = \\
+            = 0 + \frac{2}{3} \frac{1}{3} = \frac{2}{9}
+        \end{gather*}
+
+    \item $ P(\overline A | B) $
+        \[ P(B) = P(B|H_1)P(H_1) + P(B|H_2)P(H_2)
+        = \frac{1}{2} + \frac{1}{6}
+        = \frac{4}{6} \]
+
+        \begin{gather*}
+            P(\overline A | B) = \frac{P(\overline A B)}{P(B)} = \\
+            = \frac{P(\overline A B|H_1)P(H_1) + P(\overline A B|H_2)P(H_2)}{P(B)} = \\
+            = \frac{3}{4} ( P(\overline A B|H_1) + P(\overline A B|H_2) ) = \\
+            = \frac{3}{4} ( P(\overline A|H_1) P(B|H_1\overline A)
+                + P(\overline A | H_2) P(B|H_2 \overline A) ) = \\
+            = \frac{1}{4} ( P(B|H_1\overline A) + P(B|H_2\overline A) )
+        \end{gather*}
+
+        ... нехай події $B$ та $A$ незалежні, тоді:
+
+        \begin{gather*}
+            P(\overline A | B) = \frac{P(\overline A B)}{P(B)} = \\
+            = \frac{P(\overline A B|H_1)P(H_1) + P(\overline A B|H_2)P(H_2)}{P(B)} = \\
+            = \frac{3}{4} ( P(\overline A B|H_1) + P(\overline A B|H_2) ) = \\
+            = \frac{3}{4} ( P(\overline A|H_1) P(B|H_1)
+                + P(\overline A | H_2) P(B|H_2) ) = \\
+            = \frac{1}{4} ( P(B|H_1) + P(B|H_2) ) = \\
+            = \frac{1}{4} \cdot \frac{4}{3} = \frac{1}{3}
+        \end{gather*}
+
+\end{enumerate}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+

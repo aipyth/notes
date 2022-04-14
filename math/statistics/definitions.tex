@@ -1,0 +1,34 @@
+\begin{definition}[Convergence in distribution]
+    A sequence of random variables $X_1, X_2, \ldots, X_n$ converges
+    in distribution, or \textbf{converge weakly}, or \textbf{converge in law}
+    $X_n \rightsquigarrow X$ ($X_n \overset{d}{\to} X$)
+    to a random variable $X$ if:
+    \[
+        \forall x \in \mathbb{R}: F \in C[x] \Rightarrow
+        \underset{n \to \infty}{\lim} F_n(x) = F(x)
+    .\] 
+\end{definition}
+
+
+\begin{definition}[Convergence in probability]
+    A sequence of random variables $\{X_n\}$ converges in probability 
+    $X_n \overset{p}{\to} X$
+    towards the random variable  $X$ if:
+     \[
+    \forall \varepsilon > 0 \quad
+\underset{n \to \infty}{\lim} P\left( \left| X_n - X \right| > \varepsilon \right) = 0
+    .\] 
+    
+\end{definition}
+
+\begin{definition}[Almost surely convergence]
+    A sequnce of random variables $\{X_n\}$ converges almost surely,
+    or \textbf{almost everywhere}, or \textbf{with probability 1}, or
+    \textbf{strongly}
+    $X_n \overset{\text{a.s.}}{\to} X$
+    towards  $X$ means that:
+    \[
+    P\left( \lim_{n \to \infty} X_n = X \right) = 1
+    .\] 
+    
+\end{definition}

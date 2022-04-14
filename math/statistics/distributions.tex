@@ -1,0 +1,80 @@
+\section*{Distributions}
+
+\subsection{Bernoulli}
+
+\begin{gather*}
+P(X = 1) = p \\
+P(X = 0) = 1 - p = q \\
+E(X) = p \\
+E \left[ X^2 \right] = P(X=1) \cdot 1^2 + P(X=0) \cdot 0^2 = p \cdot 1 + q \cdot 0 = p = E [X] \\
+\mathcal{D}[X] = E[X^2] - E[X] = p - p ^2 = p(1-p) = pq
+\end{gather*}
+
+\subsection{Binomial}
+
+\begin{gather*}
+    P(\xi = k) = C_n^k p^k q^{n-k}, \quad k = 0,1,2,3,\ldots,n \quad
+    p \in [0, 1], \quad q = 1-p \quad n \in \mathbb{N} \\
+    E[X] = np \\
+    \mathcal{D}[X] = np(1-p)
+\end{gather*}
+
+\subsection{Poisson}
+
+\begin{gather*}
+    P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} \\
+    \lambda = E[X] = \mathcal{D}[X]
+\end{gather*}
+
+\subsection{Hypergeometric}
+\begin{gather*}
+    P(X=k) = \frac{C_D^k \cdot C_{N-D}^{n-k}}{C_N^n} \\
+    E[X] = \frac{nD}{N} \\
+    \mathcal{D}[X] = \frac{n(D / N) (1 - D / N) (N - n)}{N - 1}
+\end{gather*}
+
+\subsection{Continuos Uniform}
+\begin{gather*}
+    f_X(x) =
+    \begin{cases}
+        \frac{1}{b-a} & x \in [a, b] \\
+        0 & x \in [a,b]
+    \end{cases} \\
+    P(X \leq x) = 
+    \begin{cases}
+        0 & x < a \\
+        \frac{x-a}{b-a} & a \leq x \leq b \\
+        1 & x \geq b
+    \end{cases} \\
+    E[X] = \frac{a + b}{2} \\
+    \mathcal{D}[X] = \frac{(b-a)^2}{12}
+\end{gather*}
+
+\subsection{Normal}
+
+\begin{gather*}
+    f(x) = \frac{1}{\sigma \sqrt{2\pi}} \cdot e^{-\frac{1}{2}\left( \frac{x-\mu}{\sigma} \right)^2} \\
+    E[X] = \mu \\
+    \mathcal{D}[X] = \sigma^2
+\end{gather*}
+
+\subsection{Exponential}
+\begin{gather*}
+    f(x, \lambda) = 
+    \begin{cases}
+        \lambda e^{-\lambda x} & x \geq 0 \\
+        0 & x < 0
+    \end{cases} \\
+    F(x, \lambda) = 
+    \begin{cases}
+        1 - e^{-\lambda x} & x \geq 0 \\
+        0 & x < 0
+    \end{cases} \\
+    E[X] = \frac{1}{\lambda} \\
+    \mathcal{D}[X] = \frac{1}{\lambda^2}
+\end{gather*}
+
+\subsection{Cauchy}
+\begin{gather*}
+    F(x, x_0, \gamma) = \frac{1}{\pi} \arctan\left( \frac{x-x_0}{\gamma} \right) + \frac{1}{2}
+\end{gather*}

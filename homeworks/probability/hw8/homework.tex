@@ -1,0 +1,248 @@
+% arara: pdflatex
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+% \usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\set}{\left\{}{\right\}}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{light-gray}{gray}{0.85}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\hwnumber{8}
+\newcommand\student{Ivan Zhytkevych}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\textit{\student}}
+\chead{\textbf{\Large PT Homework \hwnumber}}
+\rhead{\textit{\today}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 7.13}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Опишіть $\sigma$-алгебру підмножин відрізка $[0, 1]$, породжену
+        множинами:
+        \begin{enumerate}
+            \item $ \left[ \frac{1}{3}, \frac{1}{2} \right] $
+            \item множиною раціональних точок відрізка $[ 0, 1 ]$
+            \item $\{0\}$ та $\{1\}$
+        \end{enumerate}
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+    \item $ [ \frac{1}{3}, \frac{1}{2} ] $
+        \[ H_1 = \left[ 0, \frac{1}{3} \right) \]
+        \[ H_2 = \left[ \frac{1}{3}, \frac{1}{2} \right] \]
+        \[ H_3 = \left( \frac{1}{2}, 1 \right] \]
+
+        \begin{gather*}
+            \mathcal{F}_{[1/3, 1/2]} = \sigma\left(\left[ \frac{1}{3},
+            \frac{1}{2} \right]\right) = \{
+                \emptyset, \Omega,
+                \left[ 0, \frac{1}{3} \right),
+                \left[ \frac{1}{3}, \frac{1}{2} \right],
+                \left( \frac{1}{2}, 1 \right], \\
+                \left[ 0, \frac{1}{3} \right) \cup \left[ \frac{1}{3}, \frac{1}{2} \right],
+                \left[ 0, \frac{1}{3} \right) \cup \left( \frac{1}{2}, 1 \right],
+                \left[ \frac{1}{3}, \frac{1}{2} \right] \cup \left( \frac{1}{2}, 1 \right]
+            \}
+        \end{gather*}
+
+    \item множина раціональних точок відрізка $[0, 1]$
+
+        \[ A = \set{ \frac{q_1}{q_2} : q_i \in \mathbb{N}, q_1 \leq q_2 } \]
+
+        \[ H_1 = A \]
+        Введемо $H_2$, що буде містити всі інтервали, котрі не містять
+        раціонального числа, тобто це множина всіх ірраціональних чисел.
+        \[ H_2 = [0, 1] \backslash A \]
+
+        \[ \mathcal{F}_{A} = \set{ \emptyset, \Omega, A, H_2 } \]
+
+    \item $\{0\}$ та $\{1\}$
+
+        \[ H_1 = (0, 1) \]
+        \[ H_2 = \set{0} \]
+        \[ H_3 = \set{1} \]
+    \[ \mathcal{F}_{\{0\}, \{1\}} = \set{ \emptyset, \Omega, H_1, H_2, H_3,
+        H_1 \cup H_2, H_1 \cup H_3, H_2 \cup H_3 } \]
+    
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 7.14}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\Omega = \mathbb{R}$, $\mathcal{B}$ - борелева $\sigma$-алгебра
+        на $\mathbb{R}$. Доведіть, що
+        $\mathbb{R} \backslash \mathbb{Q} \in \mathcal{B}$.
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\[ \mathcal{B}(\mathbb{R}) \]
+\[ \mathbb{R} \backslash \mathbb{Q} = \overline{\mathbb{Q}} \;\;
+    (\mathbb{Q} \subset \mathbb{R})\]
+
+Візьмемо такий інтервал, що, очевидно, буде належати нашій алгебрі:
+\[ [q, q] = { q \in \mathbb{Q} } \]
+Об'єднання таких інтервалів буде належати алгебрі.
+\[ \bigcup\limits_{q \in \mathbb{Q}} [q,q] \in \mathcal{B}(\mathbb{R}) \Rightarrow \]
+\[ \bigcup\limits_{q \in \mathbb{Q}} [q,q] = \mathbb{Q} \in \mathcal{B}(\mathbb{Q}) \]
+А отже і за означенням алгебри маємо:
+\[ \overline{\mathbb{Q}} = \mathbb{R} \backslash \mathbb{Q} \in
+    \mathcal{B}(\mathbb{R})\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 7.15}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\Omega = \mathbb{R}^2$, $\mathcal{B}$ - борелева $\sigma$-алгебра
+        в $\mathbb{R}^2$. Доведіть, що
+        \begin{enumerate}
+            \item $ (\mathbb{R}\backslash\mathbb{Q}) \times \mathbb{Q}
+                \in \mathcal{B} $
+            \item $ \set{ (x_1,x_2) \in R^2 \mid 
+                    \max ( \sin (x_1 x_2), \arctan (x_2 - x_1)) > 0.1
+                } \in \mathcal{B} $
+        \end{enumerate}
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+    \item З минулої задачі довели, що множина раціональних чисел належить
+        борелевій алгебрі над раціональними числами, а отже і
+        $\mathbb{R}\backslash\mathbb{Q} \in \mathcal{B}$.
+        А декартовий добуток борелевих множин є також борелевою множиною.
+        Тому і $ (\mathbb{R}\backslash\mathbb{Q}) \times \mathbb{Q}
+                \in \mathcal{B} $.
+
+            \item sin та arctan є неперевними функціями, а отже і max(sin, arctan)
+                є неперервною. Оскільки $\max(...) > 0.1$ є не що інше, як
+                $\max(...) \in (0.1, \infty)$, то його образ є відкритою множиною.
+                Праобраз відкритої множини --- множина відкрита. Отже дана множина
+                є відкритою та належить борелевій алгебрі.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 7.17}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Опишіть $\sigma$-алгебру, породжену:
+        \begin{enumerate}
+            \item подіями нульової ймовірності
+            \item подіями ймовірності одиниця.
+        \end{enumerate}
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\[ \mathbb{A} = \set{ A_i : P(A_i) = 0 }; \;\; |\mathbb{A}| = n \]
+
+\begin{enumerate}
+    \item $ \sigma (A_i) $
+        \[ P(\overline{A_i}) = 1 \]
+        \[ P\left(\bigcup_i  A_i \right) = \sum_i P(A_i) = 0 \]
+        \[ P\left(\bigcup_i \overline A_i \right) = \sum_i P(\overline A_i) 
+        - \sum_{i\neq j} P(\overline A_i \overline A_j) + \dots
+        = 1 \]
+        \[ \bigcup_i A_i \cup \bigcup_i \overline A_i = \Omega \]
+        \[ P(\Omega) = 1 \]
+    \item $ \sigma (\overline{A}_i) $ аналогічно $\sigma(A_i)$:
+        \[ \bigcap_i \overline{A}_i = \Omega \backslash \bigcup_i A_i \]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 7.18}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\{ A_n \}_{n \geq 1}$ - деяка послідовність подій. Доведіть,
+        що подія $\underline{\lim}A_n$ належить $\sigma$-алгебрі, породженій
+        цією послідовністю.
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\[ \underline{\lim} A_i = \bigcup_{i=1}^{\infty} \bigcap_{j=i}^{\infty} A_i \]
+\[ \mathbb{A} = \sigma (A_n) \Rightarrow A_n \in \mathbb{A}; \;\;\;
+    \bigcup_j A_j \in \mathbb{A}, \; j \geq 1; \;\;\;
+    \bigcap_j A_j \in \mathbb{A}, \; j \geq 1 \]
+\[ \Rightarrow \underline{\lim} A_n \in \mathbb{A} \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 7.19}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Доведіть, що якщо $\mathcal{A}_1, \mathcal{A}_2, ...$ - неспадна
+        послідовність $\sigma$-алгебр, то їхнє об'єднання $\mathcal{A} = 
+        \bigcup\limits_{n=1}^{\infty} \mathcal{A}_n$ є алгеброю.
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+\newline \\
+
+Оскільки кожна алгебра містить як пусті множину, так і $\Omega$, то і об'єднання
+цих алгебр буде містити $\emptyset$ та $\Omega$.
+
+Оскільки послідовність є неспадною $\mathcal{A}_1 \subseteq \mathcal{A}_2
+\subseteq... $, то отримана алгебра $ \mathcal{A} $ є найбільшою та містить
+елементи всіх алгебр у послідовності.
+
+Тому, якщо який елемент, або його заперечення, міститься у алгебрі $i$, то його заперечення, або ж він відповідно, міститься в цій алгебрі також, а отже і в
+об'єднанні, тобто в алгебрі $\mathcal{A}$.
+
+Якщо якесь об'єднання подій міститься у алгебрі $i$, при умові, що ці події
+належать цій алгебрі, то і таке об'єднання буде належати і алгебрі $\mathcal{A}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+

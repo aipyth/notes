@@ -1,0 +1,353 @@
+$C[a, b]$ - set of all continuous functions
+
+\section{Metric spaces}
+
+\begin{definition}[Metric space]
+    $X$ set. Function $d: x\times X \to [0, \infty)$ is called a metric if the following condition are met:
+    \begin{enumerate}
+        \item $d(x, y) = 0 \iff x = y$
+        \item $d(x, y) = d(y, x)$
+        \item $d(x,z) \leq d(x,y) + d(y, z)$ - the inequality of the triangle
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    $(X, d)$ - metric space.
+\end{definition}
+\begin{example}[Discrete space]
+    $X$ - arbitrary.
+    \[
+    d(x, y) = \begin{cases}
+            1 & x \not= y \\
+            0 & x = y
+        \end{cases}
+    .\] 
+\end{example}
+\begin{example}[Real line]
+    $X = \mathbb{R}, \;\; d(x, y) = \left| x - y \right| $
+\end{example}
+\begin{example}[n-dimentional space]
+    $X = \mathbb{R}^{n} = \{x = \left( x_1, \ldots, x_n \right) \mid x_i \in \mathbb{R}, 1 \leq i \leq n \} $
+    \[
+    d(x, y) = \sqrt{\sum_{i=1}^{n} \left( x_i - y_i \right)^2 } 
+    .\] 
+\end{example}
+
+\begin{example}
+    $d_1(x, y) = \sum_{i=1}^{n} \left| x_i - y_i \right|$ - metric on $\mathbb{R}^{n}$
+
+    \begin{proof}
+    \[
+    d_1(x, z) = \sum_{i=1}^{n} \left| x_i - z_i \right| \leq \sum_{i=1}^{n} \left( \left| x_i - _i \right| + \left| y_i - z_i \right|  \right) =
+    d_1(x, y) + d_(y, z)
+    .\] 
+    \end{proof}
+
+    $d_{\infty} (x, y) = \underset{1\leq i \leq n}{\max} \left| x_i - y_i \right|$ - metric on $\mathbb{R}^{n}$
+    
+    \begin{proof}
+        \begin{align*}
+        d_{\infty}(x, y) = 0 \iff \forall i : x_i = y_i \iff x = y \\ 
+        d_{\infty}(x, z) = \underset{1\leq i \leq n}{\max} \left| x_i - z_i \right|  \leq d_{\infty}(x, y) + d_{\infty}(y, z) \\
+        \left| x_i - z_i \right| \leq \left| x_i - y_i \right| + \left| y_i - z_i \right|        
+        .\end{align*}
+    \end{proof}
+    \[
+    1 \leq p < \infty : d_{p} (x, y) = \left( \sum_{i=1}^{n} \left| x_i - y_i \right| ^{p} \right) ^{\frac{1}{p}}
+    .\] 
+    \[
+    0 < p < 1 : d_{p}(x, y) = \sum_{i=1}^{n} \left| x_i - y_i \right| ^{p}
+    .\] 
+
+\end{example}
+
+\begin{example}
+$C[a, b]$ set of all continuous functions.
+$f: [a, b] \to \mathbb{R}$
+\[
+d(f, g) = \underset{a \leq t \leq b}{\sup} \left| f(t) - g(t) \right| 
+.\] 
+$d(f, g)$ is a metric on $C[a, b]$.
+\end{example}
+
+\begin{example}
+    $C_b[\mathbb{R}]$ - a set of all continuous and limited functions $f: \mathbb{R} \to \mathbb{R}$.
+    \[
+    d(f, g) = \underset{t \in \mathbb{R}}{\sup} \left| f(t) - g(t) \right| 
+    .\] 
+\end{example}
+\begin{example}
+    $(X, d)$ - metric space, $Y \subset X$
+    \[
+    d(y_1, y_2), y_1, y_2 \in Y
+    .\] 
+    $(Y, d)$ - subspace $X$.
+\end{example}
+
+\begin{definition}
+    $\left( X, d \right) $ - metric space, $\left\{ x_n : n\geq 1 \right\} $
+    series of $X$ elements. $\left\{ x_n : n\geq 1 \right\} $ converges to $x \in X$ if $\underset{n\to\infty}{\lim} d(x_n, x) = 0$.
+    \[
+        \left( \forall \varepsilon > 0 \quad \exists N \quad \forall n \geq N \quad d(x_n, x) < \varepsilon \right) 
+    .\] 
+    \[
+    x = \lim_{n \to \infty} x_n
+    .\] 
+\end{definition}
+
+\begin{theorem}
+    In metric space convergent sequence has only one boundary.
+\end{theorem}
+\begin{proof}
+    Let $\lim_{n \to \infty} x_n = x, \; \lim_{n \to \infty} x_n = y $.
+    \[
+    0 \leq d(x, y) \leq d(x, x_n) + d(x_n, y) \to 0
+    .\] 
+    \[
+    \Rightarrow d(x, y) = 0 \Rightarrow x = y
+    .\] 
+\end{proof}
+
+$\left( X, d_x \right), \left( Y, d_y \right) $ - metric spaces. $f : X \to Y$.
+
+\begin{definition}
+    \begin{enumerate}
+        \item $f$ continuous in point $x_0 \in X$ if 
+            \[
+            x_n \to x_0 \text{ in $X$ } \Rightarrow f(x_n) \to f\left( x_0 \right) \text{ in $Y$ }
+            .\] 
+        \item $f$ continuous on $X$ if $f$ continuous in every point $x_0 \in X$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    $f$ continuous in $x_0 \in X$ then and only then if
+    \[\forall \varepsilon > 0 \quad \exists \delta > 0 : d_x(x, x_0) < \delta \Rightarrow d_x(f(x), f(x_0)) < \varepsilon \]
+\end{remark}
+
+\begin{definition}
+    \begin{enumerate}
+        \item $f: X \to Y$ is called homeomorphism if $f$ is bijective, continuous and $f^{-1}$ is continuous.
+        \item $f: X \to Y$ isometric if 
+            \[
+            d_y (f(x), f(x')) = d_x(x, x')
+            .\] 
+            Isometrie is always continuous.
+    \end{enumerate}
+\end{definition}
+
+$x \in X, \;\; r > 0$
+\begin{definition}
+    Open ball \[
+    \mathbb{B}(x, y) = \{ y \in X : d(y, x) < r \} 
+    .\] 
+\end{definition}
+\begin{definition}
+    Closed ball \[
+    \overline{\mathbb{B}} = \{ y \in X : d(y, x) \leq r \} 
+    .\] 
+\end{definition}
+
+Convergence can be rewritten using the last two definitions:
+\[
+x_n \to x \iff \forall \varepsilon > 0 \quad \exists N \quad
+\forall n \geq N \quad x_n \in \mathbb{B}(x, \varepsilon)
+.\] 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{convergence-in-terms-of-open-and-closed-ball-definitions}
+    \caption{Convergence in terms of open and closed ball definitions}
+    \label{fig:convergence-in-terms-of-open-and-closed-ball-definitions}
+\end{figure}
+
+\begin{definition}
+    $A \subset X$. Point $x$ is tangent to set $A$ if \[
+    \forall \varepsilon > 0 \quad \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing
+    .\] 
+\end{definition}
+
+\begin{example}
+    $X = \mathbb{R}$, $A = (a, b)$. $a$ and $b$ are tangent to $A$. \\
+    All elements from set $A$ are tangent to $A$. \\
+    If there's some $\exists c > b$ then we can pick some ball around $c$
+    of radius $r$. In that ball there would be no elements from A.
+\end{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{tangent-point-example}
+    \caption{Tangent point example}
+    \label{fig:tangent-point-example}
+\end{figure}
+
+\begin{definition}
+    $\overline{A} = \{ x \in X : x \text{ tangent to } A \} $ closure of set $A$.
+\end{definition}
+
+\begin{theorem}[Properties of closure]
+    Set $A$ with closure $\overline{A}$ has the following properties:
+    \begin{enumerate}
+        \item $A \subset \overline{A}$
+        \item $\overline{\overline{A}} = \overline{A}$ --- idempotence
+        \item $A \subset B \Rightarrow \overline{A} \subset \overline{B}$
+        \item $\overline{A \cup B} = \overline{A} \cup \overline{B}$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item[1] \begin{align*}
+        x \in A \Rightarrow \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing \text{ since it contains $x$ }
+        .\end{align*}
+    \item[3] \begin{align*}
+        x \in \overline{A} \Rightarrow \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing \Rightarrow \\
+        \Rightarrow \mathbb{B}(x, \varepsilon) \cap B \not= \varnothing \Rightarrow 
+        x \in \overline{B}
+        .\end{align*}
+        \item[2] \begin{align*}
+            \overline{A} \subset \overline{\overline{A}} \\
+            \text{ need to show that } \overline{\overline{A}} \subset \overline{A} \\
+            x \in \overline{\overline{A}}, \varepsilon > 0. \quad
+            \mathbb{B}(x, \varepsilon) \cap \overline{A} \not= \varnothing \\
+            \text{ exists point } y \in \mathbb{B}(x, \varepsilon) \cap \overline{A}.
+        .\end{align*}
+        \begin{figure}[ht]
+            \centering
+            \incfig{eps-ball-y-in-eps-ball-x-with-point-from-a}
+            \caption{Eps-Ball Y in eps-Ball x with point from A}
+            \label{fig:eps-ball-y-in-eps-ball-x-with-point-from-a}
+        \end{figure}
+
+        Lets show that $\mathbb{B}(y, \varepsilon - d(x, y)) \subset \mathbb{B}(x, \varepsilon)$.
+        \begin{gather*}
+            z \in \mathbb{B}(y, \varepsilon - d(x, y)) \\
+            \text{ for $z$ the following is met } d(z, y) < \varepsilon - d(x, y) \\
+            \varepsilon > d(z, y) + d(y, x) \geq d(z, x) \Rightarrow
+            z \in \mathbb{B}(x, \varepsilon) \\ 
+            \mathbb{B}(y, \varepsilon - d(x, y)) \cap A \not= \varnothing \Rightarrow 
+            \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing \\
+            \Rightarrow x \in \overline{A}.
+        \end{gather*}
+
+    \item[4] \[
+    A \subset A \cup B \Rightarrow \overline{A} \subset \overline{A \cup B}; \; \overline{B} \subset \overline{A \cup B}
+    \] 
+    \[
+    \Rightarrow \overline{A} \cup \overline{B} \subset \overline{A \cup B}
+    .\] 
+\begin{figure}[ht]
+    \centering
+    \incfig{for-stupid-idiots}
+    \caption{For stupid idiots}
+    \label{fig:for-stupid-idiots}
+\end{figure}
+
+    Need to prove $\overline{A \cup B} \subset \overline{A} \cup \overline{B}$
+
+    (by contradiction) \\
+    Let $x \in \overline{A \cup B}$ and $x \not\in \overline{A}$, $x \not\in \overline{B}$.
+    \[
+    \exists \varepsilon_1 > 0 : \mathbb{B}\left( x, \varepsilon_1 \right) \cap A = \varnothing
+    .\] 
+    \[
+    \exists \varepsilon_2 > 0 : \mathbb{B}\left( x, \varepsilon_2 \right) \cap B = \varnothing
+    .\] 
+    \[
+    \varepsilon = \min(\varepsilon_1, \varepsilon_2). \quad
+    \mathbb{B}(x, \varepsilon) \cap \left( A \cup B \right) = \varnothing
+    .\] 
+    \[
+    \Rightarrow \overline{A \cup B} = \overline{A} \cup \overline{B}
+    .\] 
+    \end{itemize}
+\end{proof}
+
+
+\begin{theorem}
+    $x \in \overline{A} \iff$ in set A exists series $\left( x_n : n \geq 1 \right) $ that converges to $x$.
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item[($\Rightarrow$)] Let $x\in \overline{A}$
+            \[
+            \forall \varepsilon > 0 \quad \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing
+            .\] 
+            let $\varepsilon_n = \frac{1}{n} \quad$ \\
+            $\forall n \geq 1$ exists point $x_n \in A \cap \mathbb{B}(x, \frac{1}{n}$ \\
+            \[
+            0 \leq d(x, x_n) < \frac{1}{n} \to 0. \quad \lim_{n \to \infty} x_n = x
+            .\] 
+        \item[($\Leftarrow$)] Let $\lim_{n \to \infty} x_n = x$ and $x_n \in A$. \\
+            \[
+            \forall \varepsilon > 0 \quad \exists N \quad \forall n \geq N \quad d(x_n ,x) < \varepsilon
+            .\] 
+            \[
+            x_n \in \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing
+            .\] 
+            \[
+            \Rightarrow x \in \overline{A}
+            .\] 
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    A is dense in set B if $B \subset \overline{A}$ (any B element can be approached to elements of A)
+\end{definition}
+\begin{definition}
+    A dense everywhere if $\overline{A} = X$.
+\end{definition}
+\begin{definition}
+    Metric space $\left( X, d \right) $ is separable if exists dense everywhere countable set.
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}
+        \item $\mathbb{R}$ - separable space. $\overline{\mathbb{Q}} = \mathbb{R}$
+        \item $\mathbb{R}^{n} $ - separable space related to any metric $d_{p}, \; 0 < p \leq \infty$. $\overline{\mathbb{Q}^{n}} = \mathbb{R}^{n}$
+        \item $X, d$ - discrete. $\mathbb{B}(x, \varepsilon) = \{ y : d(x, y) < \varepsilon \} $. But if $0 < \varepsilon < 1$ then
+            \[
+            \mathbb{B}(x, \varepsilon) \cap A \not= \varnothing \iff x \in A.
+            .\] 
+            \[
+             \Rightarrow \overline{A} = A
+            .\] 
+        The only dense everywhere set is X.
+    \item $C[a, b]$; $d(f, g) = \underset{t \in [a, b]}{\sup} \left| f(t) - g(t) \right| $ \\
+        By Weierstrasse theorem $\forall f \in C[a, b] \quad \forall \varepsilon > 0$ exists polynomial
+    \[ P(t) = a_0 + a_1 t + \ldots + a_d t^{d} : \underset{t \in [a, b]}{\sup}
+    \left| f(t) - P(t) \right| < \varepsilon \]
+    Dense everywhere set is set of polymonials with rational coefficients.
+
+    \item $C_{b}(\mathbb{R}), d(f, g) = \underset{t \in \mathbb{R}}{\sup} \left| f(t) - g(t) \right| $ - is not separable metric space.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{line-for-example-of-not-separable-metric-space}
+    \caption{Line for example of not separable metric space}
+    \label{fig:line-for-example-of-not-separable-metric-space}
+\end{figure}
+
+\[ A \subset \mathbb{Z} \quad f_{A}(n) =
+ \begin{cases}
+     1 & n \in A \\
+     0 & n \in \mathbb{Z} \backslash A
+ \end{cases}
+.\] 
+\[
+A \not= A' \quad n \in A \backslash A' \text{ or } n \in A' \backslash A
+.\] 
+\[
+d(f_{A}, f_{A'}) = 1
+.\] 
+\[
+\mathbb{B}(f_{A}, \frac{1}{2}) \cap \mathbb{B}(f_{A'}, \frac{1}{2}) = \varnothing
+.\] 
+In space $C_b(\mathbb{R})$ exists a continuum family of open balls that do not intersect.
+
+If dense everywhere set exists than in every open ball must be an element of the one.
+\begin{figure}[ht]
+    \centering
+    \incfig{family-of-open-balls-each-containing-an-element}
+    \caption{Family of open balls each containing an element}
+    \label{fig:family-of-open-balls-each-containing-an-element}
+\end{figure}
+    \end{enumerate}
+\end{example}

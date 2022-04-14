@@ -793,6 +793,7 @@ Let $\xi$ - integral (невід'ємна) random value. Then:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   Inequalities. The law of large numbers in the form of Chebyshev.
 %%%   Borel-Cantelli lemma
+%%%   Lection 12
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Inequalities. The law of large numbers in the form of Chebyshev.
 Borel-Cantelli lemma}
@@ -911,7 +912,7 @@ Let $X_1, X_2, \dots$ - sequence of random values with finite expectation $m_i =
     .\] 
     then $\set{x_n}_{n\geq1}$ satisfies the law of large numbers.
     
-\end{theorem}
+\end{theorem}X-
 
 \begin{corollary}
     For independent evenly distributed random values:
@@ -925,6 +926,65 @@ Let $X_1, X_2, \dots$ - sequence of random values with finite expectation $m_i =
     For use of the law of large numbers the finiteness of expectation is enough (will be proven later).
 \end{remark}
 
+\begin{example}
+    \begin{itemize}
+        \item Bernoulli theorem:
+            \begin{theorem}[Bernoulli]
+                Let $S_n$ be a number of <<successes>> in $n$ unrelated repeated trials with probability of <<success>> $p$ in each one. Then
+                \[ \forall \varepsilon > 0 : P \left( \left| \frac{S_n}{n} - p \right| \geq \varepsilon \right) \underset{n \to \infty}{\longrightarrow} 0 \]
+                Indeed --- $ S_n = \sum\limits_{i=1}^{n} X_i $ , where
+                $X_i \sim B(p); \; X_i $ are independent;
+
+                $M X_i = p; \; \mathcal{D} X_i = p(1-p) \leq \frac{1}{4} $.
+            \end{theorem}
+        \item Poisson theorem
+            \begin{theorem}[Poisson]
+                Let $S_n$ be a number of successes in $n$ trials. In $k$-th trials the probability of success in $p_k$.
+                Then:
+                \[
+                    \forall \varepsilon > 0 : P \left( \left| \frac{S_n}{n} - \frac{1}{n} \sum_{i=1}^{n}p_i \right| \geq \varepsilon \right) \underset{n\to\infty}{\longrightarrow} 0
+                \]
+                Indeed: $ S_n = \sum\limits_{i=1}^{n} X_i $ ,\\
+                $X_i \sim B(p_i); \; MX_i = p_i; \; \mathcal{D}X_i = p_i (1 - p_i) \leq \frac{1}{4}$
+            \end{theorem}
+                
+    \end{itemize}
+\end{example}
+
+\section{Borel-Cantelli}
+The next lemma is the main tool for analysis of properties with probability of 1.
+
+Consider $\set{A_n}_{n\geq}$ - a sequence of random events from $\sigma$-algebra $\mathcal{F}$.
+
+Call to mind next notation:
+\[ \overline{\lim\limits_{n\to \infty}} A_n = \set{A_n \text{ occurs for infinitely many $n$}} \equiv \set{A_n \text{ i.o. (infinitely often)}} = \]
+\[ = \bigcap\limits_{n=1}^{\infty} \bigcup_{k\geq n} A_k \]
+\[ \forall n \; \exists k \geq n : A_k \text{ occurred } \]
+
+\[ \underset{n \to \infty }{\underline{\lim}} A_n = \set{\text{ from some number all the $A_n$ events occur }} =
+    \bigcup_{n=1}^{\infty} \bigcap_{k\geq n} A_k
+\]
+\[ (\exists n \; \forall k \geq n A_k \text{ occurs }) \]
+\begin{lemma}[Borel-Cantelli] Got several cases:
+    \begin{itemize}
+        \item[a.] If $\sum\limits_{n=1}^{\infty} P(A_n) < \infty$, then $P(A_n \text{ i.o. }) = 0$.
+    \item[b.] If $\sum\limits_{n=1}^{\infty} P(A_n) = \infty$ and $A_1, A_2, \dots$ are independent, then $P(A_n \text{ i.o. }) = 1$.
+    \end{itemize}
+
+    \begin{proof}
+        \begin{itemize}
+            \item[a.] By definition:
+                \[ P \left( \underset{n \to \infty}{\overline{\lim}} A_n \right) =
+                P \left( \bigcap_{n=1}^{\infty} \bigcup_{k\geq n}^{} A_k \right) \]
+                Create the following subsequence:
+                \[ B_1 = \bigcup_{k=1}^{\infty} A_k \supset B_2 = \bigcup_{k=2}^{\infty} A_k \supset \dots \]
+                The $P \left( \bigcap_{n=1}^{\infty} \bigcup_{k\geq n}^{} A_k \right)$ is continuous from above:
+                \[ P \left( \bigcap_{n=1}^{\infty} \bigcup_{k\geq n}^{} A_k \right) = \underset{n\to\infty}{\lim} P \left( \bigcup_{k\geq n} A_k \right) \leq \underset{n\to \infty}{\lim} \sum_{k\geq n} P(A_k) = 0 \]
+                as long as the series $\sum\limits_{k=1}^{\infty} P(A_k)$ is convergent.
+                
+        \end{itemize}
+    \end{proof}
+\end{lemma}
 
 
 \end{document}

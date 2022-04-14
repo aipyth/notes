@@ -1,0 +1,392 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage{fullpage}
+% \usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+% \usepackage{fancy}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{dsfont}
+
+\usepackage{mathtools}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Define Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{light-gray}{gray}{0.85}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyhf{}
+\usepackage[top=1.5cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\rfoot{\rightmark}
+\lfoot{\thepage}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+\title{Complexity Theory Notes}
+\author{}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Some declarations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}              % Вимога
+\newtheorem{proposition}[theorem]{Proposition}  % Твердження
+\newtheorem{lemma}[theorem]{Lemma}              % Лема
+\newtheorem{corollary}[theorem]{Corollary}      % Наслідок
+\newtheorem{conjecture}[theorem]{Conjecture}    % Припущення
+\newtheorem*{observation}{Observation}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% \DeclarePairedDelimiter{\set}{\left\{}{\right\}}
+\NewDocumentCommand{\set}{o m}{%
+  % <code>
+  \IfNoValueTF{#1}
+    {\{#2\}}
+    {\{#1 \mid #2\}}%
+  % <code>
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Computability}
+
+\section{Godel numeration}
+
+\begin{enumerate}
+\item $\mathcal{D}$ - subject area (objects, properly built functions, ...)
+\item $\nu : \mathcal(D) \rightarrow \mathcal{N}$ - coding into unique natural number
+Actually anything can be coded using this numeration.
+\item there are lots of Godel numerations ($\nu(x_1, ..., x_n) = 2^{\nu(x_1)} ... p_n^{\nu(x_n)}$)
+\item arithmetization of arbitrary theory (transposition from theory objects to natural numbers)
+\item partial function $f : \mathbb{N}^{n} \not\to \mathbb{N}, n \in \mathbb{N}$, is (algorithmically) computable $\iff$ there is such Turing machine $M: M(x_1, ..., x_n) \simeq f(x_1, ..., x_n), \forall x_1, ..., x_n \in \mathbb{N}$ (Turing thesis)
+\item set (algorithmically) computable functions coincides to set of partially\itemrecursive functions (Church thesis)
+\item Turing Machines numeration $M_0, M_1, ...$
+\item numeration of every (algorithmic) computable functions $\varphi_0, \varphi_1, ...$
+\end{enumerate}
+
+Example of computable function:
+$$f(n) = 1, \text{ if there would be colony on Moon}$$
+$$f(n) = 0, \text{ if there would be no colony on Moon}$$
+subjunctive algorithm that proves computability of this function is to wait the predefined set time.
+
+---
+
+### Theorem about uncomputable function
+
+Uncomputable function defined everywhere - exists.
+
+#### Proof
+
+\item $\varphi_0^1, \varphi_1^1, ...$ - all computable functions (арності 1)
+\item $$
+f(n) = \begin{cases}
+    	\varphi_n^1(n) + 1, \;\; \text{ if } \; \varphi_n^1(n) \not= \bot \\
+        0,  \;\;\; \text{ if } \varphi_n^1(n) = \bot \;\; (\not\exists \varphi_n^1)
+\end{cases} \;,\;\;\;
+n \in \mathbb{N}
+$$
+\item $\forall n \in \mathbb{N} f \not\simeq \varphi_n^1: f(n) \not\simeq \varphi_n^1(n)$
+\item diagonalization method (Kantor)
+
+---
+
+### Theorem about parametrization
+
+For arbitrary countable function $f(x, y)$ exists everywhere defined countable function $k(x)$ that $f(x, y) = \varphi_{k(x)}(y)$ for arbitrary Godel Numeration $\varphi_0, \varphi_1, ...$ unary countable functions.
+
+#### Proof
+\item $f(x, y)$ is countable $\Rightarrow \exists \text{ TM } M: M(x, y) \simeq f(x, y)$
+\item $\forall a \in \mathbb{N} \exists \text{ TM } M_a : M_a(y) \simeq f(a, y)$
+\item composition of Turing Machines: add argument $a$ at input (additional) tape and start TM $M$
+\item number of TM $M_a$ is $k(a)$ value
+
+#### Consequence
+Number of function $k(x)$ depends only on parameter $x$.
+
+---
+
+### $s_n^m$ Kleene theorem (s-m-n Theorem)
+
+#### Theorem
+For arbitrary countable funcions' Godel Numeration exists such a primitiv recursive function $s: \mathbb{N}^2 \rightarrow \mathbb{N}$ (арності 2), that for arbitrary Godel number $p \in \mathbb{N}$ of some partial function of two variables next Kleene equality is true: $\varphi_{s(p, x)}(y) \simeq \varphi_p(x,y)$ for every natural number $x, y \in \mathbb{N}$. 
+
+#### $s_n^m$ Kleene theorem (s-m-n theorem, parametrization theorem)
+
+For arbitrary natural numbers $m,n > 0$ and arbitrary godel numeration of countable functions exists such a primitiv recursive function $s_n^m : \mathbb{N}^{m+1} \rightarrow \mathbb{N}$ that for arbitrary Godel number $p \in \mathbb{N}$ of some partial function of $m + n$ arguments Kleene equality is true:
+\[ \varphi_{s_n^m(p, x_1, ..., x_m)}(y_1, ..., y_n) \simeq \varphi_p(x_1, ..., x_m, y_1, ..., y_n) \]
+for every natural number $x_1, ..., x_m, y_1, ..., y_n \in \mathbb{N}$.
+
+---
+
+### Universal function
+
+For arbitrary set of partial functions $\mathcal{H} \subseteq \mathcal{F}_n$ of $n$ variables, $n \in \mathbb{N}_0$, function $f \in \mathcal{F}_{n+1}$ of variables $n+1$ is called universal function of set of functions $\mathcal{H}$, if the following two conditions are true:
+\item for arbitrary number $c \in \mathbb{N}_0$ function $f(c, \cdot)$ of variables $n$ is in set of functions $\mathcal{H}$
+\item for arbitrary function $h$ of set of functions $\mathcal{H}$ exists such a number $c \in \mathbb{N}_0$, that $h(x_1, ..., x_n) \simeq f(c, x_1, ..., x_n)$ for arbitrary values $x_1, ..., x_n \in \mathbb{N}_0$.
+
+Algorithm to compute universal function for a set is called universal.
+
+#### Theorem (about numeration)
+
+For arbitrary number $n \in \mathbb{N}_0$ exists such universal function of set of all partial computable functions $\mathcal{H}_n \subseteq \mathcal{F}_n$ of $n$ variables.
+
+##### Proof
+\item let $f(y, x_1, ..., x_n) \simeq \varphi_y(x_1, ..., x_n)$ for arbitrary numbers $y, x_1, ..., x_n \in \mathbb{N}_0$
+\item by value $y \in \mathbb{N}_0$ find algorithm of computing function $\varphi_y$ and compute value $\varphi_y(x_1, ..., x_n)$ using this algorithm
+\item $\Rightarrow$ function $f$ is computable
+
+#### Theorem
+
+For arbitrary number $n \in \mathbb{N}_0$ there is no such universal funtion of set of defined everywhere computable functions $\mathcal{H}_n^{tot} \subseteq \mathcal{F}_n^{tot} \subset \mathcal{F}_n$ of $n$ variables.
+
+##### Proof
+\item let universal function $f$ of set of functions $\mathcal{H}_n^{tot} : f(y, x_1, ..., x_n) = \varphi_y(x_1, ..., x_n)$ for arbitrary numbers $y, x_1, ..., x_n \in \mathbb{N}_0$
+\item let $h(x_1, ..., x_n) = f(x_1, x_1, ..., x_n) + 1$ for arbitrary numbers $x_1, ..., x_n \in \mathbb{N}_0$
+\item $\Rightarrow h \in \mathcal{H}_n^{tot} \Rightarrow \exists c \in \mathbb{N}_0 f(c, x_1, ..., x_n) = h(x_1, ..., x_n)$ for arbitrary numbers $x_1, ..., x_n \in \mathbb{N}_0$
+\item on one side $h(c, ..., c) = f(c, ..., c)$ but $h(c, ..., c) = f(c, ..., c) + 1$ by definition of $h$ $\Rightarrow$ *contradiction*.
+
+---
+
+* every universal function of unary computable functions set defines numeration $f(x, y) = \varphi_x(y)$
+* binary function $U$ is called **main universal function (main numeration)** if for any binary computable function $h$ exists such a defined everywhere computable unary funtion $g$ that $h(x, y) = U(g(x), y)$ for any numbers $x, y \in \mathbb{N}_0$
+* $\Rightarrow$ exists main universal function of set of all unary computable functions
+* $\Rightarrow U_1(x, y) = U_2(c_1(x), y)$ and $U_2(x, y) = U_1(c_2(x), y)$ (**theorem about main numerations' ismorphism**)
+* operations on computable functions $\Leftrightarrow$ operations on their indexes
+
+---
+
+### Theorem about motionless point
+
+For arbitrary Godel numeration $\varphi_0. \varphi_1, ...$ of unary computable functions and arbitrary unary computable defined everywhere funtion $f$ exists such natural number $n \in \mathbb{N}_0$ that $\varphi_n \simeq \varphi_{f(n)}$.
+
+##### Proof
+\item consider such function $\varphi_{f(\varphi_x(x))}(y)$, $\varphi_{f(\varphi_x(x))}(y) \simeq \psi(f(\varphi_x(x)), y) \simeq g(x, y) , \forall x, y \in \mathbb{N}_0$
+\item from $s_n^m$ Kleene theorem follows that exists such unary defined everywhere function $h$ that $\varphi_{f(\varphi_x(x))}(y) \simeq \varphi_{h(x)}(y), \forall x, y \in \mathbb{N}_0$
+\item let $h \simeq \varphi_m \Rightarrow \varphi_{f(\varphi_x(x))}(y) \simeq \varphi_{\varphi_m}(y), \forall x, y \in \mathbb{N}_0$
+\item let $\varphi_m(m) = n$ (defined everywhere) $\Rightarrow \varphi_{f(n)}(y) \simeq \varphi_n(y), \forall y \in \mathbb{N}_0$
+
+#### Second theorem about recursion (Kleene, 1938)
+For arbitrary Godel numeration $\varphi_0. \varphi_1, ...$ unary omputable functions and arbitrary binary partial computable function $f$ exists such natural number $n \in \mathbb{N}_0$ that $\varphi_n(y) \simeq f(n ,y)$ for all numbers $y \in \mathbb{n}_0$.
+
+##### Consequence
+Let  function $h$ - $f(x, y) \simeq \varphi_{h(x)}(y)$ ($s_n^m$ theorem).
+Let number $m$ be motionless point of function $h$.
+From theorem about Rodger's motionless point follows second theorem about recursion ($n=m, \; \varphi_m(y) \simeq \varphi_{h(m)}(y) \simeq f(m,y)$ for all numbers $y \in \mathbb{N}_0$)
+
+##### Consequence
+Let function $f$ - for arbitrary algorithm $\mathcal{A}_x$ algorithm $\mathcal{A}_{f(x)}$ "prints description" of algorithm $\mathcal{A}_x$.
+Function $f$ is computable $\Rightarrow$ by theorem about motionless point exists algorithm $\mathcal{A}$, that "prints own description".
+
+### Computable functions
+
+> Can UTM compute arbitrary function $\{0, 1\}^* \rightarrow \{0,1\}^*$?
+
+#### Theorem
+Exists uncountable function UC: $\{0,1\}^* \rightarrow \{0,1\}$
+
+##### Proof
+\item TM numeration using set $\{0,1\}^*$, for arbitrary word $x \in \{0,1\}^*$ appropriate Turing Machine is marked $M_x$ or $M_{\lceil x \rceil}$
+\item define $$UC(x) = \begin{cases}
+	0, \text{ if } M_x(x) = 1 \\
+	1, otherwise
+\end{cases} \forall x \in \{0,1\}^*
+$$
+\item let $\exists \text{ TM } \widetilde{M}: \forall x \in \{0,1\}^* \widetilde{M}(x) = UC(x)$
+$\widetilde{M}(\lfloor\widetilde{M}\rfloor) = ?$
+\item if $\widetilde{M}(\lfloor \widetilde{M} \rfloor) = 1$, then $UC(\lfloor \widetilde{M} \rfloor)=0$ and vice versa
+
+### Modification of TM for recognition tasks
+
+Recognition task $\Leftrightarrow$ defined everywhere function $\{0,1\}^* \rightarrow \{0,1\}$
+
+#### Definition (multitape Turing Machine)
+\item $k \in \mathbb{N}^+$ number of tapes
+\item $\Gamma$ Turing Machine alphabet
+\item $\# \in \Gamma$
+\item $\{0,1\}^*$ input alphabet
+\item $Q$ nonempty finite set of internal states
+\item $q_0 \in Q$ initial state
+\item $q_{acc} \in Q$ final state, that accepts input word
+\item $q_{rej} \in Q, q_{acc} \not= q_{rej}$ final state that rejects input word
+\item $\delta : (Q \backslash \{q_{acc}, q_{rej}\}) \times \Gamma^k \nrightarrow Q \times \Gamma^{k-1} \times \{L, S, R\}^k$ partial function of transitions
+
+#### Notion
+$q_{acc}, q_{rej} \in Q, q_{acc} \not= q_{rej}$, other ending configurations does not exist
+($\Sigma = \{0,1\}, q_{acc} \equiv q_{accept} \equiv q_y \equiv q_{yes}, q_{rej} \equiv q_{reject} \equiv q_{n} \equiv q_{no}$)
+
+#### Definition
+Final configuration of TM is called positive (negative) if it's state is final state that accepts (rejects) input word.
+
+#### Definition
+TM $M$ input word $x$
+\item accepts if $M(x) = 1$ ($q_{acc}$, positive configuration)
+\item rejects if $M(x) = 0$
+\item not  accepts if $M(x) = 0$ or $M(x) = \bot$
+\item not rejects if $M(x) = 1$ or $M(x) = \bot$
+
+### Language recognition
+
+#### Definition
+TM $M$ resolves (decides) language $L \subseteq \{0,1\}^*$
+\item if $x \in L$ then $M(x) = 1$
+\item if $x \not\in L$ then $M(x) = 0$
+
+#### Definition
+TM $M$ recognizes language $L \subseteq \{0,1\}^*$
+\item if $x \in L$ then $M(x) = 1$
+\item if $x \not\in L$ then $M(x) = 0$ or $M(x) = \bot$
+
+#### Definition
+Languages - decidable (recursive) or semidecidable (recursively countable)
+
+language $L(M) \;\; (L_M)$ of TM $M$ - all word it accepts.
+
+#### Definition
+Turing machines $M_1$ and $M_2$ are:
+\item same if there exists such permutation of inner states and/or change of directions 'left' and 'right', otherwise - is principle different
+\item equivalent if $M_1 = M_2$, $M_1 \simeq M_2$
+\item with one language if $L(M_1) = L(M_2)$
+
+### **HALT** problem
+
+Define by binary representation of TM $M$ and input word $x \in \{0,1\}^*$, will TM $M$ stop on input word $x$. (decide language $L_{HALT}$)
+
+#### Theorem
+**HALT** task is unsolvable.
+
+##### Proof
+\item let existance of $M_{HALT}$
+\item $M_{diag}(x) = M_{HALT}(x, x)$
+\item $$M^{co}(x) = \begin{cases}
+\text{cycle}, M_{diag}(x) = 1 \\
+\text{stop}, M_{diag}(x) = 0
+\end{cases}$$
+\item $M^{co}(\lfloor M^{co} \rfloor)$ ?
+
+### $HALT_\varepsilon$ problem
+
+Define by binary representation of Turing Machine whether TM $M$ will stop on empty input word (decide language $L_{HALT_\varepsilon}$).
+
+#### Theorem
+
+Problem $HALT_\varepsilon$ is unsolvable.
+
+##### Proof
+\item for arbitrary pair of TM $\widetilde{M}$ and input word $x$ there exists TM $\widetilde{M}_x$
+\item if such TM exists, that solves $HALT_\varepsilon$ problem, then it solves $HALT$ problem
+\item **contradiction**
+
+### Rice's theorem
+
+Numeric set $S \subseteq \mathbb{N}$ is called **invariant**, if representation of any two equivalent TM simultaneously is in or not in set $S$.
+
+#### Examples
+\item all TM, that accepts input word $11$
+\item all TM, that accepts at least one input word
+\item all TM, that never get hung up
+\item all TM, that stop after 15 tacts with input word $1$
+
+---
+---
+
+## Lection *
+
+\item Tibour Rado 1962 year
+\item TM model: $(1, \{0, 1\}, {1}, 0, Q, q_h, q_0, \sigma)$
+\item $\sigma : (Q \backslash \{q_h\}) \times \{0,1\} \rightarrow Q \times \{0,1\} \times \{L, R\}$
+\item $\mathcal{K}_{BB}$ -- all turing machines that stop on empty word (Rado class)
+\item $\mathcal{K}_{BB}(n)$ -- all TM that stop on empty imput word and have $n$ non-final states
+\item $s(M)$ -- number of steps that TM M does with empty input word before it stops
+\item $\sigma(M)$ -- number of non-empty left cells on tape after TM M stops with empty input word
+
+#### Definition 
+Rado functions -- $S, \Sigma : \mathbb{N} \rightarrow \mathbb{N}$ that for arbitrary natural number $n \in \mathbb{N}$ take value $S(n) = \max_{M \in \mathcal{K}_{BB}(n)} s(M)$ and $\Sigma(n) = \max_{M \in \mathcal{K}_{BB}(n)} \sigma(M)$
+
+##### Consequence
+For arbitrary natural number $n \in \mathbb{N}$ the following is true $\Sigma(n) \leq S(n)$.
+
+##### Statement
+For arbitrary natural number $n \in \mathbb{N}$ class Rado $\mathcal{K}_{BB}$ cardinality is limited at top $4^{n + 1}^{2n}$
+
+### Theorem 
+For arbitrary computable function $f : \mathbb{N} \rightarrow \mathbb{N}$ exists sucvh natural number $n_f \in \mathbb{N}$, that $\Sigma(n) > f(n)$ for all natural numbers $n \in \mathbb{N}, n > n_f$.
+
+#### Consequence
+\item $\Sigma$ is uncomputable
+\item $S$ is uncomputable
+
+\item for arbitrary computance and arithmetically right theory exists such natural number $k \in \mathbb{N}$ that for arbitrary number $n \in \mathbb{N}, n \geq k$ no statement like $S(n) = m$, where $m \in \mathbb{N}$ cannot be proved in cases of the theory
+\item in cases of the Cermello-fRenkel theory cannot be computed $S(748)$
+\item built TM from Rado class $\mathcal{K}_{BB}(1919)$ that stops when CF theory with axiom of choice is contradictional
+\item - built TM from Rado class $\mathcal{K}_{BB}(744)$ that stops that Rieman hypothesis is wrong
+
+\item small by building TM may generate big computance
+\item exists some limit of computable functions, and quite rapid by grows functions are uncomputable
+
+## Lection: Reducibility
+
+#### Definition
+Reducibility is some procedure (or algorithm) of translating one problem to another.
+Problem P1 reduces to problem P2:
+\item use available solution of P2
+\item prove complexity of solution of problem P1
+
+
+#### Example
+\item P1 : $ax^2 + bx + c = 0$
+\item P2 : $x^2 + bx + 1 = 0$
+\item P3 : $x^2 -2x+1=0$
+\item P3 reduces to P2
+\item P2 reduces to P1
+
+\item PRIME — for given natural number define whether it is prime
+\item COMPOSITE — for given natural number define whether it has non-trivial dividers (not 1 and itself)
+\item FACTOR — for given natural numbers $m$ and $k$ define whether number $m$ has non-trivial divider that is $\not\geq k$
+\item COMPOSITE -> PRIME
+\item задача PRIME -> COMPOSITE
+\item PRIME & COMPOSITE -> FACTOR
+\item FACTOR not -> PRIME | COMPOSITE
+
+#### Definition
+Reduction of languages is arbitrary binary relation on set $\{0,1\}^*$ that is reflexive and transitional. Laguage $L_1 \subseteq \{0,1\}$ reduces to language $L_2 \subseteq \{0,1\}$ if ordered pair $(L_1,L_2)$ belong to the binary relation that defines reduction. For language reduction signing $\leq$ is used with probable use of under- and upper- indexes for clarification of specifical reduction.
+
+##### Consequence
+Computable problem P1 reduces to computable problem P2 if such encoding schemas $e_1, e_2$ of P1 and P2 exists, that language $L[P1, e_1]$ reduces to $L[P2, e_2]$.
+
+##### Remark
+Is applicable for arbitrary sets.
+
+\end{document}
+

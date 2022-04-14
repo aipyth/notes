@@ -1,0 +1,202 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\hwnumber{4}
+\newcommand\student{Ivan Zhytkevych}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\student}
+\chead{\textbf{\Large Complexity Homework \hwnumber}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\NewDocumentCommand{\set}{o m}{%
+  % <code>
+  \IfNoValueTF{#1}
+    {\{#2\}}
+    {\{#1 \mid #2\}}%
+  % <code>
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.2}
+
+\begin{itemize}
+    \item[$\tilde{L_1}$] Можна побудувати вирішувач для $\tilde{L_1}$
+        \[ \tilde{M}_{1}(x) = \begin{cases}
+            M_1(M_{et}(x)) & \text{ якщо } x \text{ починається з } 0, \text{ де } M_{et} \text{ --- "з'їдає" перший символ } \\
+            0 & \text{ якщо } x \text{ починається з } 1
+            \end{cases}\]
+
+    $\tilde{M}_{1}$ вирішує $\tilde{L}_{1} \Rightarrow \tilde{L}_{1} \in R .$
+\item[$\tilde{L_2}$] Маємо лише розпізнавач для $L_2$, а отже і можемо побудувати розпізнавач і для $\tilde{L_2}$. Чи можемо побудувати вирішувач? Очевидно, що ні, оскільки тоді буде існувати вирішувач  і для $L_2$, що є протиріччям. Тому маємо $\tilde{L_2} \not\in R \Rightarrow \tilde{L_2} \in RE \backslash R$.
+\item[$\tilde{L_3}$] Чи можемо побудувати розпізнавач для $\tilde{L_3}$? Якщо це так, то матимемо змогу розпізнавати і $L_3$ $\Rightarrow $ протиріччя.
+    Чи можемо розпізнати $\overline{\tilde{L_3}}$? І знову таки ні, бо матимемо змогу використовувати розпізнавач $\overline{L_3}$, якого не існує. Маємо протиріччя, а отже $\tilde{L_3} \in NRNC$.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.3}
+
+\begin{itemize}
+    \item[$\cup$] $L_1 = \overline{INF}_{TM}, \;\; \overline{INF}_{TM} \in NRNC$ \\
+        $L_2 = ESEVEN_{TM}, \;\; ESEVEN_{TM} \in NRNC$ \\
+        $ESEVEN \subset \overline{INF}_{TM} \Rightarrow L_1 \cup L_2 = \overline{INF}_{TM} \in NRNC$.
+    \item[$\cap$] $L \in NRNC$ \\
+        $L_1 = \set{ 0x \mid x \in L }, \;\; L_2 = \set{ 1x \mid x \in L }$\\
+        $L_1, L_2 \in RE \backslash R$\\
+        $L_1 \cap L_2 = \varnothing \in R$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.4}
+
+\begin{itemize}
+    \item[\textbf{a}] $C_1 = \set{\varnothing, \set{1}, \set{0}}$ \\
+        $C_2 = \set{\varnothing, \set{0,1}}$ \\
+        $C_1 \cup C_2 = \set{\varnothing, \set{1}, \set{0}, \set{0, 1}}$ \\
+        $C_1 \lor C_2 = \set{\varnothing, \set{1}, \set{0}, \set{0,1}}$
+    \item[\textbf{b}] $C_1 = \set{\varnothing, \set{1}}, \;\; C_2 = \set{\set{0,1}, \set{1}, \set{0}}$ \\
+        $C_1 \cap C_2  =\set{\set{1}}$\\
+        $C_1 \land C_2 = \set{\set{1}}$
+    \item[\textbf{c}] $C_1 = \set{L_1 \subseteq \set{0,1}^* \mid |L_1| < \infty}$\\
+        $\overline{C_1} = \set{L_1 \subseteq \set{0,1}^* \mid |L_1| = \infty}$\\
+            $coC_1 = \set{L_1 \subseteq \set{0,1}^* \mid |\overline L_1| < \infty} = \set{L_1 \subseteq \set{0,1}^* \mid |L_1| = \infty}$
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.5}
+
+\begin{enumerate}
+    \item $C_1 \cup C_2 = \set{L_1 \subseteq \set{0,1}^* : \text{другий символ слів $L_1$ --- 1 або третій символ --- 0}}$
+    \item $C_1 \cap C_2 = \set{L_1 \subseteq \set{0,1}^* : \text{другий символ слів $L_1$ --- 1 та третій символ --- 0}}$
+    \item $C_1 \lor C_2 = \set{L_1 \subseteq \set{0,1}^* : \text{ з $L_1$ кожне слово має другим символом --- 1 або третім --- 0}}$
+    \item $C_1 \land C_2 = \set{L_1 \subseteq \set{0,1}^* : \text{ з $L_1$ кожне слово має другим символом --- 1 та третім --- 0}}$
+    \item $\overline{C_1} = \set{L_1 \subseteq \set{0,1}^* : L_1 \text{ має хоч одне слово $x$, у якого другий символ 0 або $|x| < 2$}}$
+    \item $\overline C_2 = \set{L_1 \subseteq \set{0,1}^* : L_1 \text{ має хоч одне слово $x$ у якого третій символ 1 або $|x| < 3$ }}$
+    \item $coC_1 = \set{L_1 \subseteq \set{0,1}^* : \text{кожне слово $x$ маж другим символом 0 або $|x| < 2$ }}$
+    \item $coC_2 = \set{L_1 \subseteq \set{0,1}^* : \text{кожне слово $x$ маж третім символом 1 або $|x| < 3$ }}$
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.6}
+
+Припустимо, що існує вирішувач $\tilde{M}_{HALT}$, який для заданої машини Тюринга і вхідного слова $x$ визначає чи зупиняється машина Тюринга на цьому вхідному слові $x$.
+Тоді мова $L_{BB} = \set{\langle M \rangle \mid M \text{ чемпіон класифікації BB}}$
+є вирішувальною, оскільки ми можемо взяти всі машини певного класу $\langle M, \varepsilon\rangle \in HALT$ і порівняти їх. А це означає що можна визначити для довільного класу переможця, отже функції Радо є обчислювальними для $n \in \mathbb{N}$. Але функції Радо є необчислюваними, отримали протиріччя.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.7}
+
+$L_{Champ} = HALT \cap \overline{L_{BB}}$
+HALT невирішувальна, тоді якщо $L_{BB} \in coRE \backslash R$, то $L_{Champ}$ - невирішувальна, так як $HALT, \overline{L_{BB}} \in RE \backslash R \Rightarrow HALT \cap \overline{L}_{BB} \in RE \backslash R.$
+$RE$ замкнутий відносно перетину $\Rightarrow L_{Champ} = HALT \cap \overline{L}_{BB} \in RE.$
+РОзпізнавач для $\overline{L_{BB}}$:
+\[ M_{L_{BB}}(\langle M \rangle) =  \begin{cases}
+    1 & M \text{ чемпіон в класифікації BB } \\
+    \bot & \text{ інакше }
+\end{cases}\]
+Якщо МТ М буде зупинятися на пустому слові, то ця МТ М входить до $\overline L_{BB}$, або буде зациклюватися. $\Rightarrow L_{BB} \in coRE, L_{Champ} \in RE$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.8}
+
+$L_1 \in C_1 \text{ complete } \Rightarrow \forall L_c \in C_1 : L_c \leq_r L_1$.
+
+Також $\overline L_1 \in coC_1$.
+
+$\forall L_c \in C_1 : L_c \leq_r L_1 \Rightarrow \overline L_c \leq_r \overline L_1 \Rightarrow
+\forall L_{coC} \in coC_1 : L_{coC} \leq_r \overline L_1$
+
+$\Rightarrow \overline L_1 $ --- coC_1 complete
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.9}
+
+$L_1, L_R \subseteq \set{0,1}^*, \; L_R \in R \land L_1 \leq_T L_R \Rightarrow L_1 \in R $
+Саме зведення $L_1 \leq_T L_R$ означає, що існує така МТ з оракулом $M(L_1^{L_R})$, 
+яка вирішує $L_1$.
+Також із цього слідує, що ми матимемо змогу побудувати вирішувач $M_L_R$ для $L_R$. При запиті до оракула запускаємо МТ $M_L_R$. $\Rightarrow L_1 \in R$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.10}
+
+\[  \]
+
+\begin{itemize}
+    \item[\textbf{r}] При $L_1 \leq_{tt} L_1$ функції $f_1, f_2, f_3$ будуть повертати результат вхідного слова. А розпізнавач, в свою чергу, буде повертати результат функцій.
+    \item[\textbf{t}] $L_1 \leq_{tt} L_2, \;\; L_2 \leq_{tt} L_3 \Rightarrow L_1 \leq_{tt} L_3$
+
+        Маючи $L_2$ можемо побудувати композицію вирішувачів $L_1$ та $L_2$, використовуючи функції $L_2$ для звернень до оракула.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.11}
+
+Нехай $L_1$ повна для класів $C_1, C_2$. Тобто:
+\[ L_1 \in C_1 \Rightarrow \forall L_C \in C_1 L_C \leq_r L_1 \]
+\[ L_1 \in C_2 \Rightarrow \forall L_C \in C_2 L_C \leq_r L_1 \]
+Тоді:
+\[ L_1 \in C_2, \; \forall L_C \in C_1 : L_C \in C_2 \Rightarrow C_1 \subseteq C_2 \]
+\[ L_1 \in C_1, \; \forall L_C \in C_2 : L_C \in C_1 \Rightarrow C_2 \subseteq C_1 \]
+\[ C_1 = C_2 \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.12}
+
+\begin{itemize}
+    \item[\textbf{a}] $R$ --- замкнений за Тюрінгом, $L_1 \in R$.
+    \item[\textbf{b}] $L_2$ не буде вирішуваною, оскільки є замкнутість класу за тюрінгом та $L_1$ не є вирішуваною (можна доказати від противного).
+    \item[\textbf{c}] рефлексивність є очевидною --- просто повертаємо відповідь оракула.
+        Транзитивність можна доказати шляхом композиції.
+    \item[\textbf{d}] будуємо МТ з оракулом, що має мову $L_1$. Для вирішувача $\overline L_1$ побудуємо таку МТ, яка буде повертати протилежний результат оракула МТ $L_1$.
+    \item[\textbf{e}] Будуємо розпізнавач з оракулом з мовою $L_2$. Оскільки $L_1$ вирішувана, то також існує розпізнавач без оракула. Для зведення за Тюрінгом ця МТ буде ігнорувати відповіді оракула.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 4.13}
+
+$L_1 \in RE, \; L_2 \in coRE \Rightarrow \exists$ розпізнавачі для $L_1$ та $\overline L_2$.
+
+Тоді із замкнутості класів R, RE, coRE, та припущення, що або зведення $L_1 \leq_m L_2$, або $L_2 \leq_m L_1$ існують, то обидва $L_1, L_2$ будуть належати якомусь з класів $R, RE, coRE$.
+
+$L_1 \in RE, L_2 \in coRE \Rightarrow L_1, L_2 \in R.$
+Але ми маємо протиріччя: $A_{TM}$ та $E_{TM}$ не є вирішуваними. Отже наше припущення щодо такого зведення є хибним.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

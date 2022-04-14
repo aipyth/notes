@@ -1,0 +1,268 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+% \usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{dsfont}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\set}{\left\{}{\right\}}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{light-gray}{gray}{0.85}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\hwnumber{12}
+\newcommand\student{Ivan Zhytkevych}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\textit{\student}}
+\chead{\textbf{\Large PT Homework \hwnumber}}
+\rhead{\textit{\today}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 11.20}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\xi$ випадкова величина з функцією розподілу $F$.
+        Знайдіть функцію розподілу випадковго вектора $(\xi, \xi)$.
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\[ F_{(\xi, \xi)} (x, y) = P(\xi \leq x, \xi \leq y) = P(\xi \in (-\infty , x] \cap (-\infty, y]) = \]
+\[ = \begin{cases}
+    F_{\xi}(x) & x \leq y \\
+    F_{\xi}(y) & x > y
+\end{cases}\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 11.21}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Випадковий вектор $(\xi_1, \xi_2)$ має щільність розподілу
+        $p(x, y) = \frac{c}{1+x^2+x^2y^2+y^2}$. Знайдіть:
+        \begin{enumerate}
+            \item параметр $c$
+            \item щільність розподілу $p_{\xi_1}(x), p_{\xi_2}(x)$
+            \item $P(|\xi_1| \leq 1, |\xi_2| \leq 1)$
+        \end{enumerate}
+        Чи є $\xi_1, \xi_2$ незалежними?
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+    \item \[ \int\limits_{x \in \mathbb{R}} \int\limits_{y \in \mathbb{R}} p(x, y) =
+        \int\limits_{x \in \mathbb{R}} \int\limits_{y \in \mathbb{R}} \frac{c}{1+x^2+x^2y^2+y^2} =
+        c \int\limits_{x \in \mathbb{R}} \int\limits_{y \in \mathbb{R}} \frac{1}{(1+x^2)(1+y^2)} = \]
+        \[ = c \int\limits_{x \in \mathbb{R}} \left(\frac{1}{1+x^2} \int\limits_{y \in \mathbb{R}} \frac{1}{1+y^2}\right) =
+        c \int\limits_{x \in \mathbb{R}} \left(\frac{1}{1+x^2} \pi \right) =
+        c \pi \pi = 1 \]
+        \[ \Rightarrow c = \frac{1}{\pi^2} \]
+
+    \item \[ p_{\xi_1}(x) = \int\limits_{y \in \mathbb{R}} \frac{1}{\pi^2 (1 + x^2 + y^2 + x^2 y^2)} =
+            \frac{1}{\pi^2 (1+x^2)} \int\limits_{y \in \mathbb{R}} \frac{1}{1 + y^2} =
+            \frac{1}{\pi (1+x^2)} \]
+        Аналогічно $p_{\xi_2}(x)$ через симетрію:
+        \[ p_{\xi_2}(x) = \int\limits_{x \in \mathbb{R}} \frac{1}{\pi^2 (1 + x^2 + y^2 + x^2 y^2)} =
+           \frac{1}{\pi (1+y^2)} \]
+
+       \item \[ P(|\xi_1| \leq 1, |\xi_2| \leq 1) = P(\xi_1 \in [-1, 1], \xi_2 \in [-1, 1]) = \]
+           \[ = \int\limits_{x \in [-1, 1]} \int\limits_{y \in [-1, 1]} \frac{1}{\pi^2 (1 + x^2 + y^2 + x^2y^2)} =
+           \frac{1}{\pi^2} \int\limits_{x \in [-1,1]} \int\limits_{y \in [-1,1]} \frac{1}{(1+x^2)(1+y^2)} = \]
+           \[ = \frac{1}{\pi^2} \int\limits_{x \in [-1,1]} \left( \frac{1}{1+x^2}
+            \int\limits_{y \in [-1,1]} \frac{1}{1+y^2} \right) =
+        \frac{1}{\pi^2} \int\limits_{x \in [-1,1]} \frac{1}{1+x^2} \frac{\pi}{2} = \frac{1}{4} \]
+
+    \item \[ p_{(\xi_1, \xi_2)}(x,y) = p_{\xi_1}(x) p_{\xi_2}(y) \]
+        \[ p_{\xi_1}(x) p_{\xi_2}(y) = \frac{1}{\pi (1+x^2)} \frac{1}{\pi (1+y^2)} =
+            \frac{1}{\pi^2 (1+x^2)(1+y^2)} = 
+        \frac{1}{\pi^2 (1+x^2 + y^2 + x^2y^2)}\]
+        Отже величини є незалежними.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 11.22}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\xi$ та $\eta$ незалежні випадкові величини, кожна з ких розподілена за показниковим розподілом
+        з параметром $\alpha > 0$. Доведіть, що $\frac{\xi}{\xi + \eta}$ має рівномірний розподіл
+        на відрізку $[0,1]$.
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+beg
+
+\[ F_{\frac{\xi}{\xi + \eta}}(x) = P(\frac{\xi}{\xi + \eta} \leq x) \]
+\[ p_{(\xi, \eta)}(x, y) = p_{\xi}(x) p_{\eta}(y) = \alpha^2 e^{-\alpha x} e^{-\alpha y} \cdot \mathds{1}(x \geq 0, y \geq 0) \]
+\[ F_{\frac{\xi}{\xi + \eta}}(x) = \int\limits_{\mathbb{R}}\int\limits_{\mathbb{R}}
+    \alpha^2 e^{-\alpha z} e^{-\alpha y} dz dy \cdot
+    \mathds{1}(x \geq 0, y \geq 0) \cdot \mathds{1}\left(\frac{z}{z + y} \leq x\right) = \]
+\[ = \int\limits_0^{+\infty}\int\limits_0^{+\infty}
+    \alpha^2 e^{-\alpha z} e^{-\alpha y} dz dy \cdot
+    \mathds{1}(z - xz \leq xy) = \]
+\[ = \int\limits_{0}^{+\infty}\int\limits_0^{+\infty}
+    \alpha^2 e^{-\alpha z} e^{-\alpha y} dz dy \cdot
+    \mathds{1}\left(z \leq \frac{xy}{1 - x}\right) = \]
+\[ = \int\limits_{0}^{+\infty}\int\limits_0^{\frac{xy}{1 - x}}
+    \alpha^2 e^{-\alpha z} e^{-\alpha y} dz dy = \] 
+\[ = \int\limits_{0}^{+\infty}\int\limits_0^{\frac{xy}{1 - x}}
+     \alpha^2 e^{-\alpha z} e^{-\alpha y} dz dy =
+   \alpha^2 \int\limits_{0}^{+\infty} 
+   e^{-\alpha y} \frac{1}{-\alpha} \left( e^{-\alpha \frac{xy}{1-x}} - 1 \right) dy = \] 
+
+   \[ = -\alpha \left( \int\limits_0^{+\infty} e^{-\alpha y (1 + \frac{x}{1-x}) } dy -
+       \int\limits_0^{+\infty} e^{-\alpha y} dy \right) = \]
+   \[ = -\alpha \int\limits_0^{+\infty} e^{-\alpha y \frac{1}{1-x} } dy -
+       \frac{\alpha}{\alpha} e^{-\alpha y}\mid_{0}^{+\infty}  = \]
+   \[ = (1-x) e^{-\alpha y \frac{1}{1-x} } \mid_0^{+\infty} -
+   e^{-\alpha y}\mid_{0}^{+\infty} = (1-x)(e^{-\infty} - 1) - (e ^ {-\infty} - 1) = \]
+   \[ = (1 - x - 1)(e ^ {-\infty} - 1) = x \]
+
+   \[ F_{\frac{\xi}{\xi + \eta}}(x) = x \cdot \mathds{1}(x \in [0, 1]) \]
+   \[ p_{\frac{\xi}{\xi + \eta}}(x) = \mathds{1}(x \in [0, 1]) \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 11.23}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\xi_1, ..., \xi_n$ незалежні однаково розподілені випадкові величини
+        з неперервною функцією розподілу $F$. Впорядкуємо їх за величиною $\xi_{(1)} \leq \xi_{(2)}
+        \leq ... \leq \xi_{(n)}$. Знайдіть функціх розподілу випадкових величин:
+        \begin{enumerate}
+            \item $ \xi_{(1)} = \min(\xi_1, ... \xi_n) $
+            \item $ \xi_{(n)} = \max(\xi_1, ..., \xi_n) $
+            \item $ \xi_{(m)} $
+        \end{enumerate}
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{enumerate}
+    \item 
+        \[ F_{\xi_{(1)}} (x) = P(\min(\xi_1, ..., \xi_n) \leq x) = 1 - P(\min(\xi_1, ...,\xi_n) > x) = \]
+        \[ = 1 - P(\xi_1 > x, ..., \xi_n > x) = 1 - P(\xi_1 > x) \dots P(\xi_n > x)) = \]
+        \[ = 1 - (1 - F(x))^n \]
+
+    \item 
+        \[ F_{\xi_{(n)}}(x) = P(\max(\xi_1, ..., \xi_n) \leq x) = P(\xi_1 \leq x, \dots, \xi_n \leq x) = \]
+        \[ = P(\xi_1 \leq x) \dots P(\xi_n \leq x) = F^{n}(x) \]
+
+    \item
+        \[ F_{\xi_{(m)}}(x) = P(\xi_{(1)} \leq x, \dots, \xi_{(m)} \leq x,
+            \xi_{(m+1)} > x \; or \; \xi_{(m+1)} \leq x,
+            \dots, \xi_{(n)} > x\; or \; \xi_{(n)} \leq x) = \]
+            \[ = \sum_{i=m}^{n} C_{n}^{i} P^i(\xi \leq x) P^{n-i}(\xi > x) =
+            \sum_{i=m}^{n} C_{n}^{i} F^i(x) (1-F(x))^{n-i} \]
+
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 11.24}
+
+\noindent\fcolorbox{black}{light-gray}{
+    \parbox{\textwidth}{
+        Нехай $\xi_1, \xi_2$ незалежні випадкові величини зі стандартним нормальним розподілом.
+        Знайдіть щільність розподілу випадкової величини $\xi_1^2 + \xi_2^2$.
+    }
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\[ p_{(\xi_1, \xi_2)}(x, y) = p_{\xi_1}(x) p_{\xi_2}(y) =
+    \frac{1}{\sqrt{2\pi}} e ^ {- \frac{x^2}{2}} \cdot \frac{1}{\sqrt{2\pi}} e^{-\frac{y^2}{2}} =
+    \frac{1}{2\pi} e^{-\frac{x^2 + y^2}{2}} \]
+
+\[ F_{\xi_1^2 + \xi_2^2}(x) = P(\xi_1^2 + \xi_2^2 \leq x) \;\;\;\;\;\; (x \geq 0) \]
+\[ F_{\xi_1^2 + \xi_2^2}(x) = \int\limits_{\mathbb{R}} \int\limits_{\mathbb{R}} 
+    p_{(\xi_1, \xi_2)}(z, y) dz dy \cdot \mathds{1}(z^2 + y^2 \leq x) = 
+\]
+\[ = \int\limits_{\mathbb{R}} \int\limits_{\mathbb{R}}
+    \frac{1}{2\pi} e^{-\frac{z^2 + y^2}{2}} dz dy \cdot \mathds{1}(z^2 + y^2 \leq x) = \]
+\[ = \int\limits_{0}^{2\pi} \int\limits_{-\infty}^{\infty}
+    \frac{1}{2\pi} e^{-\frac{\rho^2 \cos^2\varphi + \rho^2\sin^2\varphi}{2}}
+    \rho \cdot d\rho \cdot d\varphi \cdot \mathds{1}(\rho^2 \cos^2\varphi + \rho^2\sin^2\varphi \leq x) = \]
+\[ = \int\limits_{0}^{2\pi} \int\limits_{0}^{\sqrt{x}}
+    \frac{1}{2\pi} e^{-\frac{\rho^2}{2}} \rho \cdot d\rho \cdot d\varphi = \]
+\[ = \int\limits_{0}^{\sqrt{x}} e^{-\frac{\rho^2}{2}} \rho d\rho = 
+-e^{-\frac{\rho^2}{2}} |_{0}^{\sqrt{x}} = -e^{-\frac{x}{2}} + 1 \]
+
+\[ p_{\xi_1^2 + \xi_2^2}(x) = \frac{1}{2} e^{-\frac{x}{2}} \cdot \mathds{1}(x \geq 0) \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 11.25}
+
+% \noindent\fcolorbox{black}{light-gray}{
+%     \parbox{\textwidth}{
+%     }
+% }
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\[ P(\xi_1 < x, \xi_1 + 2 \xi_2 < y) = \begin{cases}
+    \int\limits_{0}^{x} \int\limits_{0}^{\frac{z_1 - y}{2}} dz_1 dz_2 & x < y - 2\xi_2 \\
+    \int\limits_{0}^{1} \int\limits_{0}^{\frac{z_1 - y}{2}} dz_1 dz_2 & x > y - 2\xi_2
+\end{cases} = \]
+\[ = \begin{cases}
+    \int\limits_0^x \frac{z_1 - y}{2} dz_1 & x < y - 2\xi_2 \\
+    \int\limits_0^1 \frac{z_1 - y}{2} dz_1 & x > y - 2\xi_2
+\end{cases} = \begin{cases}
+    \frac{x^2 -2xy}{4} & x < y - 2\xi_2 \\
+    \frac{1 - 2y}{4} & x > y - 2\xi_2
+\end{cases}\]
+
+
+\[
+a_0, a^2 a^3 a^{c} a^{a} \frac{s}{c} \overline{f}
+.\] 
+\[
+\hat{f}
+.\] 
+\[
+    \vec{sss}
+.\] 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

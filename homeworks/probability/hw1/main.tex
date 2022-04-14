@@ -1,0 +1,397 @@
+% !TEX root = main.tex
+\documentclass{homework}
+
+\usepackage{enumitem}
+
+\title{Probability Theory Homework №1}
+\author{Ivan Zhytkevych}
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise[1.13]
+Let's define set \( A_i \) that contains all permutations of elements in set \( S = \set{ 1, 2, \dots{}, n } \) where \( i \)-th element is on its place.
+\[ A_i = \set{ a_1 \dots{} a_i \dots{} a_n : a_i \in S ; \; a_i \; \text{is on its place} } \]
+
+Let's find the cardinality of this set.
+From the definition of the set we know that every element \( \)  has \( a_i \) that is in place
+\textit{i}. But the positions of other \( a_j ,\; j \neq i \) doesn't matter, so take number of
+permutations of these `other \(a_j\)` which is \( (n-1)! \).
+
+\[ \abs{A_i} = (n-1)! \]
+
+Using this built object we can find \( \omega_n \) -- number of set \( S \)
+permutations where no number stays in it's place.
+
+\[ \omega_n = P_t - P_s \]
+
+\( P_t \) is total number of permutations of \textit{S} and \( P_s \) is number of permutations of
+\textit{S} where exists an element that is in it's place.
+
+Obviously:
+\[ P_t = n! \]
+
+And what about \( P_s \)? Let's construct a union of all \(A_i\)
+
+\( \bigcup_{i=1}^{n} A_i \) such a union contains all permutations where an element that is in it's
+place exists.
+
+\[ \abs{\bigcup_{i=1}^{n} A_i } = \sum_{i=1}^{n}{\abs{A_i}} - \sum_{i<j}{\abs{A_i \cap A_j}} + \dots
++ (-1)^{n-1}\abs{\bigcap_{i=1}^{n}{A_i}}\]
+
+Here we got a problem. We don't know the cardinality of intersections.
+
+The intersection of two sets \(A_i\) and \(A_j\) contains all permutations where \textit{i}-th and
+\textit{j}-th elements are in it's place. The way cardinality of \(A_i\) found we know that two
+elemets stay in their positions and others can go anywhere. Find number of permutations with two
+elements stay in place:
+\[ \abs{A_i \cap A_j} = (n-2)! \]
+
+Similarly for any number of intersections:
+\[ \abs{\bigcap_{i=1}^{k}{A_i}} = (n-k)! \]
+
+Last step for \textbf{Inclusion–exclusion principle} -- we need to do something with these sums.
+
+When we used this principle the exact elements and distinction in sum's arguments were not
+mentioned. So we only calculate numbers as long as cardinality is found using the statements
+above.
+
+So, the number of ways to pick one element from a set \(S\) is \( C_{n}^{1} \), for two elements --
+\( C_{n}^{2} \) and so on:
+
+\[ \abs{\bigcup_{i=1}^{n} A_i } = C_{n}^{1} (n-1)! - C_{n}^{2} (n-2)! + \dots + (-1)^{n-1}
+    C_{n}^{n} = \]
+\[ = \frac{n!}{1! (n-1)!} (n-1)! - \frac{n!}{2! (n-2)!} (n-2)! + \dots + (-1)^{n-1} = \]
+\[ = n! - \frac{n!}{2!} + \dots + (-1)^{n-1} \]
+
+Finally find \(\omega_n\):
+\[ \omega_n = P_t - P_s = n! - n! + \frac{n!}{2!} - \frac{n!}{3!} + \dots + (-1)^{n} = \]
+need to mention that here used \( - (-1)^{n-1} = (-1)^{n} \)
+\[ = \frac{n!}{2!} - \frac{n!}{3!} + \dots + (-1)^{n} \]
+
+Last step -- find \( p_n = \ddfrac{\omega_n}{n!} \):
+
+\[ p_n = \ddfrac{\omega_n}{n!} = \frac{n!}{2! n!} - \frac{n!}{3! n!} + \dots + \frac{(-1)^{n}}{n!} =
+\frac{1}{2!} - \frac{1}{3!} + \dots + \frac{(-1)^{n}}{n!} \]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise[1.14]
+
+First of all, define set of all learners, learners attending math class and 
+learners attending physics class:
+
+\[ A = \set{ a : \text{ \textit{a} -- learner } } ; \; \abs{A} = 35 \]
+\[ M = \set{ m : \text{ \textit{b} -- learner and attends math class }} ; \; \abs{M} = 20 \]
+\[ P = \set{ p : \text{ \textit{p} -- learner and attends physics class }}  ; \; \abs{P} = 11 \]
+\[ N = \set{ n : \text{ \textit{n} -- learner and attends no classes } }; \; \abs{N} = 10 \]
+\[ A = M \cup P \cup N \]
+
+Find cardinality of \(A\):
+\[ \abs{A} = \abs{M \cup P \cup N} \]
+
+Use \textbf{Inclusion–exclusion principle}
+\[ \abs{A} = \abs{M} + \abs{P} + \abs{N} - \abs{M \cap P} - \abs{M \cap N} 
+- \abs{P \cap N} + \abs{M \cap P \cap N} \]
+
+The \(N\) set is defined as set of non-attenders so there cannot be any intersections with sets
+\(M\) and \(P\).
+
+\[ \abs{A} = \abs{M} + \abs{P} + \abs{N} - \abs{M \cap P} \]
+\[ 35 = 20 + 11 + 10 - \abs{M \cap P} \]
+\[ \abs{M \cap P} = 20 + 11 + 10 - 35 = 41 - 35 = 6 \]
+
+Number of students who attend math group and physics group -- 6.
+
+And number of students attending only math group:
+\[ \abs{M} - \abs{M \cap P} = 20 - 6 = 14 \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.15]
+
+\( \abs{X} = n; \; \abs{Y} = m \)
+
+Define such relation:
+\[ \mathit{f}: X \to Y \; \text{or} \; \mathit{f} \subseteq X \times Y \]
+\(\mathit{f}\) is fully defined and functional:
+\[  \forall x \in X \; \exists! y \in Y: \mathit{f}(x) = y \]
+
+And let's also define set of permutations where each element would represent \(\mathit{f}\):
+\[ M = \set{ 
+        \begin{pmatrix}
+            x_1    & x_2    & \dots & x_n \\
+            M(x_1) & M(x_2) & \dots & M(x_n)
+        \end{pmatrix}
+        : x_i \in X, \; M(x_i) \in Y
+} \]
+
+\begin{enumerate}
+    \item \textbf{Number of arbitrary functions}
+
+        No additional conditions for set \textit M. Find cardinality of \textit M:
+        for each element \textit x from \textit X we can map some element \textit y from \textit Y
+        so there are \textit m ways to choose \textit y
+        \[ \abs M = m ^ n \]
+
+
+    \item \textbf{Number of injective functions}
+        
+        Set injection condition on set \textit M:
+        \[ \forall x_1, x_2 \in X \;\;\; x_1 \neq x_2 \Rightarrow M(x_1) \neq M(x_2) \]
+
+        That condition means distinct values \( M(x_i) \) for each pair of \( x \). Map the first
+        \(x_1\) to some value from \(Y\) out of \(m\) possible variants and for the next \( x_2 \) number of
+        such values to choose would be \(m-1\), for \(x_i\) the number of remaining elements in
+        \( Y \backslash \set{\textit{chosen y's}} \) would be \(m-i+1\). The number of such permutations:
+        \[ \abs M = m \cdot (m-1) \cdot (m-2) \dots (m-n+1) = \frac{m!}{(m-n)!}\]
+
+
+    \item \textbf{Number of bijective functions}
+
+        Add bijection condition on set \textit M from the previous subtask:
+        \[ \forall y \in Y \; \exists x \in X : M(x) = y \]
+
+        If \(n = m\) the number of left elements \( y : \nexists x \in X \; M(x) = y \) is \( 0 \).
+        So number of such permutations:
+        \[ \abs M = m! = n! \]
+
+
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.16]
+
+\begin{enumerate}
+    \item \textbf{Digits 0, 1, 2, 3, 4, 5}
+
+        Define set of digits
+        \[ D = \set{0, 1, 2, 3, 4, 5}; \; \abs{D} = 6 \]
+        Define set of 3-digit numbers of digits of set D (the first digit cannot be 0):
+        \[ A = \set{ a_1 a_2 a_3 : a_2, a_3 \in D; \; a_1 \in D \backslash \set{0}  } \]
+        Use product rule to compute cardinality of set \(A\) which is number of such numbers
+        \[ \abs{A} = 5 \cdot 6 \cdot 6 \]
+
+    \item \textbf{Digits 0, 1, 2, 3, 4, 5 can be used only once}
+
+        Define set of digits
+        \[ D = \set{0, 1, 2, 3, 4, 5}; \; \abs{D} = 6 \]
+        Define set of 3-digit numbers of digits of set D (the first digit cannot be 0):
+        \[ A = \set{ a_1 a_2 a_3 : a_2, a_3 \in D, \; a_1 \in D \backslash \set{0}, \; a_i \neq
+        a_j \;\; \forall i, j: i \neq j } \]
+        Number of required numbers:
+        \[ \abs{A} = 5 \cdot 5 \cdot 4 \]
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.17]
+
+Using set of digits:
+\[ D = \set{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 } \]
+
+Set of five-digit numbers divisible by 5 (the first digit cannot be 0):
+\[ S = \set{ a_1 a_2 a_3 a_4 a_5 : a_1 \in D \backslash \set{0}, \; a_i \in D \;\; i =
+\overline{2, 4}, \; a_5 \in \set{0, 5} } \]
+
+We define \( a_5 \in \set{0, 5} \) in order to make a number divisible by 5.
+So number of required numbers:
+\[ \abs{S} = 9 \cdot 10^{3} \cdot 2 \]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.18]
+
+Set of buttons:
+\[ B = \set{ 1, 2, 3, 4, 5 } \]
+
+\( w \) is set of two buttons pressed simultaneously (the order doesn't matter). Let's define a set of such sets
+and find it's cardinality:
+\[ W = \set{ w = \set{ w_1, w_2 } : w_1, w_2 \in B } \]
+\[ \abs W = C_{\abs{B}}^{\abs{w}} = C_{5}^{2} = \frac{5!}{2! (5-2)!} = \frac{3 \cdot 4 \cdot 5}{2 \cdot
+3} = 10 \]
+
+Set of combinations:
+\[ A = \set{ (w, a_1, a_2, a_3) : w \in W, \; a_1, a_2, a_3 \in B \backslash w } \]
+
+Let's find cardinality of \(A\):
+
+Elements \(a_1, a_2, a_3\) can take values only from a set of 3 items because 
+\( \abs B - \abs w = 3\).
+So number of such combinations of \( a_1, a_2, a_3 \) is \( 3! = 6 \).
+
+Using product rule we find the cardinality of \( A \) -- number of code combinations:
+\[ \abs A = \abs W \cdot 6 = 10 \cdot 6 = 60 \]
+
+If last 3 buttons to press can be repeated:
+\[ 10 \cdot 3^3 \]
+
+If first 2 buttons do not stay pressed and can be pressed later:
+\[ 10 \cdot 5^3 \]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.19]
+
+Set of cards:
+\[ C = \set{ c : c \text{ -- card} } \]
+
+Suits:
+\[ C_1 = \set{ c : c \text{ -- card of suit 1 } } \]
+\[ C_1 = \set{ c : c \text{ -- card of suit 1 } } \]
+\[ C_1 = \set{ c : c \text{ -- card of suit 1 } } \]
+\[ C_1 = \set{ c : c \text{ -- card of suit 1 } } \]
+
+\begin{enumerate}[label=\alph*]
+    \item Set of such combinations:
+        \[ A = \set{ a_1 a_2 a_3 a_4 a_5 a_6 : a_1 \text{ -- king of spades}, a_i \in C
+                \; i=\overline{2, 6}  } \]
+                \[ \abs A = 1 \cdot C_{51}^{5} \]
+
+    \item Number of picked card 6 but number of suits is 4 so in such combinations the repeat of
+        suit representers is inevitable. There must be 1 card from each suit and other two can be of
+        any suits. They may be of one suit or two different. Let's visualize these two variants of
+        combinations:
+        \[ 1: a b c d a a \]
+        \[ 2: a b c d a b \]
+
+        Calculate final result as sum of these variants configurations:
+        
+        For the first one we pick three card of one suit and then 3 cards of other 3 suits.
+        \[ C_4^1 \cdot C_{13}^3 \cdot (C_{13}^1)^3 \]
+
+        For the second one we pick two times two card of one suit and 3 card of other 3 suits:
+        \[ C_4^2 \cdot (C_{13}^2)^2 \cdot (C_{13}^2)^2 \]
+
+        \[  C_4^1 \cdot C_{13}^3 \cdot (C_{13}^1)^3 +  C_4^2 \cdot (C_{13}^2)^2 \cdot (C_{13}^2)^2 \]
+
+    \item Set of such combinations:
+        \[ D = \set{ a b c d e f :
+            a, b, c, d, e \text{ -- cards of one suit} } \]
+
+        The number of ways to pick \( a, b, c, d, e \) of one specific suit is \( C_{13}^5 \).
+        Taking in consideration number of suits to pick:
+        \[ 4 \cdot C_{13}^5 \]
+
+        And last, last 6-th card should be of another 3 suits. Number of card in these suits --
+        \( 13 \cdot 3 = 39 \). So number of variants to pick one card of 39 is \( C_{39}^1 = 39 \).
+
+        Answer:
+        \[ 4 \cdot C_{13}^5 \cdot C_{39}^1 \]
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.20]
+
+\begin{enumerate}[label=\alph*]
+
+    \item Use common approach to such problem. Instead assignment of letters to mailboxes
+        lets place mail in one line and demarcate them by sticks. We use 3 sticks in order to
+        produce 4 mailboxes. Is such a way every box should have at least 1 letter. The number of
+        pickings a place for stick is (we got 9 places to place a stick) -- number of assignments:
+        \[ C_9^3 \]
+
+    \item C_9^2
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.21]
+
+\begin{enumerate}[label=\alph*]
+
+    \item Set of vouchers:
+        \[ V = \set{ 1, 2, \dots, 10 } \]
+        
+        Create set of permutations (just mapping a voucher to some student or vice versa):
+
+        \[  P = \set{
+            \begin{pmatrix}
+                1   & 2   & \dots & 10 \\
+                v_1 & v_2 & \dots & v_{10}
+            \end{pmatrix} :
+            v_i \in V
+        }\]
+
+        The number of such permutations is:
+        \[ \abs P = 10! \]
+
+    \item So some of the vouchers are the same. Define a set of such assignments:
+        \[  A = \set{
+            \begin{pmatrix}
+                1   & 2   & \dots & 10 \\
+                v_1 & v_2 & \dots & v_{10}
+            \end{pmatrix} \; | \;
+            v_i \text{ -- 1-st type } \, i=\overline{1, 4}, \; \\
+            v_j \text{ -- 2-nd type } \, i=\overline{5, 10}
+        }\]
+
+        Here we firstly assign 4 vouchers of 1-st type to some of \( 10 \) students:
+        \[ C_{10}^{4} \]
+        And then assign last 6 vouchers of 2-nd type to \( 10 - 4 \) left students:
+        \[ C_6^6 \]
+
+        The number of such assignments is:
+        \[ C_{10}^{4} \cdot C_6^6 = \frac{10!}{4! 6!} \]
+        
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.22]
+
+In order to get from \( (0, 0, \dots, 0) \) to \( (n_1, n_2, \dots, n_r) \) \( n_i \) steps along
+each axis \( i \) is required. So the only thing that changes along all the configurations is the order of
+such steps. But all the steps along some axis are the same, the steps of axis \( i \) and axis \( j \)
+differ because they are steps along different axes.
+
+So we need to find a cardinality of the set:
+\[ S = \set{ \set{ s_1, s_2, \dots, s_{\,\sum n_i} } : s_i \in \set{0, 1, \dots, r} \text{ -- is a step along some
+axis represented by number} } \]
+Also there must be exactly \( n_i \) steps along axis \( i \).
+
+The number of such configurations is:
+\[ \left( \sum_{i=1}^{r} n_i \right)! \]
+
+But take in consideration that steps along some axis \( i \) do not differ. The number of
+permutations of these steps along axis \( i \) is \( n_i! \) so devide number of all
+configurations by these number of permutations in order to not count these configurations.
+
+\[ \frac{ \sum_{i=1}^{r} n_i }{ \prod_{i=1}^{r} n_i! } \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.23]
+
+Define such sets:
+\[ A = \set{ a : a \text{ is a student} } \]
+\[ E = \set{ e : e \text{ is a student and knows english} } \]
+\[ G = \set{ g : g \text{ is a student and knows german} } \]
+\[ F = \set{ f : f \text{ is a student and knows french} } \]
+
+Cardinality of the sets and their intersections is given:
+\[ \abs A = 100, \;\; \abs E = 28, \;\; \abs G = 30; \;\; \abs F = 42 \]
+\[ \abs{E \cap G} = 8; \;\; \abs{E \cap F} = 10; \;\; \abs{G \cap F} = 5; \;\; \abs{E \cap G \cap F}
+= 3\]
+
+In order to use \textbf{Inclusion–exclusion principle} set of students that do not know neither
+english nor german nor french.
+\[ N = \set{ n : n \text{ is a student and knows neither english nor german nor french} } \]
+
+Use \textbf{Inclusion–exclusion principle} taking in consideration that set \( N \)
+does not intersects with other language-learners sets:
+\[ \abs A = \abs E + \abs G + \abs F + \abs N - \abs{E \cap G} - \abs{E \cap F} - \abs{G \cap F} +
+\abs{E \cap G \cap F} \]
+\[ \abs N = \abs A - \abs E - \abs G - \abs F + \abs{E \cap G} + \abs{E \cap F} + \abs{G \cap F} -
+\set{E \cap G \cap F} \]
+\[ \abs N = 100 - 28 - 30 - 42 + 8 + 10 + 5 - 3 \]
+\[ \abs N = 20 \]
+
+
+\end{document}
+

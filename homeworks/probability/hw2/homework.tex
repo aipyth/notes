@@ -1,0 +1,276 @@
+\documentclass{homework}
+\usepackage{enumitem}
+
+\title{Probability Theory Homework №2}
+\author{Ivan Zhytkevych}
+
+\begin{document}
+
+\maketitle
+
+\exercise*[3.15]
+\textit{Prove that for arbitrary events A and B:}
+\[ P(AB) = 1 - P(\overline A) - P(\overline B) + P(\overline A \,  \overline B) \]
+\textbf{Solution:}
+\[ P(AB) = P(A) + P(B) - P(A \cup B) = \]
+\[ = 1 - P(\overline A)) + (1 - P(\overline B)) - (1 - P(\overline{A \cup B})) = \]
+\[ = 1 - P(\overline A) - P(\overline B) + P(\overline A \, \overline B)) \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.16]
+\textit{Four dice are tossed. Find the probability that they will lose the same number of points.}
+
+\textbf{Solution:}
+
+Set of all dice configurations:
+\[ \Omega = \set{(a_1, a_2, a_3, a_4) : a_i = \overline{1, 6}} \]
+\[ \abs \Omega = 6^4 \]
+
+The configurations we're interested in:
+\[ S = \set{(a_1, a_2, a_3, a_4) : a_1 = a_2 = a_3 = a_4, \; a_i = \overline{1,6}} \]
+\[ \abs S = 6 \]
+
+All configurations are equiprobable:
+\[ P(S) = \frac{\abs S}{\abs \Omega} = \frac{6}{6^4} = \frac{1}{6^3} \]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.17]
+\textit{Class consists of r students. Find the probability that at least two students were born in
+the same month (assume all months are equiprobable for birth).}
+
+\textbf{Solution:}
+
+Make a set of all birth configurations:
+\[ \Omega = \set{ (a_1, a_2, \dots, a_{12}) : a_i \text{ -- students born in i-th month}, \;
+\sum a_i = r } \]
+
+To find probability that at least two students were born in the same month let's find
+probability of opposite event: number of configurations where none of the students were born in the
+same month.
+If \( r \) gets bigger than the number of month our probability inevitably turns into 0 because
+there's no such configurations where each month has less than 2 birthday boy or girl. So we found
+the probability we need for one case -- \( r > 12 \):
+\[ r>12: P = 1 \]
+
+To find the probability for \( r < 12 \) we follow this path of thinking:
+
+The probability that at least two students have the same birthday month is opposite to probability
+that none of them has same birthday month. This probability is easier to find:
+\[ A = \set{ (a_1, a_2, \dots, a_{12}) : a_i < 2, \; \sum a_i = r} \]
+\[ \abs A = A_{12}^{r} \]
+\[ \overline P = \frac{ \abs A }{12^r} = \frac{A_{12}^{r}}{12^r} \]
+
+\[ P = 1 - \frac{A_{12}^{r}}{12^r} \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.18]
+\textit{How many people should be in the room for the probability that at least two of those present
+were born on the same day was more than half?}
+
+\textbf{Solution:}
+
+\( n \) -- number of people in the room.
+
+Using the same approach as in the previous problem: n should be less than number of days in the
+year in order to calculate the probability we want. Let the number of days in the year be 365, leap year is not taken into consideration.
+\[ \Omega = \set{ (a_1, a_2, \dots, a_{365}) : a_i = \overline{1, 365}, \; \sum a_i = n } \]
+
+The probability is calculated the same way as in the previous task:
+\[ P = 1 - \frac{A_{365}^{n}}{ 365^n } = 1 - \frac{ 365! }{ (365 - n)! \cdot 364^n } \]
+
+Found number we need using binary search for a range from 2 to 50:
+
+\[ n = 23 : P = 1 - \frac{365!}{(365 - 23)! \cdot 365^{23}} \approx 0.507 \]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.19]
+\textit{Numbers 1, 2, \dots, n are in random order. Find probability that numbers: a) 1 and 2; b) 1,
+2 and 3 are placed next to in the predefined order.}
+
+\textbf{Solution:}
+
+\[ N = \set{1, 2, \dots, n} \]
+Set of all such number configurations:
+\[ A = \set{ (a_1, a_2, \dots, a_n) : a_i \in N \backslash \set{a_{i-1}, \dots, a_1} } \]
+\[ \abs A = n! \]
+
+\begin{enumerate}
+    \item \textbf{1 and 2.}
+        \textit{D} is our event that number 2 is next to 1. The cardinality of this set can be
+        calculated in the following way: number of positions to pick for 1 is \(n-1\) since number 2
+        is placed next to. Time to arrange other \(n-2\) number in \( (n-2)! \) ways.
+        \[ D = \set{ t = (a_1, a_2, \dots, a_n) : t \in A, \; a_i = 1, a_{i+1} = 2 } \]
+        \[ \abs D = (n-1) \cdot (n-2)! \]
+
+        The probability is:
+        \[ P(D) = \frac{ (n-1)(n-2)! }{ n! } = \frac{ (n-1)! }{ n! } \]
+
+    \item \textbf{1, 2 and 3.}
+        Use the same approach. \textit T is our event that \textit{1, 2 and 3} are placed next to
+        each other. The number of such positions is \( n - 2 \).
+        \[ T = \set{ t = (a_1, a_2, \dots, a_n) : t \in A, \; a_i = 1, \, a_{i+1} = 2,\, a_{i+2} = 3
+        }\]
+        \[ \abs T = (n-2) \cdot (n-3)! \]
+        
+        The probability is:
+        \[ P(T) = \frac{ (n-2)! }{ n! } \]
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.20]
+\textit{Exam consists of 10 questions. Each question should be answeres "yes" or "no". Find a
+probability that student will give correct answers to at least 70\% of all questions picking answer
+by chance. Solve this problem for a test of 30 and 50 questions.}
+
+\textbf{Solution:}
+
+\[ \Omega = \set{ (\omega_1, \dots, \omega_{10}) : \omega_i \in \set{0, 1} } \]
+\[ \abs \Omega = 2^{10} \]
+
+Our event that student answered at least 70\% of questions:
+\[ T = \set{ \omega \in \Omega : \sum \omega_i \geq 7 } \]
+
+There are up to 3 of these questions can remain answered falsly. Pick answers that will be true.
+\[ \abs T = \sum_{i=7}^{10} C_{10}^{i} \]
+
+The probability:
+\[ P(T) = \frac{ \sum_{i=7}^{12} C_{10}^{i} }{2^{10}} \]
+
+Generalizing for 30 questions and 50:
+
+Number of true answers for 30 and 50 respectively is \( > 21 \) and \( > 35 \).
+
+\[ P(T_{30}) = \frac{ \sum_{i=21}^{30} C_{30}^{i} }{ 2^{30} } \]
+\[ P(T_{50}) = \frac{ \sum_{i=35}^{50} C_{50}^{i} }{ 2^{50} } \]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.21]
+\textit{A list of 4N tournament participants is divided into four parts. Find a probability that
+four strongest participants will be in distinct groups.}
+
+\textbf{Solution:}
+To divide participants into 4 groups firstly pick \textit N participants for first group, then pick
+\textit N for the second out of \textit{3N} participants left and so on.
+\[ \abs \Omega = C_{4N}^{N} \cdot C_{3N}^{N} \cdot C_{2N}^{N} \]
+Find all groups where first strongest participants are in distinct group: 
+
+4 possible variants to assign group for first participant
+
+3 possible variants to assign group for second participant and so on...
+
+After assigning strongest participants to their groups other \textit{4N - 4} ones are left:
+
+\[ \abs A = 4! ( C_{4N-4}^{N-1} C_{3N_3}^{N-1} C_{2N-2}^{N-1} ) \]
+
+A is a set of all such possible groups. At the end the probability is:
+\[ P(A) = \frac{ 4! ( C_{4N-4}^{N-1} C_{3N_3}^{N-1} C_{2N-2}^{N-1} ) }{ C_{4N}^{N} C_{3N}^{N}
+C_{2N}^{N} } \]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.22]
+\textit{Playing poker, a player has five cards from a deck of 52 cards. Find the probability of the
+following combinations:}
+\begin{enumerate}[label=\alph*]
+    \item
+        \textbf{royal flush} ten, jack, queen, king and ace of the same suit
+    \item 
+        \textbf{straight flush} five cards in a row of the same suit but not royal flush
+    \item
+        \textbf{four of a kind} four cards of the same order
+    \item
+        \textbf{full house} two and three cards of the same order respectively
+    \item
+        \textbf{flush} five cards of the same suit but neither royal flush nor straight flush
+    \item
+        \textbf{straight} five card in a row, not all are of the same suit
+\end{enumerate}
+
+\textbf{Solution:}
+
+\[ \Omega = \set{ \set{a_1, a_2, \dots, a_5} : a_i \text{ -- card from the deck} } \]
+\[ \abs \Omega = C_{52}^{5} \]
+
+\begin{enumerate}[label=\alph*]
+    \item \textbf{royal flush}
+        \[ A = \set{ f =  \set{a, b, c, d, e} : \\
+                \text{f is a royal flush combination} \\ 
+        } \]
+        \[ \abs A = 4 \]
+        \[ P(A) = \frac{4}{C_{52}^{5}} \]
+
+
+    \item \textbf{straight flush}
+        Straight flush configurations are all configurations of 13 cards of the same suit of
+        sequential rank except \textbf{royal flush}.
+        \[ B \text{ -- straight flush configurations}  \]
+        \[ \abs B = 4(13 - 1) \]
+
+        \[ P(B) = \frac{ 4(13 - 1) }{ C_{52}^{5} } = \frac{ 32 }{ C_{52}^{5} } \]
+
+    \item \textbf{four of a kind}
+        Four of a kind does not intersects with royal flush or straight flush.
+        13 variants to pick four cards of one rank out of 4 suits plus one card of some other rank.
+        \[ \abs{C} = 13 \cdot C_{48}^{1} \]
+
+        \[ P(C) = \frac{13 \cdot 48}{C_{52}^{5}} \]
+
+    \item \textbf{full house}
+        Firstly pick a rank then a suit for 3 and 2 cards respectively.
+        \[ 2: 13 \cdot C_{4}^{2}  \]
+        \[ 3: 12 \cdot C_{4}^{3} \]
+        Apply product rule:
+        \[ \abs{D} = 13 \cdot C_{4}^{2} \cdot 12 \cdot C_{4}^{3} = 156 \cdot 24 = 3744 \]
+        \[ P(D) = \frac{3744}{C_{52}^{5}} \]
+
+
+    \item \textbf{flush}
+        \[ \abs E = 4(C_{13}^{5} - 8 - 1) = 4(117 - 9) = 4 \cdot 108 = 432 \]
+        \[ P(E) = \frac{432}{C_{52}^{5}} \]
+
+    \item \textbf{straight}
+        Fistly pick a sequential rank configuration. 13 possible variants to make such
+        configuration. Then pick suits, but there are 5 possible ways to pick them:
+        \[ 1, 1, 2, 3, 4 \; : \;
+            4 \text{ combinations} \]
+        \[ 1, 1, 2, 2, 3 \; : \;
+            \frac{4*3}{2} \cdot 2 = 12 \text{ combinations}\]
+        \[ 1, 1, 1, 2, 2 \; : \;
+            4 * 3 = 12 \text{ combinations}\]
+        \[ 1, 1, 1, 2, 3 \; : \;
+            4 * \frac{3*2}{2} = 12 \text{ combinations}\]
+        \[ 1, 1, 1, 1, 2 \; : \;
+            4 * 3 = 12 \text{ combinations}\]
+        All in all:
+        \[ \abs{F} = 13 ( 4 + 4 * 12 ) = 676 \]
+        \[ P(F) = \frac{676}{C_{52}^{5}} \]
+        
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[3.23]
+\textit{Computer center has 3 processors that received n tasks. For each task the processor is
+randomly picked. Find a probability that exactly one processor will be idle.}
+
+\textbf{Solution:}
+
+\[ \Omega = \set{ ( a_1, a_2, \dots, a_n ) : a_i = \overline{1, 3} } \]
+\[ \abs \Omega = 3^n \]
+
+The cases we're interested in:
+\[ A_i = \set{ (a_1, a_2, \dots, a_n ) : a_i \in \set{1, 2, 3} \backslash \set{i} } \]
+\[ \abs{A_i} = 2^n \]
+\[ A = A_1 + A_2 + A_3 \]
+\[ P(A) = \frac{ 3 * 2^n }{ 3^n } = \frac{2^n}{3^{n-1}} \]
+
+
+\end{document}
+

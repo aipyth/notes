@@ -1,0 +1,91 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage{fontspec}
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+\title{Statistics}
+\author{Ivan Zhytkevych}
+\date{\today}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{claim}[theorem]{Claim}              % Вимога
+\newtheorem{proposition}[theorem]{Proposition}  % Твердження
+\newtheorem{lemma}[theorem]{Lemma}              % Лема
+\newtheorem{corollary}[theorem]{Corollary}      % Наслідок
+\newtheorem{conjecture}[theorem]{Conjecture}    % Припущення
+\newtheorem*{observation}{Observation}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\NewDocumentCommand{\set}{o m}{%
+  % <code>
+  \IfNoValueTF{#1}
+    {{#2}}
+    {{#1 \mid #2}}%
+  % <code>
+}
+
+
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{.8\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+% \newcommand{\incfig}[2][1]{%
+%     \def\svgwidth{#1\columnwidth}
+%     \import{./figures/}{#2.pdf_tex}
+% }
+
+\newcommand\symbolwithin[2]{%
+  {\mathmakebox[\widthof{\ensuremath{{}#2{}}}]{{#1}}}}
+
+
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+
+    \input{distributions.tex}
+    \input{definitions.tex}
+
+    \input{lec_01.tex}
+    \input{lec_02.tex}
+    \input{lec_03.tex}
+    \input{lec_04.tex}
+    \input{lec_05.tex}
+    \input{lec_06.tex}
+    \input{lec_07.tex}
+    \input{lec_08.tex}
+    \input{lec_09.tex}
+    \input{lec_10.tex}
+    \input{lec_11.tex}
+    \input{lec_12.tex}
+\end{document}

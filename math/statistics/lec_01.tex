@@ -1,0 +1,407 @@
+\newpage
+
+\section{Sample and sample characteristics}
+
+\subsection{Sample}
+
+\begin{definition}
+Vector \(\vec{X} = \left( x_1, \ldots, x_n \right)\), where \(x_i \in P(\xi)\)
+    are independent equally distributed random values (i.e.d. - independent 
+    equally distributed) is called
+    a sample of volume $n$ with distribution $P(\xi)$ (from general
+    totality (з генеральної сукупності) $P(\xi)$).
+\end{definition}
+\begin{remark}
+    $F_{\vec{X}} \left( y_1, \ldots, y_n \right) = P(x_1 \leq y_1,
+    \ldots, x_n \leq y_n) = \prod_{i=1}^{n} P(x_i \leq y_i) =
+    \prod_{i=1}^{n} F_{\xi} (y_i) $, where $F_{\xi}(x) = P(\xi \leq x)$
+    distribution function $\xi$.
+\end{remark}
+$\mathcal{F} = \{F_{\xi}\}$ we define a class of allowable ditribution
+functions for random value $\xi$.
+
+\(\mathcal{F} \{F(x, \theta), \theta \in \Theta\}\), $\Theta$ - a set of all allowable values for $\theta$.
+
+\begin{example}
+    $P(\xi)$ normal distribution with known dispersion $\sigma^2$ but unknown expectation $\theta$. Then our parametric model is:
+
+    \[
+    \mathcal{F} = \{F(x, \theta), \theta \in \Theta = (-\infty, \infty)\}, \text{ where } F(x, \theta) \text{ has density of distribution }
+    \] 
+\[
+f(x, \theta) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(x-\theta)^2}{2\sigma^2}}, x \in \mathbb{R}
+.\] 
+\end{example}
+\begin{example}
+    $P(\xi)$ has Puasson distribution with unknown parameter $\theta$.
+    Then the parametric model is:
+
+    \[
+    \mathcal{F} = \{F(x, \theta), \; \theta \in \Theta = (0, \infty)\}
+    .\] 
+    \[
+    F(x, \theta) = P(\xi = x) = \frac{\theta^{x}}{x!} e^{-\theta}, x = 0,1,2,\ldots
+    .\] 
+\end{example}
+
+\begin{definition}
+    Measurable function from sampling (and only from sample) is called statistics.
+    \[
+    T_n(\vec{X}) \text{ - statistics }
+    .\] 
+\end{definition}
+\begin{example}
+    \[
+    x_1, \ldots, x_n \text{ - i.e.d. random values }
+    .\] 
+    \[
+    T(x_1, \ldots, x_n) = x_1
+    .\] 
+    \[
+    T(x_1, \ldots, x_n) = \frac{1}{n} \sum_{i=1}^{n} x_i
+    .\] 
+    \[
+    T(x_1, \ldots,x_n) = \min(x_1, \ldots, x_n)
+    .\] 
+\end{example}
+\begin{example}
+    \[
+    x_i \sim Poiss(\theta), \theta \text{ - unknown parameter }
+    .\] 
+    \(T(x_1, \ldots, x_n) = \frac{x_1}{\theta}\) \text{ - is not a statistics function as long as it depends on unknown parameter }
+\end{example}
+
+
+
+\subsection{Variation series of the sample}
+
+Suppose $\vec{X} = (X_1, \ldots, X_n)$ a sample, $\vec{x} = (x_1, \ldots, x_n)$ a realization of the sample.
+
+Let
+\begin{align*}
+    x_{(1)} = min(x_1, \ldots, x_n) \\
+    x_{(2)} \text{ - second by range } \\
+    \hdots \\
+    x_{(n)} = max(x_1, \ldots, x_n)
+.\end{align*}
+
+In probability and statistics, a realization, observation, or observed value, of a random variable is the value that is actually observed (what actually happened).
+
+Let $X_{(k)}$ to be a random value that for every realization $\vec{x}$ of sample $\vec{X}$ is $x_{(k)}$. Then the series
+\[
+R = \left( X_{(1)}, X_{(2)}, \ldots, X_{(n)} \right)
+.\]
+is a variation series of the sample.
+
+$X_{(k)}$ - is $k$th ordinal statistics.
+
+\begin{remark}
+    Ordinal statistics $X_{(1)}, \ldots, X_{(n)}$ are neither independent nor equally distributed.
+\end{remark}
+Let's find $F_{X_{(1)}}, F_{X_{(k)}}, F_{X_{(n)}}$:
+
+\begin{gather*}
+    F_{X_{(1)}}(y) = P( X_{(1)} \leq y ) = P( \min \left( X_1, \ldots, X_n \right) \leq y) = \\
+    = 1 - P( \min \left( X_1, \ldots, X_n \right) > y) = 1 - P( X_1 > y, \ldots, X_n > y) = \\
+    = 1 - \prod_{i=1}^{n} P( X_i > y) = 1 - \left( 1 - F(y) \right) ^{n} ; 
+\end{gather*}
+
+\begin{gather*}
+    F_{X_{(n)}} (y) = P \left( \max \left( X_1, \ldots, X_n \right) \leq y \right) = \\
+    = P\left( X_1 \leq y, \ldots, X_n \leq y \right) = \left[ F (y) \right] ^{n}.
+\end{gather*}
+
+\[
+F_{ X_{(k)} } (y) = P \left( X_{(k)} \leq y \right) =
+\] 
+\begin{figure}[ht]
+    \centering
+    \incfig{distribution-of-k-th-ordinal-statistics}
+    \caption{Distribution of k-th ordinal statistics}
+    \label{fig:distribution-of-k-th-ordinal-statistics}
+\end{figure}
+
+\begin{gather*}
+    = P \left( \text{ at least $k$ elements do not exceed $y$} \right) = \\
+    = \sum_{m=k}^{n}  C_n^m \left[ F(y) \right]^m \left( 1 - F(y) \right) ^{n-m}.
+\end{gather*}
+
+\begin{proposition}[joint distribution of variation series]
+    Let \( \vec{X} = \left( X_1, \ldots, X_n \right) \) - a sample and $X_i$ has density 
+    $f(x)$. Then:
+    \[
+    f_{( X_{(1)}, \ldots, X_{(n)})} (y_1, \ldots, y_n) = n! f(y_1) \ldots f(y_n) \times
+    \mathds{1}(y_1 \leq y_2 \ldots \leq y_n)
+    .\] 
+\end{proposition}
+\begin{proof}
+    Consider distribution function of variation series:
+\[
+    F_{(X_{(1)}, \ldots, X_{(n)})} (y_1, y_2, \ldots, y_n) =
+    P\left( X_{(1)} \leq y_1, \ldots, X_{(n)} \leq y_n \right).
+\] 
+Consider that $y_1 > y_2$. Then $X_{(2)} \leq y_2 \Rightarrow X_{(1)} \leq y_1$.
+$\left( X_{(1)} \leq X_{(2)} \leq y_2 < y_1 \right) $.
+\[
+    \left\{ X_{(2)} \leq y_2 \right\} \cap \left\{ X_{(1)} \leq y_1 \right\} = \left\{ X_{(2)} \leq y_2 \right\} 
+.\] 
+That's why:
+\[
+F_{\left( X_{(1)}, \ldots, X_{(n)} \right) } (y_1, \ldots, y_n) = 
+P\left( X_{(2)} \leq y_2, \ldots, X_{(n)} \leq y_n \right) 
+.\] 
+Because right side does not depend from $y_1$ then 
+\[
+f_R (y_1, \ldots, y_n) = 0
+\] 
+in case of non-fulfillment of the condition of orderliness: $y_1 \leq y_2 \leq \ldots \leq y_n$.
+
+Let $\Gamma = \{\left( y_1, \ldots, y_n \right) \in \mathbb{R}^n : y_1 \leq \ldots, y_n\}$.
+\[
+\forall A \subset \Gamma : P\left(  \left( X_{(1)}, \ldots, X_{(n)} \right) \in A \right) =
+\int_{A}^{} f_R (y_1, \ldots, y_n) dy_1 \ldots dy_n 
+.\] 
+On the other side:
+\[
+\] 
+\begin{gather*}
+P\left( \left( X_{(1)}, \ldots, X_{(n)} \right) \in A \right) =
+\sum_{\sigma \in S_n}^{} P\left( \left( X_{\sigma(1)}, \ldots, X_{\sigma(n)} \right) \in A \right) = \\
+= n! \cdot P\left( \left( X_1, \ldots, X_n \right) \in A \right)
+= n! \cdot \int_{A}^{} f_{\vec{X}} \left( y_1, \ldots, y_n \right)  dy_1\ldots dy_n 
+\end{gather*}
+Hence:
+\[
+f_r(y_1, \ldots, y_n) = n! f_{\vec{X}} (y_1, \ldots, y_n) = n! f(y_1) \cdot \ldots \cdot f(y_n)
+.\] 
+At last:
+\[
+f_R (y_1, \ldots, y_n) = n! \prod_{i=1}^{n} f(y_i) \cdot \mathds{1}(y_1 \leq \ldots \leq y_n) 
+.\] 
+\end{proof}
+
+
+
+\subsection{Empirical distribution function}
+
+Let $\vec{X} = \left(  x_1, \ldots, x_n \right) $ - a sample.
+
+Consider:
+\[
+F_n(x) = \frac{1}{n} \sum_{i=1}^{n}  \mathds{1}\left(X_i \leq x\right)
+.\] 
+$F_n(x)$ is called \textbf{empirical distirbution function}.
+
+$F_n(x)$ - random function: for every  $x \in \mathbb{R}$ takes values $0, \frac{1}{n}, \frac{2}{n}, \ldots, 1$.
+
+Herewith:
+\[
+P\left( F_n (x) = \frac{k}{n} \right) = C_n^k \left[ F(x) \right] ^k
+(1 - F(x))^{n-k}, \;\;\;\; k = \overline{0, n}
+.\] 
+\[
+    n \cdot F_n(x) \sim \operatorname{Bin} (n, F(x))
+.\] 
+
+Hence:
+\begin{enumerate}
+    \item
+        \begin{align*}
+            M \left[ n \cdot F_n(x) \right] &= n \cdot F(x) \\
+                             &\Downarrow \\
+            M F_n(x)         &= F(x)
+        .\end{align*}
+
+    \item
+        \begin{align*}
+            \mathcal{D}(n \cdot F_n(x)) &= n \cdot F(x) (1-F(x)) \\
+                                        &\Downarrow \\
+            \mathcal{D}F_x(x) &= \frac{1}{n} F(x) (1-F(x))
+        .\end{align*}
+\end{enumerate}
+
+Using law of large numbers:
+\[
+F_n(x) = \frac{\mathds{1}(X_1 \leq x) + \ldots + \mathds{1} (X_n \leq x)}{n}
+\underset{n \to \infty}{\overset{P}{\to}}
+M \mathds{1}(X_1 \leq x) = P(X_1 \leq x) = F(x)
+.\] 
+
+Using central limit theorem (ЦГТ):
+\[
+\frac{n \cdot F_n(x) - n F(x)}{\sqrt{nF(x) (1-F(x))} }
+\underset{n\to\infty}{\overset{d}{\to}}
+\mathcal{N}(0, 1)
+\] 
+\[
+\sqrt{n} \cdot \frac{F_n(x) - F(x)}{\sqrt{F(x)(1-F(x))}}
+\overset{d}{\to}
+\mathcal{N}(0,1)
+\] 
+
+
+
+\subsection{Hystogram and frequency range}
+Suppose that $X_1, \ldots, X_n$ = a sample;
+
+$X_i \sim \xi$;  $\xi$ has continuous density $f(x)$ (unknown).
+
+Let  $\mathcal{I}_1, \ldots, \mathcal{I}_m$ - some division of the area $\mathcal{I}$ of possible values of  $\xi$:
+
+Let $\nu_r = \sum_{j=1}^{n}  \mathds{1}(X_j \in \mathcal{I}_r)$ - number of elements of the sample that are in $\mathcal{I}_r$.
+
+Then by the Law of Large Numbers:
+\[
+    \frac{\nu_r}{n} = \frac{\sum_{j=1}^{n} \mathds{1}(X_j \in \mathcal{I}_r)}{n}
+    \underset{n\to\infty}{\overset{P}{\to}}
+    M \mathds{1}(X_1 \in \mathcal{I}_r) = P(X_1 \in \mathcal{I}_r) =
+    \int_{\mathcal{I}_r}^{} f(x) dx 
+.\] 
+
+Because $f$ is continuos then by the theorem about mean (теорема про середнє):
+\[
+    \int_{\mathcal{I}_r}^{}  f(x) dx =  \left| \mathcal{I}_r \right| \cdot f(x_r)
+\] 
+where $x_r$ - is inner point of the interval $\mathcal{I}_r$, $\left| \mathcal{I}_r \right| $ - length of the interval.
+
+We can consider, that ( $n$ is big and $\left| \mathcal{I}_r \right| $ is small)
+\[
+    \frac{\nu_r}{n \cdot \left| \mathcal{I}_r \right| } \approx f(x_r)
+\] 
+where $x_r$ - middle of  $\mathcal{I}_r$.
+
+\begin{definition}
+    Piecewise constant function
+    \[
+        f_n(x) = \frac{\nu_r}{n \cdot \left| \mathcal{I}_r \right| } \mathds{1}(x \in \mathcal{I}_r), \;\;\;\; r = \overline{1, m}
+    \] 
+    is called a hystogram.
+\end{definition}
+
+Within large $n$ and small enough division the hystogram $f_n(x)$ is
+an approximation of true density $f(x)$.
+
+\begin{example}
+    Height of $n=500$ students was measured; The results are shown in view of
+    interval statistiсal series:
+
+\begin{center}
+    \begin{tabular}{|c | c | c | c | c | c | c | c|}
+        \hline
+        145-150 & 150-155 & 155-160 & 160-165 & 165-170 & 170-175 & 175-180 & 180-185 \\
+        \hline
+        1 & 2 & 28 & 90 & 169 & 132 & 55 & 23 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{align*}
+    \left| \mathcal{I}_r \right| = 5; && n = 500; && f_n(x) = \frac{\nu_r}{ 2500} \mathds{1}(x \in \mathcal{I}_r)
+.\end{align*}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{students-height-hystogram}
+    \caption{Students height hystogram}
+    \label{fig:students-height-hystogram}
+\end{figure}
+
+\end{example}
+
+\begin{definition}
+The frequency polygon is a polyline that connects the midpoints of the segments in the histogram.
+\end{definition}
+
+
+
+\subsection{Sample mean}
+
+\begin{definition}
+    Statistics $\overline{X} = \frac{X_1 + \ldots + X_n}{n}$ is called
+    sample mean (вибіркове середнє) or selective first moment
+    (вибірковий перший момент).
+\end{definition}
+
+Properties:
+\begin{enumerate}
+    \item $M \overline{X} = \frac{1}{n} \sum_{i=1}^{n} MX_i = MX_1 = m$ 
+    \item $\mathcal{D}\overline{X} = \frac{1}{n^2} \sum_{i=1}^{n} \mathcal{D}X_i = \frac{1}{n} \mathcal{D}X_1 = \frac{\sigma^2}{ n}$ 
+    \item Using Law of Large Numbers:
+        \[
+            \overline{X} = \frac{X_1 + \ldots + X_n}{n}
+            \underset{n\to\infty}{\overset{P}{\to}}
+            MX_1 = m
+        .\] 
+    \item Using central limit theorem (центральна гранична теорема):
+        \[
+            \frac{n \cdot \overline{X} - n \cdot M\overline{X}}{\sqrt{\mathcal{D}[n\overline{X}]} }
+            \overset{d}{\to}
+            \mathcal{N}(0,1), \quad n \to \infty
+        \] 
+        \[
+            \frac{n\left( \overline{X} - m \right) }{n \sqrt{\frac{\sigma^2}{n}} }
+            \overset{d}{\to}
+            \mathcal{N}(0,1)
+        \] 
+        \[
+            \sqrt{n \cdot \frac{\overline{X} - m}{\sigma}}
+            \overset{d}{\to}
+            \mathcal{N}(0,1), \;\;\; n \to \infty
+        .\] 
+\end{enumerate}
+
+
+
+\subsection{Sample variance}
+
+\[
+S^2 = \frac{1}{n} \sum_{i=1}^{n} \left(  X_i - \overline{X} \right) 
+\] 
+where $\overline{X} = \frac{1}{n} \sum_{i=1}^{n} X_i$.
+\[
+S^2 = \overline{X^2} - \left( \overline{X} \right) ^2
+\] 
+where $\overline{X}^2 = \frac{X_1^2 + \ldots + X_n^2}{n}$ is second sample moment.
+
+Using Law of Large Numbers:
+\[
+    S^2 = \overline{X^2} - \left( \overline{X} \right) ^2
+    \underset{n \to \infty}{\overset{P}{\to}}
+    MX_1^2 - \left( MX_1 \right) ^2 = \mathcal{D}X_1
+.\] 
+\[
+S_o^2 = \frac{1}{n-1} \sum_{i=1}^{n} \left( X_i - \overline{X} \right) ^2
+.\] 
+$S_0^2$ - is \textbf{unbiased sample dispersion}.
+
+Then 
+\begin{equation}
+    MS_o^2 = \sigma^2
+\end{equation}
+
+Indeed :
+\begin{gather*}
+    \sum_{i=1}^{n} \left( X_i - m \right) ^2
+    = \sum_{i=1}^{n} \left( \left( X_i - \overline{X} \right) + \left( \overline{X} - m \right)  \right) ^2 = \\
+    = \sum_{i=1}^{n} \left( X_i - \overline{X} \right) ^2 + 2\left( \overline{X} - m \right) \cdot \overbrace{\sum_{i=1}^{n} \left( X_i - \overline{X} \right)}^0 + 
+    n \cdot \left( \overline{X} - m \right) ^2 = \\
+    = \sum_{i=1}^{n} \left( X_i - \overline{X} \right) ^2 + n \left( \overline{X} - m \right) ^2 = \\
+    = \left( n-1 \right) S_o^2 + n \cdot \left( \overline{X} -m \right) ^2.
+\end{gather*}
+
+Let's take \textit{expectation} on the left and right side:
+
+\begin{gather*}
+   M \sum_{i=1}^{n} \left( X_i - m \right) ^2 =
+   \sum_{i=1}^{n} M \left( X_i - m \right) ^2 =
+   \sum_{i=1}^{n} \mathcal{D}X_i = n \cdot \sigma^2
+\end{gather*}
+
+\begin{gather*}
+    M\left( \overline{X} - m \right) ^2 = M\left( \overline{X} - M\left( \overline{X} \right)  \right) ^2 = \mathcal{D}\overline{X} = \frac{\sigma^2}{n}
+\end{gather*}
+\begin{align*}
+    n \cdot \sigma^2 = \left( n-1 \right) & \cdot MS_o^2 + n \cdot \frac{\sigma^2}{n} \\
+    & \Downarrow \\
+    MS_o^2 = \sigma^2
+.\end{align*}

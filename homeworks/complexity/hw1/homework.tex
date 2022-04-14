@@ -1,0 +1,65 @@
+\documentclass{homework}
+
+\usepackage{amsmath}
+
+\title{Complexity Theory Homework №1}
+\author{Ivan Zhytkevych}
+
+\begin{document}
+
+\maketitle
+
+\exercise*[1.3]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.5]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.6]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.7]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\exercise*[1.8]
+\begin{enumerate}
+    \item
+
+        \[ \Sigma = \set{a, b, c}, \;\; \text{replaces } a \text{ to } b  \]
+
+        \begin{gather*}
+            q_0 b q_0 b R \\
+            q_0 c q_0 c R \\
+            q_0 a q_a b R \\
+            q_0 # q_{Accept} # S \\
+            \\ 
+            q_a a q_{1a} b R \\
+            q_a b q_{1b} b R \\
+            q_a c q_{1c} b R \\
+            q_a # q_{Accept} b R \\
+            \\
+            q_{1a} a q_{1a} a R \\
+            q_{1a} b q_{1b} a R \\
+            q_{1a} c q_{1c} a R \\
+            q_{1a} # q_r a R \\
+            \\
+            q_{1b} a q_{1a} b R \\
+            q_{1b} b q_{1b} b R \\
+            q_{1b} c q_{1c} b R \\
+            q_{1b} # q_r b L \\
+            \\
+            q_{1c} a q_{1a} c R \\
+            q_{1c} b q_{1b} c R \\
+            q_{1c} c q_{1c} c R \\
+            q_{1c} # q_r c L \\
+            \\
+            q_r * q_r * L \\
+            q_r # q_0 # L \\
+        \end{gather*}
+\end{enumerate}
+
+\end{document}
+

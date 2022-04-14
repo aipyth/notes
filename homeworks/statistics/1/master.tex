@@ -1,0 +1,269 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{hyperref}
+% \usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{dsfont}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\set}{\left\{}{\right\}}
+
+\usepackage{fontspec}
+
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{light-gray}{gray}{0.85}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\hwnumber{1}
+\newcommand\student{Ivan Zhytkevych}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\textit{\student}}
+\chead{\textbf{\Large Statistics Homework \hwnumber}}
+\rhead{\textit{\today}}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\newcommand{\problemdef}[1]{%
+    \noindent\fcolorbox{black}{light-gray}{
+        \parbox{\textwidth}{
+            #1
+        }
+    }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \tableofcontents
+% \newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 17.12}
+
+\problemdef{
+    Нехай $\xi$ випадкова величина зі стандартним нормальним розподілом.
+    Користуючись таблицею стандартного нормального розподілу знайдіть:
+    \begin{enumerate}
+        \item ймовірність $P(\xi \in [-3, 1])$
+        \item таке $x$, що $P(|\xi| \leq x) = 0.9$.
+    \end{enumerate}
+}
+
+\begin{enumerate}
+    \item 
+        \begin{gather*}
+        P(\xi \in [-3, 1]) = P(\xi \leq 1) - P(\xi < -3) = \\
+        = P(\xi \leq 1) - \left( 1 - P(\xi < 3)  \right) = \\
+        = P(\xi \leq 1) + P(\xi < 3) - 1 = 0.841 + 0.999 - 1 = 0.84 
+        \end{gather*}
+    \item
+        \begin{gather*}
+            P(|\xi| \leq x) = P(\xi \leq x) - P(\xi \leq -x) = \\
+            = P(\xi \leq x) - 1 + P(\xi \leq x) = \\
+            = 2 P(\xi \leq x) - 1 = 0.9 \\
+            P(\xi \leq x) = 0.95 \\
+            x = 1.64
+        \end{gather*}
+\end{enumerate}
+
+\[
+\iff d = \frac{1009}{13}
+.\] 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 17.13}
+
+\problemdef{
+    Нехай $S$ - число гербів, що випали при 1 000 000 підкидань правильної монети.
+    Оцініть ймовірність $(499 000 < S < 501 000)$:
+    \begin{enumerate}
+        \item за допомогою нерівності Чебишова
+        \item за допомогою центральної граничної теореми
+    \end{enumerate}
+}
+
+\begin{enumerate}
+    \item 
+        \begin{gather*}
+            S = \sum_{i=1}^{10^6} \mathds{1}(\text{ випав герб }) \\
+            P(S \geq \varepsilon) \leq \frac{M S}{\varepsilon} \\
+            MS = 10^6 \cdot \frac{1}{2} = 5 \cdot 10^5 \\
+            P(4.99 \cdot 10^5 < S < 5.01 \cdot 10^5) =
+            P(S < 5.01 \cdot 10^5) - P(S < 4.99 \cdot 10^5) = \\
+            = 1 - P(S \geq 5.01 \cdot 10^5) - 1 + P(S \geq 4.99 \cdot 10^5) = \\
+            = P(S \geq 4.99 \cdot 10^5) - P(S \geq 5.01 \cdot 10^5) = \\
+            \text{ навряд чи можна одразу перейти до нерівності } \\
+            \text{ тому спробуємо інакше } \\
+            P \left( 4.99 \cdot 10^5 < S < 5.01 \cdot 10^5 \right) = P(\left| S - 5 \cdot 10^5 \right| < 1000 ) = \\
+            = 1 - P(\left| S - 5 \cdot 10^5 \right| \geq 1000 )\\
+            \xi = \left| S - 5 \cdot 10^5 \right| = \left| S - M S \right|  \\
+            \Rightarrow P(\left| S - M S \right| \geq 1000) \leq \frac{\mathcal{D}\xi}{\varepsilon^2} \\
+            P(\left| S - M S \right| \geq 1000) \leq 10^6 \cdot \frac{1}{4} \cdot \frac{1}{10^6} \\
+            P(\left| S - M S \right| \geq 1000) \leq \frac{1}{4}
+            \Rightarrow P(\left| S - M S \right| < 1000 ) \leq \frac{3}{4}
+        \end{gather*}
+    \item 
+        \begin{gather*}
+            \frac{S - MS}{\sqrt{\mathcal{D}S}} = \frac{S - 5 \cdot 10^5}{500} \xrightarrow{d} N(0, 1) \\
+            P(4.99 \cdot 10^5 < S < 5.01 \cdot 10^5) = \\
+            = P(4.99 \cdot 10^5 - 5 \cdot 10^5 < S - 5 \cdot 10^5 < 5.01 \cdot 10^5 - 5 \cdot 10^5) = \\
+            = P\left(\frac{4.99 \cdot 10^5 - 5 \cdot 10^5}{500} < \frac{S - 5 \cdot 10^5}{500} < \frac{5.01 \cdot 10^5 - 5 \cdot 10^5}{500}\right) = \\
+            = P\left( -2 < \frac{S - 5 \cdot 10^5}{500} < 2 \right) = \\
+            = P(\eta < 2) - P(\eta < - 2) = 2 P (\eta < 2) - 1 = 
+            2 \cdot 0.977 - 1 = 0.954
+        \end{gather*}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 17.15}
+\problemdef{
+    При випадковому блуканні на числовій осі частинка, стартуючи з точки 0, робить
+    % крок вправо або вліво з ймовірністю \(\displaymath \frac{1}{2}$$. Оцініть
+    ймовірність того, що після сотого кроку частинку віддалятиме від початкової
+    точки не менше, ніж 10 кроків.
+
+
+\begin{gather*}
+    \xi = \begin{cases}
+        1 & \frac{1}{2} \\
+        -1 & \frac{1}{2}
+    \end{cases} \\
+    S_n = \sum_{i=1}^{n} \xi \\
+    M S_n = 0 \\
+    D S_n = 100 \\
+    P(\left| S \right| < 10) = P(-10 < S < 10) = \\
+    = P(\frac{-10}{\sqrt{100}} < \frac{S}{\sqrt{100} } < \frac{10}{\sqrt{100} }) = \\
+    = P(-1 < \frac{S}{10} < 1) = P(\frac{S}{10} < 1) - P(\frac{S}{10} < -1) =
+    P(\frac{S}{10} < 1) - 1 + P(\frac{S}{10} < 1) = \\
+    = 2 P(\frac{S}{10} < 1) - 1 = 2 \cdot 0.841 - 1 = 0.682 \\
+    \Rightarrow P(\left| S \right| > 10) = 0.318
+\end{gather*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 17.16}
+\problemdef{
+    У компанії-авіаперевізнику оцінили, що в середньому 4\% квитків, проданих
+    на авіарейс, залишаються невикористаними. Як наслідок, компанія обрала наступну стратегію: продавати 100 квитків на літак, що має 98 місць. Знайдіть ймовірність того, що кожному пасажиру, що опиниться на борту літака, знайдеться місце.
+}
+
+\begin{gather*}
+    \xi_i = \mathds{1}(\text{ білет $i$ використаний })\\
+    M \sum_{i=1}^{n} \xi_i = 0.04 \cdot n = \lambda \\ 
+    \text{схоже на розподіл Пуассона, оскільки надали значення в середньому та не вказали кількість $n$} \\
+    \mathcal{D} \sum_{i=1}^{n} \xi_i = \lambda \\
+    S = \sum \xi_i \\
+    \frac{S - M S}{\mathcal{D}S} = \frac{S - 0.04}{0.04} \to N(0, 1) \\
+    \text{ нехай продано 100 білетів } \\
+    P(S_{100} \geq 2) = P(S_{100} - 4 \geq 2 - 4) = P(\frac{S_{100} - 4}{\sqrt{4}} \geq \frac{2 - 4}{\sqrt{4}}) = P(\frac{S_{100} - 4}{2} \geq -1) =  \\
+    = 1 - P(\frac{S_{100}-4}{2} < -1) = P(\frac{S_{100}-4}{2} < 1) = 0.841
+\end{gather*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 17.17}
+\problemdef{
+    Кожен з членів жюрі, яке складається з непарної кількості осіб, незалежно
+    від інших приймає справедливе рішення з ймовірністю $0.7$. Якою повинна бути
+    чисельність жюрі для того, щоб рішення, ухвалене більшістю голосів, було
+    справедливим з ймовірністю не меншою за $0.9$.
+}
+
+\begin{gather*}
+    \eta = \mathds{1}( \text{ рішення справедливе }) \\
+    S_n = \sum_{i=1}^{n} \eta_i \\
+    M S_n = n \cdot 0.7 \\ 
+    \mathcal{D}S_n = n \cdot 0.21 \\
+    P(S_n > \frac{n}{2}) = P(\frac{S_n - n \cdot 0.7}{\sqrt{n \cdot 0.21}} > \frac{\frac{n}{2} - n \cdot 0.7}{\sqrt{ n \cdot 0.21}}) > 0.9 \\
+    P(S_n > \frac{n}{2}) = 1 - P(S_n \leq \frac{n}{2}) \Rightarrow 
+    1 - P(\frac{S_n - n \cdot 0.7}{\sqrt{n \cdot 0.21}} \leq \frac{\frac{n}{2} - n \cdot 0.7}{\sqrt{n \cdot 0.21}}) > 0.9 \\
+    P(\frac{S_n - n \cdot 0.7}{\sqrt{ n \cdot 0.21}} \leq \frac{\frac{n}{2} - n \cdot 0.7}{\sqrt{ n \cdot 0.21}}) < 0.1 \\
+    \frac{\sqrt{n} }{2 \cdot \sqrt{0.21}} - \frac{0.7 \cdot \sqrt{n} }{\sqrt{0.21}} < -1.282 \\
+    \sqrt{n} \left( \frac{1}{2\cdot\sqrt{0.21}} - \frac{0.7}{\sqrt{0.21}}  \right) < -1.282 \\
+    \sqrt{n} \left( 0.91 - 1.53 \right) < -1.282 \\
+    \sqrt{n} > \frac{-1.282}{-0.62} \\
+    \sqrt{n} > 2.07 \\
+    n > 4.2
+\end{gather*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 17.20}
+\problemdef{
+    Гральний кубик підкидається до тих пір, аж поки сума очок вперше перевищить $700$.
+    Оцініть ймовірність того, що для цього знадобиться:
+    \begin{enumerate}
+        \item більше за 210 підкидань
+        \item менше за 190 підкидань
+        \item неменше за 180 і не більше за 210 підкидань.
+    \end{enumerate}
+}
+
+\begin{gather*}
+    \xi \text{ - кількість очок на кубику } \\
+    M \xi = 3.5 \\
+    \mathcal{D} \xi = \frac{1}{6}\left( 1 + 4 + 9 + 16 + 25 + 36 \right) - 3.5^2 = 2.91 \\
+    S_n = \sum_{i=1}^{n} \xi_i \\ 
+    M S_n = n \cdot 3.5 \\
+    \mathcal{D}S_n = n \cdot 2.91 \\
+\end{gather*}
+\begin{enumerate}
+    \item \begin{gather*}
+    P(S_{210} < 700) = P(\frac{S_{210} - 210 \cdot 3.5}{\sqrt{210 \cdot 2.91}} < \frac{700 - 210 \cdot 3.5}{\sqrt{210 \cdot 2.91} }) = \\
+    = P(\frac{S_{210} - 735}{24.72} < \frac{-35}{24.72}) = P(\eta < -1.42) = 0.078 \\
+    \Rightarrow P(S_{>210} > 700) = 0.922
+    \end{gather*}
+    \item \begin{gather*}
+        P(S_{190} > 700) = P(\frac{S_{190} - 190 \cdot 3.5}{\sqrt{190 \cdot 2.91}} > 1.49 ) = 1 - 0.932 = 0.068 \\
+        \Rightarrow P(S_{<190} > 700) = 0.932
+    \end{gather*}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{Problem 17.22}
+
+%\problemdef{
+%    Нехай $\{X_n\}_{n \geq 1}$ - послідовність незалежних однаково розподілених випадкових
+%    величин з рівномірним розподілом на відрізку $[-3, 3]$ і нехай $T_n = \frac{1}{n} \sum_{i=1}^{n} \left| X_i \right|$. Знайдіть такі константи $a$ та $b^2$, що:
+%    \[
+%    \sqrt{n} \cdot (T_n - a) \xrightarrow{d} N(0, b^2)
+%    .\] 
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
