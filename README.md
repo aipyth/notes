@@ -1,12 +1,12 @@
 # aipyth Notes
 
 - Complexity Theory
-    - [markdown file](/complexity-theory/Complexity.md)
-    - [markdown's pdf file](/complexity-theory/Complexity.md.pdf)
-    - [pdf file](/complexity-theory/Complexity.pdf)
+    - [markdown file](/cources/complexity-theory/Complexity.md)
+    - [markdown's pdf file](/cources/complexity-theory/Complexity.md.pdf)
+    - [pdf file](/cources/complexity-theory/Complexity.pdf)
 - Functional Analysis
-    - [pdf file](/functional-analysis/master.pdf)
+    - [pdf file](/cources/functional-analysis/master.pdf)
 - Probability theory
-    - [pdf file](/probability-theory/Probability\ Theory.pdf)
+    - [pdf file](/cources/probability-theory/Probability\ Theory.pdf)
 - Statistics
-    - [pdf file](/statistics/master.pdf)
+    - [pdf file](/cources/statistics/master.pdf)
