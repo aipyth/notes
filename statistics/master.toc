@@ -1,0 +1,21 @@
+\contentsline {subsection}{\numberline {0.1}Bernoulli}{2}{subsection.0.1}%
+\contentsline {subsection}{\numberline {0.2}Binomial}{2}{subsection.0.2}%
+\contentsline {subsection}{\numberline {0.3}Poisson}{2}{subsection.0.3}%
+\contentsline {subsection}{\numberline {0.4}Hypergeometric}{3}{subsection.0.4}%
+\contentsline {subsection}{\numberline {0.5}Continuos Uniform}{3}{subsection.0.5}%
+\contentsline {subsection}{\numberline {0.6}Normal}{3}{subsection.0.6}%
+\contentsline {subsection}{\numberline {0.7}Exponential}{4}{subsection.0.7}%
+\contentsline {subsection}{\numberline {0.8}Cauchy}{4}{subsection.0.8}%
+\contentsline {section}{\numberline {1}Sample and sample characteristics}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Sample}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Variation series of the sample}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Empirical distribution function}{9}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Hystogram and frequency range}{10}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Sample mean}{11}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Sample variance}{12}{subsection.1.6}%
+\contentsline {section}{\numberline {2}Lection 2. Point extimates and their properties}{13}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Root mean square approach to comparing estimates}{16}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Sample contribution and Fisher information quantity}{19}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Cramér–Rao bound}{23}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Lecture 3. Exponential model. Methods of point evaluation contruction}{26}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Exponential model}{27}{subsection.3.1}%

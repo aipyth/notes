@@ -1,0 +1,129 @@
+\section{Lecture 3. Exponential model. Methods of point evaluation contruction}
+
+Let $X_1, \ldots, X_n$ a sample from regular parametric model
+$\mathcal{F} = \{F(x, \theta), \theta \in \Theta\} $ ;
+$f(x, \theta)$ --- probability density function (or $P(X_1 = x)$ in
+descrete variant).
+$g(\theta)$ --- some differentiable parametric function;
+$K_{0}^{g}$ --- class of unbiased evaluations for $g(\theta)$.
+
+Then:
+\begin{equation}
+    \label{eq:3:effective-evaluation-equality}
+    \forall T \in K_{0}^{g}: \mathcal{D}_{\theta} T \geq \frac{\left[ 
+    g'(\theta)\right] ^2}{n\cdot i(\theta)}
+\end{equation}
+where
+\[
+i(\theta) = M_{\theta}\left( \frac{\partial}{\partial \theta} \ln f(x, \theta) \right) ^2
+\] 
+is quantity of Fisher information.
+Besides:
+\[
+\mathcal{D}_{\theta} T = \frac{\left[ g'(\theta) \right] ^2}{n i(\theta)} \iff
+T - g(\theta) = a(\theta) U(\vec{X}, \theta)
+\] 
+where  $U(\vec{X}, \theta) = \frac{\partial}{\partial \theta} \ln
+\mathcal{L}(\vec{X}, \theta)$ --- sample contribution.
+
+The statistics for which the equation \ref{eq:3:effective-evaluation-equality}
+is true is called effective evaluation.
+
+
+
+\subsection{Exponential model}
+
+\begin{definition}
+    Model $\mathcal{F} = \{F(x, \theta), \theta \in \Theta\} $ is called 
+    exponential if function $f(x, \theta)$ is like:
+    \[
+        f(x, \theta) = \exp{A(\theta) \cdot B(x) + C(\theta) + D(x)}
+    \] 
+    or
+    \[
+    \ln f(x, \theta) = A(\theta) \cdot B(x) + C(\theta) + D(x)
+    .\] 
+\end{definition}
+
+\begin{example}[$\operatorname{Bin}$ is exponential model]
+    \[
+    X_i \sim \operatorname{Bin}(k, \theta);
+    \] 
+    \begin{gather*}
+        f(x, \theta) = P(X = x) = C_k^x \theta^x \left( 1 - \theta \right) ^{k-x}
+        \quad x = \overline{0, k}
+    \end{gather*}
+    \begin{gather*}
+        \ln f(x, \theta) = \ln C_k ^x + x \ln \theta + \left( k-x \right) 
+        \ln(1- \theta) = \\
+        = \underbrace{\ln k! + \ln \frac{1}{x! \left( k-x \right) !}}_{D(x)}
+        + \underbrace{x\ln \frac{\theta}{1 - \theta}}_{B(x)\cdot A(\theta)}
+        + \underbrace{k \ln(1 - \theta)}_{C(\theta)}
+    \end{gather*}
+    So model $\operatorname{Bin}(k, \theta)$ is exponential.
+\end{example}
+\begin{remark}
+    Models $\mathcal{N}(\theta, \sigma^2)$, $\mathcal{N}(a, \theta^2)$,
+    $\operatorname{Poiss}(\theta)$, $\Gamma(\theta, \lambda)$ are
+    \textbf{exponential} models
+\end{remark}
+
+\begin{example}
+    Causy distribution is not an exponential model.
+    Indeed:
+    \[
+    f(x, \theta) = \frac{1}{\pi} \cdot \frac{1}{1 + \left( x - \theta
+    \right) ^2}, \quad \theta\in \mathbb{R}, \; x \in \mathbb{R}
+    .\] 
+    \[
+    \ln f(x, \theta) = C - \ln \left( 1 + \left( x - \theta \right) ^2 \right) 
+    .\] 
+    Assume that
+    \[
+    \ln f(x, \theta) = A(\theta) B(x) + C(\theta) + D(x)
+    \] 
+    then \[
+        \frac{\partial ^2}{\partial \theta \partial x} \ln f(x, \theta) =
+        A'(\theta) B'(x) \equiv a(\theta) b(x)
+    .\] 
+    On the other side:
+    \[
+    \frac{\partial ^2}{\partial \theta \partial x} \ln f(x, \theta) = 
+    2 \cdot \frac{1 - (x- \theta)^2}{\left( 1 + (x- \theta)^2 \right) ^2}
+    .\] 
+    Therefore:
+    \[
+    a(\theta) \cdot b(x) = 2 \cdot \frac{1 - (x- \theta)^2}{\left(
+    1 + (x - \theta)^2 \right) ^2}
+    .\] 
+    But the right side cannot be represented as $a(\theta) b(x)$
+    (separate the variables).
+\end{example}
+
+
+Lets compute sample contribution for a regular exponential
+model:
+\begin{gather*}
+    U(\vec{X}, \theta) = \frac{\partial }{\partial \theta} \ln
+    \mathcal{L}(\vec{X}, \theta) = \\
+    = \frac{\partial }{\partial \theta} \ln \prod_{i=1}^{n} 
+    \exp{A(\theta)B(X_i) + C(\theta) + D(X_i)} = \\
+    = \frac{\partial }{\partial \theta} \ln
+    \exp{A(\theta) \cdot \sum_{i=1}^{n} B(X_i) + n C(\theta) + \sum_{i=1}^{n} D(X_i)} = \\
+    = \frac{\partial }{\partial \theta} \left( A(\theta)
+    \cdot n \cdot \overline{B(X)} + n C(\theta) + \overline{D(X)} \cdot n\right) = \\ 
+    = A'(\theta)  \cdot n \cdot \overline{B(X)} + n \cdot C'(\theta) = 
+    n A'(\theta) \left[ \overline{B(X)} + \frac{C'(\theta)}{A'(\theta)} \right] 
+\end{gather*}
+where $\overline{B(X)} = \frac{1}{n} \sum_{i=1}^{n} B(X_i)$.
+Suppose:
+\[
+a(\theta) = \frac{1}{n A'(\theta)} \quad T(\vec{X}) = \overline{B(x)}
+\quad g(\theta) = - \frac{C'(\theta)}{A'(\theta)}
+.\] 
+then:
+\[
+ T(x) - g(\theta) = a(\theta) \cdot U(\vec{X}, \theta)
+.\] 
+By Cramer-Rao criterion: $T(x) = \overline{B(x)}$ is an effective evaluation
+for $g(\theta) = - \displaymath \frac{C'(\theta)}{A'(\theta)}$.

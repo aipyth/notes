@@ -1,0 +1,612 @@
+\section{Lection 2. Point extimates and their properties}
+
+Let \(X_1, X_2, \ldots X_n\) is a sample from parametric
+family \(\mathcal{F} = \{ F(x, \theta), \theta \in \Theta \}\)
+where \(\theta\) is unknown parameter.
+
+Problem: find statistics $T_n = T\left( \vec{X} \right) $, values
+of which, by defined realization of a sample, are taken as
+approximated value of $\theta$(значення якої при заданій реалізації
+$\vec{x}$ вибірки $\vec{X}$ приймається за наближене значення $\theta$).
+Then $T_n$ is called a point estimate of evaluation (точкова оцінка) $\theta$.
+
+\begin{definition}
+    Statistics \[
+    T_n = T(X_1,X_2, \ldots, X_n)
+    .\] 
+    is called meaningful evaluation (змістовна оцінка) of $\theta$ if \[
+    T_n \; \overset{p}{\rightarrow} \; \theta, \quad n \to \infty
+    .\] 
+    \[
+    \forall \varepsilon > 0 \quad
+    P_{\theta} \left( \left| T_n - \theta \right| > \varepsilon \right) \to 0, \quad
+    n \to \infty
+    .\] 
+\end{definition}
+
+\begin{remark}
+    $P_{\theta}, M_{\theta}, D_{\theta}$ means that respective values
+    are evaluated with an assumption that $X_i \sim F(x, \theta)$.
+\end{remark}
+
+\begin{definition}
+    Statistics $T_n$ is called unbiased evaluation of $\theta$ if \[
+    M_{\theta}T_{n} = \theta \;\;\;\; \forall \theta \in \Theta
+    .\] 
+\end{definition}
+
+\begin{definition}
+    Statistics $T_n$ is called asymptotically unbiased evaluations if \[
+    M_{\theta} T_n \to \theta, \;\; n\to \infty \;\; \forall \theta \in \Theta
+    .\] 
+\end{definition}
+
+\begin{example}
+    $\overline{X} = \frac{1}{n} \sum_{i=1}^{n} X_i$ - meaningful
+    unbiased statistics for $\theta = MX_1$.
+\end{example}
+
+\begin{example}
+    \[ S^2 = \frac{1}{n} \sum_{i=1}^{n} \left( X_i - \overline{X} \right) ^2
+    = \overline{X^2} - \left( \overline{X} \right) ^2 \]
+
+    Using Law of Large Numbers:
+    \[
+    S^2 \overset{p}{\to} MX_1^2 - \left( MX_1 \right) ^2 = \mathcal{D}X_1
+    \] 
+    \[
+    MS^2 = M \left(\frac{n-1}{n} MS_0^2\right) \quad
+    S_0^2 = \frac{1}{n-1} \sum_{i=1}^{n} \left( X_i - \overline{X} \right) ^2
+    \]
+
+    That's why \[
+    MS^2 = \frac{n-1}{n} MS_0^2 = \frac{n-1}{n} \cdot \mathcal{D} X_1 \to \mathcal{D}X_1
+    \]  
+    $S^2$ - meaningful asymptotic unbiased for $\theta = \mathcal{D}X_1$
+\end{example}
+
+\begin{corollary}[About meaningfullness and unbias of sampling moments]
+    Let $g$ - borel function that $Mg(X_1) < \infty$.
+    Then the evaluation \[
+    \overline{g(X)} = \frac{1}{n}\sum_{i=1}^{n} g(X_i)
+    .\] is meaningful unbiased evaluation for $\Theta = Mg(X_1)$.
+\end{corollary}
+
+\begin{example}[Unbiased evaluation does not exist]
+    \[
+    X_1 \sim \operatorname{Poiss} (\theta), \quad
+    g(\theta) = \frac{1}{\theta}
+    .\] 
+    Assume that $\exists T(X)$ unbiased estimate for $\frac{1}{\theta}$ :
+    \[
+    M_{\theta} T(X) = \frac{1}{\theta} \quad \forall \theta > 0
+    .\] 
+    this means
+    \[
+    \sum_{k=0}^{\infty} T(k) \cdot \frac{\theta^{k}}{k!} e^{-\theta} =
+    \frac{1}{\theta} \quad \forall \theta > 0
+    .\] 
+    \[
+    \sum_{k=0}^{\infty} T(k) \cdot \frac{\theta^{k+1}}{k!} =
+    e^{\theta} \quad \forall \theta > 0
+    .\] 
+    \[
+    \sum_{k=0}^{\infty} T(k) \cdot \frac{\theta^{k+1}}{k!} =
+    \sum_{m=0}^{\infty} \frac{\theta^{m}}{m!} \;\;\;\; \forall \theta > 0
+    .\] 
+    The last equality is unpossible: theres no such function $T$
+    that does not depend on $\theta$ in such way that the last
+    equality is true.
+\end{example}
+\begin{remark}
+    If $T_1$ and $T_2$ are unbiased evaluations for $\theta$ then \[
+    T = C_1 T_1 + C_2 T_2 , \quad C_1 + C_2 = 1
+    \] is unbiased too.
+\end{remark}
+
+\begin{example}
+    \[
+    x_1, \ldots, x_{2n} \sim B(p), \text{ $p$ is unknown }
+    .\] 
+    \[
+        \hat{p_1} = \frac{1}{2n} \sum_{i=1}^{2n} x_i
+    .\]  is unbiased and measningful evaluations for $p$.
+    \[
+    \hat{p_2} = \frac{1}{n} \sum_{i=1}^{n} X_{2i}
+    .\] is unbiased and measningful too. 
+
+    Which one is better?
+\end{example}
+
+
+
+\subsection{Root mean square approach to comparing estimates}
+
+\begin{definition}[RMS]
+    Value \[
+        M_{\theta} (T(\vec{X}) - \theta) ^2
+    \] is called a root
+    \textbf{mean square evaluation} of $T$.
+\end{definition}
+
+\begin{definition}
+    The evaluation $T_1$ is better in root mean
+    square than evaluation $T_2$ if \[
+    \forall \theta \in \Theta : M_{\theta} (T_1 - \theta)^2 \leq 
+    M_{\theta} \left( T_2 - \theta \right) ^2
+    .\]  and at least for one $\theta$: \[
+    M_{\theta}\left( T_1 - \theta \right) ^2 <
+    M_{\theta} \left(T_2 - \theta  \right) ^2
+    .\] 
+\end{definition}
+
+\begin{example}[continuation]
+    \[
+    \hat{p_1} = \frac{1}{2n} \sum_{i=1}^{2n} X_i \quad
+    \hat{p_2} = \frac{1}{n} \sum_{i=1}^{n} X_{2i}
+    .\] 
+    \[
+     M_{\theta}\left( \hat{p_1} - p \right) ^2 =
+     M_{\theta} \left( \hat{p_1} - M\hat{p_1} \right) ^2 =
+     \mathcal{D} \hat{p_1} = \frac{1}{2n} \mathcal{D}X_1
+    .\]  
+    \[
+    M_{\theta} \left( \hat{p_2} - p \right) ^2 = 
+    \mathcal{D} \hat{p_2} = \frac{1}{n} \mathcal{D} X_1
+    .\]
+    \[
+    \frac{1}{2n} < \frac{1}{n} \Rightarrow \text{ $\hat{p_1}$ is better in rms }
+    .\] 
+\end{example}
+
+\begin{example}
+    \[
+    X_1, \ldots, X_n \sim  U(0, \theta), \quad
+    \text{$\theta$ unknown }
+    .\] 
+    \[
+    T_1 = 2 \cdot \overline{X} ; \quad
+    T_2 = X_{\left( n \right) }
+    .\] 
+    for $T_1$:
+    \[
+    MT_1 = 2 \cdot \frac{\theta}{2} = \theta
+    \]  is unbiased.
+    \[
+    M_{\theta} (T_1 - \theta)^2 = \mathcal{D} T_1 =
+    4 \cdot \mathcal{D} (\overline{X})
+    = \frac{4}{n} \cdot \mathcal{D} X_1 =
+    \frac{4}{n} \cdot \frac{\theta^2}{12} = \frac{\theta^2}{3n}
+    .\] 
+    For $T_2$:
+    \[
+    F_{X_{(n)}} (y) = \left[ F_{X_i}(y) \right] ^{n} =
+    \begin{cases}
+        1 & y \geq 0 \\
+        \left( \frac{y}{\theta} \right) ^{n} & y \in [0, \theta] \\
+        0 & y < 0
+    \end{cases}
+    .\] 
+    \[
+    f_{X_{(n)}} (y) = n \cdot \frac{y^{n-1}}{\theta^n}
+    \cdot \mathds{1}(y \in [0, \theta])
+    .\] 
+    Herewith
+    \[
+    MX_{(n)} = \frac{n}{\theta^{n}} \int_{0}^{\theta} y^n dy =
+    \frac{n}{n+1} \cdot \theta \underset{n\to\infty}{\to} \theta
+    .\] 
+    $X_{(n)}$ is asymptotically unbiased
+    \[
+    MX_{(n)}^2 = \frac{n}{\theta^{n}} \int_{0}^{\theta} y^{n+1} dy =
+    \frac{n}{n+2} \theta^2
+    .\] 
+    Hence
+    \[
+    M_{\theta} \left( X_{\left( n \right) } - \theta \right) ^2 =
+    \frac{n}{n+2}\theta^2 - \frac{2n}{n+1}\theta^2 + \theta ^2 =
+    \frac{2}{(n+1)(n+2)}\theta^2
+    .\]
+    Within $n=1, n=2$ then RMS are equal.
+    It follows that no is better.
+    Within $n \geq 3$:
+    \[
+    \frac{2}{(n+1)(n+2)} < \frac{1}{3n}
+    \] and $X_{(n)}$ is better in RMS.
+\end{example}
+
+
+\begin{definition}
+    Value $b(\theta) = M_{\theta} T(\vec{X}) - \theta $
+    is called biased evaluation $T\left( \vec{X} \right) $.
+\end{definition}
+Suppose $K_b$ is a class of biased evaluations $b = b(\theta)$.
+$K_0$ is a class of unbiased evaluations.
+
+\begin{remark}
+    If $ \; \forall T \in K_b$:
+    \[
+    M_{\theta} \left( T(X) - \theta \right) ^2 =
+    \mathcal{D}_{\theta} T(X) + \left( b(\theta) \right) ^2
+    .\] 
+\end{remark}
+
+\begin{definition}
+    Evaluation $T^* \in K_b$ is called an optimal in this class
+    if it is not worse (better) than any other evaluation
+    from this class.
+    \[
+    \forall T \in K_b, \forall \theta \in \Theta  \;\; \mathcal{D}_{\theta} T^* \leq \mathcal{D}_{\theta} T
+    .\] 
+\end{definition}
+
+\begin{theorem}[about unity of optimal evaluation]
+    Let $T_1$ and $T_2$ are two optimal evaluations. Then \[
+    T_1 = T_2 \text{ almost certainly }
+    .\] 
+\end{theorem}
+\begin{proof}
+    We got:
+    \[
+        M_{\theta}T_1 = \theta, \quad M_{\theta}T_2 = \theta
+    .\] 
+    \[
+        \mathcal{D_{\theta}} T_1 = \mathcal{D}_{\theta} T_2 = \sigma^2 \\
+    .\] 
+    \begin{gather*}
+        \text{Consider } T = \frac{1}{2} \left( T_1 + T_2 \right) \\
+        T \in K_0 : M_{\theta} T = \theta \text{ besides } \\
+        \mathcal{D}_{\theta} T \geq \sigma^2 \\
+        \mathcal{D}_{\theta} T = \mathcal{D}_{\theta}
+        \left( \frac{1}{2} T_1 + \frac{1}{2} T_2 \right) =
+        \frac{1}{4} \mathcal{D} T_1 + \frac{1}{4} \mathcal{D}T_2 +
+        \frac{1}{2} \operatorname{cov}(T_1, T_2) = \\
+        = \frac{1}{2} \sigma^2 + \frac{1}{2} \operatorname{cov}(T_1, T_2) \\
+        \text{ Causy-Bunyakovskiy: }
+        \left| \operatorname{cov}(T_1, T_2) \right| =
+        \left| \operatorname{cov}(T_1 - \theta, T_2 - \theta) \right|  \leq \\
+        \leq \sqrt{\mathcal{D}_{\theta} T_1 \cdot
+        \mathcal{D}_{\theta}T_2}  = \sigma^2 \\
+        \mathcal{D}_{\theta}T \leq \sigma^2
+    \end{gather*}
+    This means that in Causy-Bnyakovskiy inequality turn into equality, and this means that \[
+    T_1 \overset{\text{a.s.}}{=} k T_2 + a
+    .\] 
+    Using conditions:
+    \[
+    a = 0, k = 1
+    .\] 
+    So
+    \[
+    T_1 \underset{\text{a.c.}}{=} T_2
+    .\] 
+\end{proof}
+
+
+
+
+\subsection{Sample contribution and Fisher information quantity}
+
+\[
+X_{1}, \ldots, X_{n} \sim \mathcal{F}_{\theta} = 
+\{ F(x, \theta), \theta \in \Theta \} 
+.\] 
+$f(x, \theta)$ - corresponding distribution densit  $X_{i}$ ;
+$f(x, \theta) = P\left( X_{i} = x \right) $ - in discrete case.
+
+\begin{definition}
+    \[
+    \mathcal{L} (\vec{x}, \theta) = f(x_1, \theta) \cdot
+    \ldots \cdot f(x_n, \theta)
+    \] that is considered as function $\theta$ within fixed $\vec{x}$,
+    is called a likelihood function.
+\end{definition}
+
+Consider further that
+\[
+\mathcal{L} (x, \vec{\theta}) > 0 \;\;\;\; \forall \vec{x} \in X \;\;\;\;
+\forall \theta \in \Theta
+.\] 
+\[
+\mathcal{L}(\vec{x}, \theta) \text{ differentiable by $\theta$ }
+.\]
+The model is regular: the order of differential by $\theta$ and integration by $\vec{X}$ may be swapped.
+
+\begin{example}[not regular model]
+    \[
+    X_1, X_2, \ldots , X_n \sim  U(0, \theta)
+    .\] 
+    \[
+    f(x, \theta) = \frac{1}{\theta} \mathds{1}(x \in (0, \theta))
+    .\] 
+    \[
+    \int_{0}^{\theta} f(x, \theta) dx = 1 
+    .\] 
+    Then \[
+    \frac{\partial}{\partial \theta} \int_{0}^{\theta} \frac{1}{\theta} dx = 0 
+    .\] 
+    But \[
+    \int_{0}^{\theta} \frac{\partial }{\partial \theta} \left( \frac{1}{\theta} \right) dx = \int_{0}^{\theta} - \frac{1}{\theta^2}dx = - \frac{1}{\theta} \not= 0 
+    .\] 
+\end{example}
+
+\begin{definition}
+    Random value 
+    \[
+    U(\vec{X}, \theta) =
+    \frac{\partial}{\partial \theta} \ln \mathcal{L}(\vec{X}, \theta) =
+    \sum_{i=1}^{n} \frac{\partial }{\partial \theta} \ln f(X_i, \theta)
+    .\] is called sample contribution. And addition
+    \[
+    \frac{\partial }{\partial \theta} \ln f(X_i, \theta)
+    .\] is called a contribution of $i$-th observation.
+\end{definition}
+
+\begin{corollary}[about expectation of $U$]
+    For regular model \[
+    M_{\theta} U(\vec{X}, \theta) = 0 \;\;\;\; \forall \theta \in \Theta
+    .\] 
+\end{corollary}
+\begin{proof}
+    \[
+    L(\vec{X}, \theta) = f(x_1, \theta) \ldots f(x_n, \theta)
+    .\] 
+    $L$ is compatible (сумісна) density function $\vec{X}$.
+    \[
+    \int_{\mathbb{R}}^{} L(\vec{X}, \theta) dx = 1
+    .\] 
+    Differentiate by $\theta$
+    \[
+    0 = \frac{\partial }{\partial \theta}
+    \int_{\mathbb{R}^{n}} L(\vec{X}, \theta) d \vec{x} =
+    \int_{\mathbb{R}^{n}}^{} \frac{\partial}{\partial \theta}  L(\vec{X}, \theta) d\vec{x} = 
+    \] 
+    \[
+    = \int_{\mathbb{R}^{n}}^{} \left[ \frac{\partial }{\partial \theta}
+    \ln L(\vec{x}, \theta)  \right] \cdot L(\vec{x}, \theta) d\vec{x} =
+    M_{\theta} \left[ \frac{\partial}{\partial \theta} \ln
+    L(\vec{x}, \theta) \right] =
+    M_{\theta} U(\vec{X}, \theta)
+    .\] 
+\end{proof}
+
+\begin{definition}
+    Value \[
+    I_n (\theta) = M_{\theta} U^2(X, \theta) =
+    \mathcal{D}_{\theta} U(X, \theta)
+    \] is called a number of Fisher information in sample $\vec{X}$.
+    Value
+    \[
+    i(\theta) = M_{\theta} \left( \frac{\partial }{\partial \theta}
+    \ln f(X_1, \theta) \right) ^2
+    .\] is a number of information in one observation.
+\end{definition}
+
+As long as $X_1, \ldots X_n $ are independent equaly distributed values:
+\[
+I_n(\theta) = n \cdot i(\theta)
+.\] 
+
+This means that number of information is increasing proprtionally
+to the grows of sample volume.
+
+\begin{corollary}
+    If $f(x, \theta)$ is differentiable twice by $\theta$ then
+     \[
+         i(\theta) = - M_{\theta} \left[ \frac{\partial^2}{\partial \theta^2} \ln f(X_1, \theta) \right]
+    .\] 
+\end{corollary}
+
+\begin{proof}
+    By the latest proof:
+    \[
+        0 = M_{\theta} U(\vec{X}, \theta) = \int_{\mathbb{R}^{n}}^{} 
+        \left[ \frac{\partial }{\partial \theta} \ln
+        \mathcal{L}(\vec{x}, \theta) \right] \mathcal{L}(\vec{x}, \theta) d\vec{x}
+    .\] 
+    Within $n = 1$ :
+    \[
+    0 = \int_{\mathbb{R}}^{} \left[ \frac{\partial }{\partial \theta} \ln
+    f(x, \theta) \right] f(x, \theta) dx
+    .\] 
+    Differentiate by $\theta$:
+    \begin{gather*}
+        0 = \int_{\mathbb{R}}^{} \left[
+        \frac{\partial^2}{\partial \theta^2} \ln f(x, \theta) \right]  
+        f(x, \theta) dx + \int_{\mathbb{R}}^{} \left[ 
+        \frac{\partial }{\partial \theta} \ln f(x, \theta) \right] \cdot
+        \frac{\partial}{\partial \theta} f(x, \theta) dx = \\
+        = M_{\theta} \left[ \frac{\partial ^2}{\partial \theta^2} \ln
+        f(x, \theta) \right] \cdot \left[
+        \frac{\partial }{\partial \theta} \ln f(x, \theta) \right] \cdot
+        f(x, \theta) dx = \\
+        = M_{\theta} \left[ \frac{\partial ^2}{\partial \theta^2} 
+        \ln f(x, \theta) \right] + M_{\theta} \left(
+        \frac{\partial }{\partial \theta} \ln f(x, \theta) \right) ^2 = \\
+        = M_{\theta} \left[ \frac{\partial^2}{\partial \theta^2}
+        \ln f(x, \theta) \right] + i(\theta).
+    \end{gather*}
+    Herewith:
+    \[
+    i(\theta) = -M_{\theta} \left[ \frac{\partial ^2}{\partial \theta^2}
+    \ln f(x, \theta) \right]
+    .\] 
+\end{proof}
+
+\begin{example}[Calculation of information quantity]
+    \[
+    X_{1}, \ldots, X_{n} \sim \operatorname{Poiss}(\theta)
+    .\] 
+    \begin{gather*}
+        f(x, \theta) = \frac{\theta^{x}}{x!} e^{-\theta} \quad x = 0,1,2,\ldots \\
+        \ln f(x, \theta) = -\theta + x \ln \theta - \ln x! \\
+        \frac{\partial ^2}{\partial \theta^2} \ln f(x, \theta) = 
+        \frac{\partial }{\partial \theta} (-1 + \frac{x}{\theta}) =
+        -\frac{x}{\theta^2} \\
+        i(\theta) = - M_{\theta} \left( -\frac{x}{\theta^2} \right) = 
+        \frac{M_{\theta}X}{\theta^2} = \frac{\theta}{\theta^2} =
+        \frac{1}{\theta}
+    \end{gather*}
+\end{example}
+
+\begin{example}
+    \begin{gather*}
+        X_i \sim \mathcal{N}(\theta, \sigma^2) \quad \sigma^2 \text{ known}\\
+        f(x, \theta) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{\left( 
+        x - \theta \right) ^2}{2\sigma^2}} \\
+        \ln f(x, \theta) = C - \frac{\left( x-\theta \right) ^2}{2\sigma^2}\\
+        \frac{\partial ^2}{\partial \theta^2} \ln f(x, \theta) = 
+        \frac{\partial}{\partial \theta} \left( 
+        \frac{1}{\sigma^2}\left( x - \theta \right) \right) =
+        - \frac{1}{\sigma^2} \\
+        i(\theta) = - M_{\theta} \left( -\frac{1}{\sigma^2} \right)
+        = \frac{1}{\sigma^2}
+    \end{gather*}
+\end{example}
+
+\begin{example}
+    \begin{gather*}
+        X_i \sim \mathcal{N}(a, \theta^2); \quad a - \text{ known} \\
+        f(x, \theta) = \frac{1}{\sqrt{2\pi} \cdot \theta} e^{-\frac{\left( 
+        x - a \right) ^2}{2 \theta^2} } \\
+        \ln f(x, \theta) = C - \ln \theta - \frac{\left( x-a \right) ^2}{
+        2\theta^2}; \\
+        \frac{\partial ^2}{\partial \theta^2} \ln f(x, \theta) =
+        \frac{\partial}{\partial \theta} \left(
+        -\frac{1}{\theta} + \frac{\left( x-a \right) ^2}{\theta^{3}}\right) = \\
+        \frac{1}{\theta^2} - \frac{3\left( x-a \right) ^2}{\theta^4} \\
+        i(\theta) = - M_{\theta} \left( \frac{1}{theta^2} -
+        \frac{3\left( x-a \right) ^2}{\theta^4}\right) = 
+        -\frac{1}{\theta^2} + \frac{3\theta^2}{\theta^4} =
+        \frac{2}{\theta^2}.
+    \end{gather*}
+\end{example}
+
+
+\subsection{Cramér–Rao bound}
+
+\begin{theorem}
+    Let $X_1, \ldots, X_n \in \mathcal{F}_{\theta} = \{ F(x, \theta),
+    \theta \in \Theta\}$ a sample from regular parametrized
+    model;
+
+    Let $g(\theta)$ - differentiable function; $K_{0}^{g}$ - 
+    a class of unbiased evaluations for $g(\theta)$.
+    Then
+    \begin{equation}
+    \forall T \in K_{0}^{g} \quad \mathcal{D}_{\theta} T
+    \geq \frac{\left[ g'(\theta) \right] ^2}{n i (\theta)}
+    \end{equation}
+    moreover the equation is true only if
+    \[
+    T(\vec{X}) - g(\theta) = a(\theta) U(X, \theta)
+    \] 
+    for some function $a(\theta )$; $U$ - sample contribution.
+
+    Notice, that within  $g(\theta) = \theta$ :
+    \[
+    \mathcal{D}_{\theta}T \geq \frac{1}{n i(\theta)} \quad
+    \forall T \in K_{0}
+    .\] 
+\end{theorem}
+
+\begin{proof}
+   As far as $T \in K_{0}^{g}$ then
+   \begin{align*}
+        M_{\theta}T &= g(\theta) \quad \forall \theta \in \Theta \\
+        & \Updownarrow \\
+        \int_{\mathbb{R}^{n}}^{} T(\vec{x}) L(\vec{x}, \theta) d\vec{x} &= 
+        g(\theta), \quad \forall \theta \in \Theta
+   .\end{align*}
+   Differentiate by $\theta$:
+   \begin{gather*}
+       g'(\theta) = \int_{\mathbb{R}^{n}}^{} T(\vec{x})\cdot
+       \frac{\partial}{\partial \theta} \mathcal{L}(\vec{x}, \theta) d\vec{x} = \\
+       = \int_{\mathbb{R}^{n}}^{} T(\vec{x}) \left[ 
+       \frac{\partial}{\partial \theta} \ln \mathcal{L}(\vec{x}, \theta) \right] 
+       \cdot \mathcal{L}(\vec{x}, \theta) d\vec{x} = \\
+       = M_{\theta}\left[ T(\vec{x}) \cdot \frac{\partial}{\partial \theta} \ln
+       \mathcal{L}(\vec{x}, \theta) \right] = \\
+       = M_{\theta}\left[ T(\vec{x}) \cdot U(\vec{x}, \theta) \right] = \\
+       = \left< M_{\theta}U(\vec{x}, \theta) = 0 \right> = \\
+       = M_{\theta}\left[ \left( T(\vec{x}) - g(\theta) \right) \cdot
+       U(\vec{x}, \theta) \right] \leq \left<
+       \text{ Causy-Bunyakovskiy inequality } \right> \leq \\
+       \leq \sqrt{\mathcal{D}_{\theta}T(\vec{x}) \cdot
+       \mathcal{D}_{\theta}U(\vec{x}, \theta)} =
+       \sqrt{\mathcal{D}_{\theta} T(\vec{x}) \cdot \left( n i(\theta) \right) } 
+   \end{gather*}
+   Herewith:
+   \begin{align*}
+       \left[ g'(\theta) \right] ^2 &\leq \mathcal{D}_{\theta} T(\vec{x}) \cdot
+       I_{n} (\theta) \\
+        & \Downarrow \\
+       \mathcal{D}_{\theta}T(\vec{x}) &\geq \frac{\left[ 
+       g'(\theta) \right] ^2}{I_{n}(\theta)}
+   .\end{align*}
+   Equality in inequality of Causy-Bunyakovskiy is true if and only if:
+   \[
+   T(\vec{x}) - g(\theta) = a(\theta) \cdot U(\vec{x}), \theta)
+   .\] 
+\end{proof}
+
+\begin{definition}
+    Evaluation $T^{*} \in K_{0}^{g}$ is called \textbf{effective} (by Cramér–Rao) if
+    \[
+    \mathcal{D}_{\theta}T^{*} = \frac{\left[ g'(\theta) \right] ^2}{ni(\theta)}
+    .\] 
+    Criterion of effectiveness:
+    \[
+    T^{*} = g(\theta) + a(\theta) U(\vec{x}, \theta)
+    .\] 
+    Effective evaluation is optimal and therefore the only one.
+\end{definition}
+
+\begin{example}
+    \begin{gather*}
+        X_1, \ldots, X_n \sim \operatorname{Poiss}(\theta); \quad 
+        \theta = MX_1 \\
+        T(\vec{X}) = \overline{X}. \\
+        i(\theta) = \frac{1}{\theta} \\
+        \mathcal{D}_{\theta} T = \frac{1}{n} \mathcal{D}X_1 =
+        \frac{\theta}{n} = \frac{1}{ni(\theta)}
+        \Rightarrow T = \overline{X} \quad \text{ --- effective for }
+        \theta = MX_1
+    \end{gather*}
+\end{example}
+
+\begin{example}
+    \begin{gather*}
+        X_i \sim \mathcal{N}(\theta, \sigma^2) \quad \theta = MX_1 \\
+        T(\vec{X}) = \overline{X} \quad i(\theta) = \frac{1}{\sigma^2} \\
+        \mathcal{D}(\overline{X}) = \frac{1}{n} \mathcal{D}X_1 = 
+        \frac{\sigma^2}{n} = \frac{1}{ni(\theta)} \Rightarrow 
+        \overline{X} \text{ --- effective }.
+    \end{gather*}
+\end{example}
+
+\begin{example}
+    \begin{gather*}
+        X_i \sim \mathcal{N}(a, \theta^2) \quad \theta^2 = \mathcal{D}X_{1} \\
+        S^2 = \frac{1}{n} \sum_{i=1}^{n} \left( X_i - a \right) ^2 \\
+        MS^2 = \mathcal{D}X_{1} = \theta^2 \\
+        g(\theta) = \theta^2; \quad g'(\theta) = 2 \theta \\
+    i(\theta) = \frac{2}{\theta^2}; \quad
+    \frac{\left( g'(\theta) \right) ^2}{ni(\theta)} =
+    \frac{2 \theta^{4}}{n};
+\end{gather*}
+\begin{gather*}
+    \mathcal{D}S^2 = \frac{1}{n} \mathcal{D}\left( X_1 - a \right) ^2 =
+    \frac{1}{n}\left( M\left( X_1 - a \right) ^4 - 
+    \left( M(X_1 - a)^2 \right) ^2\right) = \\
+    = \frac{1}{n} \left( \left( 4-1 \right) !!
+    \left( \mathcal{D}X_1 \right) ^2 -
+    \left( \mathcal{D}X_1 \right)^2 \right) = \\
+    = \frac{1}{n}\left( 3 \theta^4 - \theta^4 \right)  =
+    \frac{1}{n} 2 \theta^{4}; \\
+    \frac{\left[ g'(\theta) \right] ^2}{ni(\theta)} =
+    \frac{4 \theta^{4}}{2n} = \frac{2 \theta^{4}}{n}; \\
+    \mathcal{D}S^2 = \frac{\left[ g'(\theta) \right] ^2}{ni(\theta)}
+    \Rightarrow S^2 \text{ --- effective}.
+    \end{gather*}
+\end{example}
