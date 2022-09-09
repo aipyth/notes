@@ -1,0 +1,74 @@
+\setromanfont{PTSerif}[
+    Path=./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+]
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+
+\title{Markov Models and their Appliances}
+\author{Ivan Zhytkevych}
+\date{\today}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{claim}[theorem]{Claim}              % Вимога
+\newtheorem{proposition}[theorem]{Proposition}  % Твердження
+\newtheorem{lemma}[theorem]{Lemma}              % Лема
+\newtheorem{corollary}[theorem]{Corollary}      % Наслідок
+\newtheorem{conjecture}[theorem]{Conjecture}    % Припущення
+\newtheorem*{observation}{Observation}
+% \newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\NewDocumentCommand{\set}{o m}{%
+  % <code>
+  \IfNoValueTF{#1}
+    {{#2}}
+    {{#1 \mid #2}}%
+  % <code>
+}
+% \newenvironment{boxed}
+%   {
+%     \begin{center}
+%     \begin{tabular}{|p{0.9\textwidth}|}
+%     \hline \\
+%   }
+%   { 
+%     \\\\\hline
+%     \end{tabular} 
+%     \end{center}
+%   }
+
+\newenvironment{example}[1][]
+{
+\par
+\noindent
+\textit{\textbf{Example}} \textit{\ifx\newenvironment#1\newenvironment\else\space\fi#1:}
+\\
+}
+{
+  % $\blacksquare$
+  \null\hfill $\blacksquare$
+  \\
+}
+
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{.8\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+% \newcommand{\incfig}[2][1]{%
+%     \def\svgwidth{#1\columnwidth}
+%     \import{./figures/}{#2.pdf_tex}
+% }
+
+% \newcommand\symbolwithin[2]{%
+%   {\mathmakebox[\widthof{\ensuremath{{}#2{}}}]{{#1}}}}
+%
