@@ -1,0 +1,307 @@
+\lecture{4}{Tue 20 Sep 2022 12:20}{EM алгоритм для знаходження параметрів суміші розподілів}
+
+\subsection{Суміш скінченної кількості ймовірністних розподілів}
+
+\boxexample{}{
+  Нехай $Y_1, \ldots, Y_n$ --- незалежні випадкові величини; \\
+  $Y_i \sim \mathcal{N}\left( \mu_i, \sigma_i^2 \right) , i = \overline{1, N}$.
+  Нехай $X$ --- дискретна випадкова величина зі значеннями в множині
+  $E = \{1, 2, \ldots, N\}$ та
+  \[ P\left( X = i \right)  = p_i, \quad i = \overline{1 = N} \] 
+  \[ \sum_{i=1}^{N} p_i = 1 \] 
+  Покладемо 
+  \[ Z = Y_X = \begin{cases}
+    Y_1 & X = 1 \\ 
+    Y_2 & X = 2 \\ 
+    \ldots \\ 
+    Y_n & X = N
+  \end{cases} \] 
+  Знайдемо щільність розподілу $ Z$:
+  \begin{align*}
+    p_Z(t) = \sum_{i=1}^{N} p(X=i) \cdot P_{Z|X}(t|i) = 
+    \sum_{i=1}^{N} P\left( X=i \right) P_{Y_i}(t) = \\ 
+    = \boxed{\sum_{i=1}^{N} p_i \cdot \frac{1}{\sqrt{2\pi \sigma_i} } \cdot \exp \left\{ 
+    -\frac{\left( t - \mu_i \right) ^2}{2\sigma_i^2}\right\}} 
+  .\end{align*}
+  Щільність розподілу в.в. $Z$ наз. сумішшю $N$ нормальних розподілів $\mathcal{N}\left( \mu_1, \sigma_1^2 \right), \ldots
+  , \mathcal{N}\left( \mu_N, \sigma_N^2 \right) $ зі змішувальним розподілом $\left( p_i \right) _{i=\overline{1, N}}$
+
+  Припустимо, що $\left\{ X_n \right\} _{n \geq 1}$ --- н.о.р.; \\ $X_i \sim X$ \\
+   $\left\{ Z_n \right\} _{n \geq 1}$ --- н.о.р. в.в.: $Z_n \sim Z$
+   \[ p_{Z_n}(t) = \sum_{i=1}^{N} P\left( X_n = i \right) \cdot p_{Z_n|X_n}(t|i)  \] 
+
+   $\left\{ X_n \right\} _{n\geq 1}$ --- є прихованою послідовністю ($X$ --- латентна
+   змінна);
+
+   \textbf{Задача:} за скінченною кількість спостережень $Z_1, \ldots, Z_n$ потрібно оцінити невідомі
+   параметри суміші, а саме: $\mu_1, \sigma_1^2, \ldots, \mu_N, \sigma_N^2$ і $p_1, \ldots, p_N$.
+
+   В теорії сигналів ці задачу можна переформулювати: визначити окремі сигнали за спостереженою
+   суперпозицією цих сигналів.
+
+   TODO: picture Distribution for problem of mixed finite number of distributions
+ }
+
+
+
+\subsubsection{Нерівність Йенсена}
+\begin{theorem}
+  Нехай $g(\cdot)$ --- опукла донизу функція
+
+  Опуклість: $\forall \lambda_i \geq 0, \; \sum_{i=1}^{n} \lambda_i = 1$ виконується
+
+  \[ g(\lambda_1 x_1 + \lambda_2 x_2 + \ldots + \lambda_n x_n) \leq \lambda_1 g(x_1) +
+  \ldots + \lambda_n g(x_n) \] 
+
+  Нехай $X$ --- випадкова величина на $E = \left\{ x_1, \ldots, x_n \right\}$
+  і $P\left( X = x_i \right)  = \lambda_i$. Тоді
+  \begin{equation} \label{eq:jensen-inequality}
+  g\left( MX \right) \leq M\left( g(X) \right)
+  \end{equation}
+
+  \ref{eq:jensen-inequality} --- нерівність Йенсена.
+  
+  При $g(x) = - \log x$ (опукла донизу функція) отримаємо
+  \[ \log\left( M(X) \right) \geq M\left( \log X \right)  \] 
+  або ж
+  \[ \log\left( \sum_{i=1}^{n} \lambda_i x_i \right) \geq \sum_{i=1}^{n} \lambda_i \log(x_1) \] 
+  і ця нерівність перетворюється в рівність лише при $x_1 = x_2 = \ldots x_n$.
+\end{theorem}
+
+\subsubsection{Відстань Кульбака-Лейблера між розподілом (Kullback-Leibler devirgence)}
+
+\begin{definition}
+  Нехай є $E = \left\{ 1, 2, \ldots, N \right\} $ і $f$ і $g$ --- два розподіли ймовірності на $E$:
+ \[ f = \left( f(1), \ldots, f(N)), \quad \sum_{i=1}^{N} f(i) = 1 \right)  \] 
+ \[ g = \left( g(1), \ldots, g(N)), \quad \sum_{i=1}^{N} g(i) = 1 \right)  \] 
+
+ Тоді їхньою відносною ситропією або ж відстанню Кульбака-Лейблера між $f$ і $g$ наз. віличина
+ \[ D\left( f|g \right) = \sum_{i=1}^{N} f(i) \cdot \log \frac{f(i)}{g(i)} \] 
+ Тут $0 \cdot \log \frac{0}{g(i)} = 0$, $f(i) \cdot \log \frac{f(i)}{0} = \infty$
+\end{definition}
+
+\begin{remark}
+Відстань Кульбака-Лейблера не є метричною відстаню, оскільки $D(f|g) \not= D(g|f)$.
+\end{remark}
+
+\boxexample{Інформаційне наповнення розподілу}{
+  $X$ --- випадкова величина на $E = \left\{ 1, \ldots, N \right\}$ з розподілом
+  $f = \left( p_1, \ldots, p_N \right)$ і  $Y$ --- в.в. з рівномірним розподілом на 
+  $E$, $g = \left( \frac{1}{N}, \ldots, \frac{1}{N} \right) $. Тоді
+  \[ D(f|g) = \sum_{i=1}^{N} p_i \log \frac{p_i}{\frac{1}{N}} = \sum_{i=1}^{N} p_i \log N p_i = \] 
+  \[ = \log N + \underbrace{\sum_{i=1}^{N} p_i \log p_i}_{- H(X)} = \log N - H(X) \] 
+  де $H(X)$ --- ентропія в.в. $X$.
+}
+\boxexample{Відстань К.-Л. між двома розподілами Бернуллі}{
+  $X \sim B(p_1), Y\sim B(p_2)$
+  \[ f = \left( 1-p_1, p_1 \right) , \qquad g = \left( 1-p_2, p_2 \right) \] 
+  Тоді 
+  \[ D(f|g) = (1-p_1) \log \frac{1-p_1}{1-p_2} + p_1 \cdot \log \frac{p_1}{p_2} = \] 
+  \[ = -(1-p_1)\log (1-p_2) - p_1 \cdot \log p_2 -h(p_1) \] 
+  де $h(p) = -p \log p - (1-p) \log(1-p)$ --- функція ентропії.
+}
+
+\begin{lemma}
+  Для довільних розподілів $f, g$ на $E = \left\{ 1, \ldots, N \right\}$
+  величина $D(f|g)$ є невід'ємною
+  \[ D(f|g) \geq 0 \]
+\end{lemma}
+\begin{proof}
+  Нехай $X$ --- випадкова величина з розподілом $f$. Тоді:
+  \begin{align*}
+    D(f|g) &= \sum_{i=1}^{N} f(i) \log \frac{f(i)}{g(i)} = \\ 
+           &= M \left[ \log \frac{f(x)}{g(x)} \right] = 
+    -M \left[ \log \frac{g(x)}{f(x)} \right] \overset{\text{н. Йенсена}}{\geq}
+    - \log M \left[ \frac{g(x)}{f(x)} \right] = \\
+           &= - \log \sum_{i=1}^{N} f(x_i) \frac{g\left( x_i \right) }{f(x_i)} = 
+    -\log \underbrace{\sum_{i=1}^{N} g(x_i)}_{=1} = -\log 1 = 0
+  .\end{align*}
+\end{proof}
+
+
+
+\subsection{Постановка задачі}
+
+Нехай $\left\{ (X_1, Y_1) ,\ldots,\left( X_n, Y_n \right)  \right\} $ --- незалежні в.в.
+на $E \times Y$, де $E = \left\{ 1, .., N \right\} $. Позначимо
+\[ \alpha_j = P(X_i = j) , \qquad j = \overline{1, N} \] 
+і $\forall y \in Y$ нехай $\forall k = \overline{1, n}$ 
+\[ P\left( y | \varphi_j \right)  = P_{Y_k | X_k}\left( y | j \right) \]
+умовна щільність розподілу $Y_k$ при заданому $X_k$,
+$\varphi_j$ --- вектор параметрів, від якого цей умовний
+розподіл залежить.
+
+В першому прикладі
+\[ p\left( y | \varphi_j \right) = \frac{1}{\sqrt{2\pi \sigma_j^2}} \exp \left\{ 
+- \frac{\left( y - \mu_j \right) ^2}{2\sigma_j^2} \right\} \qquad
+\varphi_j = \left( \mu_j, \sigma_j^2 \right)  \] 
+
+Покладемо \[ \theta = \left( \alpha_1, \ldots, \alpha_N; \varphi_1, \ldots, \varphi_N \right) \] 
+як вектор невідомих параметрів.
+
+\textbf{Задача:} за спостереженням $Y_1, \ldots, Y_n$ побудувати оцінку для $\theta$. 
+
+\[ \theta_{ML}^{*} = \underset{\theta}{\operatorname{argmax}} \; p\left( y_1, \ldots, y_n | \theta \right)  \] 
+Позначимо: $y_1^{n} = \left( y_1, \ldots, y_n \right)$, $x_1^{n} = \left( x_1, \ldots, x_n \right) $
+
+Запишемо функцію правдоподібності $p(y_1^{n}|\theta)$:
+\begin{align*}
+  P\left( y_1^{n} | \theta \right) &\overset{\text{незал.}}{=} p(y_1|\theta) \cdot \ldots \cdot
+  p(y_n|\theta) = \\ 
+     &= \sum_{i=1}^{N} \alpha_i p(y_1|\varphi_i) \cdot \sum_{i=1}^{N} \alpha_i
+     p(y_2|\varphi_i) \cdot \ldots \cdot \sum_{i=1}^{N} \alpha_i
+     p(y_n|\varphi_i) = \\ 
+     &= \prod_{k=1}^{n} \underbrace{\sum_{i=1}^{N} \alpha_i p(y_k|\varphi_i)}_{
+     \equiv f(y_k|\theta)} = \prod_{k=1}^{n} f(y_k|\theta) 
+.\end{align*}
+
+Розглянемо апостеріорну щільність:
+\[ p(x_1^{n} | y_1^{n}, \theta) = \frac{p\left( x_1^{n}, y_1^{n} | \theta \right) }{
+p\left( y_1^{n}| \theta \right) } \] 
+
+З наших припущень випливає:
+
+\[ p\left( x_1^{n}, y_1^{n} | \theta \right) \overset{\text{незал.}}{=}
+\prod_{k=1}^{n} p\left( x_k, y_k | \theta \right) = \prod_{k=1}^{n} \alpha_{x_k} \cdot
+p\left( y_k | \varphi_{x_k} \right) \] 
+\[ p\left( y_1^{n} | \theta \right) = \prod_{k=1}^{n} f(y_k | \theta)  \] 
+
+Тоді
+\[ p\left( x_1^{n} | y_1^{n}, \theta \right) = 
+\prod_{k=}^{n} \frac{\alpha_{x_k} \cdot p\left( y_k | \varphi_{x_k} \right) }{
+\sum_{j=1}^{N} \alpha_j \cdot p(y_k | x_j)} = 
+\prod_{k=1}^{n} \frac{\alpha_{x_k}p(y_k | \varphi_{x_k})}{f(y_k | \theta)} \] 
+
+Звідси
+\begin{equation} \label{eq:3}
+  \log p(y_1^{n} | \theta) = \log p(x_1^{n}, y_1^{n} | \theta) - \log p(x_1^{n} | y_1^{n}, \theta) = 
+  \sum_{k=1}^{n} \log \left[ p(y_k | \varphi_{x_k}) \alpha_{x_k} \right] - 
+  \log p(x_1^{n} | y_1^{n}, \theta)
+\end{equation}
+
+\subsection{Квазі-$\log$ правдоподібність}
+
+Припустимо, що $\theta^{(t)} = \left( \alpha_1^{(t)}, \ldots, \alpha_N^{(t)}; \varphi_1^{(t)}, \ldots, \varphi_N^{(t)} \right) $
+--- деяке наближення $\theta$.
+
+\textbf{Ідея:} покращити  $\theta^{(t)}$, наблизивши до $\theta_{ML}^{*}$.
+
+Домножимо \ref{eq:3} на $p\left( x_1^{n} | y_1^{n} , \theta^{(t)} \right)$ і
+підсумуємо за всіма $x_1^{n}$. Оскільки $\sum_{x_1^{n}}^{} p\left( x_1^{n} \mid 
+y_1^{n}, \theta^{(t)}\right) = 1 $,
+то отримаємо
+
+\[ \log p\left( y_1^{n}|\theta \right) = \sum_{x_1^{n}}^{} p\left( x_1^{n} | y_1^{n}, \theta^{(t)} \right)  \cdot \log p\left( x_1^{n}, y_1^{n} | theta \right) - 
+\sum_{x_1^{n}}^{} p\left( x_1^{n} | y_1^{n}, \theta^{(t)} \right) \cdot \log p\left( x_1^{n} | y_1^{n}, \theta \right) \] 
+
+Введемо допоміжну функцію
+
+\[ Q(\theta, \theta^{(t)}) := \sum_{x_1^{n}}^{} p\left( x_1^{n} | y_1^{n}, \theta^{(t)} \right) 
+\cdot \log p\left( x_1^{n}, y_1^{n} | \theta \right) \] 
+
+$Q\left( \theta | \theta^{(t)} \right) $ --- умовне математ. сподівання:
+\[ Q\left( \theta | \theta^{(t)} \right)  = M \left[ 
+\log p\left(  (X_1,Y_1),\ldots,(X_n,Y_n) | \theta \right) \mid Y_1^{n} = y_1^{n}, \theta = \theta^{(t)} \right]  \] 
+
+В цих позначеннях для кожного $\theta$ отримаємо рівність:
+\[ \log p(y_1^{n}|\theta) - \log p(y_1^{n}|\theta^{(t)}) = \] 
+\[ = Q(\theta|\theta^{(t)}) - Q(\theta^{(t)} | \theta^{(t)}) + 
+\sum_{x_1^{n}}^{} p(x_1^{n}|y_1^{n},\theta) \cdot \log \frac{
+p(x_1^{n}|y_1^{n},\theta^{(t)})}{p(x_1^{n}|y_1^{n},\theta)} \geq\] 
+
+відстань Кульбака-Лейблера між $p(\cdot|y, \theta^{(t)})$ і
+$p(\cdot|y,\theta) \implies$ це величина невід'ємна
+
+\[ \geq Q(\theta | \theta^{(t)}) - Q\left( \theta^{(t)} | \theta^{(t)} \right)  \] 
+
+Якщо означимо
+\[ \theta^{(t+1)} = \underset{\theta}{\operatorname{argmax}} \; Q\left( \theta | \theta^{(t)} \right) \]
+то отримаємо нову оцінку $\theta^{(t+1)}$, для якої
+\[ \log p\left( y_1^{n} | \theta^{(t+1)} \right) \geq \log p \left( 
+y_1^{n} | \theta^{(t+1)} \right) \]
+а отже ми покращили $\theta^{(t)}$ в тому сенсі,
+що збільшили значення $Q(\theta | \theta^{(t)})$.
+
+\subsection{Крок $E$ і крок $M $}
+
+$EM$-алгоритм має такий вигляд:
+
+\begin{enumerate}
+  \item \textbf{Початок}: нехай $\theta^{(t)} = \left( \alpha_1^{(t)}, \ldots, \alpha_N^{(t)};
+    \varphi_1^{(t)}, \ldots, \varphi_N^{(t)}\right) $ --- деяке наближення до $\theta_{ML}^{*}$
+  \item \textbf{Крок $E$:} обчислюємо умовне математичне сподівання
+    \[ Q(\theta|\theta^{(t)}) = \sum_{x_1^{n}}^{} p\left( x_1^{n} | y_1^{n}, \theta^{(t)} \right) 
+    \cdot \log p \left( x_1^{n}, y_1^{n} | \theta \right) \] 
+  \item \textbf{Крок $M$:} визначаємо $\theta^{(t+1)}$ як 
+    \[ \theta^{(t+1)} = \underset{\theta}{\operatorname{argmax}} \; Q\left( \theta | \theta^{(t)} \right)  \] 
+
+  \item \textbf{Покласти} $\theta^{(t+1)} \mapsto \theta^{(t)}$ і повторитиб починаючи з кроку $E$.
+\end{enumerate}
+
+Питання, які виникають:
+\begin{enumerate}
+  \item Чи збігається ця процедура?
+  \item Чи збігається до лок./глоб. максимуму ф. правдоподібності.
+\end{enumerate}
+
+\subsection{Збіжність}
+
+Нехай $\mathcal{L}(\theta) = \log p\left( y_1^{n} | \theta \right)$,  $\theta^{(t)}$ --- умовне
+мат. сподівання з $EM$-алгоритму.
+
+Ми довели, що $\{\mathcal{L}\left( \theta^{(t)} \right) \} $ є монотонною.
+
+Якщо  $\{\mathcal{L}\left( \theta^{(t)} \right) \} $ є обмеженою (на додачу до монотонності)
+, то $\mathcal{L}\left( \theta^{(t)} \right) \to \mathcal{L}^{*}, \; t \to  \infty$
+
+Але звідси ще не випливає, що $\mathcal{L}^{*}$ є лок./глоб. 
+максимумом для $\mathcal{L}\left( \theta \right)$. Більше того, якщо навіть 
+$\mathcal{L}\left( \theta^{(t)} \right) \underset{t \to  \infty}{\to } \mathcal{L}^{*}$,
+то це не означає, що $\theta^{(t)} \underset{t \to  \infty}{\to } \theta_{ML}^{*}$
+
+Умови для збіжності $EM$-алгоритму:
+\begin{enumerate}
+  \item $\theta \in  C \subseteq \R^{n}$ 
+  \item $\mathcal{L}(\theta)$ --- неперервна і диференційована у 
+    внутрішності $C$.
+  \item $\theta_{ML}^{*} \in  \operatorname{inf} (C)$ 
+  \item $Q(a|b)$ є неперервною за $a,b \in  C$
+  \item $\left\{ \mathcal{L}\left( \theta^{(t)} \right) \right\} _{t=0}^{\infty}$ --- обмежена
+    послідовність для довільного $\theta^{(t)}$
+\end{enumerate}
+
+\begin{remark}
+  Ці умови (в основному) виконуються для розподілів, що належать до експоненційної
+  сім'ї розподілів.
+\end{remark}
+
+\subsection{Явна форма кроків $E, M$}
+
+\begin{align*}
+  Q\left( \theta, \theta^{(t)} \right)  = M \left[ \log p\left( (X_1,Y_1),\ldots,(X_n,Y_n) | \theta \right) | Y_1^{n} = y_1^{n}, \theta = \theta^{(t)} \right] \overset{\text{незал.}}{=} \\ 
+  \overset{\text{незал.}}{=} M \left[ \sum_{k=1}^{n} \log p\left( (X_k,Y_k)|\theta \right) | 
+  Y_1^{n} = y_1^{n}, \theta = \theta^{(t)} \right]  \overset{\text{лінійність}}{=} \\ 
+\overset{\text{лінійність}}{=} \sum_{k=1}^{n} M \left( \log p\left( (Y_k,Y_k)|\theta \right) | Y_1^{n} = y_1, \theta = \theta^{(t)} \right) = \\ 
+= \sum_{k=1}^{n} \sum_{j=1}^{N} \log \left[ \alpha_j p\left( y_k|\varphi_j \right)  \right] \cdot
+p\left( x_k|Y_1^{n}=y_1^{n}, \theta = \theta^{(t)} \right) = \\ \
+= \sum_{j=1}^{N} \sum_{k=1}^{n} \underbrace{\log \left[ \alpha_j \cdot p(y_k|\varphi_j) \right] }_{\text{на суму двох}} \cdot \frac{\alpha_j^{(t)}\cdot p\left( y_k|\varphi_j^{(t)} \right)}{
+f\left( y_k|\theta^{(t)} \right) }
+.\end{align*}
+
+Звідси 
+\begin{align*}
+  Q \left( \theta | \theta^{(t)} \right) = \sum_{j=1}^{N} \left[ 
+    \sum_{k=1}^{n} \frac{p(y_k|\varphi_j^{(t)}\alpha_j^{(t)}}{f(y_k|\theta^{(t)}}
+  \right] \cdot \log \alpha_j + \sum_{n=j=1}^{N} \sum_{k=1}^{n} \log \left[ 
+  p\left( y_k | \varphi_j \right) \right] \cdot \frac{
+p\left( y_k | \varphi_j^{(t)} \right) \cdot \alpha_j^{(t)}}{f\left( y_k|\theta^{(t)} \right) }
+.\end{align*} 
+
+Максимізація дає таке
+\[ \alpha_j^{(t+1)} = \frac{1}{n} \sum_{k=1}^{n} \underbrace{p\left( y_k|\varphi_j^{(t)} \right) \cdot \alpha_j^{(t)}}_{\equiv \omega_j\left( y_k, \theta^{(t)} \right) } = \frac{1}{n} \sum_{k=1}^{n} \omega_j\left( y_k , \theta^{(t)} \right) \] 
+
+\[ \varphi_j^{(t+1)} = \underset{\varphi_j}{\operatorname{argmax}} \; \sum_{j=1}^{N} 
+\log \left[ p\left( y_k | \varphi_j \right)  \right] \cdot \omega_j\left( y_k, \theta^{(t)} \right) \]
+
+Задача може мати єдиний розв'язок, який можна знайти аналітично (для "хороших" розподілів).
+

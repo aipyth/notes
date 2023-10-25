@@ -1,0 +1,293 @@
+\lecture{7}{Tue 11 Oct 2022 12:20}{Час і ймовірність досягнення}
+
+Нехай маємо $\left( X_n \right) _{n\geq 1}$ --- Ланцюг Маркова на $E=\{1, 2, 3, \ldots\} $ 
+з початковим розподілом $\lambda = \left( \lambda _i \right) _{i \in E}$ та матрицею
+перезіжних ймовірностей $p$.
+
+\begin{theorem}
+  Якщо стан $i \in E$ є рекурентним і $i \leftrightarrow j$ (стани $i, j$ є сполучними), то стан
+  $j$ теж є рекурентним.
+
+  Якщо стан $j$ не є рекурентним, то \[ 
+  \forall i \in  E \sum_{n=0}^{\infty} p^{(n)}_{ij} < \infty \] 
+  та
+  \[ p^{(n)}_{ij} \to_{n \to  \infty}  0 \] 
+\end{theorem}
+
+\begin{proof}
+  Оскільки $i \leftrightarrow j$, то $\exists k, m > 0$ так що
+  \[ p^{(k)}_{ij}>0, \quad p^{(m)}_{ji}>0 \] 
+
+  Тоді \[ p^{(k + n + m)}_{jj} \geq p^{(k)}_{ji}\cdot p^{(n)}_{ii}\cdot p^{(m)}_{ij} \] 
+
+  Якщо \[ \sum_{n=0}^{\infty} p^{(n)}_{ii} = \infty \] , то $\sum_{n=0}^{\infty} p^{(n)}_{jj} = +\infty$.
+
+  2. Позначимо \[ T_{j} = \min \{ n\geq 1 : X_n = j \}  \] 
+  як момент 1-го попадання в стан $j$ після $n=0$.
+  
+  І нехай $f^{(n)}_{ij} = P\left( T_j = n \mid X_0 = i \right) $ --- ймовірність того, що ланцюг вперше 
+  попаде в $j$ в момент часу $n$, за умови, що $X_0 = i$.
+
+  Тоді за формулою повної ймовірності
+  \begin{align*}
+    p^{(n)}_{ij} &= P\left( X_n = j | X_0 = i \right) = \\
+    &= \sum_{k=1}^{n} P\left( X_n = j, T_j = k | X_0 = i \right) = \\
+    &= \sum_{k=1}^{n} P\left( T_j = k | X_0=i \right) \cdot P\left( X_n=j|T_j=k,X_0=i\right) = 
+    \text{ Строго марківська властивість }\\
+    &= \sum_{k=1}^{n} P\left( T_j=k | X_0=i \right) \cdot P\left( X_{n-k}=j|X_0=j \right) = \\
+    &= \sum_{k=1}^{n} f^{(k)}_{ij}\cdot p^{(n-k)}_{jj} \\
+  .\end{align*}
+
+  Звідси 
+  \begin{align*}
+    \sum_{n=0}^{\infty} p^{(n)}_{ij} = \sum_{n=0}^{\infty} \sum_{k=1}^{n} f^{(k)}_{ij} \cdot p^{(n-k)}_{jj} = \\
+    &= \sum_{k=1}^{\infty} f^{(k)}_{ij}\cdot \sum_{n=k}^{\infty} p^{(n-k)}_{jj} = \\
+    &= \underbrace{\sum_{k=1}^{\infty} f^{(k)}_{ij}}_{f_{i} = \sum_{k=1}^{\infty} f^{(k)}_{ij}=
+        P\left( \text{ потрапити коли-небудь з i в j } \right) \leq 1}
+      \cdot \sum_{m=0}^{\infty} p^{(m)}_{jj} = \\
+    &= f_{ij} \cdot \sum_{m=0}^{\infty} p^{(m)}_{jj} \\
+  .\end{align*}
+
+  Якщо стан $j$ --- нерекурентний, то $\sum_{n=0}^{\infty} p^{(n)}_{jj} < +\infty$.
+
+  Тоді і $\sum_{n=0}^{\infty} p^{(n)}_{ij} < +\infty$, а тому і $p^{(n)}_{ij} \to  0m n \to  \infty$.
+  (необхідна умова збіжності ряду).
+\end{proof}
+
+\begin{consequence}
+  \begin{enumerate}
+    \item Всі стани скінченного нерозкладного ланцюга Маркова є рекурентними.
+    \item Всі стани нерозкладного ланцюга Маркова є рекурентними або нерекурентними одночасно.
+  \item Стан $i$ несуттєвий $\implies$ стан $i$ нерекурентний.
+  \end{enumerate}
+\end{consequence}
+
+\begin{proof}
+  Якщо стан $i$ --- несуттєвий, то $\exists j \in E$ та $\exists m > 0$ такі, що
+  \[ p^{(m)}_{ij}>0 \text{ але } p^{(n)}_{ji} = 0 \quad \forall n \] 
+
+  Нехай \[ A = \{ N_i = +\infty \}, \quad \text{ де $N_i$ кількість відвідувань стану i }  \] 
+  \[ B = \{ X_m = j \}   \] 
+
+  Тоді $A \cap B = \varnothing$ і тому  $P\left( A\cap B \right) = 0$
+
+  З іншого боку:
+  \[ 0 < P_i(B) = P\left( X_m = j | X_0 = i \right) =p_i\left( A\cap B \right) + p_i\left( \overline{A} \cap B \right) = \] 
+  \[ = p_i(\overline{A} \cap B) \leq p_i(\overline{A}) \] 
+
+  Звідси \[ p_i(A) = 1 - p_i(\overline{A}) < 1 \implies p_i(A) = 0 \implies
+  p_i\left( N_i = +\infty \right) = 1 \] 
+  \[ \implies i \text{ --- нерекурентний } \] 
+\end{proof}
+
+
+
+\section{Нульова та додатня рекурентність}
+
+\textbf{Питання:} \textit{яким є середній час очікування повернення в деякий рекурентний стан?}
+
+Нехай $T_i = \min \{ n\geq 1 : X_n = i \} $ --- момент 1-го потрапляння в стан $i \in E$.
+
+\begin{definition}
+  Рекурентний стан $i \in  E$ називається додатнім рекурентним, якщо
+  \[ M_i T_i = M\left[ T_i | X_0 = i \right] < \infty \qquad \left( \frac{1}{M_i T_i} > 0 \right)  \] 
+
+  Рекурентний стан $i \in  E$ називається рекурентним нульовим, якщо
+  \[ M_i T_i = +\infty \qquad \left( \frac{1}{M_i T_i} = 0 \right)  \] 
+\end{definition}
+
+\begin{example}[Симметричне випадкове блукання на $\Z$]
+  $\left( X_n \right) _{n\geq 0}$ --- симметричне випадкове блукання:
+  \[ X_0 = 0; \quad X_{n+1} = X_n + \varepsilon _{n+1}, \quad \{\varepsilon_n\} _{n\geq 1} \text{ --- н.о.р.} \] 
+
+  Стан $ 0$ є рекурентним.
+
+  Нехай $g(x)$--- середній час до потрапляння в 0 з точки $x \in \Z$.
+  За формулою повної ймовірності:
+  \[ g(x) = \frac{1}{2}g(x+1) + \frac{1}{2} g(x - 1) + 1 \] 
+  Розв'язок цього рівняння слід шукати у вигляді 
+  \[ g(x) = ax^2 + bx + c \] 
+
+  Але шукати в такому вигляді не будемо, а натомість пепишемо рівняння в іншому вигляді:
+
+  \[ g(x+1) - g(x) = (g(x) - g(x-1)) - 2 = \] 
+  \[ = \left( g(x-1) - g(x-2) - 2 \right) -2 = (g(x-1) - g(x-2)) - 4 = \ldots \] 
+
+  Якби $g(x) < \infty$, то права частина стане від'ємною за скінченну кількісьб ітерацій.
+  Зліва стоїть невід'ємна величина.
+  Це протиріччя доводить, що $g(x) = +\infty \; \forall x \in \Z /\ \{0\} $ є нескінченністю.
+
+  \textbf{Висновок}: симметричне випадкове блукання є рекурентним нульовим.
+\end{example}
+
+\begin{theorem}
+  Якщо $i \in E$ є рекурентним додатнім і $j \leftrightarrow i$, то j теж є рекуретним додатнім.
+\end{theorem}
+
+\begin{proof}
+  Припустимо, що $X_0 = i$. Введемо такі моменти часу
+  \[ \tau_0 = 0 \] 
+  \[ \tau_1 = \min \{n\geq 1: X_n = i \} \text{ --- момент першого повернення в i} \] 
+  \[ \vdots \] 
+  \[ \tau _{k+1} = \min \{n > \tau_k : X_n = i \} \text{ --- момент k+1 повернення в i}  \] 
+
+  Нехай $Y_n = \tau_n - \tau_{n-1}$ --- час між послідовними поверненнями в i.
+
+  Зі строго марківської властивості слідує, що 
+  \[ \{Y_n\} _{n \geq 1} \text{ --- н.о.р. в.в.} \] 
+  \[ MY_n = MY_1 = M\tau_1 < \infty \] 
+
+  Розглянемо "екскурсії":
+  \[ \xi^{(0)} = \left( X_n, 0 \leq n < \tau_1 \right)  \] 
+  \[ \xi^{(1)} = \left( X_n, \tau_1 \leq n < \tau_2 \right)  \] 
+  \[ \vdots \] 
+  \[ \xi^{(k)} = \left( X_n, \tau_k \leq n < \tau_{k+1} \right)  \] 
+
+  еволюція $\{X_n\} _{n\geq 0}$ між послідовними потрапляннями в $i$.
+
+  Зі строго марковської властивості  випливає, що
+  \[ \{\xi^{(k)}\} _{k\geq 0} \text{ --- незалежні і однаково розподілені } \] 
+
+  Нехай $j \leftrightarrow i$. Оскільки $i$ --- рекурентний, то $j$ --- також рекурентний.
+  Отже стан $j$ відвідується нескінченно часто з ймовірністю 1.
+
+  Звідси випливає, що в нескінченно багатьох екскурсіях буде відвідувати
+  стан $j$ з ймовірністю 1.
+
+  \textit{малюнок}
+
+  Нехай $f_{ij} = P\left( T_j < \infty | X_0 = i \right) $. Ця ймовірність є однаковою для
+  всіх екскурсій.
+
+  Нехай $R_1$ та $R_2$ --- індекси 1-ї та 2-ої по рахунку екскурсій, в яких відбулося
+  відвідування стану $j$.
+
+  \textbf{Тоді що ми можемо сказати про середній час відвідування стану $j$? }
+  \begin{align*}
+    M_jT_t &\leq M \sum_{i=1}^{R_2 - R_1 + 1} Y_i = \\
+    &= MY_1 \cdot M\left( R_2 - R_1 + 1 \right) = \\
+    &= MY_1 \left( 1 + M\left( R_2 - R_1 \right)  \right)
+  .\end{align*}
+
+  Оскільки
+  \[ P( R_2 - R_1 = k ) = P( \text{ в $(k-1)$
+    екскурсіях потрапляння в $j$ не було, а в $k$ відбулося } ) = \] 
+  \[ = (1 - f_{ij})^{k-1} \cdot f_{ij}, \quad k = 1, 2, \ldots \] 
+
+  \[ R_2 - R_1 \sim Geom\left( f_{ij} \right) \implies M\left( R_2 - R_1 \right) = \frac{1}{f_{ij}} \]
+
+  Таким чином 
+  \[ j \leftrightarrow i \implies f_{ij} > 0; \qquad M_it_i < \infty \implies M_jT_j < \infty \] 
+
+  Тобто, стан $j$ --- рекурентний додатній.
+\end{proof}
+
+\begin{corollary}
+  Всі стани нерозкладного рекурентного ланцюга Маркова є
+  додатними або нульовими одночасно.
+\end{corollary}
+
+
+
+\section{Інваріантний розподіл ланцюга Маркова}
+
+\begin{definition}
+  Вектор $\pi = \left( \pi_i \right) _{i \in E}$ називається інваріантним розподілом
+  ланцюга $(X_n)_{n \geq 0}$ якщо
+
+  \[ \begin{cases}
+     \pi = \pi P \\
+     \pi_i \geq 0 \\
+     \sum_{i \in E}^{} \pi_i = 1
+  \end{cases} \] 
+\end{definition}
+
+\begin{corollary}
+  Якщо інваріантний розподіл співпадає з початковим, то 
+  \[ \forall i \in E \;\; \forall n \geq 0 \;\; P\left( X_n = i \right) = \pi_i \] 
+\end{corollary}
+
+\begin{proof}
+  Справді
+  \begin{align*}
+    P\left( X_n = i \right) &= \sum_{n=j \in E}^{} P\left( X_0 = j \right) \cdot p^{(n)}_{ji} = \\
+    &= \sum_{n=j \in E}^{} \pi_j \left( p^{n} \right) _{ji} = \\
+    &= \left( \pi p^{n} \right)_i =  \\
+    &= \left( \underbrace{\pi\cdot p}_{\pi} \cdot p^{n-1} \right) = \\
+    &= \left( \pi p^{n-1} \right)_i = \left( \pi p \right) _i = \pi_i
+  .\end{align*}
+\end{proof}
+
+\begin{corollary}
+  Нехай $E$ --- скінченна множина. Припустимо, що для деякого $i \in E$:
+  \[ \forall j \in E \quad p^{(n)}_{ij} \to \pi_j, \quad n \to \infty \] 
+
+  Тоді $\pi = \left( \pi_i \right) _{i\in E}$ --- інваріантний розподіл.
+\end{corollary}
+\begin{proof}
+  Перевіримо, що $\sum_{i \in E}^{} \pi_i = 1$:
+  \[ \sum_{i \in E}^{} \pi_i = \sum_{i \in E}^{} \lim_{n \to \infty} p^{(n)}_{ij} = \text{E --- скінч.} \] 
+  \[ \lim_{n \to  \infty} \sum_{i \in E}^{} p^{(n)}_{ij} = \lim_{n \to  \infty} 1 = 1 \] 
+
+  Далі
+  \begin{align*}
+    \pi_j &= \lim_{n \to \infty} p^{(n)}_{ij} = \lim_{n\to \infty} \sum_{k \in E}^{} p^{(n-1)}_{ik} \cdot p_{kj} = \\
+          &= \sum_{k \in E}^{} \underbrace{\lim_{n \to  \infty} p^{(n-1)}_{ik}}_{\pi_k}
+          \cdot  p_{kj} = \\
+          &= \sum_{k \in E}^{} \pi_{k} \cdot p_{kj}
+  .\end{align*}
+  \[ \implies \pi = \pi P \] 
+\end{proof}
+
+\begin{example}
+  \[ p = \begin{pmatrix} 1-\alpha & \alpha \\ \beta & 1-\beta \end{pmatrix}  \] 
+  \[ 0 < \alpha < 1 \qquad 0 < \beta < 1 \] 
+
+  Система рівнянь для знаходження інваріантного розподілу:
+  \begin{align*}
+    \pi_1 &= \left( 1-\alpha \right) \pi_1 + \beta \pi_2 \\
+    \pi_2 &= \alpha \pi_1 + (1-\beta) \pi_2 \\
+    \pi_1 + \pi_2 &= 1
+  .\end{align*}
+
+  існує єдиний розв'язок:
+  \begin{align*}
+    \pi_1 = \frac{\beta}{\alpha + \beta} \\
+    \pi_2 = 
+  .\end{align*}
+\end{example}
+
+\begin{example}[інваріантних розподілів безліч]
+  \[ p = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}  \] 
+  Ланцюг розкладний
+  \[ \begin{cases}
+    \pi_1 = \pi_1 \\
+    \pi_2 = \pi_2 \\
+    \pi_1 + \pi_2 = 1
+  \end{cases} \] 
+  \[ \pi = (\alpha, 1-\alpha), \text{ де $0 \leq a \leq 1$} \] 
+
+  є безліч інваріантних розподілів.
+\end{example}
+
+\begin{example}[інваріантний розподіл не існує]
+  $\left( X_n \right)_{n\geq 0}$ --- симметричне випадкове блукання
+\[ \pi_k = \frac{1}{2} \pi_{k-1} + \frac{1}{2} \pi_{k + 1} \] 
+рівняння арифметичної прогрессії
+
+\[ \pi_k = A \cdot k + b \] 
+
+Але $0 \leq \pi_k \leq 1$. тому $A=0, \pi_k = b = const$
+
+Задовольнити умову $\sum_{k=-\infty}^{\infty} \pi_k = 1$ неможливо.
+
+Інваріантного розподілу не існує.
+\end{example}
+
+
+
+
+
+
+
+

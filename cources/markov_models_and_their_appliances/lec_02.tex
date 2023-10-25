@@ -1,0 +1,198 @@
+\lecture{2}{Sun 11 Sep 2022 00:21}{Definition and examples of Markov Chains}
+
+Нехай $\left\{ X_n \right\}_{n\geq 0}$ - послідовність в.в. заданих на одному
+і тому ж ймовірністному просторі і які приймають не більш ніж зліченну кількість значень.
+
+Множину значень $E$ називають \textbf{множиною станів} або \textbf{фазовим простором}, а її
+елементи позначають $i, j, k, \ldots$.
+
+\begin{definition}
+  Послідовність в.в. $\left\{ X_n \right\}_{n \geq 0}$ називають ланцюгом маркова якщо:
+  \[
+  \forall n \geq 1 \quad \forall i_0, \ldots, i_n \in E
+  \] 
+має місце рівність
+\begin{equation} \label{eq:2:1} \tag{2.1}
+  P\left( X_{n} = i_{n} \mid X_{n-1} = i_{n-1}, \ldots, X_0 = i_0 \right) =
+  P\left( X_n = i_n \mid X_{n-1} = i_{n-1} \right) 
+\end{equation}
+\end{definition}
+
+В.в $X_n$ інтерпретують як стан системи в момент часу $n$.
+
+Зауважимо, що ймовірність:
+\[
+P\left( X_n = i_n  \mid X_{n-1}=i_{n-1}, \ldots, X_0=i_0 \right) =
+\frac{P\left( X_n=i_n,\ldots,X_0=i_0 \right)}{P\left( X_{n-1}=i_{n-1}, \ldots, X_0 = i_0 \right) }
+.\] 
+Тоді \ref{eq:2:1} має вигляд
+\begin{equation} \label{eq:2:2} \tag{2.2}
+P\left( X_n = i_n,\ldots,X_0=i_0 \right) = P\left( X_{n-1}=i_{n-1}, \ldots.,
+    X_0 = i_0 \right) \cdot f\left( i_n, i_{n-1}, \ldots, n \right)
+\end{equation}
+де $f\left( i_n, \ldots, i_{n-1}, n \right) = P\left( X_n = i_n  \mid X_{n-1} = i_{n-1} \right)$.
+
+Отже якщо існує детермінована функція
+\[
+  f : E \times E \times Z_{+} \to [0,1]
+\] така, що виконується \ref{eq:2:2}, то $\left\{ X_{n} \right\} _{n \geq 0}$ утворює ланцюг Маркова.
+
+
+\begin{definition}
+  Ланцюг Маркова $\left\{ X_n \right\}_{n \geq 0}$ називається однорідним, якщо ймовірності
+  \[
+  P\left( X_{n+1} = j \mid X_{n} = i \right)
+  \] не залежать від $n$.
+\end{definition}
+
+\begin{remark}
+ Позначимо $p_{ij} = P\left( X_{n+1} = j  \mid X_n = i \right)$
+\end{remark}
+
+\begin{definition}
+  Ймовірності $p_{ij}$ переходу зі стану $i$ в стан $j$ наз. перехідною ймовірністю зі стану
+  $i$ в стан $j$.
+
+  Матрицю $P = \left( p_{ij} \right) _{i,j \in E}$ назива.ть матрицею перехідних ймовірностей
+  ланцюга Маркова.
+\end{definition}
+
+\begin{remark}
+  Зауважимо, що матриця $P$ є стохастичною, тобто \[
+  p_{ij} \geq 0 \quad \forall i,j \in E \quad \sum_{j \in E}^{} p_{ij} = 1
+  \quad \forall i \in E
+  .\]
+\end{remark}
+
+
+\begin{example}
+Нехай $\left\{ \varepsilon_n \right\} _{n \geq 0}$ - н.о.р., \[
+P\left( \varepsilon_n = -1 \right) = 1/2 = P\left( \varepsilon_n = 1 \right)
+.\] 
+
+Покладемо $X_0 = 0$,  $X_{n+1} = X_{n} + \varepsilon_{n+1}, \quad n \geq 0$.
+
+Переконаємося, що $\left\{ X_{n} \right\}_{n \geq 0}$ - ланцюг Маркова.
+
+Маємо: $\forall n \geq 1$ і  $\forall i_0,\ldots,i_n \in \mathbb{Z}$:
+
+\begin{gather*}
+P\left( X_0 = i_0, X_1 = i_1, \ldots, X_n = i_n \right) = \\
+= P\left( X_{0} = i_0, \varepsilon_1 = i_1 - i_0, \varepsilon_2 = i_2 - i_1, \ldots,
+    \varepsilon_n = i_n - i_{n-1},  \right) = \\
+= P\left( X_0 = i_0 \right) \cdot P\left( \varepsilon_1 = i_1 - i_0 \right) \cdot \ldots
+  \cdot P\left( \varepsilon_n = i_n - i_{n-1} \right) = \\
+  \begin{cases}
+    \left( \frac{1}{2} \right) ^n & \text{якщо } i_0 = 0, |i_1 - i_0| \cdot \ldots \cdot |i_n - i_{n-1}| = 1 \\
+    \quad 0 & \text{інакше}
+  \end{cases}
+\end{gather*}
+
+Знайдемо відношення:
+\begin{gather*}
+  \frac{P\left( X_0 = i_0, \ldots, X_n = i_n \right)}{P\left( X_0 = i_0,\ldots, X_{n-1} = i_{n-1} \right) }
+  = 
+  \begin{cases}
+    \frac{1}{2} & \text{якщо } i_0 = 0, |i_1 - i_0| \cdot \ldots \cdot |i_n - i_{n-1}| = 1 \\
+    \quad 0 & \text{інакше}
+  \end{cases}
+\end{gather*}
+
+Детермінована функція $\Rightarrow$ $\left\{ X_n \right\}_{n\geq 0}$ - ланцюг Маркова.
+\end{example}
+
+
+\begin{example}[процес авторегресії порядку $p$]
+  \[
+  X_n = \sum_{k=1}^{p} a_k \cdot X_{n-k} + \varepsilon_k, \qquad n \geq p
+  .\] 
+  з початковою умовою $X_0 = \ldots = X_{p-1} = 0$, де $a_k \in \mathbb{R}$
+
+  $\left\{ \varepsilon_n \right\}_{n \geq 0}$ = н.о.р. в.в. не
+  залежна від $\left\{ X_{n} \right\}_{n \geq 0}$
+
+  $\left\{ X_{n} \right\}_{n \geq 0}$ - не є ланцюгом Маркова.
+
+  Розглянемо $\widetilde{X}_{n} = \left( X_{n}, X_{n+1}, \ldots, X_{n+p-1} \right)$
+
+  $\left\{ \widetilde{X}_{n} \right\}_{n \geq 0}$ - є ланцюгом Маркова на
+  $\widetilde{E} = \underbrace{E \times E \times \ldots \times E}_{p}$.
+
+\end{example}
+
+\subsection{Прихована Марківська Модель}
+
+Нехай $\left\{ X_{n} \right\}_{n \geq 0}$ - послідовність в.в. на скінченній мн-ні
+$E = \left\{ x_1, \ldots, x_N \right\} $.
+Нехай $\left\{ Y_n \right\}_{n \geq 0}$ послідовність в.в. на скінченній мн-ні станів
+$F = \left\{ y_1, \ldots, y_{M} \right\} $.
+
+\begin{definition}
+  Послідовність $\left\{ \left( X_n, Y_n \right)  \right\}_{n \geq 0}$ наз. прихованою
+  марківською моделлю, якщо
+  \begin{enumerate}
+    \item послідовність $\left\{ \left( X_n, Y_n \right)  \right\}_{n \geq 0}$ є ланцюгом Маркова
+      на множині $E \times F$
+
+    \item  $\left\{ X_n \right\}_{n \geq 0}$ є ланцюгом Маркова з деяким початковим розподілом
+      $\mu$ і матрицею перехідних ймовірностей $A$.
+    \item  $\forall n \geq 1$ випадкові величини  $y_0, y_1, \ldots, y_n$ є умовно
+      незалежними при заданих $X_0, X_1, \ldots, X_n$, тобто:
+      \begin{gather*}
+      \forall n \geq 1 \quad \forall y_0, \ldots, y_n \in F \quad \forall x_0, \ldots, x_n \in E :\\
+      P\left( Y_0 = y_0,\ldots, Y_n = y_n \mid X_0 = x_0,\ldots,X_n=x_n \right) = \\
+      = \prod_{i=0}^{n} P\left( Y_i = y_i \mid X_i = x_i \right) 
+      \end{gather*}
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  Хоча $\left\{ \left( X_n, Y_n \right) \right\}_{n \geq 0}$ і $\left\{ X_n \right\}_{n \geq 0}$ 
+  є ланцюгами Марковаб послідовність $\left\{ Y_{n} \right\} _{n\geq 0}$ може не бути
+  ланцюгом Маркова.
+\end{remark}
+
+Скінченновимірні розподіли $\left\{ \left( X_n, Y_n \right)  \right\} _{n \geq 0}$ мають такий
+вигляд:
+\begin{gather*}
+P\left( Y_{0} = y_0, \ldots, Y_n = y_n, X_0 = x_0, \ldots, X_n = x_n \right) = \\
+= P\left( X_0 = x_0, \ldots, X_n = x_n \right) \cdot P\left( Y_0 = y_0, \ldots, Y_n = y_n
+ \mid X = x \right) = \\
+= P\left( X_0 = x_0 \right) \cdot P\left( X_1 = x_1  \mid X_0 = x_0 \right) \cdot \ldots \\
+\ldots \cdot P\left( X_n = x_n  \mid X_{n-1} = x_{n-1} \right) \cdot
+\prod_{i=0}^{n} P\left( Y_{i}= y_i \mid X_i = x_i \right).
+\end{gather*}
+
+Позначимо:
+\[ B_{xy} = P\left( Y_{k} = y \mid X_k = x \right) \] 
+\[ A_{x_i y_j} = P\left( X_{k} = x_j \mid X_{k-1} = x_i \right) \] 
+\[ \mu = \left( P\left( X_0 = x_1 \right), \ldots, P\left( X_0 = x_N \right) \right)  \]
+
+Тоді:
+\begin{gather*}
+ P\left( Y_0 = y_0, \ldots, Y_n = y_n, X_0 = x_0, \ldots, X_n = x_n \right) = \\
+ = \mu_{x_0} \cdot \prod_{i=0}^{n-1} A_{x_i x_{i+1}} \cdot \prod_{j=0}^{n} B_{x_j y_j}  
+\end{gather*}
+
+Позначення $\lambda = \left( \mu, A, B \right) $ використ. для позначення ПММ.
+
+
+\subsection{Три задачі для прихованих марківських моделей}
+
+\textbf{Задача оцінювання}
+
+За заданою моделлю $\lambda = \left( \mu, A, B \right) $ і заданою послідовністю спостережень
+довжини $T$:  $y = \left( y_0, \ldots, y_T \right) $, визначити ймовірність
+$P_{lambda} \left( Y = y \right) $, де $Y = \left( Y_0, \ldots, Y_T \right) $
+
+
+\textbf{Задача декодування}
+За заданою моделлю $\lambda = \left( \mu, A, B \right) $ та за заданою послідовністю спостережнь 
+$y = \left( y_0, \ldots, y_T \right) $ визначити найбільш імовірну послідовність станів
+$x = \left( x_0, \ldots, x_T \right) $ для прихованого ланцюга Маркова.
+
+\textbf{Задача навчання}
+За заданою послідовністю спостережень $y = \left( y_0, \ldots, y_T \right) $ визначити модель
+$\lambda = \left( \mu, A, B \right) $, яка максимізує ймовірність $P_{\lambda}\left( Y = y \right)$
+спостереженої послідовності.
+

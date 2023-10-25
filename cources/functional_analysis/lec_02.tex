@@ -1,0 +1,187 @@
+\lecture{1}{02 Sep 2022}{Cover and Compact Spaces}
+
+$X$ --- a set. $(A_i)_{i \in  I}$ subsets of $X$.
+
+
+\begin{definition}
+  $(A_i)_{i \in  I}$ is a cover of the set $X$ if $X = \bigcup_{i \in  I} A_i$.
+\end{definition}
+
+\begin{lemma}[Heihe-Borel]
+  From arbitrary open cover of an interval $[a,b]$ on $\R$ we may separate finite subcover.
+\end{lemma}
+
+\begin{proof}
+  \textbf{By contradiction}.
+
+  Exists such a sequence of open sets $(G_i))_{i \in I}$ in $\R$ such that
+  \begin{enumerate}
+    \item $[a,b] \subset \bigcup_{i \in  I} G_i$ 
+    \item $[a,b]$ is not covered by any finite number of $G_i$.
+  \end{enumerate}
+
+  $[a_1, b_1] \subset [a,b], \quad b_1 - a_1 = \frac{b-a}{2}$\\
+  $[a_1,b_1]$ is not covered by a finite number of $G_i$.\\
+  $[a,b] \supset [a_1,b_1] \supset [a_2,b_2] \supset \ldots$\\
+  $b_n - a_n = \frac{b-a}{2^{n}}$ \\
+  $[a_{n}, b_{n}]$ is not covered by a finite number of $G_i$.
+  $x \in  \bigcap_{n} [a_n, b_n]$\\
+  $\exists i_0 : x \in G_{i_{0}} \implies (x-\varepsilon, x+\varepsilon) \in  G_{i_o}$ \\
+  $[a_n,b_n] \subset G_{i_0} \implies$ contradiction.
+\end{proof}
+
+\begin{exercise}
+  From arbitrary open cover of the closed rectangular in $R^{n}$ we may separate
+  a finite sub-cover.
+\end{exercise}
+
+\begin{definition}
+  Metric space  $(X,d)$ is called compact if its any open cover
+  contains finite subcover.
+\end{definition}
+
+\begin{definition}
+  Set $A$ in a metric space $(X,d)$ is compact if $A$ is a compact subspace of $(X,d)$.
+
+  \textit{Equivalently:}
+
+  Arbitrary cover of $A$ consisting of open sets of $X$ contains finite subcover.
+\end{definition}
+
+\begin{definition}
+  Set $A$ is relatively compact to $X$ if its closure is compact.
+\end{definition}
+
+\begin{definition}
+  Collection of sets $\{A_i\} _{i \in  I}$ has finite intersection property (centred system) if \[ 
+  \forall i_1, \ldots, i_{n} \in  I : n \ge  1 : A_{i_1} \cap \ldots \cap A_{i_n} \neq  \varnothing\] 
+\end{definition}
+
+\begin{theorem}
+  Metric space $(X,d)$ is compact if and only if arbitrary centred collection of closed sets in  $X$ has non-empty intersection.
+\end{theorem}
+
+\begin{proof}
+  \textbf{($\implies$)}
+
+  Let $\{F_i\} _{i \in  I}$ --- centred collection of closed sets in compact metric space $(X,d)$.
+  \[ U_i = X \backslash F_i \text{ are open} \] 
+  \[ \bigcup_{j=1}^{n} U_{i_j} = (X \backslash F_{i_1}) \cup \ldots \cup (X \backslash F_{i_n}) = X \backslash  \underbrace{\left( F_{i_1} \cap \ldots \cap F_{i_n} \right)}_{\neq  \varnothing} \neq  X \] 
+
+  \[ X \text{ is compact } \implies \bigcup_{i \in I} U_{i} \neq  X \iff X \backslash \bigcap_{i \in I} F_i \neq  X \implies \bigcap_{i \in  I}F_i \neq  \varnothing \] 
+
+\end{proof}
+
+\begin{corollary}
+  If metric space $(X,d)$ is compact and set $A \subset X$ is infinite then $A$ has limit points in $X$ (in other words, $\exists x \in  X: \forall  r > 0 : B(x,r) \cap A$ is infinite).
+\end{corollary}
+
+\begin{proof}
+  Let $A$ does not have any limit points. Let's show that $A$ is closed.
+
+  Let $\exists x \in  \overline{A} \backslash A$. $ x$ is tangent to $A$, $x \not\in A \implies \forall r>0 \;\; B(x,r) \cap A$ is infinite, which cannot be true.
+
+  $\{x_1,x_2,\ldots\} \subset A$ where all $x_n$ are distinct.\\
+  $F_n = \{x_{n}, x_{n+1}, \ldots\} $ is closed.\\
+  $F_1, \cap \ldots \cap F_{n} = F_{n} \neq \varnothing$\\
+  $\bigcap_{n=1}^{\infty} F_n = \varnothing$.\\
+  Contradiction.
+\end{proof}
+
+\begin{corollary}
+  In a compact metric space any arbitrary sequence contains convergent subsequence.
+\end{corollary}
+
+\begin{proof}
+  $(x_1, x_2, \ldots)$ --- sequence in a compact metric space $(X,d)$.\\
+  $A = \bigcup_{n=1}^{\infty} \{x_n\}$. If $A$ is finite then there exists such a subsequence $x_{n_1} = x_{n_2} = x_{n_3} = \ldots$.\\
+  If $A$ is infinite then $A$ has a limit point $x$.\\
+$B(x,1) \ni x_{n_1}$; $B(x,\frac{1}{2}) \ni x_{n_2} \;\; (n_2 > n_1)$; $\ldots$
+
+$d(x_{n_k}, x) < \frac{1}{k} \to  0, \; k \to  \infty$
+\end{proof}
+
+\begin{corollary}
+  Compact metric space is complete (fundamental sequence with convergent subsequence is convergent by itself).
+\end{corollary}
+
+\begin{corollary}
+  Compact set in metric space is closed and bounded.
+\end{corollary}
+
+\begin{proof}
+  Let $A$ be compact in $X$. Consider open balls $\{B(x,1): x \in  A\} $.
+
+  $ \implies B(x_1,1) \cap \ldots \cap B(x_n, 1) \supset A$.
+\end{proof}
+
+\begin{theorem}
+  $X$--- compact metric space. $Y$ --- arbitrary metric space. $f: X \to Y$ is continuous. Then $f(X)$ --- is compact in $Y$.
+\end{theorem}
+
+\begin{proof}
+  Let $\{V_i\} _{i \in  I}$ --- open cover $f(X)$.\\
+  $f(X) \subset \bigcup_{i \in I} V_i$.\\
+  Criteria of continuity: $f^{-1}(V_i)$ is open in $X$.\\
+  $X = \bigcup_{i \in I} f^{-1}(V_i) \implies X = f^{-1}(V_{i,1}) \cup \ldots \cup f^{-1}(V_{i,n}) \implies f(X) \subset V_{i,1} \cup \ldots \cup V_{i,n}$
+\end{proof}
+
+\begin{corollary}
+  $X$ is compact, $f: X\to \R$ is continuous. Then $f$ is bounded and reaches it's minimal and maximal values.
+\end{corollary}
+
+\begin{proof}
+  $f(X)$ --- compact in $\R \implies f(X)$ is bounded.\\
+$\sup f(X) = f(x^{*}), \quad inf f(X) = f(x_{*})$.
+\end{proof}
+
+\begin{corollary}
+  $X$ compact. $f:X \to Y$ is continuous and bijective. Then
+  $f^{-1}$ is continuous too ($f$ homogeneous).
+\end{corollary}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}[$\varepsilon$ grid]
+ $\{x_1,\ldots,x_n\} $ is $\varepsilon$-grid for $(X,d)$ if $ \cup B(x_{i}, \varepsilon) = X \quad (\forall x\in X : \exists i :d(x,x_{i}) < \varepsilon$.
+\end{definition}
+
+\begin{definition}
+  $(X,d)$ is totally bounded if $\forall \varepsilon>0 \;\; (X,d)$ has a finite $\varepsilon$-grid.
+\end{definition}
+
+\begin{example}
+  in  $\R^{n}$ bounded and totally bounded sets coincide.
+\end{example}
+
+\begin{example}
+  $l^{1} = \{x = (x_1, x_2, \ldots) \mid \sum_{n=1}^{\infty} \left| x_n \right| < \infty\} $ \\
+  $d(x,y) = \sum_{n=1}^{\infty} \left| x_n - y_n \right|$ \\
+  $\overline{B}(0,1)$ is not totally bounded set as for  $\varepsilon=\frac{1}{2}$ we cannot find a proper $\varepsilon$-grid.
+
+  Let such a finite $\frac{1}{2}$-grid exists.\\
+  $B(x_1, \frac{1}{2}), \ldots, B(x_n,\frac{1}{2})$.\\
+$e_1=(1,0,0\ldots); \; e_2 = (0, 1, 0,0\ldots); \; \ldots$\\
+$d(e_k,0) = 1 \quad e_1, e_2, \ldots \in  \overline{B}(0,1)$ \\
+$e_i, e_j \in  B(x_l, \frac{1}{2}) \;\; (i \neq j)$ \\
+$2 = d(e_i, e_j) < 1$ --- contradiction.
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

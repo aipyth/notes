@@ -1,0 +1,134 @@
+\lecture{3}{02 Sep 2022}{}
+
+\begin{statement}
+  Compact space is totally bounded.
+\end{statement}
+
+\begin{proof}
+  \[ \varepsilon>0 \;\;\; \bigcup_{x \in X}B(x,\varepsilon) = X \implies B(x_1,\varepsilon) \cup \ldots\cup B(x_n,\varepsilon) = X \] 
+\end{proof}
+
+\begin{lemma} \label{lemma:separable-space-then-open-cover-select-countable-cover}
+  $(Y, \pho)$ separable metric space. Then out of any open cover of $Y$ we may select
+  a countable cover.
+\end{lemma}
+
+\begin{proof}
+  $(U_i)_{i \in I}, \; \cup_{i \in  I} U_i = Y, U_i$ are open.\\
+  $\{y_1, y_2, \ldots\} $ are everywhere dense.\\
+  Let $\frac{1}{k} < \frac{\varepsilon}{2}$. $\exists j: d(x,y_j) < \frac{1}{k}$.\\
+  $x \in  \underbrace{B(y_j, \frac{1}{k})}_{\Delta_{jk}} \subset B(x,\varepsilon) \subset U_i$ \\
+  $U_i = \bigcup_{(j,k) \in  I(i)} \Delta_{j k}$ \\
+  $\bigcup_{i \in I} U_i = \bigcup_{i \in I} \bigcup_{(j, k) \in  I(i)} \Delta_{j k} = \Delta_{j_1 k_1} \cup \Delta_{j_2 k_2} \cup \ldots \subset U_{i_1} \cup U_{i_2}\cup \ldots$
+\end{proof}
+
+\begin{theorem}
+  [Hausdorf compact criteria]
+  Metric space $(X,d)$ is compact $\iff$
+  \begin{enumerate}
+    \item $(X,d)$ is complete
+    \item $(X,d)$ is totally bounded
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \textbf{($\impliedby$)}\\
+  Let's prove that arbitrary sequence in $X$ has convergent subsequence.\\
+  $(x_n: n \ge 1)$ --- sequence in $X$.\\
+  $X = B(y_1, \varepsilon) \cup \ldots \cup B(y_m, \varepsilon)$ \\
+  \[ \exists (x_{n_{k}}: k \ge 1) : x_{n_{k}} \in  B(y_i, \varepsilon) \] 
+  $$d(x_{n_{k}}, x_{n_{m}}) < 2 \varepsilon$$
+  $\varepsilon = 1$ --- Exists subsequence $(x_{n}^{(1)}: n \ge 1) : d(x_{n}^{(1)}, x_{k}^{(1)}) < 1$ out of sequence $x_n$ \\
+  $\varepsilon = \frac{1}{2}$ --- Exists subsequence $(x_{n}^{(2)}: n \ge 1) : d(x_{n}^{(2)}, x_{k}^{(2)}) < \frac{1}{2}$ out of sequence $x_{n}^{(1)}$ \\
+  $\varepsilon = \frac{1}{4}$ --- Exists subsequence $(x_{n}^{(3)}: n \ge 1) : d(x_{n}^{(3)}, x_{k}^{(3)}) < \frac{1}{4}$ out of sequence $x_{n}^{(2)}$ \\
+  \[ \ldots \] 
+  \[ z_n = x_{n}^{(n)} \] 
+  $(z_n, z_{n+1}, \ldots)$ --- subsequence of $x_n$ \\
+  \[ \forall k_{ij} \ge n \quad d(z_k, z_j) = d(x_{r_k}^{(n)}, x_{r_j}^{(n)}) < \frac{1}{2^{n-1}} \]
+  $\left( z_k  : k \ge 1\right)$ fundamental $\implies$ convergent subsequence.
+
+  Totally bounded space is separable. Indeed,
+  \[ X = B(x_1, \frac{1}{n}) \cup \ldots\cup B(x_{k(n)}, \frac{1}{n}); \qquad
+  D_n = \{x_1, x_{k(n)} \} \] 
+  $$D = \bigcup_{n=1}^{\infty} D_n \text{ is a countable set }$$
+  $x \in  X, \varepsilon > 0, \frac{1}{n} < \varepsilon. $
+  We may find $y \in  D_n : d(x,y) < \frac{1}{n} < \varepsilon$ 
+
+  Use Lemma \ref{lemma:separable-space-then-open-cover-select-countable-cover}.
+
+  Let $U_1, U_2, U_3, \ldots$ --- countable open cover of $X$. Assume that finite sub cover does not exist.
+  Then $X \backslash / \left(  U_1 \cup U_2 \cup \ldots \cup U_n \right) \ni x_n \not\in \left( U_1 \cup \ldots U_n \right) $.\\
+  Create a sequence of $x_n$ where each $x_i$ is not included in all of $U_j: j \le  i$.\\
+  $x_{n_{k}} \to  x, \; k \to  \infty.$ \\
+  $x \in  U_{N}, x_{n_{m}} \in U_{N}, m \ge k_0$ \\
+  Contradiction.
+
+
+\end{proof}
+
+
+\begin{corollary}
+  Metric space is compact $\iff$ arbitrary sequence has convergent subsequence.
+\end{corollary}
+
+\begin{proof}
+  \textbf{($\impliedby$ )} Completeness is fulfilled.
+  
+  By contradiction. Assume that any sequence has a convergent subsequence. Now let $X$ is not totally bounded.
+  \[ \exists \varepsilon>0 \; \varepsilon\text{-grid does not exist } \] 
+  Pick some $x_1$.
+  \[ x_1 \in  X . \] 
+ Open ball around $x_1$ does not cover all the space.
+ Then pick $x_2$ that
+ \[ \exists x_2: d(x_2, x_1) \ge  \varepsilon \] 
+ Again, two balls out of $x_1, x_2$ do not cover all the space $X$.
+  \[ \exists x_3: d(x_3, x_2) \ge  \varepsilon, d(x_3, x_1) \ge  \varepsilon \] 
+  \[ \ldots \] 
+  In result we got such a sequence of $x_n$ that
+  \[ d(x_n, x_k) \ge  \varepsilon, n \neq k. \] 
+  $(x_n: n \ge 1)$ does not have convergent subsequences.
+\end{proof}
+
+
+\begin{example}
+  $A \subset \R^{n}$. $A$ is compact $\iff$ $A$ is closed and bounded.
+\end{example}
+
+\begin{example}
+  $l^{1} = \{x = (x_1, x_2, \ldots) \mid  \sum_{n=1}^{\infty} \left| x_n \right| < \infty\} $ \\
+  $A \subset l^{1}$. $A$ is compact $\iff A$ is closed, and $A$ is bounded, and $\sup_{x \in  A} \sum_{n=N}^{\infty} \left| x_n \right| \to_{N \to \infty} 0$ 
+
+  \begin{proof}
+    \textbf{($\implies$ )}
+    $\varepsilon>0 \qquad A \subset B(y^{(1)}, \varepsilon) \cup \ldots \cup B(y^{(m)},\varepsilon)$ \\
+    $y^{(i)} = \left( y^{(i)}_1, y^{(i)}_2, \ldots \right) $ \\
+    $\sum_{n=1}^{\infty} \left| y^{(i)}_n \right| < \infty$ \\
+    \[ \exists N: \sum_{n=N}^{\infty} \left| y^{(i)}_n \right| <\varepsilon, \;\; 1 \le  i \le  m \] 
+    \[ x \in  A. d(x, y^{(i)}) < \varepsilon; \quad \sum_{n=1}^{\infty} \left| x_n - y_n^{(i)} \right| < \varepsilon \] 
+    \[ \sum_{n=N}^{\infty} \left| x_n \right| \le  \underbrace{\sum_{n=N}^{\infty} \left| x_n - x^{(i)}_n \right|}_{<\varepsilon} + \underbrace{\sum_{n=N}^{\infty} \left| y^{(i)}_n \right|}_{< \varepsilon} < 2\varepsilon \] 
+    \[ \sup_{x \in A}\sum_{n=N}^{\infty} \left| x_n \right| < 2\varepsilon \] 
+
+    \textbf{($\impliedby$ )}
+    $A$ is complete as it is closed in $l^{1}$.\\
+    $\varepsilon>0 \qquad \exists N: \sup_{x\in A}\sum_{n=N}^{\infty} \left| x_n \right| < \varepsilon$ \\
+    $\exists  c > 0: \left| x_n \right| < C, x \in  A, n \ge  1$ \\
+    exists $(y^{(i)}_1, \ldots, y^{(i)}_{N}), \;\; 1 \le  i \le M$\\
+    $u_l = -c + l\alpha, \quad 0 \le  l \le \frac{2c}{\alpha}$\\
+    $(u_{l_1}, u_{l_2})$
+
+    \[ \forall x \in  A: \exists i:: \sum_{n=1}^{N} \left| y^{(i)}_n - x_n \right| \varepsilon \] 
+    \[ \left( y^{(i)}_1, \ldots, y^{(i)}_N, 0, 0, \ldots \right)  \] 
+    \[ \forall x \in A: \exists i: d(X, y^{(i)}) < \varepsilon  \] 
+  \end{proof}
+\end{example}
+
+\begin{example}
+  $C[a,b]; \quad d(f,g) = \sup_{a \le  t \le  b} \left| f(t) - g(t) \right| $ \\
+  $A \subset C[a,b]$ is compact $\iff$ $A$ is closed, bounded and  \[ 
+  \forall \varepsilon>0: \exists \delta > 0: \left| t-s \right| \le \varepsilon \implies \sup_{f \in A}\left| f(t) - f(s) \right| \le \varepsilon \] 
+  the last condition is called (одностайна рівномірна неперервність)
+  Used Ascolli-Artsel theorem.
+\end{example}
+
+
+

@@ -1,0 +1,335 @@
+\lecture{5}{Tue 27 Sep 2022 12:20}{Ланцюги Маркова. Означення та основні властивості.}
+
+Нехай $\left\{ X_n \right\}_{n \geq 0} $ --- послідовність в.в. заданих на не більш ніж зліченній
+множині $E = \{1, 2, \ldots\} $.
+
+\begin{definition}
+  $\left\{ X_n \right\}_{n \geq 0} $ утворює ланцюг маркова з початковим розподілом
+  $\lambda = \left( \lambda_i \right)_{i \in  E}$ та матрицю похідних ймовірностей
+  $P = \left( p_{ij} \right)_{i,j \in  E} $ якщо:
+  \begin{enumerate}
+    \item $P\left( X_0 = i \right) = \lambda_i, \; i \in  E$
+  \item $P\left( X_{n+1} = j | X_n = i_n, \ldots, X_0 = i_0 \right) =
+    P\left( X_{n+1 = j} \mid X_n = i_n\right) = p_{i_n,j} $
+  \end{enumerate}
+  \[ \forall n \geq 0 \text{ та } \forall i_0, i_1, \ldots, i_n , j \in E \] 
+\end{definition}
+
+\begin{remark}
+  Розглядаємо однорідні ланцюги Маркова, для яких перехідні ймовірності
+  \[ P\left( X_{n+1} = j | X_n = i \right) = p_{ij} \] 
+  не залежить від $n$.
+
+  Це означає, що $P\left( X_1 = j, X_0 = i \right) = P\left( X_2 = j, X_1 = i \right) = \ldots $
+\end{remark}
+
+Матриця $P = \left( p_{ij} \right)_{i,j \in  E} $ є стохастичною
+\[ p_{ij} \geq 0 \quad \text{ та } \quad \sum_{j \in  E}^{} p_{ij} = 1 \] 
+
+
+\begin{lemma}
+  Нехай $E$ та $F$ --- дві зліченні (скінченні) множини і
+  нехай
+   \[ f: \N \times E \times F \to  E \] 
+  Нехай $X_0, Y_1, \ldots$ --- незалежні в сукупності в.в. такі що
+  $X_0$ прйимає значення в $E$;  $Y_n$ приймають значення в  $F$.
+  Нехай  $\{X_n, n\geq 1\}$ означено наступним чином:
+  \[ X_{n+1} = f\left( n ,X_n, Y_{n+1} \right), \quad n \in \N  \] 
+  тоді $\{X_n\} _{n\geq 0}$ --- ланцюг Маркова.
+\end{lemma}
+
+\textit{Написати доведення}
+
+\begin{example}[Підкидання грального кубика]
+  $X_n$ --- кількість шісток, які випали до  $n$-го підкидання. 
+\[ X_{n+1}  \begin{cases}
+  X_n & \text{ якщо в $\left( n+1 \right)$-му підкиданні не випала шістка} \\ 
+  X_n + 1 & \text{ якщо шістка випала у $(n+1)$-му підкиданні }
+\end{cases} \] 
+
+Тоді $X_{n+1} = X_n + Y_{n+1}$, де $\{Y_n\}_{n \geq 0}$ --- н.о.р. в.в. з 
+\[ P\left( Y_n = 0 \right) =\frac{5}{6} ; \quad P\left( Y_n = 1 \right) = \frac{1}{6} \] 
+
+$\left\{ X_n \right\}_{n \geq 0} $ --- ланцюг Маркова.
+
+Множина станів $E = \{0,1,2,\ldots\} $.
+
+Перехідні ймовірності:
+\[ p_{ij}=P\left( X_{n+1} = j | X_n = i \right) = \begin{cases}
+  5/6 & j = i \\
+  1/6 & j = i+1 \\
+  0 & \text{інакше}
+\end{cases} \] 
+\end{example}
+
+\begin{example}[Гіллястий процес Ватсона-Гальтона]
+  Нехай спостерігається деяка популяція частинок, еволюція яких така: кожна
+  частинка незалежно від інших в деякі моменти (дискретні) часу $n = 0, 1, 2, \ldots$
+  перетворюється на $i$ частинок з ймовірністю $p_i: \sum_{i=0}^{\infty} p_i = 1$.
+  
+  Стан системи: $X_n$ --- кількість частинок в момент часу $n$ (в  $n$-му поколінні).
+
+   \[ X_{n+1} = Y^{(1)} + Y^{(2)} + \ldots + Y^{(X_n)} \]
+   де $Y^{(i)}$ --- кількість нащадків $i$-ї частинки з попереднього покоління.
+\end{example}
+
+\begin{example}[Модель Еренфестів дифузії молекул газу]
+  Є дві урни $A$ та $B$, в яких знаходяться  $N$ частинок. В кожен момент часу
+  навмання вибирається число з $\{1, \ldots, N\}$ і частинка з відповідним номером
+  перекладається в іншу урну.
+
+  $X_n$ --- кількість частинок в $A$ в момент $n$.
+  \[ X_{n+1} = \begin{cases}
+    X_{n} - 1 & A \to  B \\
+    X_n + 1, B \to  A
+  \end{cases} \] 
+
+  Припустимо, що $X_n = i$.
+
+  \[ p_{i,i-1} = \frac{i}{N}; \; p_{i,i+1} = \frac{N-1}{N}; \; p_{ij} = 0 \text{ при } j \neq i \pm 1 \] 
+
+  \[ P = \begin{bmatrix} 
+    0 & 1 & 0 & \ldots && 0 \\
+    \frac{1}{N} & 0 & 1 - \frac{1}{N} & \ldots && 0 \\
+    0 & \frac{2}{N} & 0 & 1 - \frac{2}{N} & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \ddots & \ddots & \vdots \\
+    \ldots & \ldots & \ldots & \ldots & 1 & 0
+  \end{bmatrix}  \] 
+
+  \[ P(i \to i+1) > P(i\to i-1) \text{ при } i < \frac{N}{2} \] 
+  \[ P(i\to i+1) < P(i\to i-1) \text{ при } i > \frac{N}{2} \] 
+\end{example}
+
+
+\subsection{Властивості ланцюга Маркова}
+\subsubsection{Скінченновимірні розподіли}
+
+\begin{enumerate}
+  \item 
+
+\begin{align*}
+   P\left( X_0 = i_0, x_1=i_1, \ldots, X_n = i_n \right) = \\
+   = P\left( X_0 = i_0 \right) \cdot P(X_1 = i_1 | X_0 = i_0) \cdot  P\left( X_2 = i_2 | X_1 = i_1, X_0 = i_0 \right) \times \\
+   \times P\left( X_n = i_n | X_{n-1} = i_{n-1}, \ldots, X_0 = i_0 \right) = \\
+   = P(X_0 = i_0) P\left( X_1 = i_1 | X_0 = i_0 \right) \cdot \ldots\cdot P\left( 
+   X_n = i_n | X_{n-1} = i_{n-1}\right) =
+   \boxed{\lambda_{i_0} \cdot  p_{i_0 i_1} \cdot \ldots \cdot p_{i_{n-1} i_n}}
+.\end{align*}
+
+\item
+\[ P\left( X_n = j | X_0 = i \right) = \frac{P\left( X_n = j, X_0 = i \right) }{P(X_0 = i)} \] 
+
+\begin{align*}
+  P\left( X_n = j, X_0 = i \right) = \sum_{i_1, i_2, \ldots, i_{n-1} \in  E}^{} P\left( X_n = j, X_{n-1} = i_{n-1}, \ldots,
+  X_1 = i_1, X_0 = i \right) = \\
+  \sum_{i_1, \ldots, i_{n-1} \in  E}^{} \lambda_i \cdot  p_{ii_1} \cdot  p_{i_1 i_2} \cdot * p_{i_{n-1}j} =
+  \boxed{\lambda_i \cdot  \left( P^{n} \right) _{ij}}
+.\end{align*}
+
+Таким чином:
+\[ P\left( X_n = j | X_0 = i \right) = \frac{\lambda _i \cdot \left( P^{n}_{ij} \right) }{\lambda _i} = \left( P^{n}_{ij} \right)  \] 
+
+Отже \[ \boxed{ p^{(n)}_{ij} = P\left( X_n = j |X_0 = i \right) = \left( P^{n} \right) _{ij} } \] 
+
+\item
+\begin{align*}
+  P\left( X_n = j \right) = \sum_{i \in E}^{} P\left( X_0 = i \right) \cdot  P\left( X_n = j | X_0 = i \right) = \\
+  \sum_{i \in  E}^{} \lambda _i \cdot \left( P^{n} \right) _{ij}
+.\end{align*}
+
+Оскільки $\left( P^{n} \right)_{ij} = P\left( X_n = j| X_0 = i \right) $ 
+то \[ \sum_{j \in  E}^{} \left( P^{n} \right) _{ij} = \sum_{j \in  E}^{} P\left( X_n = j |X_0 = i \right) = 1 \]
+
+Отже $P^{n}$ --- стохастична для довільного $n$.
+
+\end{enumerate}
+
+\begin{theorem}[Марковська властивість]
+  Нехай $\left\{ X_n \right\}_{n \geq 0} $ --- ланцюг Маркова $(\lambda, P)$.
+
+  Тоді \[ \forall M \geq 1 \text{ та } \forall i \in  E \] при умові, що $X_m = i$
+  послідовність  $\left\{ X_{m+n}, n \geq 0 \right\}$ є ланцюгом Маркова з початковим розподілом
+  \[ \delta_i = \left( 0 \ldots 0, 1, 0 \ldots 0 \right) \] 
+
+  і матрицею перехідних ймовірностей $P$.
+
+  Більше того: розподіл в.в. $X_{m+1}, X_{m+2}, \ldots$ при $X_{m}=1$ не залежить від
+  $X_0, \ldots, X_{m-1}$.
+\end{theorem}
+
+\begin{proof}
+  Достатньо довести, що \[ 
+   \] 
+  \begin{align*}
+    P &\left( X_{m+1} = j_1, \ldots, X_{m+k} = j_k | X_{m} =i, X_{m-1} = i_{m-1}, \ldots, X_0 = i_0 \right) =\\
+      &= P\left( X_1 = j_1, \ldots, X_k = j_k | X_0 = i \right) 
+  .\end{align*}
+
+  \begin{align*}
+    P\left( X_{m+1} = j_1, \ldots, X_{m+k} = j_k | X_{m} = i ,\ldots,X_0 = i_0 \right) = \\
+    = \frac{P\left( X_0 = i_0, \ldots, X_{m-1} = i_{m-1}, X_{m}=i, \ldots, X_{m+k} = j_k \right) }{
+    P\left( X_0 = i_0, \ldots, X_m = i \right) } = \\
+    =  \frac{\left[ \lambda_0 p_{i_0 i_1} \cdot  \ldots \cdot p_{i_{m-1} i} \right] \cdot p_{ij_1} \ldots p_{j_{k-1}j_k}}{\lambda _0 p_{i_0 i_1} \ldots p_{i_{m-1} i}} = \\
+= p_{i j_1} \cdot  \ldots \cdot p_{j_{k-1} j_k} = P\left( Y_1 = j_1, \ldots, Y_k = j_k | Y_0 = i \right) 
+  .\end{align*}
+  де $\left\{ Y_k \right\}_{k \geq 0}$ --- ланцюг Маркова $\left( \delta, P \right)$, де
+  $\delta = \left( 0 \ldots 0, 1, 0 \ldots 0 \right) $.
+\end{proof}
+
+\begin{example}
+  \[ E = \{1, 2\} ; \quad P = \begin{pmatrix}
+    \frac{1}{2} & \frac{1}{2} \\
+    \frac{1}{3} & \frac{2}{3}
+  \end{pmatrix} , \quad \lambda = \left( \frac{1}{2}, \frac{1}{2} \right)  \] 
+  \begin{figure}[ht]
+    \centering
+    \incfig{example-states-transition}
+    \caption{Example: states transition}
+    \label{fig:example-states-transition}
+  \end{figure}
+
+  \begin{align*}
+    P\left( X_0 = 1, X_1 = 2 \right) = P\left( X_0 = 1 \right) \cdot 
+    P\left( X_1 = 2 | X_0 = 1 \right) = \\
+    = \lambda _1 \cdot  p_{12} = \frac{1}{2} \cdot  \frac{1}{2} = \frac{1}{4}
+  .\end{align*}
+
+  \begin{align*}
+    P\left( X_3 = 1 | X_1 = 2 \right) = p^{(2)}_{21} = \left( p^{2} \right) _{21} \\
+    p^2 = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{3} & \frac{2}{3} \end{pmatrix} \cdot \begin{pmatrix} 
+  \frac{1}{2} & \frac{1}{2} \\ \frac{1}{3} & \frac{2}{3} \end{pmatrix} = 
+  \begin{pmatrix} \cdot & \cdot \\ \boxed{\frac{7}{18}} & \cdot \end{pmatrix}
+  .\end{align*}
+
+  \begin{align*}
+    P\left( X_3 = 1 \right) = \sum_{i \in E}^{} P\left( X_0 = i \right) \cdot 
+    P\left( X_3 = 1 | X_0 = i \right) = \frac{1}{2} * p^{(3)}_{11} + \frac{1}{2}
+    p^{(3)}_{21} = \frac{1}{2}\left( (p^{(3)})_{11} + (p^{(3)})_{21} \right) 
+  .\end{align*}
+\end{example}
+
+
+\subsection{Класифікація станів ланцюга Маркова}
+
+\begin{definition}
+  Стан $i$ назхивається несуттєвим якщо
+  \[ \exists j \in  E \;\; (j \neq i) : \;
+    p^{(m)}_{ij} > 0 \; \text{ при } m \geq 1 
+  \text{ але } p^{(n)} _{ji} = 0 \;\; \forall n \geq 1\] 
+\end{definition}
+
+\begin{example}
+  Ланцюг, в якого всі стани є несуттєвими.
+  \begin{align*}
+    E &= \{1, 2, 3, \ldots \} \\
+    p_{ij} &= \begin{cases}
+      p & j = i \\
+      1 - p & j = i+1 \\
+      0 & \text{ інакше }
+    \end{cases}
+  .\end{align*}
+\end{example}
+
+\begin{remark}
+  Якщо $E$ --- скінченна, то всі стани не можуть бути несуттєвими.
+\end{remark}
+
+Надалі вважаємо, що $E$ --- множина суттєвих станів.
+
+\begin{definition}
+  % \begin{enumerate}
+  %   \item 
+  % Стан $j \in  E$ наз. \textbf{досяжним} зі стану $i \in  E \; \left( i \to  j \right) $
+  % якщо $\exists m > 0: p^{(m)}_{ij} > 0$.
+  % \item
+  % Стан $i, j$ називається \textbf{сполучним} $(i \to  j)$, якщо
+  % $\exists m_1,m_2 > 0: p^{(m_1)}_{ij} > 0, \; p^{(m_2)}_{ji} > 0$.
+  % \end{enumerate}
+  Стан $j \in  E$ наз. \textbf{досяжним} зі стану $i \in  E \; \left( i \to  j \right) $
+  якщо $\exists m > 0: p^{(m)}_{ij} > 0$.
+
+  Стан $i, j$ називається \textbf{сполучним} $(i \leftrightarrow  j)$, якщо
+  $\exists m_1,m_2 > 0: p^{(m_1)}_{ij} > 0, \; p^{(m_2)}_{ji} > 0$.
+\end{definition}
+
+\begin{remark}
+  Відношення $\leftrightarrow$ є відношенням еквівалетності: симметричне, рефлексивне та транзитивне.
+\end{remark}
+\begin{proof}
+  Справді: якщо $i \leftrightarrow j, j \leftrightarrow i $, то
+   \[ \exists m_1, m_2 > 0 : \quad p^{(m_1)}_{ij} > 0, \;\; p^{(m_2)}_{ji} > 0 \] 
+   \[ \exists r_1, r_2 > 0 : \quad p^{(r_1)}_{jk} > 0, \;\; p^{(r_2)}_{kj} > 0 \] 
+\end{proof}
+
+Тоді
+\[  \] 
+\begin{align*}
+  p^{(m_1 + r_1)}_{ik} &= \sum_{l \in  E}^{} P\left( X_{m_1 + r_1} = k, X_{m_1} = l | X_0 = i \right) = \\
+  &= \sum_{l \in  E}^{} P\left( X_{m_1} = l | X_0 = i \right) \cdot 
+  P\left( X_{m_1 + r_1} = k | X_{m_1} = l, X_0 = i \right) = \\
+  &= \sum_{l \in E}^{} p^{(m_1)}_{il} \cdot p^{(r_1)}_{lk} 
+  \geq p^{(m_1)}_{ij} p^{(r_1)}_{jk} > 0
+.\end{align*}
+
+Аналогічно
+\[ p^{(m_2 + r_2)}_{ki} = \sum_{l \in E}^{} p^{(m_2)}_{kl}p^{(r_2)}_{li} 
+\geq p^{(m_2)}_{kj} p^{(r_2)}_{ji} > 0 \] 
+
+Тоді $E = \bigsqcup\limits^{S}_{i=1} E_i $, де $E_1, \ldots, E_S$ --- неперетинні
+класи сполучних станів.
+
+\begin{definition}
+  Ланцюг, всі стани якого утворюють один клас сполучних станів,
+  називається нерозкладним.
+\end{definition}
+
+\begin{example}
+  \[ E = \{1, 2, 3, 4\} \] 
+  \[ P = \begin{pmatrix}
+    0 & 0.5 & 0.5 & 0 \\
+    0.5 & 0 & 0 & 0.5 \\
+    0 & 0 & 0.5 & 0.5 \\
+    0 & 0 & 0.5 & 0.5
+  \end{pmatrix}  \] 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{приклад-нерозкладного-ланцюга-маркова}
+    \caption{Приклад нерозкладного ланцюга Маркова}
+    \label{fig:приклад-нерозкладного-ланцюга-маркова}
+\end{figure}
+\end{example}
+
+Охарактеризуємо стани:
+\[ 1 \to 3 \text{ але } 3 \not\to 1 \implies \text{ 1 несуттєвий }\] 
+\[ 2 \to 4 \text{ але } 4 \not\to 2 \implies \text{ 2 несуттєвий } \] 
+
+3, 4 --- суттєві стани. $\widetilde{E} = \{3,4\}$ --- клас сполучних станів.
+
+\begin{definition}
+  Стан $i \in  E$ має період $d = d(i)$, якщо:
+  \begin{enumerate}
+    \item $p^{(n)}_{ii} > 0$ лише для тих $n $, які кратні $d$
+    \item  $d$ --- найбільше з чисел, які володіють властивістю 1.
+  \end{enumerate}
+  \[ d = GCD \{ n : p^{(n)}_{ii} > 0 \} \] 
+\end{definition}
+
+\begin{definition}
+  Якщо $d = 1$, то стан називається \textbf{аперіодичним}.
+\end{definition}
+
+\begin{definition}
+  Якщо \textbf{всі стани} нерозкладного ланцюга Маркова є аперіодичними, то сам
+  \textbf{ланцюг} називається \textbf{аперіодичним}.
+\end{definition}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,454 @@
+\section{Linear Spaces}
+
+$K$ --- scalars field ($K = \R$ or $K = \mathbb{C}$). 
+
+\begin{definition}
+  Linear space upon field $K$ is called a non-empty set $X$ with operations:
+  \begin{enumerate}
+    \item $+: X \times X \to  X \quad \left( (x, y) \mapsto x + y \right) $
+    \item $\cdot: K \times X \to  X \quad \left( (\alpha, x) \mapsto \alpha \cdot x = \alpha x \right) $
+  \end{enumerate}
+  that satisfy the axioms:
+  \begin{enumerate}
+    \item $x + y = y + x$ 
+    \item $(x + y) + z = x + (y + z)$ 
+    \item $\exists 0 \in X: x + 0 = x$ 
+    \item $\forall x \in X: \exists (-x): x + (-x) = 0$
+    \item $\alpha(\beta x) = (\alpha \beta) x$ 
+    \item $1 \cdot x = x$ 
+    \item $\alpha (x + y) = \alpha x + \alpha y$ 
+    \item $(\alpha + \beta) x = \alpha x + \beta x$
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  $L^{p}(\Omega, \mathcal{F}, \mathbb{P})$ --- collection of random variables $\xi$ with $E\left| \xi \right|^{p}< \infty$
+\end{example}
+
+
+\begin{definition}
+  Let $X$ be a linear space, $x_1, \ldots, x_n \in  X$. Vectors $x_1, \ldots, x_n$ are linearly dependent, if there exist such scalars \[ 
+\alpha_1, \ldots, \alpha_n \in K: \sum_{i=1}^{n} \alpha_i x_i = 0
+  \]
+  and not every $\alpha_j = 0$.
+\end{definition}
+
+\begin{definition}
+Vectors $x_1, \ldots, x_n$ are linearly independent if they are not linearly dependent.
+\end{definition}
+
+\begin{definition}
+  Basis of linear space is called maximum linear independent vector system.
+\end{definition}
+
+\textbf{Notice:} In any arbitrary linear space there exists a basis.
+
+Different basis' have similar cardinality, that is called a dimension of the space.
+If there is a finite basis (with $n$ elements) then $dim X = n$ and $X$ is finite-dimensional.
+
+\begin{definition}
+  $X' \subset X$ --- subspace, if $x, y \in  X' \implies x + y \in  X',  \alpha x \in  X'$
+\end{definition}
+
+  $X'$ -- subspace of linear space $X$.\\
+  $x \sim y \iff x - y \in  X'$ --- equivalence relation.\\
+  $[x] = \{y \in  X: x \sim y\} $ \\
+  $X // X'$ --- a set of all equivalence classes.
+  Let $\xi, \eta \in  X // X': \xi = [x], \eta = [y] \implies \xi + \eta = [x + y]$\\
+  $\alpha \xi = [\alpha x]$
+
+  $\operatorname{dim} X // X' \equiv$ codimension of  $X'$.
+
+  \textbf{Proposition}
+  \begin{proposition}
+    Let $X'$ --- subspace of codimension $n$. Then
+    $\exists x_1, \ldots, x_n \in  X:$ arbitrary $x \in  X$ is written in the only way:
+    \[ x = \alpha_1 x_1 + \ldots + \alpha_n x_n + y, \;\;\;\; \alpha_1, \ldots, \alpha_n \in  K, y \in  X' \] 
+  \end{proposition}
+
+
+  \begin{proof}
+    $\xi_1, \ldots, \xi_n$ --- basis in $X // X'$.\\
+    $\xi_1 = [x_1]$
+
+     If  $x \in  X$, $\xi = [x]$. $\xi = \alpha_1 \xi_1 + \ldots + \alpha_n \xi_n$ 
+
+     $[x] = [\alpha_1, x_1 + \ldots \alpha_n x_n] \implies x - \alpha_1 x_1 - \ldots - \alpha_n x_n = \xi $
+  \end{proof}
+
+  \begin{definition}
+    $X,Y$ --- linear spaces on some field $K$.
+    $A: X \to  Y$. $A$ is a linear operator if $A(x_1 + x_2) = A x_1 + A x_2, \; A(\alpha x) = \alpha Ax$
+  \end{definition}
+
+  \[ \operatorname{Ker} A - \{x \in  X: Ax = 0\}  \] 
+  \[ \operatorname{R}(A) = \{Ax : x \in  X\}  \] 
+
+  \begin{definition}
+    If $Y = K$ then linear operator $f: X \to K$ is called a linear functional.
+  \end{definition}
+
+\begin{proposition}
+ \begin{enumerate}
+   \item If $f: X \to Y$ is not null linear functional, then its kernel $\operatorname{Ker} f$ has codimension 1;
+   \item If $X' \subset X$ --- subspace of codimension 1 then there exist a linear functional $f: X\to Y$ for which
+     $X' = \operatorname{Ker}f$
+ \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+    \item 
+      $f(x_0) \neq 0. \;\; x^{*} = \frac{x_0}{f(x_0)}. \;\; f(x^{*}) = \frac{f(x_0)}{f(x_0)} = 1$\\
+      Consider  $x \in  X$. $y = x - f(x)x^{*}. \;\; f(y) = f(x) - f(x)f(x^{*})$\\
+      $x = \underbrace{f(x)x^{*}}_{\alpha} + \underbrace{y}_{\in \operatorname{Ker}f} \implies \operatorname{dim}X / \operatorname{Ker}f = 1$ 
+
+    \item $\operatorname{dim}X / X' = 1. \quad \exists x_1 \in  X: x = \alpha x_1 + y \text{ (the only way) }$\\
+      $f(x) := \alpha. \quad f: X \to K$
+
+      Linearity: $x = \alpha x_1 + y; \;\;\; x' = \alpha' x_1 + y' \implies$ \\
+      $\beta x + \gamma x' = (\beta \alpha + \gamma \alpha')x_1 + \beta y + \gamma y'$\\
+      $f(\beta x + \gamma x') = \beta \alpha + \gamma \alpha' = \beta f(x) + \gamma f(x')$\\
+      $\operatorname{Ker}f = X'$
+  \end{enumerate}
+\end{proof}
+
+
+\subsection{Normed vector spaces}
+
+\begin{definition}
+  Norm on a linear space is called a function $x \mapsto \|x\| (\|\cdot\|: X \to  \R$ that satisfies the conditions:
+  \begin{enumerate}
+    \item  $\|x\|\ge 0, \|x\|= 0 \iff x = 0$ 
+    \item $\|\alpha x\| = | \alpha | \cdot \|x\|$ 
+    \item $\|x+y\| \le  \|x\| + \|y\|$
+  \end{enumerate}
+\end{definition}
+
+If  $\|\cdot\|$ --- norm on $X$, then we may define a metric
+\[ d(x,y) = \|x-y\| \] 
+
+\begin{definition}
+  Normed space $(X, \|\cdot\|)$ that is complete relatively to metric $d(x,y) = \|x-y\|$ is called Banach space.
+\end{definition}
+
+\begin{example}
+  $\R^{n}, \;\; 1 \le  p < \infty. \quad \|x\|_p = \left( \sum_{i=1}^{n} |x_i|^{p} \right)^{\frac{1}{p}} $ \\
+  Minkovskiy inequiality
+  \[ \left( \sum_{i=1}^{n} |a_i + b_i|^{p} \right)^{\frac{1}{p}} \le \left( \sum_{i=1}^{n} |a_i|^{p} \right) ^{\frac{1}{p}} + \left( \sum_{i=1}^{n} |b_i|^{p} \right) ^{\frac{1}{p}}\] 
+
+\end{example}
+
+\begin{proposition}
+  Let $X'$ --- a linear subspace of normed space $X$. Then $\overline{X'}$ is a subspace too.
+\end{proposition}
+
+\begin{proof}
+  Let $x, y \in  \overline{X'}$. Then $\exists x_n, y_n \in  X': \|x_n - x\| \to 0, \|y_n - y\| \to  0$.\\
+  $x_n + y_n \in X'$.\\
+  $\|(x_n+y_n) - (x+y)\| \le  \|x_n-x\| + \|y_n-y\| \to 0$
+  Then $x + y \in  \overline{X'}.$
+
+  $\alpha x_n \in  X'. \quad \|\alpha x_n - \alpha x\| = |\alpha| \| x_n - x\| \to  0$\\
+  $\alpha x \in  \overline{X'}$
+\end{proof}
+
+
+
+\begin{definition}
+  $\spn \{x_i: i \in  I\} $ --- subspace of $X$.\\
+  If $\overline{\spn \{x_i : i \in I\}} = X $, then the system $\{x_i: i \in I\} $ is called complete.
+\end{definition}
+
+\begin{example}
+  $C[a,b]$. A sequence $1, t, t^2, t ^{3}, \ldots$ is complete.
+\end{example}
+
+\hr
+
+\begin{lemma}
+  Linear normed space $(X, \| \cdot\|)$ is Banach space $\iff \sum_{n=1}^{\infty} \|x_n\| < \infty \implies \text{ sequence } \sum_{n=1}^{\infty} x_n$ is convergent in $X$ (in other words there exists $\lim_{N \to \infty} \sum_{n=1}^{\infty} x_n$).
+\end{lemma}
+
+\begin{proof}
+  \textbf{($\implies$)}
+
+  $(X,\|\|)$ is Banach. Let $\sum_{n=1}^{\infty} \|x_n\| < \infty$.\\
+  $S_N = \sum_{n=1}^{N} x_n$ \\
+  $\|S_{N} - S_{N+p}\| = \|\sum_{n=N+1}^{N+p} x_n\| \le  \sum_{n=N+1}^{N+p} \|x_n\| \le  \sum_{n=N+1}^{\infty} \|x_n\| \to 0, \; N \to  \infty$ 
+
+  \textbf{($\impliedby$)}
+
+  Let $(x_n)_{n \ge 1}$ --- fundamental in $X$. In other words, $\|x_n - x_m\| \to  0, \; n,m \to  \infty$\\
+$\forall n,m \ge  n_k \;\;\;\; \|x_n - x_m\| \le  2^{-k} \quad (n_1 < n_2 < \ldots)$\\
+\[ \|x_{n_k} - x_{n_{k+1}}\| \le  2^{-k} \implies \sum_{k=1}^{\infty} \|x_{n_{k}} - x_{n_{k+1}}\|  \le  \sum_{k=1}^{\infty} 2^{-k} = 1\] 
+\[ \sum_{k=1}^{\infty} \left( x_{n_{k}} - x_{n_{k+1}} \right) \text{ convergent (to $y$} \] 
+\[ y=\lim_{N \to \infty} \left( \sum_{k=1}^{N} \left( x_{n_{k}} - x_{n_{k+1}} \right)  \right) = \lim_{N \to \infty} \left( x_{n_1} - x_{n_2} + x_{n_2} - x_{n_3} + \ldots + x_{n_{N}} - x_{n_{N+1}} \right) =\] 
+\[ =  x_{n_1} - \lim_{k \to \infty} x_{n_{k}}  \] 
+\end{proof}
+
+$X$ --- normed space. $X'$ --- closed subspace of $X$.\\
+$X / X'$ --- collection of equivalence classes of the relation $x \sim y \iff x - y \in  X'$.\\
+
+$\xi \in  X / X'. \quad \|\xi\| := \inf_{x \in  \xi} \|x\|$\\
+
+\begin{theorem}
+  \begin{enumerate}
+    \item $\xi \mapsto  \|\xi\|$ --- is a norm on $X / X'$;
+    \item  if  $X$ is Banach space then $X / X'$ is Banach too.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item
+      $\|\xi\| \ge 0. \quad \|0\| =? 0$\\
+      In factor-space null is $X'$.\\
+      $\|0\| = \inf_{x \in  X'} \|x\| = 0$\\
+      Let $\|\xi\| = 0 = \inf_{x\in \xi} \|x\|$. Exists $x_n \in  \xi: \|x_n\| \to 0$.\\
+      $\underbrace{x_n - x_1}_{\in  X'} \to  x_1 \in  X' \implies \xi = [x_1] = X' = 0$
+
+    \item $\alpha = 0 \implies \|\alpha \xi\| = \left| \alpha \right| dot \|\xi\|$ \\
+      Let $\alpha \neq  0$. $x \in  \xi \implies \alpha \xi \in  \alpha \xi$\\
+      $\|\alpha \xi\| \le  \|\alpha x\| = \left| \alpha \right| \cdot \|x\| \implies \|\alpha \xi\| \le \left| \alpha \right| \cdot \|\xi\|$\\
+      $\|\xi\| = \|\frac{1}{\alpha}(\alpha \xi)\| \le  \frac{1}{\left| \alpha \right|}\|\alpha \xi\| \implies \left| \alpha \right| \|\xi\| \le  \|\alpha \xi\|$ 
+
+
+      \item
+        $x \in  \xi$, $y \in  \eta \implies x + y \in  \xi + \eta$ \\
+        $\|\xi + \eta\| \le  \|x+y\| \le \|x\| + \|y\| \implies \|\xi + \eta\|\le \|\xi\| + \|\eta\|$
+
+        Let $X$ --- Banach space, $X'$ --- closed subspace $X$.\\
+        Enough to show that $\sum_{n=1}^{\infty} \|\xi_n\| < \infty \implies \sum_{n=1}^{\infty} \xi_n$ is convergent.\\
+        $\|\xi_n\| = \inf_{x \in  \xi_n} \|x\|$.\\
+        $2 \|\xi_n\| \ge  \|x_n\|$ for some $x_n \in  \xi_n$\\
+        $\sum_{n=1}^{\infty} \|x_n\| \le 2 \sum_{n=1}^{\infty} \|\xi_n\| < \infty \implies$ sequence $\sum_{n=1}^{\infty} x_n$ is convergent.\\
+        $x = \lim_{N \to \infty} \sum_{n=1}^{N} x_n$. $\xi = [x]$.
+         $\|\xi - \sum_{n=1}^{N} \xi_n\| \le  \|x - \sum_{n=1}^{N} x_n\| \to 0$ \\
+         $\xi = \lim_{N \to \infty} \sum_{n=1}^{N} \xi_n$
+  \end{enumerate}
+\end{proof}
+
+
+\hr
+
+
+$(X, \|\|), (Y, \|\|)$ normed spaces (with different norms) upon field $K$.\\
+ $A: X\to Y$ --- linear operator.
+
+ \begin{theorem}
+   The following conditions are equivalent:
+   \begin{enumerate}
+     \item $A$ is continuous
+     \item $A$ is continuous in point $0$ 
+     \item $A$ is bounded in a ball with radius 1 \[ 
+       \sup_{\|x\| \le 1} \|Ax\| < \infty \] 
+     \item $\exists c>0:$ and for any $x : \|Ax\| \le c \|x\|$ 
+   \end{enumerate}
+ \end{theorem}
+
+ \begin{proof}
+   $(1) \implies (2) $ is obvious.
+
+   \textbf{(2) $\implies$ (3)}
+
+   $A$ is continuous in 0 $\implies \forall  \varepsilon > 0 : \exists \delta > 0 : \|x\| \le  \delta \implies \|Ax\| \le  \varepsilon$ \\
+   $\|x\|\le 1 \implies \|\delta x\| \le  \delta \implies \|A\delta x\| \le  \varepsilon \implies \|A x\| \le  \frac{\varepsilon}{\delta}$. \\
+   $\sup_{\|x\| \le  1} \|A x\| \le  \frac{\varepsilon}{\delta}$ 
+
+   \textbf{(3) $\implies$ (4)}
+
+   $\sup_{\|x\| \le  1} \|A x\| =: C < \infty$\\
+   Let $x \neq  0.$ $\left\| \frac{x}{\|x\|} \right\| = 1 \implies \left\|  A \frac{x}{\|x\|} \right\| \le  x \implies \|Ax\| \le  c \|x\|$ ($A0 = 0$)
+
+   \textbf{(4) $\implies$ (1)}
+
+   $\|A x - A y\| = \|A (x - y)\| \le  C \| x - y \|$ \\
+   $A$ is continuous.
+ \end{proof}
+
+
+ \begin{definition}
+   Let $A: X \to Y$ --- linear continuous operator. $\|A\| = \sup_{\|x\| \le  1} \|Ax\|$ --- norm of the operator.
+ \end{definition}
+
+
+ \begin{theorem}
+   \begin{enumerate}
+     \item $\mathcal{L}(X,Y) = \{A: X \to Y \mid A \text{ is linear and continuous}\} $ , $\|A\| = \sup_{\|x\| \le 1} \|A x\|$ \\
+       $\left( \mathcal{L}(X,Y), \|\cdot\| \right) $ --- normed space.
+     \item  If $Y$ is Banach space, then $\mathcal{L}(X,Y)$ is Banach too.
+   \end{enumerate}
+ \end{theorem}
+
+ \begin{proof}
+   \textbf{2)  }
+   $\|A_n - A_m\| \to  0, \; n,m \to  \infty$\\
+   $\|A_n x - A_m x\| \le  \|A_n - A_m\| \cdot \|x\| \to 0$\\
+   $\left( A_n x : n \ge 1 \right) $ --- fundamental in $Y$ \\
+   $\exists  \lim_{n \to \infty} A_n x =: Ax$ and $A: X \to Y$ is linear\\
+   $\left| \|A_n\| - \|A_m\| \right| \le \|A_n - A_m\| \to 0, \; n,m \to \infty$\\
+   $\exists \lim_{n \to \infty} \|A_n\|: \|A_n\| \text{ are bounded . } \|A_n\| \le C$ \\
+   $\|Ax\| = \lim_{n \to \infty} \underbrace{\|A_n x\|}_{\le  \|A_n\| \cdot \|x\| \le  C \|X\|} \le C\|x\| \implies A$ is continuous
+
+   Let $\|x\| \le 1$.\\
+   $\exists N : \forall n,m \ge  N : \|A_n - A_m\| \le  \varepsilon$\\
+   $\|A_n x - A x\| = \lim_{m \to \infty} \underbrace{\|A_n x - A_m x\|}_{\le  \|A_n - A_m\| \cdot \|x\| \le  \varepsilon} \le \varepsilon$ \\
+   $\|A_n - A\| \le  \varepsilon, n \ge  N$
+ \end{proof}
+
+ \hr
+
+ $\mathcal{L}(X, K) =: X^{*}$ --- collection of all linear continuous functionals.
+
+ $X^{*}$ is Banach space (complement to $X$).
+
+
+ \begin{theorem}
+   $f: X \to K$ --- linear functional.
+   Then $f$ is continuous $\iff \operatorname{Ker}f$ is closed.
+ \end{theorem}
+
+ \begin{proof}
+   \textbf{($\implies$)}
+
+   $f$ --- continuous. $\operatorname{Ker} f = \{x \in  X: f(x) = 0\} = f^{-1} (\{0\} ) $ closed.
+
+   \textbf{($\impliedby$)}
+
+   Let $\operatorname{Ker}f$ is closed. Assume that $f \neq  0$.\\
+   Exists $x_0: f(x_0) = 1$ \\
+   $x_0 \not\in  \operatorname{Ker} f \implies \exists \varepsilon>0: B(x_0, \varepsilon) \cap \operatorname{Ker}f = \varnothing$\\
+   $\|y\| \le  \varepsilon$. Let $\left| f(y) \right| > 1$. $x_0 - \frac{y}{f(y)} = x$ \\
+ $\|x_0 - x\| = \|\frac{y}{f(y)}\| = \frac{\|y\|}{\left| f(y) \right|} < \varepsilon \implies x \in  B(x_0, \varepsilon)$ \\
+   $f(x) = f(x_0 - \frac{y}{f(y)}) = f(x_0) - \frac{f(y)}{f(y)} = 0$ \\
+   $x$ belongs to open ball, but $x$ belongs to the kernel.\\
+   If $\|y\| \le \varepsilon \implies \left| f(y) \right|  \le 1$\\
+   $x$ is arbitrary. $\|\frac{\varepsilon x}{\|x\|}\| = \varepsilon \implies \left| f(\frac{\varepsilon x}{\|x\|} \right| < 1$\\
+   $\frac{\varepsilon}{\|x\|} \left| f(x) \right| \le 1 \iff \left| f(x) \right| \le \frac{1}{\varepsilon} \|x\|$
+ \end{proof}
+
+ \begin{notice}
+   If $f: X \to K$ linear, then $\operatorname{Ker} f$ is either closed or everywhere dense.
+
+   \[ \operatorname{Ker}f \underbrace{\subset}_{ \text{ or } =} \overline{\operatorname{Ker} f} \underbrace{\subset}_{ \text{ or } =} X  \] 
+
+   If we add another vector to kernel then we get whole the space $X$. 
+ \end{notice}
+
+ \begin{theorem}
+   Let $X$ normed space,  $Y$ is a subspace of $X$. If  $Y$ is finite-dimensional then it's closed.
+ \end{theorem}
+
+ \begin{proof}
+   $dim Y = n$. Induction by $n$.
+   \begin{enumerate}
+     \item $n = 0 \implies Y = \{0\} $ is closed.
+     \item Let the theorem be true for any subspace of dimension $n$. Let's check for $n+1$.
+       $Y$--- subspace of dimension $n$. $\{e_1, e_2, \ldots, e_n\} $ --- basis in $Y$.\\
+       $Z = \spn \{e_1, e_2, \ldots, e_{n-1}\} $. $Z$ is a subspace of $Y$. $dim Z = n-1$. And $Z$ is closed.\\
+       $y = z + t e_n, \; z \in  Z, t \in  K$\\
+       $f: Y \to  K, \quad f(z + t e_n) = t$.\\
+       $f$ is linear, $\operatorname{Ker} f = Z$ closed $\implies f$ is continuous.\\
+       $\exists C > 0 : \left| f(y) \right| \le  C \|y\|$ \\
+
+       Prove that $Y$ is closed: $y_k \in  Y, y_k \to x \in  Y$\\
+        $y_k = z_k + t_k e_n = z_k + f(y_k) e_n$\\
+         $$\left| t_k - t_m \right| = \left| f(y_k - y_m) \right| \le  C \|y_k - y_m\| \to_{k,m \to  \infty} 0$$
+         $\left( t_k \right) _{k\ge 1}$ fundamental $\implies$ is convergent.\\
+         $t_k \to  t$.\\
+         \[ z_k = y_k - t_k e_n \to x - t e_n \in Z \text{ (as $Z$ is closed) } \] 
+         \[ x = \underbrace{\left( x - t e_n \right)}_{\in Z} + t e_n \in Y \] 
+   \end{enumerate}
+ \end{proof}
+
+
+ \begin{corollary}
+   \[ \operatorname{dim} X < \infty \implies \text{ all linear functionals are continuous} \] 
+ \end{corollary}
+
+ \begin{corollary}
+   $ \operatorname{dim} X < \infty, \;\; Y$ is normed, $ A: X \to Y \text{ linear}$.
+ Then $A$ is continuous.
+ \end{corollary}
+
+ \begin{proof}
+   $\{e_1, \ldots, e_n\} $ --- basis in $X$. $x = t_1 e_1 + \ldots + t_n e_n$.\\
+   $f_i(x) = t_i, \;\; 1 \le  i \le  n$. $\left| f_i(x) \right|  \le C \|x\|$ \\
+   $\|A x\| = \|A\left( f_1(x) e_1 + \ldots + f_n(x) e_n \right) \| = \|\sum_{i=1}^{n} f_i(x) A e_i\| \le \sum_{i=1}^{n} \left| f_i(x) \right| \cdot \|A e_i\| \le  \sum_{i=1}^{n} C \|x\|\cdot \|A e_i\| $
+    \[ \|A x\| \le  \left( C \sum_{i=1}^{n} \|A e_i\|\cdot \|x\| \right)  \] 
+ \end{proof}
+
+
+ \begin{example}
+   $X = C[0,1]$, $\|x\| = \int_{0}^{1}  \left| x(t) \right| dt $ \\
+   $f(x) = x(0)$ is linear. If $f$ is continuous, then $\left| f(x) \right|  \le  C\|x\|$. In other words, $\left| x(0) \right| \le C \cdot \int_{0}^{1} \left| x(0) \right| dt$.\\
+   It's hard to determine such $C$ constant. Then  $f$ is not continuous.
+ \end{example}
+
+ \hr
+
+ % \subsubsection{Geometrical sense of functional's norm}
+
+
+ \begin{theorem}
+   [Hana-Banach, about continuity of linear continuous functional]
+   $X$ --- normed space. $Y$ --- its subspace. $f_0: Y \to K$ linear continuous functional.\\
+   Whether we can continue $f_0$ on whole $X$ while keeping linearity and continuity?
+   \begin{enumerate}
+     \item Geometric form of Hahn-Banach theorem. $K = \R$, $X$ normed, real.\\
+       $A \subset X$ is convex if $x,y \in  A \implies t x + (1 - t)y \in  A, \; \forall t \in  [0,1]$ 
+       \textit{idea picture}
+
+
+       $X$--- read normed, $A$ open convex set, $M$ --- subspace of $X$, $M \cap A = \varnothing$.\\
+       Then exists closed hyperspace $H$ (in other words with codimension 1):
+       \begin{enumerate}
+         \item $M \subset H$ 
+         \item $H \cap A = \varnothing$
+       \end{enumerate}
+   \end{enumerate}
+ \end{theorem}
+
+
+ \begin{proof}
+   $C = M + \bigcup_{\lambda > 0} \lambda A = \{y + \lambda a : y \in  M, \lambda  > 0, a \in  A\} $ \\
+   $-C = \{ -y - \lambda a : y \in  M, \lambda >0, a \in  A\}  = M + \bigcup -\lambda a$ \\
+   $C, -C, M$ are pairwise disjoint.\\
+   $x \in  M \cap C. x = y + \lambda a \implies a = \frac{x-y}{\lambda} \in M$ --- impossible\\
+   $M \cap (-C) = \varnothing$\\
+
+    $x \in  C \cap (-C) \qquad y_1 + \lambda_1 a_1 = y_2-\lambda_2 a_2$\\
+    \[ \lambda_1 a_1 + \lambda_2 a_2 = y_2 - y_1 \] 
+    \[ \underbrace{\frac{\lambda_1}{\lambda_1 + \lambda_2} a_1 + \frac{\lambda_2}{\lambda_1 + \lambda_2}a_2}_{\text{on segment from $a_1$ to $a_2$}} = \frac{y_2 - y_1}{\lambda_1 + \lambda_2} \in A \cap M \text{ --- impossible} \] 
+
+    \textbf{Cases:}
+    \begin{enumerate}
+      \item $M \cup C \cup (-C) \neq X$ 
+        choose $h \not\in M \cup C \cup (-C)$ \\
+        $M_1 = \{y + th : y \in  M, t \in \R\} $ \\
+        If $M_1 \cap A \neq \varnothing$ then $\exists a \in A : a = y + th$. $t \neq 0. h = -\frac{y}{t} + \left( \frac{1}{t} \right) a$
+
+        $M_1 \cap A \neq \varnothing$ 
+
+      \item $M \cap C \cap (-C) = X $
+
+        Let $M$ codimension $>1$\\
+        $a \not\in M, b \not\in  \spn\left( M \cup \{a\}  \right) $ \\
+        $a \in  C \cup (-C), b \in  C \cup (-C)$\\
+        $a \in  C, b \in  (-C) \qquad g(t) = ta + (1-t)b, 0 \le t \le 1$\\
+        $g(0) = b \not\in  M, g(1) = a \not\in  M$\\
+        If $0 < t <1$ and $g(t) \in  M$ then  $b = \frac{g(t) - ta}{1-t} \in  \spn\left( M \cup \{a\}  \right) $\\
+        $\forall t: g(t) \in  C \cup (-C)$\\
+        $g^{-1}(C), g^{-1}(C)$ --- are open and not empty.\\
+        $t ^{*} = \inf \{t > 0: g(t) \in C\} $\\
+        $M$ has codimension 1.
+    \end{enumerate}
+
+    \textit{proof is not finished}
+ \end{proof}
+
+
+
+
+

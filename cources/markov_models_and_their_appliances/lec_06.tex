@@ -1,0 +1,293 @@
+\lecture{6}{Tue 04 Oct 2022 12:20}{Час і ймовірність досягнення}
+% \section{Час і ймовірність досягнення}
+
+Нехай $A \subset E$ --- деяка підмножина мн-ни станів.
+
+Позначимо
+\[ \tau^{A} = inf \; \{ n \geq 0 : X_n \in A \}  \] 
+\[ \tau^{A} = \infty, \text{ якщо } \{ n \geq 0 : X_n \in A \} = \varnothing \] 
+
+$\tau^{A}$ --- момент 1-го досягнення множини $A$.
+
+Розглянемо 
+ \[ h^{A} = P\left( \tau^{A} < \infty | X_0 = i \right)  \] 
+ це ймовірність того, що стартувавши з $i$, ланцюг коли-небудь потрапить в $A$.
+
+ \[ K^{A}_{i} = M \left[ \tau^{A} | X_{0} = i \right] = \sum_{n}^{} 
+ n \cdot P\left( \tau^{A} = n | X_0 = i \right) + \infty \cdot P\left( \tau^{A} = \infty | X_0 = i \right) \] 
+ середній час на потрапляння в $A$.
+
+ \begin{theorem}
+   При заданій множині $A \subset E$
+   величини $h^{A}_i$ та $K^{A}_{i}$ є мінімальними розв'язками таких систем
+   лінійних рівнянь.
+   \[ \begin{cases}
+   h^{A}_i = 1, & i \in  A \\
+   h^{A}_i = \sum_{j \in  E}^{} p_{ij}\cdot h^{A}_j, & i \not\in A
+ \end{cases} \]
+ \[ \begin{cases}
+   K^{A}_i = 0 & i \in  A \\
+   K^{A}_i = 1 + \sum_{j \in E}^{} p_{ij} \cdot K^{A}_j & j \not\in A
+ \end{cases} \] 
+
+ (якщо $g_i \geq 0$ --- інший розв'язок, то $g_i \geq h^{A}_i, \; i \in E$).
+ \end{theorem}
+
+ \begin{proof}
+   Якщо $i \in  A$, то $\tau^{A} = 0$ і тоді $h^{A}_i = 1$.
+
+   Якщо $i \not\in A$, то $\tau^{A} \geq 1$ і тоді
+   \[  \] 
+   \begin{align*}
+     h^{A}_{i} &= P\left( \tau^{A}<\infty | X_0 = i \right) = \sum_{j \in E}^{} 
+   P\left( \tau^{A}<\infty, X_1 = j | X_0 = i \right) = \\
+   &= \sum_{j \in  E}^{} P\left( X_1 = j | X_0 = i \right) \cdot P\left( 
+   \tau^{A}<\infty | X_1 = j, X_0 = i \right) = \\
+   &= \sum_{j \in E}^{} p_{ij} \cdot P\left( \tau^{A}<\infty | X_0 = j \right) \\
+   &= \sum_{j \in E}^{} p_{ij}\cdot h^{A}_{j}
+   .\end{align*}
+
+   Якщо $i\in A$, то $\tau^{A} = 0 \implies K^{A}_i = 0$.
+
+   Якщо $i \not\in A$, то $\tau^{A} \geq 1$ і
+   \begin{align*}
+     K^{A}_i &= M\left[ \tau^{A} | X_0 = i \right] = \\
+     &= \sum_{j \in E}^{} M\left[ \tau^{A}, X_1=j | X_0 = i \right] = \\
+     &= \sum_{j \in E}^{} P\left( X_1 = j | X_0=i \right) M\left[ \tau^{A} | X_1=j, X_0=i \right] = \\
+     &= \sum_{j \in E}^{} p_{ij} \cdot \left[ M\left[ \tau^{A} | X_0 = j \right] + 1 \right]= \\
+     &= \sum_{j\in E}^{} p_{ij} \cdot \left( K^{A}_{j} + 1 \right)
+   .\end{align*}
+ \end{proof}
+
+ \begin{example}
+   \[ E = \{1,2,\ldots,7\} \] 
+\begin{figure}[ht]
+    \centering
+    \incfig{example-to-the-theorem-3-states}
+    \caption{Example to the theorem 3. States}
+    \label{fig:example-to-the-theorem-3-states}
+\end{figure}
+\[ X_0 = 1 \] 
+З кожної вершини частинка з ймовірністю $\frac{1}{3}$ переходить в одну з трьох сусідніх вершин
+(з'єднаниз з нею ребром).
+
+Яка ймовірність того, що частинка повернеться в стан 1 раніше ніж побуває в стані 7?
+
+\[ h_i = P\left( \text{ частинка досягне 1 раніше за 7 } | X_0 = i \right) \quad u = \overline{1,7} \] 
+Хочемо знайти $h_1$.
+
+Маємо такі рівняння:
+
+\begin{align*}
+  h_1 &= \frac{1}{3} \cdot h_2 + \frac{1}{3} \cdot  h_6 + \frac{1}{3} \cdot 0 =
+  \frac{1}{3}h_2 + \frac{1}{3}h_6 + = \frac{2}{3}h_2 \\
+  h_2 &= \frac{1}{3} \cdot 1 + \frac{1}{3}h_3 + \frac{1}{3}\cdot 0 = \frac{1}{3} + \frac{1}{3}h_3 \\
+  h_3 &= \frac{1}{3}h_2 + \frac{1}{3}h_4 \\
+  h_4 &= \frac{1}{3}h_3 + \frac{1}{3}h_5 = \frac{2}{3}h_3
+.\end{align*}
+Тоді:
+\begin{align*}
+  h_3 &= \frac{1}{2}h_2 + \frac{2}{9}h_3 \\
+  h_3 &= \frac{2}{7}h_2 \\
+  h_2 &= \frac{1}{7}h_2 + \frac{1}{3} \implies h_2 = \frac{7}{18}
+.\end{align*}
+Тоді $h_1 = \frac{2}{3}\cdot h_2 = \frac{7}{27}$.
+ \end{example}
+
+\begin{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{example-2-to-the-theorem-3}
+    \caption{Example 2 to the theorem 3}
+    \label{fig:example-2-to-the-theorem-3}
+\end{figure}
+\[ X_0 = (0, 0, 1) \] 
+
+З ймовірністю $\frac{1}{3}$ з кожної вершини частинка переходить в одну з трьох сусідніх.
+
+Будемо вважати, що стани $(0,0,0)$ та $(1,1,1)$ є поглинальними станами.
+
+Яка ймовірність того, що ланцюг буде поглинуто саме в стані $(0,0,0)$?
+Можна переформулювати у питання: ланцюг потрапить у стан $(1,1,1)$ раніше, ніж в стан $(0,0,0)$.
+
+Введемо класи станів (пофарбоно на рисунку):
+\begin{align*}
+  E_1 &= \{(1,1,1)\} \\
+  E_2 &= \{(0,0,0)\} \\
+  E_3 &= \{(0,1,1),(1,0,1),(1,1,0)\} \\
+  E_4 &= \{(0,0,1),(0,1,0),(1,0,0)\} 
+.\end{align*}
+
+Укрупнення станів
+\begin{figure}[ht]
+    \centering
+    \incfig{example-2-to-the-theorem-3-states}
+    \caption{Example 2 to the theorem 3 states}
+    \label{fig:example-2-to-the-theorem-3-states}
+\end{figure}
+
+\begin{align*}
+  h_i = P\left( \text{ ланцюг потрапить в (0,0,0) раніше, ніж в (1,1,1) } | X_0=i \right) \\
+  i \in  \{ \underset{3}{E_1}, \underset{0}{E_2}, \underset{2}{E_3}, \underset{1}{E_4} \} 
+.\end{align*}
+
+\begin{align*}
+  h_0 &= 1 \\
+  h_3 &= 0 \\
+  \begin{cases}
+    h_1 = \frac{1}{3} \cdot 1 + \frac{2}{3} \cdot h_2 \\
+    h_2 = \frac{2}{3} \cdot h_1 + \frac{1}{3} \cdot 0
+  \end{cases} \implies 
+  \begin{matrix}
+    h_2 = \frac{2}{3} h_1 \\
+    h_1 = \frac{1}{3} + \frac{4}{9}h_1 
+  \end{matrix}
+.\end{align*}
+\[ \implies \frac{5}{9} h_1 = \frac{1}{3} \] 
+\[ h_1 = \frac{3}{5}; \qquad h_2 = \frac{2}{5} \] 
+\end{example}
+
+
+\section{Рекурентність ланцюгів Маркова}
+
+\subsection{Строго марківська властивість}
+\begin{definition}
+  Випадкова величина $T$, яка залежить від ланцюга $X_0, X_1, \ldots$ і приймає значення
+  дискретні $n=0, 1, 2, \ldots$ називається \textbf{моментом зупинки} якщо подія
+  $\{T = n\}$ описується лише в термінах випадкових величин $X_0, \ldots, X_n$ і не
+  залежить від в.в. $X_{n+1}, X_{n+2}, \ldots$.
+\end{definition}
+
+\begin{example}
+  \begin{enumerate}
+    \item 
+  $\tau^{A}$ --- момент зупинки.
+  $ \{\tau^{A} = n\} = \left( X_0 \not\in A, X_1 \not\in A, \ldots,
+  X_{n-1}\not\in A, X_n \in A \right) $ --- ланцюг вперше в момент часу $n$ потрапив
+  в множину $A$.
+  \item
+    $\mathcal{L}^{A}$ --- останній момент перебування в $A$ після потрапляння в неї.
+
+    \[ \mathcal{L}^{A} = \min_{n} \{n > \tau^{A} : X_{n} \in A, X_{n+1} \not\in A \} \] 
+    Отже подія $\{\mathcal{L}^{A} = n\}$ залежить від $X_{n+1} \implies \mathcal{L}^{A}$
+    не є моментом зупинки.
+  \end{enumerate}
+\end{example}
+
+\begin{theorem}[Строго марковська властивість]
+  Нехай $\left( X_{n} \right)_{n \geq 0}$ --- ланцюг Маркова $\left( \lambda , P \right) $ 
+ Нехай $T$--- момент зупинки. Тоді при умові, що $T < \infty$ і 
+ $X_{T} = i$ послідовність $\left( X_{T + n} \right) _{n\geq 0}$ утворює
+ ланцюг маркова $\left( \delta_i, P \right)$. Зокрема,
+ $X_{T+1}, X_{T+2}, \ldots$ не залежить від $X_{0}, \ldots, X_{T-1}$.
+\end{theorem}
+\begin{proof}
+  Нехай $T = \tau^{i}$ --- момент першого досягнення стану $i$.
+  \textit{Хочемо показати:}
+  \[ P\left( X_{T+1}=j_1, \ldots,X_{T+m}=j_m \right) | X_{T} = i, T<\infty =
+  P\left( X_1 = j_1, \ldots, X_{m} = j_m | X_0 = i \right) \]
+  \[ \forall j_1, \ldots, j_m, i \in E \] 
+
+  \begin{align*}
+    & P\left( X_{T+1} = j_1, \ldots, X_{T+m} = j_m | X_{T}=i, T< \infty \right) = \\
+    &= \frac{P\left( X_{T+1}=j_1, \ldots, X_{T+m} = j_m, X_t =i, T<\infty \right) }{
+    P\left( X_T = i, T < \infty \right) } = \\
+    &= \frac{\sum_{k=0}^{\infty} P\left( X_{k+1}=j_1, \ldots,X_{k+m}=j_m, X_{k}=i, T=k \right) }{
+    P\left( X_{T}=i, T<\infty\right) } = \\
+    &= \frac{\sum_{k=0}^{\infty} P\left( X_k=i,T=k \right)\cdot P\left( 
+    X_{k+1}=j_1, \ldots,X_{k+m}=j_m | X_{k}=i, T=k \right) }{P\left( X_{T}=i,T<\infty \right) } = 
+    \quad \text{ \small{марк. власт. $k$-детерм.}} \\
+    &= \frac{\sum_{k=0}^{\infty} P\left( X_k=i, T=k \right) \cdot P\left( X_1 = j_1, X_{m}=j_m | X_0 = i \right) }{P\left( X_{T}=i, T<\infty \right) } = \\
+    &= P\left( X_1 = j_1, \ldots, X_{m}=j_m | X_0 =i \right) \cdot 
+    \frac{P\left( X_{T}=i, T<\infty \right) }{P\left( X_{T}=i, T<\infty \right)} = \\
+      &= P\left( X_1 = j_1, \ldots, X_{m}=j_m | X_0=i \right)
+  .\end{align*}
+\end{proof}
+
+\begin{example}[Частково спостережувані процеси]
+  $\{X_n\}_{n\geq 0}$ --- ланцюг Маркова
+
+  \begin{enumerate}
+    \item Спостереження доступні лише тоді, коли
+      \[ X_{n+1} \not= X_{n} \] 
+    \item Спостереження доступні лише тоді, коли
+      \[ X_{n} \in A \subset E \] 
+  \end{enumerate}
+\end{example}
+
+
+\subsection{Рекурентність: означення та властивості}
+\begin{example}
+  $E = \{1, 2, 3, \ldots,\} ; \;\; p_{ij} = p < 1,\;\; p_{i, i+1} = 1-p; \;\; X_0 = 0$
+
+  Всі стани не суттєві
+
+  Після виходу з нуля ланцюг більше ніколи в нього не повернеться.
+\end{example}
+\begin{example}[Симметричне випадкове блукання]
+  \[ X_0 = 0 \quad X_{n+1}= X_n + \varepsilon_{n+1} \]
+  де $P\left( \varepsilon_n = \pm 1 \right) =\frac{1}{2}; \;\;\; \{\varepsilon_{n}\} $ --- н.о.р.
+
+  \[ p = P\left( X_n = 0 \text{ для деякого $n \geq 1$ } | X_0 = 0 \right)  \] 
+  Позначимо $h_m = P\left( X_n = 0 \text{ для деякого $n \geq 0$ } | X_0 = m \right)$ та
+  $h_0 = 1$.
+
+  $h_{m}=\frac{1}{2} h_{m+1} + \frac{1}{2} h_{m-1}$ --- формула повної ймовірності.
+
+  $h_m = a \cdot m + b$
+
+  $h_0 = 1, \;\; 0 \leq h_m \leq 1 \implies a = 0, b = 1$
+
+  Отже $h_m = 1 \;\; \forall m$. Тоді \[ p = \frac{1}{2}h_1 + \frac{1}{2}h_{-1} = 1 \] 
+
+  \textbf{Висновок:} вип. симетр. блукання з ймовірністю 1 повернеться  в 0 (коли-небудь).
+\end{example}
+
+\begin{definition}
+  Стан $i \in E$ називається \textbf{рекурентним}, якщо ймовірність повернення 
+  в стан i після виходу з нього дорівнює 1.
+  \[ P\left( \exists n \geq 1 : X_{n} = i | X_0 = i \right) = 1 \] 
+
+  Стан $i$ наз. \textbf{нерекурентним}, якщо
+  \[ P\left( X_{n} = i \text{ для деякого } n \geq 1 \mid X_0 = i \right) < 1 \] 
+\end{definition}
+
+Позначимо як момент 1-го попадання в стан $i$.
+\[ T_i = \min \{ n \geq 1 : X_n = i \}  \] 
+
+\begin{remark}
+  $T_i$ --- момент зупинки, а отже марковський момент часу.
+\end{remark}
+
+Дамо альтернативні означення рекурентності та нерекурентності:
+\begin{definition}
+  Стан $i \in E$ називається рекурентним, якщо
+  \[ P\left( T_i < \infty \mid  X_0 = i \right) = 1 \] 
+  а відповідно для нерекурентного
+  \[ P\left( T_i < \infty \mid  X_0 = i \right) < 1 \] 
+\end{definition}
+
+Введемо позначення
+\[ \mathcal{N}_{i} = \sum_{n=0}^{\infty} \mathds{1}\left( X_n = i \right) \] 
+загальна кількість відвідувань стану $i$, включаючи $n=0$.
+
+\begin{corollary}
+  \[ P\left( \mathcal{N}_{i} > K \mid X_0 = i \right) = \left( f_i \right)^{K}, \quad K = 0, 1, 2, \ldots \]
+  де $f_i = P\left( T_i < \infty \mid X_0 = i \right) \equiv P_{i}\left( T_i M< \infty \right) $
+\end{corollary}
+\begin{proof}
+  $K = 0:$
+   \[ P_i(\mathcal{N}_i > 0) = P\left( \mathcal{N}_i > 0 \mid  X_0 = i \right) = 1 \] 
+   \[ \left( f_i \right) ^{0} = 1 \] 
+   $\implies$ рівність виконується
+\end{proof}
+
+
+
+
+
+
+
+
+
+\hr

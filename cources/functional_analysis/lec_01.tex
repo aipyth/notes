@@ -1,0 +1,1015 @@
+\lecture{1}{Tue 14 Sep 2022 12:20}{Metric Spaces and Convergence}
+
+\begin{definition}
+$X$ is a set. Function $d: X \times X \to [0, \infty]$ is called a metric if three of the conditions are met:
+\begin{enumerate}
+  \item $d(x, y) = 0 \iff x = y$
+  \item $d(x, y) = d(y, x)$
+  \item $d(x, z) \leq d(x, y) + d(y, z)$ --- triangle inequality
+\end{enumerate}
+\end{definition}
+
+$(X, d)$ – is a metric space.
+
+\begin{example}[1. Discrete space]
+   $X$ --- arbitrary.
+   $$
+d(x, y) = \begin{cases}
+1, & x \neq y \\
+0, & x = y
+\end{cases}
+$$
+\end{example}
+
+\begin{example}[2. Real numbers]
+   $X = \mathbb{R}$, $d(x,y) = |x - y|$
+\end{example}
+
+\begin{example}
+$X = \mathbb{R}^n = \{ x = (x_{1}, \dots, x_{n}) \mid x_{i} \in \mathbb{R}, 1 \leq i \leq n \}$
+   $d(x, y) = \sqrt{ \sum_{i=1}^{n} (x_{i} - y_{i})^{2} }$
+   $d_{1}(x,y) = \sum_{i=1}^{n}|x_{i} - y_{i}|$ – metric on $\mathbb{R}^n$
+
+   \begin{proof}
+   $d_{1}(x,z) = \sum_{i=1}^n |x_{i} - z_{i}| \leq \sum_{i=1}^n(|x_{i} - y_{i}| + |y_{i} - z_{i}|) = d_{1}(x,y) + d_{1}(y, z)$
+   \end{proof}
+\end{example}
+
+\begin{example}
+   $d_{\infty}(x,y) = \max_{1 \leq i \leq n} |x_{i} - y_{i}|$ – metric on $\mathbb{R}^n$
+
+   \begin{proof}
+   $d_{\infty} (x,y) = 0 \iff \forall i x_{i} = y_{i} \iff x = y$
+
+   $d_{\infty} (x, z) = max_{1\leq i \leq n} |x_{i} - y_{i}| \leq d_{\infty} (x,y) +d_{\infty}(y,z)$
+
+   $|x_{i} - z_{i}| \leq |x_{i} - y_{i}| + |y_{i} - z_{i}| \leq d_{\infty}(x,y) + d_{\infty}(y,z)$
+   \end{proof}
+\end{example}
+
+\begin{example}
+$1 \leq p \leq \infty$
+
+ $d_{p}(x,y) = \left( \sum_{i=1}^n |x_{i} - y_{i}|^p \right) \frac{1}{p}$ — metric on $\mathbb{R}^n$
+
+ $0 \leq p \leq 1 : d_{p}(x,y) = \sum_{i=1}^{n}|x_{i} - y_{i}|^p$ metric on $\mathbb{R}^n$
+\end{example}
+
+\begin{example}
+$C[a,b]$ – a set of all continuous functions $f: [a,b] \to \mathbb{R}$
+
+$d(f,g) = sup_{a \leq t \leq b} |f(t) - g(t)|$ — metric on $C[a,b]$
+\end{example}
+
+\begin{example}
+$C_{b}(\mathbb{R})$ — a set of all continuous and bounded functions $f: \mathbb{R} \to \mathbb{R}$.
+
+   $d(f, g) = sup_{t \in R} |f(t) - g(t)|$
+\end{example}
+
+\begin{example}
+$(X, d)$ — metric space;
+$Y \subset X$
+
+$d(y_{1}, y_{2}), \;\;\; y_{1}, y_{2} \in Y$
+
+$(Y, d)$ — subspace $X$
+\end{example}
+
+\hr
+%----------------------------------------------------------------
+
+\begin{definition}
+$(X,d)$ – metric space, $(x_{n}: n\geq 1)$ – sequence of elements $X$. 
+$(x_{n}, n\geq 1)$ converges to $x \in X$ if $\lim_{ n \to \infty } d(x_{n}, x) = 0$.
+
+$(\forall \varepsilon > 0 \;\; \exists N \; \forall n \geq N \;\; d(x_{n}, x)< \varepsilon)$
+$$x = \lim_{ n \to \infty } x_{n}$$
+\end{definition}
+
+\begin{theorem}
+In metric space sequence that converges has only ONE limit.
+\end{theorem}
+\begin{proof}
+Let $\lim_{ n \to \infty }x_{n} = x, \lim_{ n \to \infty } x_{n} = y$
+$$
+d(x,y) \leq d(x, x_{n}) + d(x_{n}, y) \to 0
+$$
+$$
+\implies d(x,y) = 0 \to x = y.
+$$
+\end{proof}
+
+
+$(X, d_{x}), (Y, d_{y})$ — metric spaces. $f: X \to Y$
+\begin{definition}
+$f$ – continuous in point $x_{0} \in X$, if
+	$$
+x_{n} \to x_{0} \text{ in x } \implies f(x_{n}) \to f(x_{0}) \text{ in Y }
+$$
+\end{definition}
+
+\begin{definition}
+$f$ continuous on $X$ if $f$ is continuous in every point $x_{0} \in X$.
+\end{definition}
+
+\begin{exercise}
+ $f$ is continuous in point $x_{0} \in X$ if and only if $$
+\forall \varepsilon > 0 \; \exists \delta > 0: d_{x}(x, x_{0}) < \varepsilon \implies d_{y}(f(x), f(x_{0})) < \varepsilon
+$$
+\end{exercise}
+
+\begin{definition}
+$f: X \to Y$ homogeneous (гомеоморфізм) if $f$ is
+bijective, continuous and $f^{-1}$ is continuous.
+\end{definition}
+
+\begin{definition}
+$f: X \to Y$ isometric if $d_{y}(f(x), f(x')) = d_{x}(x, x')$
+(isometrie is always continuous)
+\end{definition}
+
+$x \in X, \; r > 0$
+\begin{definition}
+Open ball $\mathbf{B}(x, r) = \{  y \in X : d(y,x) < r \}$
+\end{definition}
+\begin{definition}
+Closed ball $\overline{B}(x, r) = \{  y \in X: d(y, x) \leq r \}$
+\end{definition}
+$$
+x_{n} \to x \iff \forall \varepsilon > 0 : \; 
+\exists N \;\;
+\forall n \geq N : x_{n} \in \mathbf{B}(x, \varepsilon)
+$$
+
+**Definition**:
+$A \subset X$. Point $x$ tangent to the set $A$, if $\forall \varepsilon$ > 0
+$$
+\mathbf{B}(x, \varepsilon) \cap A \neq \varnothing
+$$
+
+**Example**:
+$X = \mathbb{R}$. $A = (a,b)$
+$a$ and $b$ tangent to $A$
+
+![[Drawing 2023-09-05 20.44.54.excalidraw]]
+
+2. $$
+\overline{A} = \{ x \in X : x \text{ дотична до } A \}
+$$
+closed set $A$
+
+**Theorem 2**
+1. $A \subset \overline{A}$
+2. $\overline{\overline{A}} = \overline{A}$
+3. $A \subset B \implies \overline{A} \subset \overline{B}$
+4. $\overline{A \cup B} = \overline{A} \cup \overline{B}$
+
+*Proof:*
+1. $x \in A \implies B(x, \varepsilon) \cap A \neq \varnothing$ as does not contain $x$
+3. $ x inn \overline{A}$ => $B(x, \varepsilon) \cup A \neq \varnothing \implies B(x, \varepsilon) \cup B \neq \varnothing \implies x \in \overline{B}$
+2. $\overline{A} \subset \overline{\overline{A}}$
+   need to show that $\overline{\overline{A}} \subset \overline{A}$
+   $x \in \overline{\overline{A}}, \varepsilon > 0$
+   $B(x, \varepsilon) \cap \overline{A} \neq \varnothing$
+   exists such a point that $y \in B(x, \varepsilon) \cap \overline{A}$
+   ![[Drawing 2023-09-05 20.52.53.excalidraw]]
+show that $B(y, \varepsilon - d(x,y)) \subset B(x, \varepsilon)$
+$z \in B(y, \varepsilon - d(x, y))$.
+$d(z, y) < \varepsilon) - d(x, y)$
+$\varepsilon > d(z, y) + d(y, x) \geq d(z, x) \implies z \in B(x, \varepsilon)$
+$B(y, \varepsilon - d(x, y)) \cap A \neq \varnothing \implies B(x, \varepsilon) \cap A \neq \varnothing$
+$x \in \overline{A}$
+
+4. $a \subset A \cup B \implies \overline{A} \subset \overline{A \cup B}$; $\overline{B} \subset \overline{A \cup B}$
+
+$\overline{A} \cup \overline{B} \subset \overline{A \cup B}$
+Let $x \in \overline{A \cup B}$
+$x \not\in \overline{A}, \; x\not\in \overline{B}$
+$\implies \varepsilon_{1} > 0 : B(x, \varepsilon_{1}) \cap A = \varnothing$
+$\implies \varepsilon_{2} > 0 : B(x, \varepsilon_{2}) \cap B = \varnothing$
+
+$\varepsilon = \min(\varepsilon_{1}, \varepsilon_{2})$
+$B(x, \varepsilon), \cap (A \cup B) = \varnothing$
+$\overline{A \cup B} = \overline{A} \cup \overline{B}$
+---
+
+**Theorem 3**
+$x \in \overline{A} \iff$ in set $A$ there is a sequence $(x_{n}: n \geq 1)$ that converges to $x$
+
+*Proof*:
+$(\implies)$
+Let $x \in \overline{A}$
+$\forall \varepsilon > 0 \; B(x, \varepsilon) \cap A \neq \varnothing, \;\;\;\; \varepsilon_{n} \frac{1}{n}$
+$\forall n \geq 1$ there is a point $x_{n} \in A \cap B(x, \frac{1}{n})$
+$0 \leq d(x, x_{n}) < \frac{1}{n} \to 0$
+$\lim_{ n \to \infty }x_{n} = x$
+
+$(< =)$
+let $\lim_{ n \to \infty }x_{n} = x, \;\; x_{n} \in A$
+$$
+\forall \varepsilon > 0 \; \exists N \; \forall n \geq N \; d(x_{n}, x) < \varepsilon
+$$
+$$
+x_{n} \in B(x, \varepsilon) \cap A
+$$
+$x \in \overline{A}$
+
+**Definition**
+1. A is dense in a set B if $B \subset \overline{A}$
+2. A is dense everywhere if $\overline{A} = X$
+3. Metric space $(X, d)$ separable if there is a countable everywhere dense set in it.
+
+**Examples:**
+1. $\mathbb{R}$ separable space. $\overline{\mathbb{Q}} = \mathbb{R}$
+2. $\mathbb{R}^n$ separable related to any metric $d_{p}, 0 < p \leq \infty$
+3. $X, d$ – discrete. $B(x, \varepsilon) = \{ y: d(x, y) < \varepsilon \} = x$
+   $B(x, \varepsilon) \cap A \neq \varnothing \iff x \in A$
+   $\overline{A} = A$
+   The only everywhere dense set is $X$.
+4. $C[a,b]$ ; $d(f,g) = sup_{t \in [a,b]} |f(t) - g(t)|$
+   by theorem of Weierstrasse $\forall f \in C[a,b] \; \forall \varepsilon > 0$ there is a polynomial $P(t) = a_{0} + a_{1}t + \dots + a_{d}t^d$: $sup_{t\in [a,b]} |f(t) - P(t)| < \varepsilon$
+   *Countable everywhere dense set is a set of polynomials with rational coefficients.*
+   5. $C_{b}(\mathbb{R}), d(f,g) = sup_{t \in \mathbb{R}} |f(t) - g(t)|$ — not separable metric set.
+   ![[Drawing 2023-09-05 21.43.21.excalidraw]]
+   $A \subset \mathbb{Z}$
+   $$f_{A} (n) = \begin{cases}
+1 & n \in A \\
+0 & n \in \mathbb{Z} \textbackslash A
+\end{cases}$$
+$A \neq A'; \; n \in A \textbackslash A'$ or $n \in A' \textbackslash A$
+$d(f_{A}, f_{A'}) = 1$
+$B\left( f_{A}, \frac{1}{2} \right) \cap B(f_{A'}, \frac{1}{2}) = \varnothing$
+
+In space $C_{b}(\mathbb{R})$ exists continual family of open balls that do not intersect by pairs.
+
+
+---
+
+$(X,d)$
+$A \subset X$
+$\overline{A} = \{ x \in X: \forall \varepsilon > 0 B(x, \varepsilon) \cap A \neq \varnothing \}$
+Let $x \\in \overline{A}$, $y \neq x$. $\varepsilon < d(x,y) \implies B(X, \varepsilon)$ does not contain $y$.
+if for any $\varepsilon > 0 \;\; B(X, \varepsilon) \cap A$ finite then:
+$$
+\exists \delta > 0: B(X, \delta) \cap A = \{ x \}
+$$
+in this case point $x$ is called isolated point of the set $A$
+
+If $x \in \overline{A}$ and is not isolated, then $x$ is called гранична
+
+$x$ is гранична to the set $A$ $\iff \forall \varepsilon: B(X, \varepsilon) \cap A$  infinite
+
+*Example*:
+1. $X$ is discrete. $B(X,1) = \{ x \}$
+$\overline{A} = A$ is filled with only isolated points
+2. $X = \mathbb{R}$. $A = (a,b)$. $\overline{A} = [a, b]$ is composed out of cluster points.
+
+**Definition**
+A set $A$ of metric space $X$ is closed if $\overline{A} = A$.
+
+*Example*:
+1. $X$, $\varnothing$ are closed.
+2. $\overline{B}(x, r)$ closed
+$$
+\overline{\overline{B} (x,r)} \subset \overline{B}(x, r)
+$$
+Let $y \not\in \overline{B}(x,r)$
+$d(x,y) > r$. $\varepsilon = d(x,y) - r$
+If $z \in B(y,\epsilon)$, then $d(y,z) < \epsilon$
+$d(z,x) \leq d(x,y) - d(z,y) > d(x,y) - \varepsilon = r$
+$z \not\in \overline{B}(x,r)$.
+$B(y,\epsilon) \cap \overline{B}(x,r) = \varnothing$ and $y \not\in \overline{\overline{B}(x,r)}$.
+
+3. $\overline{A}$ closed ($\overline{\overline{A}} = \overline{A}$)
+4. $\overline{A}$ – smallest closed set the contains $A$. (if $B$ is closed and $A \subset B$ then $\overline{A} \subset B$)
+
+**Theorem**
+1. Intersection of any arbitrary closed sets is a closed set
+2. Union of finite number of closed sets is a closed set
+
+*Proof*:
+1. Consider $(A_{i})_{i \in I}$ — closed sets
+$$A = \bigcap_{i \in I} A_{i}$$
+$$
+\forall i \in I : \overline{A_{i}} = A_{i}
+$$
+$A \subset A_{i}$
+$\overline{A} \subset \overline{A_{i}} = A_{i}$
+$\overline{A} \subset \bigcap_{i \in I} A_{i} = A \subset \overline{A}$
+$\implies \overline{A} = A$ and $A$ is closed.
+2. If $A$ and $B$ are closed, then $\overline{A \cup B} = \overline{A} \cup \overline{B} = A \cup B$
+
+
+*Example*:
+$X = \mathbb{R}$. $A_{n} = [0, 1 - \frac{1}{n}]\;\;\; n \geq 1$
+$$
+\bigcup_{n=1}^{\infty} A_{n} = [0, 1)
+$$
+
+---
+
+**Definition**
+1. Point $x \in X$ is inner for the set $A$ if $$
+\exists \varepsilon > 0: B(x, \varepsilon) \subset A
+$$
+2. $A^{o} = \{ x \in X: x \text{ inner for } A \}$ — ***interior***
+3. $A$ is open if $A = A^{o}$
+
+
+*Example:*
+1. $B(x,r)$ is an open set.
+$y \in B(x,r)$, $d(x,y) < r$. $\epsilon = r - d(x,y)$.
+if $z \in B(y,\varepsilon)$ then $d(y,z) < \varepsilon$
+$$
+d(z,x) \leq d(x,y) + d(y,z) < d(x,y) + \varepsilon = r
+$$
+2. $X = \mathbb{R}$. $A = [a,b], \;\; a < b$
+$a < x < b \implies x \in A^{o}$
+$A^{o} = (a,b)$
+3. $X, \varnothing$ are open.
+
+
+**Theorem**
+For any arbitrary set $A \subset X$ it is true that $$
+X \setminus A^{o} = \overline{X \setminus} A
+$$
+*Proof*
+$$
+x \in X \setminus A^{o} \implies x \not\in A^{o} \iff \forall \epsilon > 0
+\;\;
+B(x,\epsilon) \not\subset A \iff \forall\epsilon > 0 B(x,\epsilon) \cap (X \setminus A) \neq \varnothing \iff X \in \overline{X \setminus A} \}
+$$
+
+**Consequences**
+1. $A^{o} \subset A$, ($X \setminus A^{o} = \overline{X\backslash A} \subset X \backslash A$)
+2. $A \subset B \implies A^{o} \subset B^{o}$
+3. $(A^{o})^{o} = A^{o}$
+4. $(A \cap B)^{o} = A^{o} \cap B^{o}$
+5. $A$ is open $\iff X \backslash A$ is closed ($A^{o} = A \iff X \backslash A^{o} = X \backslash A = \overline{X\backslash A}$)
+6. Union of arbitrary family of open sets is an open set.
+7. Intersection of finite number of open sets is an open set
+
+*Example*
+1. $X$ — discrete space. All the sets are open.
+2. $X = \mathbb{R}$. Set is open $\iff$ a set is a union of intervals sequence (open intervals)
+
+---
+
+$X: d$ – metric on $X$. A set of all open sets is called a topology of the space $X$.
+
+$$
+\lim_{ n \to \infty } x_{n} = x \iff
+\forall \epsilon > 0 \epsilon \;\; \exists N \forall n \geq N x_{n} \in B (x,\epsilon)
+$$
+$$
+\iff \forall \text{ open set } U \text{ that contains } x, \exists N \; \forall n \geq N \; x_{n} \in U
+$$
+
+**Theorem**
+$d_{1}: d_{2}$ — metric on $X$. $d_{1}$ and $d_{2}$ define the same topology on $X$ if and only if the convergence on these metrics is the same (in other words $d_{1}(x_{n}, x) \to 0 \iff d_{2}(x_{n},x) \to 0$)
+
+*Proof:*
+1. Let the open sets relatively $d_{1}$ and $d_{2}$ coincide.
+Let $d_{1}(x_{n}, x) \to 0$
+$$
+\forall \epsilon > 0 : B_{d_{2}}(x,\epsilon) \text{ open relatively } d_{2} \implies B_{d_{2}}(x,\epsilon) \text{ open relatively } d_{1}
+$$
+$$
+\implies \exists \delta > 0: B_{d_{1}}(x,\delta) \subset B_{d_{2}}(x,\epsilon)
+$$
+$$
+\exists N: \forall n \geq N: d_{1}(x_{n}, x) < \delta \implies d_{2}(x_{n}, x) < \varepsilon
+$$
+
+2. Let the convergence in $d_{1}$ and $d_{2}$ be equivalent.
+Consider the the set $A \subset X$ exists that is open relatively to $d_{1}$ and not open relatively to $d_{2}$.
+$\exists x \in A$: x not inner for $A$ relatively $d_{2}$.
+$$
+\forall n \geq 1: B_{d_{2}}\left( x, \frac{1}{n} \right) \not\subset A.
+\;\;\;\;
+\forall n \geq 1 \exists x_{n} \not\in A
+$$
+$d_{2}(x_{n}, x) < \frac{1}{n}$
+$d_{2}(x_{n}, x) \to \implies d_{1}(x_{n}, x) \to 0$
+Relatively $d_{1}$ $A$ is open, $x \in A \implies \exists N \;\; \forall n \geq N$ 
+$x_{n} \in A$. 
+*Contradiction.*
+
+**Definition**
+Two metrics: $d_{1}$ and $d_{2}$ on a set $X$ are equivalent if they define the same topology (define the same convergent sequences).
+
+
+*Exercise*: On $\mathbb{R}^{n}$ all the metrics $d_{p}, 0 < p \leq \infty$ are equivalent.
+
+Topology of subspace
+
+$(X, d)$ — metric space, $Y \subset X$.
+$(Y, d|_{Y \times Y})$ — subspace
+
+$y \in Y, r >0$.
+$B_{Y}(y,r) = \{ y' \in Y: d(y, y') < r \} = Y \cap B_{X}(y,r)$
+
+$A \subset Y$
+$\overline{A}_{Y} = \{ y \in Y: \forall \epsilon > 0 \;\; B(y,\epsilon) \cap A \neq \varnothing \} = Y \cap \overline{A}_{X}$
+
+$A \subset Y$ is closed relatively to $Y$ if and only if $A = Y \cap F$ where $F$ is closed in $X$.
+
+$A \subset Y$ is open relatively to $Y$ if and only if $A = Y \cap G$ where $G$ is open in $X$.
+
+---
+
+**Definition**
+A sequence $(x_{n \geq_{1}}^{\infty})$ in metric space $(X,d)$ is fundamental (Cauchy sequence) if
+$$
+d(x_{n}, x_{m}) \to 0 \;\; n,m \to \infty
+$$
+$$
+\forall \varepsilon > 0 \;\; \exists N \;\; \forall n,m \geq N \;\; d(x_{n}, x_{m}) < \varepsilon
+$$
+
+**Corollary**
+Convergent sequence in fundamental.
+
+*Proof*:
+Let $x_{n} \to x, \;\; n \to \infty$
+$\implies d(x_{n}, x) \to 0, \;\; n \to \infty$
+$\forall \epsilon > 0 \;\; \exists N \;\; \forall n \geq N \;\; d(x_{n}, x) < \frac{\epsilon}{2}$
+
+If $n,m \geq N$ then $d(x_{n}, x_{m}) \leq d(x_{n}, x) + d(x_{m}, x) < \epsilon$
+
+
+**Definition**:
+$(X, d)$ — full, if in $X$ any fundamental sequence is convergent.
+
+*Example*:
+1. $X = \mathbb{R}$, $d(x,y) = \left| x - y \right|$ — full metric space
+2. $X = \mathbb{R}^{n}$, $d_{2}(x,y) = \sqrt{ \sum_{i=1}^{n}(x_{i} - y_{i})^{2} }$
+Let $(x^{(k)})_{k \geq 1}$ fundamental sequence in $(\mathbb{R}^{n}, d_{2})$
+$x^{(k)} = \left( x^{(k)}_{1}, \dots, x^{(k)}_{n} \right)$
+$$
+0 \leftarrow d_{2}(x^{(k)}, x^{(m)}) = \sqrt{ \sum_{i=1}^{n}(x^{(k)}_{i} - x^{(m)}_{i})^{2} }
+ \geq \left| x^{(k)} _{i} - x^{(m)}_{i} \right| , \;\;\; k,m \to \infty
+$$
+
+$(x^{(k)}_{i})_{k \geq 1}$ — fundamental in $\mathbb{R}$.
+
+$\exists \lim_{ k \to \infty } x^{(k)}_{i} = x_{i},\;\;\; 1 \leq i \leq n \;\;\; x = (x_{1}, \dots, x_{n})$
+$d_{2}(x^{(k)}, x) = \sqrt{ \sum_{i=1}^{n} \underbrace{(x^{(k)}_{i} - x_{i})}_{0}^{2} } \to_{k \to \infty} 0$
+
+*Exercise:* $\forall p \in (0, \infty] \;\;\; (\mathbb{R}^{n}, d_{p})$ — full space
+
+3. $X = C[a,b]$
+$$d(f,g) = \sup_{a \leq t \leq b} \left| f(t) - g(t) \right|$$
+$(C[a,b], d)$ — full metric space
+Let $(f_{n})_{n \geq 1}$ fundamental sequence in that full metric space
+
+$0 \leftarrow d(f_{n}, f_{m}) = \sup_{a \leq t \leq b} \left| f_{n}(t) - f_{m}(t) \right| \geq$
+$\geq \left| f_{n}(t) - f_{m}(t) \right|$
+fixed $t$
+$(f_{n}(t))_{n \geq 1}$ — fundamental sequence in $\mathbb{R}$
+$\exists \lim_{ n \to \infty }f_{n}(t) =: f(t)$
+$f: [a,b] \to \mathbb{R}$
+
+
+$\forall \varepsilon > 0 \;\;\; \exists N \;\;\; \forall n,m \geq N \;\;\; \forall t \in [a,b] \;\; \left| f_{n}(t) - f_{m}(t) \right| \leq \varepsilon$
+$m \to \infty$
+$$\implies \forall \varepsilon > 0 \;\; \exists N \forall n \geq N \;\; \underbrace{\forall t \left| f_{n}(t) - f(t) \right| \leq \varepsilon}_{d(f_{n}, f) \leq \varepsilon}$$
+
+
+Lets show that $f$ is continuous by $t$ 
+$t_0 \in  [a,b]$. 
+Need to prove that $\forall \varepsilon > 0 \exists \delta > 0 : \left| t - t_0 \right| < \delta \implies \left| f(t) - f(t_0)  \right| < \varepsilon$
+\[ \exists N : \forall n \ge N : \sup_S \left| f_n(s) - f(s) \right| < \frac{\varepsilon}{3}  \] 
+\[ \left|f_{N}(t) - f_{N}(t_0) \right| < \frac{\varepsilon}{3} \text{ if } \left| t -t_0  \right| < \delta  \] 
+
+\[ \left| f(t) - f(t_0) \right|  \le \left| f_{N}(t) - f(t) \right| + \left| f_{N}(t_0) - f(t_0) \right| + \left| f_{N(t)} - f_{N}(t_0) \right| < \varepsilon \] 
+
+\hr
+
+\begin{example}
+  $\R$, $d_1(x,y) = \left| e^{x} - e^{y} \right|$, $d(x,y) = \left| x - y \right| $ 
+
+  metrics $d_1$ and $d$ are equivalent.
+
+  $(\R, d_1)$ is not complete. $x_{n} = -n, n\ge 1$ 
+
+  \[ d_1(x_{n}, x_{m}) = \left| e^{x_n} - e^{x_m} \right| = \left| e^{-n} - e^{-m} \right| \to  0, \;\; n,m \to  \infty \] 
+  \[ d_1(x_{n}, x) = \left| e^{x_n} - e^{x} \right| = \left| e^{-n} - e^{x} \right| \to  e^{x} \] 
+
+  $e^{e}$ set mutually unambiguous correspondence between $\R$ and $(0, \infty)$
+\end{example}
+
+\begin{example}
+  $C[a,b]$, $d_1(f,g) = \int_a^{b} \left| f(t) - g(t) \right| dt$
+
+  $(C[a,b], d_1)$ is not complete metric space.
+
+  \[ f_{n}(t) = \begin{cases}
+    1 & t \ge c \\
+    0 & t \le c - \frac{1}{n} \\
+    \text{linear on } [c - \frac{1}{n}, c]
+  \end{cases} \] 
+
+  \[
+  d_1(f_{n}, f_{m}) = \int_{a}^{b} \left| f_{n}(t) - f_{m}(t) \right| dt
+\le \int_{c-\frac{1}{n}}^{c} 2 dt = \frac{2}{n} \to_{n,m \to \infty} 0    
+\] 
+If $d_1(f_{n}, f) \to 0$, $n \to  \infty$, then $f(t) = \begin{cases}
+  1 & t \le c\\
+  0 & t < c
+\end{cases}$ which cannot be true for continuous $f$.
+\end{example}
+
+\begin{example}
+  \[ l^2 = \{x = (x_1, \ldots \mid \sum_{i=1}^{\infty} x_i^2 < \infty\}  \] 
+
+  \[ d(x,y) = \sqrt{\sum_{i=1}^{\infty} (x_i - y_i)^2}  \] 
+
+  $(l^2, d)$ --- complete metric space
+
+  $(x^{(k)})_{k \ge 1}$ --- fundamental sequence in $l^2$
+
+  \[ x^{(k)} = (x^{(k)}_1, x^{(k)}_2, \ldots \] 
+  \[ d(x^{(k)}, x^{(m)}) = \sqrt{\sum_{i=1}^{\infty} 
+  \left( x_i^{(k)} - x_i^{(m)} \right) ^2} \to  0, \;\; n,m \to \infty  \] 
+
+  Let's freeze the number of $n$.
+
+   \[ \left| x^{(k)}_{n} - x^{(m)}_{n} \right| \le \sqrt{\sum_{i=1}^{\infty} \left( x_i^{(k)} - x_{i}^{(m)} \right)^2 } = d(x^{(k)}, x^{(m)}) \to 0\;\;k,m \to  \infty \] 
+
+\[ \exists \lim_{k \to \infty} x^{(k)}_{n} := x_n \] 
+
+\[ \varepsilon > 0 : \exists N : \forall k,m \ge  \N : d(x^{(k)}, x^{(m)}) \le  \varepsilon \] 
+
+\[ \sum_{i=1}^{\infty} \left( x_i^{(k)} - x_i^{(m)} \right) ^2 \le  \varepsilon^2, \;\; k,m \ge  N \] 
+
+\[ \sum_{i=1}^{M} \left( x_i^{(k)}- \underbrace{x_i^{(m)}}_{x_i, \text{within } m \to  \infty} \right) ^2 \le  \varepsilon^2, \;\; k,m \ge  N, M \ge  1 \] 
+
+\[ \sum_{i=1}^{M} \left( x_i^{(k)} - x_i \right) ^2 \le  \varepsilon^2, \;\;\; k \ge  N, M \ge 1 \] 
+
+\[ \sum_{i=1}^{\infty} \left( x_i^{(k)} - x_i  \right) ^2 \le  \varepsilon^2 \] 
+
+\[ \implies \begin{cases}
+  \sum_{i=1}^{\infty} x_i^2 < \infty , \;\; x \in  l^2 \\
+  d(x^{(k)}, x) \le  \varepsilon, \;\; k \ge N
+\end{cases}  \]
+
+  
+\end{example}
+
+
+\begin{corollary}
+  \begin{enumerate}
+    \item Closed subspace of a complete space is complete.
+    \item Complete subspace of a metric space is closed.
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\begin{enumerate}
+\item 
+  $(X, d)$ is complete. $Y$ --- closed subset of $X$.
+
+  $(x_n)_{n \ge 1}$ --- fundamental in $Y$ $\implies (x_n)_{n \ge  1}$ --- fundamental in $X \implies (x_n)_{n \ge 1}$ converges to $x \in  X \implies x \in  Y$ and $(x_n)_{n \ge 1}$ is convergent in $Y$.
+
+\item
+  Let  $Y$ --- a subspace of space $X$, $Y$ is complete.
+
+  $y \in \overline{Y} \implies $ exists sequence $(y_n)_{n}$ in $Y$ that converges to $y \implies (y_n)$ fundamental $\implies (y_n)$ converges in $Y \implies y \in  Y$.
+\end{enumerate}
+\end{proof}
+
+
+\begin{theorem}[about nested balls]
+ $(X,d)$ metric space. 
+ $X$ is complete if and only if any arbitrary sequence of nested closed balls which have $R\to 0$ has non-empty intersection.
+\end{theorem}
+
+\begin{proof}
+  $(\implies)$
+  Let $X$ is a complete. $B_n = \overline{B} (X_n, r_n), B_1 \supset B_2 \supset B_3 \ldots, r_n \to  0$ 
+
+$d(x_n, x_m) \le^{n \le  m} r_n \to  0, \;\; n \to \infty $
+
+$\exists \lim_{n \to \infty} x_n := x$
+
+$n \ge  N \implies x_n \in  B_N, \;\; n \ge  N \implies x \in B_N$
+
+$\bigcap_{n=1}^{\infty} B_n \neq \varnothing$
+
+
+$(\impliedby)$
+
+Let $(x_n)_{n \ge 1}$ --- fundamental in $X$
+
+ \[ \exists n_1 \;\; \forall n,m \ge  n_1: d(x_{n}, x_{m}) \le  \frac{1}{2} \] 
+ \[ \exists n_2 \ge n_1 : \forall n_1, m \ge  n_2 : d(x_n, x_m) \le  \frac{1}{4}\] 
+ \[ \ldots \] 
+
+ \[ 1\le  n_1 < n_2 < n_3 \ldots : \forall n,m \ge  n_k : d(x_n, x_m) \le \frac{1}{2^{k}} \] 
+ \[ d(x_{n_k}, x_{n_{k+1}}) \le  2^{-k} \] 
+
+ \[ B_k = \overline{B}(x_{n_k}, 2^{-k+1}  \] 
+
+ Let's show that $B_{k+1} \subset B_k$
+
+ $y \in  B_{k+1}: d(y, x_{n_{k+1}} ) \le 2_{-k}$
+
+ \[ d(y, x_{n_k}) \le d(y, x_{n_{k+1}}) + d(x_{n_{k+1}}, x_{n_k}) \le  2^{-k+1} \] 
+ \[ \exists x \in  \cap_{k \ge  1} B_k \] 
+ \[ d(x_{n_k}, x) \le  2^{-k+1} \to  0 \] 
+
+ \[ x_{n_k} \to  x, \;\; k \to \infty \] 
+
+ \[ \varepsilon > 0. \;\;\; \exists N: \forall n,m \ge  N : d(x_n, x_m) < \frac{\varepsilon}{2} \] 
+ \[ \exists n_k \ge  N: d(x_{n_k}, x) \le  \frac{\varepsilon}{2} \] 
+
+if $n \ge N$ then $d(x_n, x) \le  \varepsilon$
+
+\end{proof}
+
+%-----------------------------------------------------------------------
+
+\section{Completation of Metric Space}
+
+\begin{definition}
+  Complete metric space $(\hat{X}, \hat{d})$ is a complitation of metric space $(X, d)$ if $X$ is isometric to dense everywhere subset of $X$.
+\end{definition}
+
+\begin{theorem}
+  For any arbitrary metric space $X$ its completation exists and only one with the precision to isometrie.
+\end{theorem}
+
+\begin{proof}
+  (Oneness)
+
+  $(\hat{X}, \hat{d})$ and $(\tilde{X}, \tilde{d})$ --- a completion $(X,d)$. 
+
+$f: X \to  \hat{X}$ isometrie between $X$ and $f(x), \overline{f(X)} = \hat{X}$
+
+$g: X \to  \tilde{X}$ isometrie between $X$ and $g(x), \overline{g(X)} = \tilde{X}$ 
+
+$\hat{x} \in  \hat{X}$. $\hat{x} = \lim_{n \to \infty} f(x_n)$.
+
+$(f(x_n))$ convergent $\implies$ fundamental $\implies (x_n)$ fundamental $\implies (g(x_n))$ fundamental in $\tilde{X}$
+
+ $\varphi(\hat{x}) = \lim_{n \to \infty} g(x_n)$ 
+
+ \textit{Further need to show that $\varphi$ is isometric}
+
+
+ \textbf{(Existence)}
+
+  $S(X)$ set of all fundamental sequences in  $X$.
+
+  $s \in  S(X) \implies s = (x_1, x_2, \ldots). \;\;\;\; d(x_n, x_{m}) \to  n,m \to  \infty$ 
+
+
+  $S \sim S' \iff \lim_{n \to \infty} d(x_{n}, x_{m}) \to , n,m \to  \infty$ 
+
+  \[ \left| d(x_{n}m x_{n}') - d(x_{m}, x_{m}') \right| \le  d(x_{n}, x_{m}) + d(x_{n}', x_{m}') \to 0 \;\; n,m \to  \infty \] 
+
+  $d(x_{n},m x_{n}')$ --- fundamental in $\R$.
+
+  $\exists \lim_{n \to \infty} d(x_{n},x_{n}')$
+
+
+  $s \sim s, s \sim s' \to  s' \sim s$
+
+  $s \sim s', s' \sim s'' \implies s \sim s''$
+
+
+  $S(X) / \~ = \hat{X}$ a set of equivalence classes
+
+  $\forall s \in  S(X) \;\;\;\;\;\; [S]$ --- equivalence class
+
+  $d([S], [S']) = \lim_{n \to \infty} d(x_{n}, x_{n}')$
+
+    $s = (x_1, x_2, \ldots), t = (y_1, y_2, \ldots) \;\;\; t \sim s$
+
+    $s' = (x_1', x_2', \ldots), t' = (y_1', y_2', \ldots) \;\;\; t' \sim s'$
+
+
+    $\left| d(x_{n}, x_{n}') - d(y_{n}, y_{n}') \right| \le  \underbrace{d(x_{n}, y_{n})}_{(t \sim s)} + \underbrace{d(x_{n}', y_{n}')}_{t' \sim s'} \to  0$ 
+
+    $\hat{d} ([S], [S"]) = 0 \implies \lim_{n \to \infty} d(x_{n}, x_{n}') = 0 \to  s \sim s' \implies [S] = [S']$ 
+
+    $f: X \to  \hat{X}$
+
+
+    $x \in  X \to  s = (x_1, x_2, \ldots) \implies f(x) = [S]$
+
+    $x, y \in  X$. $\hat{d}(f(x), f(y)) = \lim_{n \to \infty} $
+
+    $\overline{f(x)} = \hat{X} ?$
+
+    $s = (x_1, x_2, \ldots), \varepsilon > 0$
+
+
+    $\forall n, m \ge  N \;\; d(x_{n}, x_{m}) \le  \varepsilon$
+
+    $\hat{d}([s], f(x_{n})) = \lim_{m \to \infty} d(x_{n}, x_{m}) \le  \varepsilon$
+
+    Completeness $(\hat{X}, \hat{d}) $. Let $([S^{(k)}])_{k\ge 1}$ fundamental sequence.
+
+    $\forall k \ge  1 : \exists x_k \in  X : \hat{d} ([S^{(k)}], d(x_k)) \le  \frac{1}{k}$
+
+    $s = (x_1, x_2, \ldots) \in  S(X). \;\;\;\; \lim_{k \to \infty} f(x_k) = [S]$
+
+    $[S^{(k)}] \to  [S]$
+
+\end{proof}
+
+\hr
+%------------------------------------------------------------------------------------
+
+\section{Baire Theorem}
+
+\begin{definition}
+  Set $A$ is nowhere dense nowhere if $A$ is not dense in any ball.
+
+  \textit{Equivalently:}
+
+  \[ int \overline{A} = \varnothing \]
+\end{definition}
+
+\begin{example}
+  $X = \R, \quad A = \{a\} \text{ is dense nowhere }$
+
+  \textit{In a space of isolated points finite sets are nowhere dense.}
+\end{example}
+
+\begin{theorem}[Baire]
+
+$(X,d)$ --- complete metric space ($X \neq \varnothing$.
+
+Then $X$ cannot be represented as a countable union of nowhere dense sets.
+  
+\end{theorem}
+
+\begin{proof}
+  Let $X =  \bigcup_{n=1}^{\infty} A_{n}$, every set $A_{n}$ is nowhere dense set ($int \overline{A} = \varnothing$).
+
+  $x_0 \in  X$. $x_0$ --- not an inner point of the set $\overline{A_1}$.
+
+  $B(x_0, 1)$ contains $x_1 \not\in \overline{A_1}$ 
+
+  \[ \exists r_1 < \frac{1}{2} : \overline{B}(x_1, r_1) \cap A_1 = \varnothing, 
+  \quad \overline{B}(x_1, r_1) \subset B(x_0, 1) \] 
+
+  $B(x_1, r_1) \not\subset \overline{A_2}$
+
+  $B(x_1, r_1)$ contains $x_2 \not\in \overline{A_2}$
+
+  $\exists r_2 < \frac{1}{4} : \overline{B}(x_2, r_2) \cap A_2 = \varnothing, \quad \overline{B}(x_2, r_2) \subset B(x_1, r_1)$
+
+  Exists such a sequence of closed balls $\overline{B}(x_{n}, r_n): r_n < \frac{1}{2^{n}}, \quad \overline{B}(x_{n}, r_n) \subset B(x_{n-1}, r_{n-1}): \quad \overline{B}(x_{n}, r_n) \cap A_n = \varnothing$
+
+  \[ (X,d) \text{ complete } \implies \bigcap_{n=1}^{\infty} \overline{B}(x_{n}, r_n) \ni x_{*} \] 
+
+  $x_* \not\in \bigcup_{n=1}^{\infty} A_n$. Contradiction.
+\end{proof}
+
+
+\begin{corollary}
+  $(X,d)$ is a complete metric space without any isolated points. Then set $X$ is not countable.
+\end{corollary}
+
+\begin{corollary}
+  $\Q$ --- countable not complete space.
+  There are no equivalent metric $d_x$ that gives us $(Q, d_x)$ as a complete space.
+\end{corollary}
+
+%-------------------------------------------------------------------------------------
+
+
+\section{Continuous Mappings of Metric Spaces, Lipschitz Continuity}
+
+
+$(X, d_x)$, $(Y, d_y)$; $f: X \to  Y$ 
+
+\begin{definition}
+$f$ is continuous in a point $x_0$ if $x_n \to  x_0 \implies f(x_n) \to  f(x_0)$
+
+\textit{Alternatively:}
+
+\[ \forall \varepsilon > 0 : \exists \delta > 0 : d_x(x,x_0) < \delta \implies d_y(f(x), f(x_0)) < \varepsilon \] 
+  
+\end{definition}
+
+\begin{definition}
+  $f$ is continuous if it is continuous in every point $x \in  X$.
+\end{definition}
+
+
+\begin{theorem}[Continuous Criteria]
+  The following conditions are equivalent:
+  \begin{enumerate}
+    \item $f: X \to  Y$ continuous
+    \item $\forall$ open set $U \subset Y \;\; \underbrace{\{x \in  X: f(x) \in U\}}_{f^{-1}(U)} $ is open in $X$.
+    \item $\forall $ closed $F \subset Y : f^{-1}(F)$  --- closed
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  (2) $\iff$ (3) $F$ closed $ \iff U$ open.
+
+  $X \backslash f^{-1}(F) = f^{-1}(U)$ 
+
+
+  \textbf{(1) $\implies$ (2)}
+
+  Let $f: X \to  Y$ is continuous. Want to show that $\forall U \in  Y$ is open.
+
+  $x_0 \in  f^{-1}(U)$. Need to find such a radius $r > 0: B(x_0, r) \subset f^{-1}(U)$.
+
+  $f(x_0) \in  U. \exists \varepsilon>0 \quad B(f(x_0), \varepsilon) \subset U$.
+
+  \[ \exists \delta > 0: d_x(x,x_0) < \delta \implies d_y(f(x),f(x_0)) < \varepsilon \] 
+  It means that
+  \[ x \in  B(x_0,\delta) \implies f(x) \in  B(f(x_0), \varepsilon) \subset U 
+  \implies x \in  f^{-1}(U)\] 
+
+  \[ B(x_0, \delta) \subset f^{-1}(U) \] 
+
+
+  \textbf{(2) $\implies$ (1)}
+
+  $f: X \to  Y$ ; $x_0 \in  X$
+
+
+  $\forall \varepsilon > 0; U = B(f(x_0), \varepsilon)$ --- open set
+
+  $f^{-1}(U)$ --- open set. $x_0 \in  f^{-1}(U)$
+
+\[ \exists  \delta > 0 \quad B(x_0,\delta) \subset f^{-1}(U) \] 
+\[ d_x(x,x_0) < \delta \implies d_y(f(x),f(x_0)) < \varepsilon \] 
+
+\end{proof}
+
+
+\begin{corollary}
+  $X,Y,Z$ --- metric spaces. $f: X \to  Y$, $g: Y \to Z$ --- continuous.
+  Then $g \circ f: X \to Z$ continuous.
+\end{corollary}
+
+\begin{proof}
+  $U \subset Z$ --- open. $(g, f)^{-1} (U) = \underbrace{f^{-1}(g^{-1}(U))}_{\text{open in } X}$
+\end{proof}
+
+\hr
+%---------------------------------------------------------------------
+
+\begin{definition}
+  $f: X \to  Y$ is uniformly continuous if
+  \[ \forall \varepsilon>0: \exists  \delta > 0: d_x(x_1, x_2) < \delta \implies d_y(f(x_1), f(x_2)) < \varepsilon \] 
+\end{definition}
+
+\begin{definition}
+  $f: X \to  Y$ satisfies Lipschitz condition with constant $c > 0$ if
+  \[ d_y(f(x_1), f(x_2)) \le c \cdot d_x(x_1, x_2) \] 
+\end{definition}
+
+
+\begin{example}
+  Let $A \subset X$, $A \neq \varnothing$.
+   \[ d(x,A) := \inf_{y \in  A} d(x,y) \] 
+\[ d(\cdot,A): X \to  \R \text{ --- Lipschitz function with } c = 1 \] 
+
+$x_1, x_2 \in  X$, $y \in  A$.
+\[ d(x_1, A) \le d(x_1, y) \le d(x_1, x_2) + d(x_2, y) \] 
+\[ d(x,A) - d(x_1,x_2) \le  d(x_2,y) \] 
+\[ \left|  d(x,A) - d(x_2,A) \right| \le d(x_1,x_2) \] 
+\end{example}
+
+\begin{exercise}
+  $\{x: d(x, A) = 0\} = \overline{A} $
+\end{exercise}
+
+
+%-----------------------------------------------
+
+\section{Contraction mapping}
+
+\begin{definition}
+  $f: X \to  Y$ is a contraction mapping if \[ 
+  \exists  \alpha \in  [0,1) : d(f(x_1), f(x_2)) \le \alpha d(x_1,x_2)\] 
+\end{definition}
+
+For contraction mapping an equation $f(x) = x$ always has a solution.
+
+$f(x) = x \implies x$ --- fixed point of mapping $f$.
+
+\begin{theorem}
+  [Banach]
+
+  $(X,d)$ --- complete metric space, $f: X\to Y$ --- contraction mapping.
+  Then $f$ has only one fixed point.
+\end{theorem}
+
+\begin{proof}
+  \textbf{(Oneness)}
+
+  Let the two fixed point exist $x_1, x_2 \in  X$.
+  \[ d(x_1, x_2) = d(f(x_1),f(x_2)) \le  \alpha d(x_1, x_2) \implies x_1 = x_2 \] 
+
+
+  \textbf{(Existence)}
+
+  Arbitrary $x_0 \in  X$.
+
+  $x_1 = f(x_0)$,\\
+  $x_2 = f(x_1)$ \\
+  $\ldots$
+
+  $x_n = \underbrace{f(f(\ldots(f(x_0))\ldots))}_{n}$
+  \[ d(x_{n}, x_{n+1}) = d(f(x_{n-1}), f(x_{n})) \le  \alpha d(x_{n}, x_{n-1})
+  \le  \alpha^2 d(x_{n-2}, x_{n}) \le \ldots \le \alpha ^{n} d(x_0, x_{n}) \] 
+
+  \[ d(x_{n+p}, x_{n}) \le d(x_{n}, x_{n+1}) + d(x_{n+1}, x_{n+2}) + \ldots + d(x_{n+p-1}, x_{n+p}) \le d(x_0, x_1) (\alpha ^{n} + \alpha ^{n+1} + \ldots + \alpha ^{n + p -1} \le  \] 
+  \[ \le d(x_0, x_1) \frac{\alpha ^{n}}{1 - \alpha} \] 
+  \[ \lim_{n \to \infty} \sup_{p \ge  1} d(x_{n+p}, x_n) = 0 \] 
+  $(x_n)$ Cauchy sequence.
+
+  $x_* = \lim_{n \to \infty} x_n$\\
+  $x_n \to  x_*$ \\
+  $\underbrace{f(x_n)}_{x_{n+1}} \to  f(x_*)$ \\
+  $\implies f(x_*) = x_*$
+\end{proof}
+
+\begin{corollary}
+  $f$ --- contraction mapping, $x_0 \in  X$; $x_{n} = f(x_{n-1})$
+  \[ d(x_*, x_{n}) \le  d(x_0, x_1) \frac{\alpha ^{n}}{1 - \alpha} \] 
+\end{corollary}
+
+\textbf{Applications}
+\begin{enumerate}
+  \item $f: [a,b] \to  [a,b]$ continuous.\\
+    $f: [0,1] \to  [0,1]; \qquad f(x) = 1-x$ is Lipschitz mapping but not contraction mapping.
+
+    If $\left| f'(x) \right| \le  \alpha < 1$ then $\left| f(x_1) - f(x_2) \right| \le  \alpha \left| x_1 - x_2 \right| $ 
+
+    $F: [a,b] \to  \R$ : $F(a) < 0, F(b) > 0, \;\; F'(x) \in  [k_1, k_2], 0 < l_1 \le  k_2 < \infty$
+
+    Then this function has only one 0. $F(x_*) = 0, \quad x_*$ --- ?
+
+     $f(x) = x - \lambda F(x)$\\
+     $F(x_*) = 0 \iff x \text{ is fixed for } f$
+
+      Need several things:
+      \begin{enumerate}
+        \item $f: [a,b] \to  [a,b]$
+        \item $f'(x) = 1 - \lambda F'(x) \in [1-\lambda k_2, 1-\lambda k_1]$
+      \end{enumerate}
+
+    \item Linear equations systems
+
+       \[ x_{i} = \sum_{j=1}^{n} a_{ij} x_j + b_i \] 
+       \[ x = Ax + b =: f(x) \] 
+       \[ f: \R^{n} \to  \R^{n} \] 
+
+       The contraction mapping actually depends on the matrix $A$ and picked metric function. So usually the metric function is picked the way that the mapping is contraction for a specific matrix  $A$.
+
+        \[ d_{\infty}(x,y) = \max_{1 \le  i \le  n}\left| x_{i} - y_{i} \right|  \] 
+        \[ d_{\infty}(f(x), f(y) = \max_{1 \le  i \le  n} \left| \ldots \right| =  \]  
+        \[ = \max_{1 \le  i \le n} \left| \sum_{j=1}^{n} a_{ij}(x_{j} - y_{j}) \right| \le \left( \max_{i} \sum_{j=1}^{n} \left| a_{ij} \right|  \right) d_{\infty}(x,y)  \] 
+        The mapping $f(x) = Ax + b$ is going to be contraction mapping relative to $d_{\infty}$ if \[ \max_{i} \sum_{j=1}^{n} \left| a_{ij} \right| < 1 \] .
+
+        $d_1(x,y) = \sum_{i=1}^{n} \left| x_{i} - y_{i} \right| $
+        \[ d_1(f(x), f(y)) = \sum_{i=1}^{n} \left| \sum_{j=1}^{n} a_{ij}\left( x_j- y_j \right)  \right|  \le  \] 
+        \[ \le \sum_{j=1}^{n} \left| x_j - y_j \right| \sum_{i=1}^{n} \left| a_{ij} \right| \le \left( \max_j \sum_{j=1}^{n} \left| a_{ij} \right| \right) d_1(x,y) \] 
+
+        If $\max_j \sum_{j=1}^{n} \left| a_{ij} \right| < 1$ then $f(x) = Ax + b$ is a contraction mapping relative to $d_1$.
+
+
+  \item
+  \[ \begin{cases}
+    \frac{\partial y}{\partial x} = f(x,y)\\
+    y(x_0) = y_0
+  \end{cases} \iff
+  y(x) = \underbrace{y_0 + \int_{x_0}^{x} f(t,y(t)) dt }_{F(y)}
+\] 
+  \[ \left| f(x_1, y_1) - f(x, y_2) \right|  \le  L \left| y_1 - y_2 \right|  \] 
+
+  \item Fredholm equations
+    \[ x(t) = \lambda \int_{a}^{b} K(t,s) x(s)ds + y(t), \quad a \le b  \] 
+
+    $K$ is continuous on $[a,b]^2$, $y$ is continuous on $[a,b]$.
+    \[ f: C[a,b] \to  C[a,b] \] 
+    $C[a,b]$ is complete relative to $d(x_1, x_2) = \max_t \left| x_1(t) - x_2(t) \right| $
+     \[ f(x)(t) = \lambda \int_{a}^{b} K(t,s) x(s)ds + y(t)  \] 
+     \[ d(f(x_1), f(x_2)) = \max_t \left| f(x_1)(t) - f(x_2)(t) \right|  \] 
+     Let's fix point $t$...
+     $M = \sup_{(t,s) \in  [a,b]^2} \left| K(t,s) \right| $ 
+
+     $\left| f(x_1)(t) - f(x_2)(t) \right| = \left| \lambda \int_{a}^{b} K(t,s)(x_1(s) - x_2(s))ds  \right|  \le \left| \lambda  \right| \int_{a}^{b} M d(x_1,x_2) ds = \left| \lambda  \right| M(b-a) d(x_1, x_2)  $
+
+     $\left| \lambda  \right| < \frac{1}{M(b-a)}$ then $f$ is a contraction mapping.
+   
+\end{enumerate}
+
+
+
+
+
