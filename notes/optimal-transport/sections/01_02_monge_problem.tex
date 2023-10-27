@@ -1,0 +1,28 @@
+\section{Monge Problem}
+
+Discrete measures:
+$$
+\alpha = \sum_{i = 1}^{n} = \mathbf{a}_{i} \delta_{x_{i}}
+\;\; \text{ and } \;\;
+\beta = \sum_{j=1}^{m} \mathbf{b}_{j} \delta _{y_{j}}
+$$
+
+Seek for a map that associates to each point $x_{i}$ a single point $y_{i}$ and which must push the mass of $\alpha$ toward the mass of $\beta$:
+$$
+T: \{ x_{1}, \dots, x_{n} \} \to \{ y_{1}, \dots, y_{_{m}} \}
+$$
+$$
+\forall j \in [[ m ]], \;\; \mathbf{b}_{j} = \sum_{i: T(x_{i}) = y_{j}} a_{i}
+$$
+compactly
+$$
+T_{\#} \alpha = \beta
+$$
+
+This map should minimize the transportation cost which is the sum of each single point transportation:
+
+$$
+\min_{T} \left\{ \sum_{i} c( x_{i}, T(x_{i}) )
+\; : \;
+T_{\#} \alpha = \beta \right\}
+$$

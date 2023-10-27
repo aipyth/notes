@@ -1,0 +1,19 @@
+\section{Wasserstein distance}
+
+\begin{proposition}
+Suppose that $n=m$ and that for some $p \geq 1$
+$$\mathbf{C} = \mathbf{D}^{p} = (\mathbf{D}^{p}_{i, j})_{i,j} \in \mathbb{R}^{n \times n}$$
+where $\mathbf{D} \in \mathbb{R}^{n \times n}_{+}$ is a distance on $[[ n ]]$, i.e.
+\begin{enumerate}
+  \item $\mathbf{D} \in \mathbb{R}^{n \times n}_{+}$ is symmetric
+  \item $D_{i, j} = 0 \iff i = j$
+  \item $\forall (i, j, k) \in [[n]]^{3}, \; \mathbf{D}_{i,k} \leq \mathbf{D}_{i,j} + D_{j,k}$
+\end{enumerate}
+Then
+$$
+W_{p}(\mathbf{a}, \mathbf{b}) := L_{\mathbf{D}^{p}} (\mathbf{a}, \mathbf{b}) ^{1/p}
+$$
+defines the \textit{$p$-Wasserstein distance} on $\Sigma_{n}$,
+i.e. $W_{p}$ is symmetric, positive, $W_{p}(\mathbf{a}, \mathbf{b}) = 0$
+if and only of $\mathbf{a} = \mathbf{b}$, and it satisfies the triangle inequality.
+\end{proposition}
