@@ -1,5 +1,44 @@
 \section{Probability Measures}
 
+The applied object in OT is a measure (probability measure).
+Let's give some definitions and explain them
+
+\begin{definition}[Measure]
+  A function $\mu : \mathcal{B}(\R^{d}) \to  [0, \infty)$ is called a
+  \textbf{measure} if:
+  \begin{enumerate}
+    \item $\mu (\varnothing) = 0$
+    \item Countable additivity: $\mu \left( \bigsqcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} \mu(A_i) $
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}[Probability measure]
+  A function $\mu : \mathcal{B}(\R^{d}) \to  [0, 1]$ is called a
+  \textbf{probability measure} if:
+  \begin{enumerate}
+    \item $\mu (\varnothing) = 0$
+    \item Countable additivity: $\mu \left( \bigsqcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} \mu(A_i) $
+  \end{enumerate}
+\end{definition}
+
+% ---------------------------------------------------------------------------------------------
+
+% \subsection{Discrete measure}
+
+For a simpler discrete OT case we got to define a discrete measure:
+
+\begin{definition}[Discrete measure]
+A discrete measure with weights $\alpha$ and locations $x_{1}, \dots, x_{n} \in \mathcal{X}$ reads
+$$
+a = \sum_{i=1}^{n} \alpha_{i} \delta_{x_{i}}
+$$
+where $\delta_{x}$ is the Dirac delta function, which is
+\[ \delta_{x_i} (A) = \begin{cases}
+  1 & x \in A \\
+  0 & x \not\in A
+\end{cases}. \]
+\end{definition}
+
 Probability vectors gives a probability point mass in a vector form.
 For each of the outcomes of the random variable corresponds one row/column in the vector.
 $$
@@ -7,20 +46,6 @@ x_{0} = \begin{pmatrix}
 0.25 & 0.5 & 0.1 & 0.15
 \end{pmatrix}
 $$
-
-\todo{what is a measure}
-
-% ---------------------------------------------------------------------------------------------
-
-\subsection{Discrete measure}
-
-\begin{definition}[Discrete measure]
-A discrete measure with weights $\alpha$ and locations $x_{1}, \dots, x_{n} \in \mathcal{X}$ reads
-$$
-a = \sum_{i=1}^{n} \alpha_{i} \delta_{x_{i}}
-$$
-where $\delta_{x}$ is the Dirac delta function.
-\end{definition}
 
 % ---------------------------------------------------------------------------------------------
 
@@ -35,3 +60,11 @@ So simplex should be a set of probability vectors
 $$
 \Sigma_{n} := \left\{ a \in \mathbb{R}_{+}^{n} : \sum_{i=1}^{n} a_{i} = 1 \right\}
 $$
+
+\subsection{General measures}
+
+\todo{Radon measures $\mathcal{M(X)}$ }
+
+
+
+

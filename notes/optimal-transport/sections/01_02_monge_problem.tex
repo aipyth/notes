@@ -1,5 +1,25 @@
 \section{Monge Problem}
 
+The first problem that may come into a mind is about transporting some mass from point $x$ into $y$.
+The two densities (for $x$ and $y$) are $f$ and $g$ respectively. So we would like to find such
+a map $T$ that is optimal.
+The problem is:
+\[ \min \int \left| x - T(x) \right| f(x) dx \]
+
+Generalizing, we can consider other costs $c(x, y)$:
+\[ \min \int c(x, T(x)) f(x) dx \]
+
+But we want to work with measures $\mu$ and $\nu$
+and get mass balance $\mu(\R^{n}) = \nu(\R^{n})$.
+
+The thing to conserve mass may be written like this:
+\[ \mu(T^{-1}(A)) = \nu(A) \;\; \forall A \subset \mathcal{Y} \] 
+
+And then we can rewrite the Monge formulation of OT:
+\[ \min \left\{ \int_{\R^{n}} c(x, T(x)) d\mu(x) \mid u(T^{-1}(A)) = \nu(A) \;\; \forall A \subset \mathcal{Y} \right\} \]
+
+\hr
+
 Discrete measures:
 $$
 \alpha = \sum_{i = 1}^{n} = \mathbf{a}_{i} \delta_{x_{i}}
@@ -26,3 +46,7 @@ $$
 \; : \;
 T_{\#} \alpha = \beta \right\}
 $$
+
+\subsection{Push-forward operator}
+
+\todo{}

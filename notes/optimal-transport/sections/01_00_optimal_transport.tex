@@ -1,3 +1,39 @@
+\section*{Notation}
+
+\todo{Need to get rid of some of these notations from <<Computational Optimal Transport>> book
+cause they are a bit confusing. Better to use longer but simpler ones.}
+\begin{itemize}
+  \item $\mathcal{X}$ and $\mathcal{Y}$ are both the sets of measures
+  \item $[[ n ]] \equiv \{ 1, \ldots, n \}$
+  \item $\mathbbm{1}_{n, m} \equiv \left( a_{i,j} \in \R : a_{i,j} = 1 \right)_{n \times m}$
+  \item $\mathbbm{1}_{n} \equiv \left( a_{i} \in \R : a_{i} = 1 \right)_{n}$
+  \item $\mathbb{I}_n$ --- identity matrix of size $n\times n$
+  \item $\operatorname{diag}\left( u \right) \equiv \left( a_{i,j} : a_{i,j} = u \text{ for } i = j , \;\; a_{i,j} = 0 \text{ for } i \neq y \right)_{n \times n}$
+  \item $\Sigma_n \equiv \{ x_i : x_i \in \R^{n}_+, x_i \text{ is a probability vector, namely } \sum_j x_{i, j} = 1 \}$ --- a probability simplex with $n$ bins
+  \item $\left( \mathbf{a}, \mathbf{b} \right) \equiv \{ \left( a, b \right) \mid a \in \Sigma_n, b \in \Sigma_m  \}  $ \todo{way to change this? not obvious that $\left( \mathbf{a}, \mathbf{b} \right)$ are of size $n \times m$}
+  \item $\left( \alpha, \beta \right) \equiv \{ \left( \alpha, \beta \right) \mid \alpha \in \mathcal{X}, \beta \in \mathcal{Y} \}$
+  \item $\pi$ is a coupling measure between $\alpha$ and $\beta$ \todo{better definition?}
+  \item $\left< \cdot, \cdot \right>$ --- for the usual Euclidean
+    dot-product between the vectors. For two matrices of the same size:
+    $A$ and $B$ --- $\left<A, B \right> \equiv \operatorname{tr} \left( A^{T} B \right) $ --- is the Frobenius dot-product. \todo{need to write more about this cause I know nothing (or forgot)}
+  \item $f \oplus g (x, y) \equiv f(x) + g(y)$ for  $f: \mathcal{X} \to \R$ and $g: \mathcal{Y} \to \R$
+  \item for two vectors $\mathbf{f} \in \R^{n}$ and $\mathbf{g} \in \R^{m}$ 
+    define $\mathbf{f} \oplus \mathbf{g} \equiv \mathbf{f} \mathbb{1}_{m}^{T} + \mathbbm{1}_{n} \mathbf{g} ^{T} \;\; \in  \R^{n \times m}$
+  \item $\alpha \otimes \beta$ is the product measure on $\mathcal{X} \times \mathcal{Y}$.\\
+    i.e. $\int_{\mathcal{X}\times \mathcal{Y}} g(x,y) d(\alpha \otimes \beta) (x, y) = \int_{\mathcal{X}\times \mathcal{Y}} g(x,y) d\alpha(x) d\beta(y)$ \todo{precise definition}
+  \item $\mathbf{a} \otimes \mathbf{b} \equiv \mathbf{a} \mathbf{b}^{T} \in \R^{n \times m}$
+  \item $\mathbf{u} \odot \mathbf{v} = \left( \mathbf{u}_i, \mathbf{v}_i \right) \in  \R^{n}$ for $\left( \mathbf{u}, \mathbf{v} \right) \in  \left( \R^{n} \right) ^2$
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=3cm]{./figures/sleepy-kitty.jpeg}
+  \caption{So let's wake up and begin}
+\end{figure} 
+
+
+
+
 \input{./sections/01_01_probability_measures.tex}
 \input{./sections/01_02_monge_problem.tex}
 \input{./sections/01_03_kantorovich_problem.tex}

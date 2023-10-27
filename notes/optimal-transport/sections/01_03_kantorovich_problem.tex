@@ -3,16 +3,13 @@
 $$
 \mathbf{U}(\mathbf{a}, \mathbf{b}) := \left\{
 \mathbf{P} \in \mathbb{R}_{+}^{n\times m} \; : \;
-\mathbf{P} \mathbb{1}_{m} = \mathbf{a}
+\mathbf{P} \mathbbm{1}_{m} = \mathbf{a}
 \; \text { and } \;
-\mathbf{P}^{T} \mathbb{1}_{n} = \mathbf{b}
+\mathbf{P}^{T} \mathbbm{1}_{n} = \mathbf{b}
 \right\}
 $$
-$$
-\mathbb{1}_{n} = \begin{pmatrix}
-a_{i, j} = 1 \; : \; i = n
-\end{pmatrix}
-$$
+where $ \mathbbm{1}_{n} = \begin{pmatrix} a_{i} = 1, i = \overline{1, n} \end{pmatrix} $.
+
 Kantorovich optimal transport reads:
 $$
 L_{\mathbf{C}}(\mathbf{a}, \mathbf{b}) :=
