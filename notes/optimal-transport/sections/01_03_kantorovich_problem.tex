@@ -1,4 +1,4 @@
-\section{Kantorovich Relaxation}
+\subsection{Kantorovich Relaxation}
 
 $$
 \mathbf{U}(\mathbf{a}, \mathbf{b}) := \left\{
@@ -17,3 +17,15 @@ L_{\mathbf{C}}(\mathbf{a}, \mathbf{b}) :=
 \left< \mathbf{C}, \mathbf{P} \right> :=
 \sum_{i, j} \mathbf{C}_{i,j} \mathbf{P}_{i,j}
 $$
+
+For discrete measures of the form
+\[  \] 
+we store matrix $C$ as all the pairwise consts between points in the supports of $\alpha, \beta$
+\[ \mathbf{C}_{i,j} \equiv c(x_{i}, y_{j}) \]
+defining
+\[ \mathcal{L}_{c}(\alpha, \beta) \equiv L_{\mathbf{C}} (\mathbf{a}, \mathbf{b}) \] 
+
+That means that the this formulation of optimal transport between discrete measures is the same as the
+problem between their associated probability weight vectors
+$\mathbf{a}, \mathbf{b}$ except that the cost matrix $\mathbf{C}$
+depends on the support of $\alpha, \beta$.

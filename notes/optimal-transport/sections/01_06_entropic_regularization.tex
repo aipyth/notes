@@ -1,0 +1,25 @@
+\subsection{Entropic Regularization of Optimal Transport}
+
+\subsubsection{Entropic Regularization}
+
+\begin{definition}[Disrete entropy]
+  The discrete entropy of a coupling matrix is defined as
+  \[ \mathbf{H}(\mathbf{P}) \equiv - \sum_{i, j}^{} \mathbf{P}_{i,j} \left( \log\left( \mathbf{P}_{i,j} \right) - 1 \right)  \] 
+\end{definition}
+
+As you may see from the definition, the same function works
+for vectors, as we use the sum.
+
+\begin{remark}
+  The function $\mathbf{H}$ is 1-strongly concave, because its Hessian
+  is $\partial^2 \mathbf{H} (P) = - \operatorname{diag}
+  \left(\frac{1}{\mathbf{P}_{i,j}}\right)$ 
+  and $\mathbf{P}_{i,j} \le 1$.
+\end{remark}
+
+The idea behind the use of entropy is to use it as a regularizing
+function to obtain approximate solutions to the original transport problem:
+\[ L_{\mathbf{C}}^{\varepsilon} (\mathbf{a}, \mathbf{b}) \equiv
+\min_{\mathbf{P} \in  \mathbf{U} (\mathbf{a}, \mathbf{b})}
+\left< \mathbf{P}, \mathbf{C} \right> - \varepsilon \mathbf{H} (\mathbf{P})
+\] 

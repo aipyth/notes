@@ -1,0 +1,81 @@
+
+% ---------------------------------------------------------------------------------------------
+
+\subsection{Simplex}
+
+
+Probability vectors gives a probability point mass in a vector form.
+For each of the outcomes of the random variable corresponds one row/column in the vector.
+$$
+\mathbf{x} = \begin{pmatrix}
+0.25 & 0.5 & 0.1 & 0.15
+\end{pmatrix}
+$$
+
+Let $\mathbf{x} = (x_{0}, x_{1}, x_{2}, \dots, x_{n})$ be a probability vector
+with $x_0, x_1, \ldots, x_n \ge 0$ such that
+$$
+\sum_{i=0}^{n} x_{i} = 1
+$$
+
+So simplex should be a set of probability vectors
+$$
+\Sigma_{n} := \left\{
+  \mathbf{a} = \left( a_0, a_1, \ldots, a_n \right)  \in \mathbb{R}_{+}^{n} :
+\sum_{i=1}^{n} a_{i} = 1,
+a_i \ge 0, \;\; \forall i \in  [[n]]
+\right\}
+$$
+
+\begin{definition}[Discrete measure]
+  A discrete measure with weights $\mathbf{a}$ and locations $x_{1}, \dots, x_{n} \in \mathcal{X}$ reads
+$$
+a = \sum_{i=1}^{n} \mathbf{a}_{i} \delta_{x_{i}}
+\qquad \mathbf{a}_i \ge 0 \quad \forall i \in  [[n]]
+$$
+where $\delta_{x}$ is the Dirac delta function, which is
+\[ \delta_{x_i} (A) = \begin{cases}
+  1 & x \in A \\
+  0 & x \not\in A
+\end{cases}. \]
+\end{definition}
+
+\paragraph{Histogram}
+
+Let $\xi$ be a random variable
+(with some continuous density function $f(x)$ which is unknown).
+
+Let $X_1, X_2, \ldots, X_n \sim \xi$ a sample.
+
+\begin{definition}[Histogram]
+  Piecewise constant function
+  \[ f_n(x) = \frac{\nu_r}{ n \cdot |\mathcal{I}_r|} \mathbbm{1} (x \in \mathcal{I}_r), \quad r \in [[m]] \]
+  is called a histogram, where
+  \begin{itemize}
+    \item $\mathcal{I}_r$ is the division segment of the division $\mathcal{I}_1, \mathcal{I}_2, \ldots, \mathcal{I}_m$ of the area $\mathcal{I}$ of possible values of $\xi$ ;
+    \item $\nu_r = \sum_{j=1}^{n} \mathbbm{1} \left( X_j \in \mathcal{I}_r \right)$ ---
+      number of elements of the sample that are in $\mathcal{I}_r$.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  The histogram function for large $n$ and small enough division of the
+  interval is the approximation of the true density $f(x)$.
+\end{remark}
+\begin{proof}
+  By the Law of Large Numbers:
+  $\frac{\nu_r}{n} = \frac{\sum_{j=1}^{n} \mathbbm{1} (X_j \in \mathcal{I}_r)}{n}
+  \underset{n\to \infty}{\overset{P}{\longrightarrow}}
+  \mathbf{E} \left[ \mathbbm{1} \left( X_1 \in \mathcal{I}_r \right) \right]
+  = P\left( X_1 \in \mathcal{I}_r \right) = \int_{\mathcal{I}_r} f(x) dx$.
+
+  We can also conclude that for some point $x_r \in  \mathcal{I}_r$
+  \[ \int_{\mathcal{I}_r} f(x) dx = |\mathcal{I}_r| \cdot f(x_r) \] 
+  is true because of the theorem about the mean
+  and that the function $f(x)$ is continuous.
+  
+  Then pick $n \to \infty$ and the division infinitely small, which gives us:
+  \[ \frac{\nu_r}{n \cdot |\mathcal{I}_r|} \approx f(x_r) \] 
+\end{proof}
+
+
